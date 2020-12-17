@@ -21,6 +21,5 @@ RUN pip install -r requirements.txt
 RUN apt-get autoremove -y gcc
 
 
-# migrations
 # copy project
 COPY . .
