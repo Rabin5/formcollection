@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: oag_covid_web
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  
+  db:
+    container_name: oag_covid_db
+    image: postgres:13.0-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=oag_covid
+
+volumes:
+  db_data:
