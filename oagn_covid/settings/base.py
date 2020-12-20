@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'crispy_forms',
+
     'master_data.apps.MasterDataConfig',
     'users.apps.UsersConfig',
 ]
@@ -50,7 +52,11 @@ ROOT_URLCONF = 'oagn_covid.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
+        'DIRS': ['templates'],
+=======
         'DIRS': [],
+>>>>>>> 7412ce2ff2c9b71cbd7df8ece3086f09de4f641a
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,6 +124,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
+STATICFILES_DIRS = [
+    "static",
+]
+=======
+>>>>>>> 7412ce2ff2c9b71cbd7df8ece3086f09de4f641a
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
@@ -129,4 +141,10 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
+<<<<<<< HEAD
 AUTH_USER_MODEL = 'users.User'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+=======
+AUTH_USER_MODEL = 'users.User'
+>>>>>>> 7412ce2ff2c9b71cbd7df8ece3086f09de4f641a

@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for fy in fys %}
+    <p><a href="{% url 'md-fy:update' fy.pk %}">{{ fy.name }}</a></p>
+{% endfor %}
+{% endblock content %}

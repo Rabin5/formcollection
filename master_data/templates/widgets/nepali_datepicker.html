@@ -1,0 +1,14 @@
+{% load static %}
+
+{% include "django/forms/widgets/input.html" %}
+
+<script>
+
+  $(function () {
+      $("input[name='{{ widget.name }}']").calendarsPicker({
+        calendar: $.calendars.instance('nepali'),
+        firstDay: 0,
+        dateFormat: 'dd/mm/yyyy'
+        });
+  });
+</script>

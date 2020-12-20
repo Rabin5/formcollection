@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>
+      {% block title %}
+        {% comment %} use this {% endcomment %}
+      {% endblock title%}
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {% block styles %}
+      {% include 'core/_styles.html' %}
+
+      {% block extrastyles %}
+        {% comment %} use this {% endcomment %}
+      {% endblock extrastyles %}
+    {% endblock styles %}
+
+    {% include 'core/_head_scripts.html' %}
+  </head>
+  
+  <body>
+    {% block content %}
+      {% comment %} use this {% endcomment %}
+    {% endblock content %}
+
+    {% block modal %}
+      {% comment %} use this {% endcomment %}
+    {% endblock modal %}
+
+    {% block scripts %}
+      {% include 'core/_scripts.html' %}
+
+      {% block extrascripts %}
+        {% comment %} use this {% endcomment %}
+      {% endblock extrascripts %}
+    {% endblock scripts %}
+  </body>
+</html>
