@@ -3,3 +3,4 @@ psycopg2-binary==2.8.6
 django-crispy-forms==1.10.0
 nepali-datetime==1.0.4
 psycopg2-binary==2.8.6
+python-decouple

@@ -1,8 +1,9 @@
-import os
-
+# import os
+from decouple import config
 from .base import *
 
-if os.environ.get("ENVIRONMENT") == 'development':
+
+if config("ENVIRONMENT") == 'development':
     from .development import *
 else:
     from .production import *
