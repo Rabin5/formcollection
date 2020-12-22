@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for uom in uoms %}
+    <p><a href="{% url 'md-prod:uom_update' uom.pk %}">{{ uom.name }}</a></p>
+{% endfor %}
+{% endblock content %}

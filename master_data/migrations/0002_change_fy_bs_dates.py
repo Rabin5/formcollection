@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='fiscalyear',
             name='date_end_bs',
-            field=models.CharField(default='2000/01/01', max_length=15, verbose_name='अन्त्य मिति'),
+            field=models.CharField(default='01/01/2000', max_length=15, verbose_name='अन्त्य मिति'),
         ),
         migrations.AddField(
             model_name='fiscalyear',
             name='date_start_bs',
-            field=models.CharField(default='2000/01/01', max_length=15, verbose_name='सुरू मिति'),
+            field=models.CharField(default='01/01/2000', max_length=15, verbose_name='सुरू मिति'),
         ),
     ]
