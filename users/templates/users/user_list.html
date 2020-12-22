@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for user in users %}
+    <p><a href="{% url 'md-users:update' user.pk %}">{{ user.username }}</a></p>
+{% endfor %}
+{% endblock content %}

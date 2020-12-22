@@ -138,3 +138,12 @@ ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS").split(" ")
 AUTH_USER_MODEL = 'users.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# Authentication
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+# TODO: change LOGIN_REDIRECT_URL to appropriate homepage url
+LOGIN_REDIRECT_URL = 'md-users:list'
+LOGOUT_REDIRECT_URL = 'login'
