@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-{% for hos in hospitals %}
-    <p><a href="{% url 'md-hos:update' hos.pk %}">{{ hos.name }}</a></p>
+{% for gov_body in gov_bodies %}
+    <p><a href="{% url 'md-gov:update' gov_body.pk %}">{{ gov_body.name }}</a></p>
 {% endfor %}
 {% endblock content %}

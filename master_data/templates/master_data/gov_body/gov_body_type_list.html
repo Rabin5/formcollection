@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for gov_body_type in gov_body_typies %}
+<p><a href="{% url 'md-gov:gov_type_update' gov_body_type.pk %}">{{ gov_body_type.name }}</a></p>
+{% endfor %}
+{% endblock content %}

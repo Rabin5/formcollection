@@ -23,6 +23,7 @@ urlpatterns = [
     path('master-data/fiscal-year/', include('master_data.urls.fiscal_year')),
     path('master-data/product/', include('master_data.urls.product')),
     path('master-data/hospital/', include('master_data.urls.hospital')),
+    path('master-data/government/', include('master_data.urls.government')),
     path('master-data/users/', include('users.urls.user_urls')),
 
     # auth views urls

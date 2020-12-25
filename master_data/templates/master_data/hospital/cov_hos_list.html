@@ -4,6 +4,6 @@
 
 {% block content %}
 {% for cov_hospital in cov_hospitals %}
-    <p><a href="{% url 'md-hos:cov_update' cov_hospital.pk %}">{{ cov_hospital.name }}</a></p>
+    <p><a href="{% url 'md-hos:update' cov_hospital.pk %}">{{ cov_hospital.name }}</a></p>
 {% endfor %}
 {% endblock content %}
