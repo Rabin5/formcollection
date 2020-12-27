@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for country in country_list %}
+<p><a href="{% url 'md-country:update' country.pk %}">{{ country.name }}</a></p>
+{% endfor %}
+{% endblock content %}

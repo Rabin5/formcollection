@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for list in district_list %}
+<p><a href="{% url 'md-district:update' list.pk %}">{{ list.name }}</a></p>
+{% endfor %}
+{% endblock content %}

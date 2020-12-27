@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for co_hospital in covidhospital_list %}
+<p><a href="{% url 'md-covidhospital:update' co_hospital.pk %}">{{ co_hospital.name }}</a></p>
+{% endfor %}
+{% endblock content %}

@@ -27,5 +27,18 @@ urlpatterns = [
     # auth views urls
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # adress,company
+    path('master-data/country/', include('master_data.urls.country')),
+    path('master-data/province/', include('master_data.urls.province')),
+    path('master-data/district/', include('master_data.urls.district')),
+    path('master-data/locallevel/', include('master_data.urls.locallevel')),
+    path('master-data/address/', include('master_data.urls.address')),
+
+    path('master-data/companies/', include('master_data.urls.company')),
+    path('master-data/covidhospital/',
+         include('master_data.urls.covidhospital')),
+    path('master-data/institution/', include('master_data.urls.institution')),
+    path('master-data/laboratory/', include('master_data.urls.laboratory')),
+
 
 ]
