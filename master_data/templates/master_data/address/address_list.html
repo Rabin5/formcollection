@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for address in address_list %}
+<p><a href="{% url 'md-address:update' address.pk %}">{{ address.name }}</a></p>
+{% endfor %}
+{% endblock content %}
