@@ -6,7 +6,7 @@ from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder
 
 from forms.custom_layout_object import Formset
 from forms.models import MedicalExpense, MedicalExpenseLine
-
+from master_data.widgets import NepaliDateInput
 
 class MedExpLineForm(forms.ModelForm):
 
@@ -18,6 +18,10 @@ class MedExpLineForm(forms.ModelForm):
 MedExpLineFormSet = inlineformset_factory(
     MedicalExpense, MedicalExpenseLine, form=MedExpLineForm,
     fields=['medical_expense', 'product', 'amt_agreement', 'date_to_import', 'date_imported', 'amt_imported', 'remarks'],
+    widgets = {
+        'date_to_import': NepaliDateInput(),
+        'date_imported': NepaliDateInput(),
+    },
     extra=1,
     can_delete=True
 )
