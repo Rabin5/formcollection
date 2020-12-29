@@ -44,9 +44,11 @@ class MedExpUpdateView(UpdateView):
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
+        data = super(MedExpUpdateView, self).get_context_data(**kwargs)
+        print(self.object)
         if self.request.POST:
             data['lines'] = MedExpLineFormSet(self.request.POST, instance=self.object)
+            # data['lines'].full_clean()
         else:
             data['lines'] = MedExpLineFormSet(instance=self.object)
         return data
