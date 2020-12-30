@@ -1,0 +1,32 @@
+{% load static %}
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="{% static 'images/nepal-emblem.png' %}" alt="Nepal Emblem">
+    <h6 class="sidebar-brand--title">OAG COVID-19 Audit</h6>
+  </div>
+  
+  <ul class="menu">
+    <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}" >
+      <a href="{% url 'index' %}">ड्यासबोर्ड</a>
+    </li>
+    <li>
+      <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false" aria-controls="collapseExample">मूल तथ्यांक</a>
+      <div class="collapse show" id="master-data">
+        <ul class="menu py-0" >
+          <li>
+            <a href="{% url 'md-fy:list'%}" class="pl-4">आर्थिक वर्ष</a>
+          </li>
+          <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-prod:list'%}" class="pl-4">Product</a>
+          </li>
+          <li>
+            <a href="covid-suchi.html" class="pl-4">कोभिड अस्पताल प्रबन्ध...</a>
+          </li>
+        </ul>
+      </div>
+      
+    </li>
+
+  </ul>
+  </aside>

@@ -1,0 +1,28 @@
+{% load static %}
+
+<header class="header">
+  <div class="header-title">
+    <a href="javascript:void(0)" id="toggler" class="user--area-link btn btn-icon-only menu-toggler">
+      <span class="ic-menu"></span>
+    </a>
+    <h5 class="title">Nepal Audit Management System</h5>
+  </div>
+  <ul class="list list-inline header--user-area">
+    <li class="user--area-item">
+      <div class="dropdown">
+        <a role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          href="#/" class="user--area-link dropdown-toggle">
+          <img src="{% static 'images/user-avatar-default.jpg' %}" alt="Profile" class="user--image">
+          <span class="user--name">{{ user }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          {% if user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+            <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+          {% endif %}
+        </div>
+      </div>
+    </li>
+  </ul>
+</header>
