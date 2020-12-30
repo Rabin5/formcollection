@@ -11,9 +11,9 @@ class GovernmentBodyTypeForm(ModelForm):
     class Meta:
         model = GovernmentBodyType
         fields = ['name', 'parent']
-    
+
+
 class GovernmentBodyForm(ModelForm):
     class Meta:
         model = GovernmentBody
         fields = ['name', 'type', 'parent', 'covid_hospital']
-        

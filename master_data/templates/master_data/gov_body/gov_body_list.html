@@ -4,6 +4,6 @@
 
 {% block content %}
 {% for gov_body in gov_bodies %}
-    <p><a href="{% url 'md-gov:update' gov_body.pk %}">{{ gov_body.name }}</a></p>
+<p><a href="{% url 'md-gov:update' gov_body.pk %}">{{ gov_body.name }}</a></p>
 {% endfor %}
 {% endblock content %}

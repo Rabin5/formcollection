@@ -37,10 +37,14 @@ urlpatterns = [
     path('master-data/address/', include('master_data.urls.address')),
 
     path('master-data/companies/', include('master_data.urls.company')),
-    path('master-data/covidhospital/',
-         include('master_data.urls.covidhospital')),
+    # path('master-data/covidhospital/',
+    #    include('master_data.urls.covidhospital')),
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
+    path('riskAllowance_forms/', include('forms.urls.riskAllowance_forms_urls')),
+    # for allowence and OfficeBearer
+    path('office_bearer/', include('master_data.urls.officebearer')),
+    path('allowance_type/', include('master_data.urls.allowance_type')),
 
 
 ]

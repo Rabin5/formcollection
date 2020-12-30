@@ -32,10 +32,10 @@ class Institution(Company):
     pass
 
 
-class Hospital(Address):
-    name = models.CharField(max_length=300)
+# class Hospital(Address):
+#     name = models.CharField(max_length=300)
 
 
-class CovidHospital(Hospital):
-    type = models.CharField(max_length=300)
-    date_announcement = models.DateField(null=False)
+# class CovidHospital(Hospital):
+#     type = models.CharField(max_length=300)
+#     date_announcement = models.DateField(null=False)
