@@ -45,7 +45,7 @@ class MedExpUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super(MedExpUpdateView, self).get_context_data(**kwargs)
-        print(self.object)
+        # import pdb;pdb.set_trace()
         if self.request.POST:
             data['lines'] = MedExpLineFormSet(self.request.POST, instance=self.object)
             # data['lines'].full_clean()
