@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('master_data', '0004_change_uom_verbose_name'),
+        ('master_data', '0006_governmentbody_governmentbodytype'),
     ]
 
     operations = [
@@ -45,14 +45,6 @@ class Migration(migrations.Migration):
                 ('address_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='master_data.address')),
                 ('name', models.CharField(max_length=300)),
                 ('date_establishment', models.DateField()),
-            ],
-            bases=('master_data.address',),
-        ),
-        migrations.CreateModel(
-            name='Hospital',
-            fields=[
-                ('address_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='master_data.address')),
-                ('name', models.CharField(max_length=300)),
             ],
             bases=('master_data.address',),
         ),
@@ -96,15 +88,6 @@ class Migration(migrations.Migration):
             model_name='address',
             name='province',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='master_data.province'),
-        ),
-        migrations.CreateModel(
-            name='CovidHospital',
-            fields=[
-                ('hospital_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='master_data.hospital')),
-                ('type', models.CharField(max_length=300)),
-                ('date_announcement', models.DateField()),
-            ],
-            bases=('master_data.hospital',),
         ),
         migrations.CreateModel(
             name='Importer',

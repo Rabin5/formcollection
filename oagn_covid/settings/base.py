@@ -36,6 +36,9 @@ INSTALLED_APPS = [
 
     'master_data.apps.MasterDataConfig',
     'users.apps.UsersConfig',
+    'forms.apps.FormsConfig',
+
+    'reports.apps.ReportsConfig',
 ]
 
 MIDDLEWARE = [
