@@ -45,8 +45,22 @@ class SourceBudget(models.Model):
     description = models.TextField()
 
     def __str__(self) -> str:
+        return self.name
+
+class OfficeBearer(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=30, blank=True, null=True)
+
+    def __str__(self) -> str:
         return self.title
 
+class SourceBudget(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=30, blank=True, null=True)
+    description = models.TextField()
+
+    def __str__(self) -> str:
+        return self.title
 
 class ExpenseHeader(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -56,10 +70,8 @@ class ExpenseHeader(models.Model):
     def __str__(self) -> str:
         return self.title
 
-
-class Manpower(models.Model):
+class  Manpower(models.Model):
     pass
-
 
 class AllowanceType(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -68,7 +80,6 @@ class AllowanceType(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
 
 class CovidHospitalManagementChecklistDescription(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -90,7 +101,6 @@ class ReliefType(models.Model):
 
     def __str__(self) -> str:
         return self.title
-
 
 class ActionPlanActivity(models.Model):
     created = models.DateTimeField(auto_now_add=True)

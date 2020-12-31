@@ -3,4 +3,4 @@ All forms are based on the UML (https://gitlab.com/ai-python-django/covid-report
 based on the Business Requirement Documents provided.
 """
 
-from .risk_allowance import *
+from .medical_expense import *
