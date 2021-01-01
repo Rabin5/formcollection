@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models import RiskAllowance, RiskAllowanceLine
+from forms.models.risk_allowance import RiskAllowance, RiskAllowanceLine
 from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLine, RiskAllowanceFormSet
 
 

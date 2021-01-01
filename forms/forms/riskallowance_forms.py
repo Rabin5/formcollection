@@ -5,7 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
-from forms.models import RiskAllowanceLine, RiskAllowance
+from forms.models.risk_allowance import RiskAllowanceLine, RiskAllowance
 
 
 class RiskAllowanceLineForm(forms.ModelForm):
