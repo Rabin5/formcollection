@@ -24,8 +24,6 @@ class CovidHospitalForm(HospitalForm):
             'date_announcement': NepaliDateInput(),
         }
 
-
-
     def save(self, commit=True):
         covDate = super().save(commit=False)
         covDate.date_start = nepali_datetime.datetime.strptime(covDate.date_announcement, '%d/%m/%Y').date().to_datetime_date()

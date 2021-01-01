@@ -1,18 +1,17 @@
 {% load crispy_forms_tags %}
 
 <div class="modal-header">
-  <h6 class="modal-title" id="exampleModalLabel">कोभिड अस्पताल</h6>
+  <h6 class="modal-title" id="exampleModalLabel">Are you sure?</h6>
   <a class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </a>
 </div>
 <div class="modal-body pt-2">
-  <form id="cov_create" method="post" action="{% url 'md-hos:cov_create' %}">
+  <form id="hos_delete" method="post" action="{% url 'md-hos:delete' hospital.pk %}">
     {% csrf_token %}
-    {{ form|crispy  }}
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-  <button id="btn_cov_create" form="cov_create" type="submit" class="btn btn-success">Save</button>
+  <button id="btn_hos_delete" form="hos_delete" type="submit" class="btn btn-danger">Delete</button>
 </div>

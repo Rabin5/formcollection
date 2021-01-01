@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Covid Hospital - Nepal Audit Management System
+  Hospital - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Covid Hospital
+Hospital
 {% endblock page_title %}
 
 {% block page_actions %}
   <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-hos:cov_create' %}"
-    href="{% url 'md-hos:cov_create' %}" data-toggle="modal" data-target="#modalCovHosCreate">
+    href="{% url 'md-hos:cov_create' %}" data-toggle="modal" data-target="#modalHosCreate">
     <i class="ic-add"></i>
-    कोभिड अस्पताल थप्नुहोस्
+    अस्पताल थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,26 +23,22 @@ Covid Hospital
   <thead>
     <tr>
       <th>#.</th>
-      <th>Covid Hospital Name</th>
-      <th>Covid Hospital Type</th>
-      <th>Date Announcement</th>
+      <th>Hospital Name</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
   <tbody>
-    {% for cov_hospital in cov_hospitals %}
+    {% for hospital in hospitals %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ cov_hospital.name }}</td>
-        <td>{% if cov_hospital.type %}{{cov_hospital.type}}{% else %} - {% endif %}</td>
-        <td>{{ cov_hospital.date_announcement }}</td>
+        <td>{{ hospital.name }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-hos:cov_update' cov_hospital.pk %}"
-            href="{% url 'md-hos:cov_update' cov_hospital.pk %}" data-toggle="modal" data-target="#modalCovHosUpdate">
+          <a data-remote="{% url 'md-hos:update' hospital.pk %}"
+            href="{% url 'md-hos:update' hospital.pk %}" data-toggle="modal" data-target="#modalHosUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'md-hos:cov_delete' cov_hospital.pk %}"
-            href="{% url 'md-hos:cov_delete' cov_hospital.pk %}" data-toggle="modal" data-target="#modalCovHosDelete">
+          <a data-remote="{% url 'md-hos:delete' hospital.pk %}"
+            href="{% url 'md-hos:delete' hospital.pk %}" data-toggle="modal" data-target="#modalHosDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -54,21 +50,21 @@ Covid Hospital
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalCovHosCreate" tabindex="-1" role="dialog" aria-labelledby="modalCovHosCreate" aria-hidden="true">
+<div class="modal fade" id="modalHosCreate" tabindex="-1" role="dialog" aria-labelledby="modalHosCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalCovHosUpdate" tabindex="-1" role="dialog" aria-labelledby="modalCovHosUpdate" aria-hidden="true">
+<div class="modal fade" id="modalHosUpdate" tabindex="-1" role="dialog" aria-labelledby="modalHosUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalCovHosDelete" tabindex="-1" role="dialog" aria-labelledby="modalCovHosDelete" aria-hidden="true">
+<div class="modal fade" id="modalHosDelete" tabindex="-1" role="dialog" aria-labelledby="modalHosDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -81,31 +77,31 @@ Covid Hospital
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalCovHosCreate').on('shown.bs.modal', function (e) {
+    $('#modalHosCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalCovHosUpdate').on('shown.bs.modal', function (e) {
+    $('#modalHosUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalCovHosDelete').on('shown.bs.modal', function (e) {
+    $('#modalHosDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
   });
 
-  $( "#modalCovHosCreate").on('submit', 'form', function(e) {
+  $( "#modalHosCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalCovHosUpdate").on('submit', 'form', function(e) {
+  $( "#modalHosUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
