@@ -30,23 +30,6 @@ class GovernmentBody(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
-class OfficeBearer(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
-
-    def __str__(self) -> str:
-        return self.title
-
-
-class SourceBudget(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
-    description = models.TextField()
-
-    def __str__(self) -> str:
-        return self.name
-
 class OfficeBearer(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=30, blank=True, null=True)
