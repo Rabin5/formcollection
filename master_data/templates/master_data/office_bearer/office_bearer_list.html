@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for office in office_bearer_typies %}
+<p><a href="{% url 'md-offbearer:update' office.pk %}">{{ office.name }}</a></p>
+{% endfor %}
+{% endblock content %}
