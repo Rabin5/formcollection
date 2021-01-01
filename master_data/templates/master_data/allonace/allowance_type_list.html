@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for allowance in allowance_type_list %}
+<p><a href="{% url 'md-allowance_type:update' allowance.pk %}">{{ allowance.name }}</a></p>
+{% endfor %}
+{% endblock content %}
