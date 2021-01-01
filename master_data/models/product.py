@@ -6,6 +6,12 @@ class UnitOfMeasure(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class ProcurementMethod(models.Model):
+    name = models.CharField(max_length=20, blank=True, null=True, verbose_name='नाम')
+
+    def __str__(self) -> str:
+        return self.name
+
 class Product(models.Model):
     ordering = ['start_date']
     created = models.DateTimeField(auto_now_add=True)

@@ -1,19 +1,17 @@
 {% load crispy_forms_tags %}
 
-
 <div class="modal-header">
-  <h6 class="modal-title" id="exampleModalLabel">आर्थिक वर्ष</h6>
+  <h6 class="modal-title" id="exampleModalLabel">Are you sure?</h6>
   <a class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </a>
 </div>
 <div class="modal-body pt-2">
-  <form id="fy_create" method="post" action="{% url 'md-fy:create' %}">
+  <form id="uom_delete" method="post" action="{% url 'md-prod:uom_delete' uom.pk %}">
     {% csrf_token %}
-    {{ form|crispy  }}
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-  <button id="btn_fy_create" form="fy_create" type="submit" class="btn btn-success">Save</button>
+  <button id="uom_delete" form="uom_delete" type="submit" class="btn btn-danger">Delete</button>
 </div>

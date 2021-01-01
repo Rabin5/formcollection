@@ -1,9 +1,113 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+  आर्थिक वर्षहरु - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+आर्थिक वर्षहरु
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-fy:create' %}"
+    href="{% url 'md-fy:create' %}" data-toggle="modal" data-target="#modalFyCreate">
+    <i class="ic-add"></i>
+    आर्थिक वर्ष थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for fy in fys %}
-    <p><a href="{% url 'md-fy:update' fy.pk %}">{{ fy.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>आर्थिक वर्ष</th>
+      <th>सुरू मिति</th>
+      <th>अन्त्य मिति</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fy in fys %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ fy.name }}</td>
+        <td>{{ fy.date_start_bs }}</td>
+        <td>{{ fy.date_end_bs }}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-fy:update' fy.pk %}"
+            href="{% url 'md-fy:update' fy.pk %}" data-toggle="modal" data-target="#modalFyUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          <a data-remote="{% url 'md-fy:delete' fy.pk %}"
+            href="{% url 'md-fy:delete' fy.pk %}" data-toggle="modal" data-target="#modalFyDelete">
+            <i class="ic-delete"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalFyCreate" tabindex="-1" role="dialog" aria-labelledby="modalFyCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalFyUpdate" tabindex="-1" role="dialog" aria-labelledby="modalFyUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalFyDelete" tabindex="-1" role="dialog" aria-labelledby="modalFyDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalFyCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalFyUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalFyDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+  
+    $( "#modalFyCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalFyUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+</script>
+{% endblock extrascripts %}

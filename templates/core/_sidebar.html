@@ -14,7 +14,7 @@
       <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false" aria-controls="collapseExample">मूल तथ्यांक</a>
       <div class="collapse show" id="master-data">
         <ul class="menu py-0" >
-          <li>
+          <li {% if 'md-fy:list' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'md-fy:list'%}" class="pl-4">आर्थिक वर्ष</a>
           </li>
           <li >
@@ -26,6 +26,9 @@
                 </li>
                 <li {% if 'md-prod:uom_list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-prod:uom_list'%}" class="pl-4">Unit of Measurement</a>
+                </li>
+                <li {% if 'md-prod:procurement_list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                  <a href="{% url 'md-prod:procurement_list'%}" class="pl-4">Procurement Method</a>
                 </li>
               </ul>
             </div>

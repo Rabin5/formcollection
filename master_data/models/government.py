@@ -46,7 +46,7 @@ class ExpenseHeader(models.Model):
     def __str__(self) -> str:
         return self.title
 
-class  Manpower(models.Model):
+class Manpower(models.Model):
     pass
 
 class AllowanceType(models.Model):
