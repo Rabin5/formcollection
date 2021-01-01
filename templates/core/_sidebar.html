@@ -14,12 +14,24 @@
       <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false" aria-controls="collapseExample">मूल तथ्यांक</a>
       <div class="collapse show" id="master-data">
         <ul class="menu py-0" >
-          <li>
+          <li {% if 'md-fy:list' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'md-fy:list'%}" class="pl-4">आर्थिक वर्ष</a>
           </li>
-          <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-            <a href="{% url 'md-prod:list'%}" class="pl-4">Product</a>
-          </li>
+          <li >
+            <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">सरकारी निकाय</a>
+            <div class="collapse show" id="collapseExample1">
+              <ul class="menu py-0">
+                <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                  <a href="{% url 'md-prod:list'%}" class="pl-4">Product</a>
+                </li>
+                <li {% if 'md-prod:uom_list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                  <a href="{% url 'md-prod:uom_list'%}" class="pl-4">Unit of Measurement</a>
+                </li>
+                <li {% if 'md-prod:procurement_list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                  <a href="{% url 'md-prod:procurement_list'%}" class="pl-4">Procurement Method</a>
+                </li>
+              </ul>
+            </div>
           <li>
             <a href="covid-suchi.html" class="pl-4">कोभिड अस्पताल प्रबन्ध...</a>
           </li>

@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Product - Nepal Audit Management System
+  Procurement - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Products
+Procurement Method
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:create' %}"
-    href="{% url 'md-prod:create' %}" data-toggle="modal" data-target="#modalProdCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:procurement_create' %}"
+    href="{% url 'md-prod:procurement_create' %}" data-toggle="modal" data-target="#modalProcurementCreate">
     <i class="ic-add"></i>
-    Product थप्नुहोस्
+    Procurement थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,26 +23,22 @@ Products
   <thead>
     <tr>
       <th>#.</th>
-      <th>Product Name</th>
-      <th>Product Type</th>
-      <th>Measurement</th>
+      <th>Procurement Method</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
   <tbody>
-    {% for prod in prods %}
+    {% for procurement in procurements %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ prod.name }}</td>
-        <td>{{ prod.type }}</td>
-        <td>{% if prod.uom %}{{prod.uom}}{% else %} - {% endif %}</td>
+        <td>{{ procurement.name }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-prod:update' prod.pk %}"
-            href="{% url 'md-prod:update' prod.pk %}" data-toggle="modal" data-target="#modalProdUpdate">
+          <a data-remote="{% url 'md-prod:procurement_update' procurement.pk %}"
+            href="{% url 'md-prod:procurement_update' procurement.pk %}" data-toggle="modal" data-target="#modalProcurementUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'md-prod:delete' prod.pk %}"
-            href="{% url 'md-prod:delete' prod.pk %}" data-toggle="modal" data-target="#modalProdDelete">
+          <a data-remote="{% url 'md-prod:procurement_delete' procurement.pk %}"
+            href="{% url 'md-prod:procurement_delete' procurement.pk %}" data-toggle="modal" data-target="#modalProcurementDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -54,21 +50,21 @@ Products
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalProdCreate" tabindex="-1" role="dialog" aria-labelledby="modalProdCreate" aria-hidden="true">
+<div class="modal fade" id="modalProcurementCreate" tabindex="-1" role="dialog" aria-labelledby="modalProcurementCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalProdUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProdUpdate" aria-hidden="true">
+<div class="modal fade" id="modalProcurementUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProcurementUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete" aria-hidden="true">
+<div class="modal fade" id="modalProcurementDelete" tabindex="-1" role="dialog" aria-labelledby="modalProcurementDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -81,33 +77,33 @@ Products
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalProdCreate').on('shown.bs.modal', function (e) {
+    $('#modalProcurementCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalProdUpdate').on('shown.bs.modal', function (e) {
+    $('#modalProcurementUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalProdDelete').on('shown.bs.modal', function (e) {
+    $('#modalProcurementDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
   });
 
-  $( "#modalProdCreate").on('submit', 'form', function(e) {
-    var $prod_modal = $(this);
+  $( "#modalProcurementCreate").on('submit', 'form', function(e) {
+    {% comment %} var $prod_modal = $(this); {% endcomment %}
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalProdUpdate").on('submit', 'form', function(e) {
-    var $prod_modal = $(this);
+  $( "#modalProcurementUpdate").on('submit', 'form', function(e) {
+    {% comment %} var $prod_modal = $(this); {% endcomment %}
     console.log($prod_modal)
     e.preventDefault();
     saveData($(this)) 

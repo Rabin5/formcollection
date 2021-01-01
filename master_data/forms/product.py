@@ -14,3 +14,8 @@ class UomForm(ModelForm):
     class Meta:
         model = UnitOfMeasure
         fields = ['name', ]
+
+class ProcurementForm(ModelForm):
+    class Meta:
+        model = ProcurementMethod
+        fields = ['name', ]
