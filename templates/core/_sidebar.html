@@ -85,7 +85,19 @@
           </li>
         </ul>
       </div>
-      
+    </li>
+    <li >
+      <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">User</a>
+      <div class="collapse show" id="collapseExample4">
+        <ul class="menu py-0">
+          <li {% if 'md-users:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-users:list'%}" class="pl-4">Users</a>
+          </li>
+          <li {% if 'md-users:groups_list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-users:groups_list'%}" class="pl-4">User Group</a>
+          </li>
+        </ul>
+      </div>
     </li>
   </ul>
   </aside>

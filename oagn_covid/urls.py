@@ -54,6 +54,8 @@ urlpatterns = [
 
     path('forms/', include('forms.urls.forms_urls')),
 
+    path('users/', include('users.urls.user_urls')),
+
     path('', DashboardView.as_view(), name='index'),
 
 ]
