@@ -101,14 +101,11 @@ Products
   });
 
   $( "#modalProdCreate").on('submit', 'form', function(e) {
-    var $prod_modal = $(this);
     e.preventDefault();
     saveData($(this)) 
   });
 
   $( "#modalProdUpdate").on('submit', 'form', function(e) {
-    var $prod_modal = $(this);
-    console.log($prod_modal)
     e.preventDefault();
     saveData($(this)) 
   });

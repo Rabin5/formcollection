@@ -54,6 +54,7 @@ class ExpenseHeader(models.Model):
         return self.title
 
 class Manpower(models.Model):
+    # TODO: UI integration for manpower
     pass
 
 class AllowanceType(models.Model):

@@ -1,9 +1,111 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+  Gov Body Type - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Government Body Type
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-gov:gov_type_create' %}"
+    href="{% url 'md-gov:gov_type_create' %}" data-toggle="modal" data-target="#modalGovTypeCreate">
+    <i class="ic-add"></i>
+    सरकारी निकायको प्रकार थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for gov_body_type in gov_body_typies %}
-<p><a href="{% url 'md-gov:gov_type_update' gov_body_type.pk %}">{{ gov_body_type.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>Government Body Type Name</th>
+      <th>Parent</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for gov_body_type in gov_body_typies %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ gov_body_type.name }}</td>
+        <td>{% if gov_body_type.parent %}{{gov_body_type.parent}}{% else %} - {% endif %}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-gov:gov_type_update' gov_body_type.pk %}"
+            href="{% url 'md-gov:gov_type_update' gov_body_type.pk %}" data-toggle="modal" data-target="#modalGovTypeUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          <a data-remote="{% url 'md-gov:gov_type_delete' gov_body_type.pk %}"
+            href="{% url 'md-gov:gov_type_delete' gov_body_type.pk %}" data-toggle="modal" data-target="#modalGovTypeDelete">
+            <i class="ic-delete"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalGovTypeCreate" tabindex="-1" role="dialog" aria-labelledby="modalGovTypeCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalGovTypeUpdate" tabindex="-1" role="dialog" aria-labelledby="modalGovTypeUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalGovTypeDelete" tabindex="-1" role="dialog" aria-labelledby="modalGovTypeDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalGovTypeCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalGovTypeUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalGovTypeDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+
+  $( "#modalGovTypeCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalGovTypeUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+</script>
+{% endblock extrascripts %}

@@ -8,5 +8,6 @@ urlpatterns = [
     path('', OfficeBearerListView.as_view(), name='list'),
     path('create/', OfficeBearerCreateView.as_view(), name='create'),
     path('<int:pk>/update', OfficeBearerUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete', OfficeBearerDeleteView.as_view(), name='delete'),
 
 ]

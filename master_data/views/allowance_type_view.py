@@ -22,5 +22,11 @@ class AllowanceTypeUpdateView(UpdateView):
     model = AllowanceType
     template_name = "master_data/allonace/allowance_type_update.html"
     form_class = AllowanceTypeForm
-    success_url = reverse_lazy('md-allowance_type:update')
-    context_object_name = 'allowance_type_update'
+    success_url = reverse_lazy('md-allowance_type:list')
+    context_object_name = 'allowance_type'
+
+class AllowanceTypeDeleteView(DeleteView):
+    model = AllowanceType
+    template_name = "master_data/allonace/allowance_type_delete.html"
+    success_url = reverse_lazy('md-allowance_type:list')
+    context_object_name = 'allowance_type'

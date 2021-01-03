@@ -25,6 +25,12 @@ class GovernmentBodyTypeUpdateView(UpdateView):
     success_url = reverse_lazy('md-gov:gov_type_list')
     context_object_name = 'gov_body_type'
 
+class GovernmentBodyTypeDeleteView(DeleteView):
+    model = GovernmentBodyType
+    template_name = "master_data/gov_body/gov_body_type_delete.html"
+    success_url = reverse_lazy('md-gov:gov_type_list')
+    context_object_name = 'gov_body_type'
+
 class GovernmentBodyCreateView(CreateView):
     model = GovernmentBody
     template_name = "master_data/gov_body/gov_body_create.html"
@@ -42,5 +48,11 @@ class GovernmentBodyUpdateView(UpdateView):
     model = GovernmentBody
     template_name = "master_data/gov_body/gov_body_update.html"
     form_class = GovernmentBodyForm
+    success_url = reverse_lazy('md-gov:list')
+    context_object_name = 'gov_body'
+
+class GovernmentBodyDeleteView(DeleteView):
+    model = GovernmentBody
+    template_name = "master_data/gov_body/gov_body_delete.html"
     success_url = reverse_lazy('md-gov:list')
     context_object_name = 'gov_body'

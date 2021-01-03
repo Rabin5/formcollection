@@ -1,0 +1,17 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-header">
+  <h6 class="modal-title" id="exampleModalLabel">Are you sure?</h6>
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body pt-2">
+  <form id="gov_body_type_delete" method="post" action="{% url 'md-gov:gov_type_delete' gov_body_type.pk %}">
+    {% csrf_token %}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+  <button id="btn_gov_body_type_delete" form="gov_body_type_delete" type="submit" class="btn btn-danger">Delete</button>
+</div>

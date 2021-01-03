@@ -25,3 +25,9 @@ class OfficeBearerUpdateView(UpdateView):
     form_class = OfficeBearerForm
     success_url = reverse_lazy('md-offbearer:list')
     context_object_name = 'office_bearer_type'
+
+class OfficeBearerDeleteView(DeleteView):
+    model = OfficeBearer
+    template_name = "master_data/office_bearer/office_bearer_delete.html"
+    success_url = reverse_lazy('md-offbearer:list')
+    context_object_name = 'office_bearer_type'

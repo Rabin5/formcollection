@@ -1,11 +1,18 @@
-{% extends 'core/base.html' %}
-
 {% load crispy_forms_tags %}
 
-{% block content %}
-<form method="post" action="{% url 'md-offbearer:update' office_bearer_type.pk %}">
+<div class="modal-header">
+  <h6 class="modal-title" id="exampleModalLabel">Office Bearer</h6>
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body pt-2">
+  <form id="offbearer_update" method="post" action="{% url 'md-offbearer:update' office_bearer_type.pk %}">
     {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Submit">
-</form>
-{% endblock content %}
+    {{ form|crispy  }}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+  <button id="btn_offbearer_update" form="offbearer_update" type="submit" class="btn btn-success">Save</button>
+</div>
