@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Allowance Type - Nepal Audit Management System
+  Source Budget - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Allowance Type
+Source Budget
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-allowance_type:create' %}"
-    href="{% url 'md-allowance_type:create' %}" data-toggle="modal" data-target="#modalAllowanceCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-source_budget:create' %}"
+    href="{% url 'md-source_budget:create' %}" data-toggle="modal" data-target="#modalSourceBudgetCreate">
     <i class="ic-add"></i>
-    Alowance Type थप्नुहोस्
+    Source Budget थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,24 +23,24 @@ Allowance Type
   <thead>
     <tr>
       <th>#.</th>
-      <th>Name</th>
+      <th>Title</th>
       <th>Description</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
   <tbody>
-    {% for allowance in allowance_type_list %}
+    {% for source in source_budget_typies %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ allowance.name }}</td>
-        <td>{{ allowance.description }}</td>
+        <td>{{ source.title }}</td>
+        <td>{{ source.description }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-allowance_type:update' allowance.pk %}"
-            href="{% url 'md-allowance_type:update' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceUpdate">
+          <a data-remote="{% url 'md-source_budget:update' source.pk %}"
+            href="{% url 'md-source_budget:update' source.pk %}" data-toggle="modal" data-target="#modalSourceBudgetUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'md-allowance_type:delete' allowance.pk %}"
-            href="{% url 'md-allowance_type:delete' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceDelete">
+          <a data-remote="{% url 'md-source_budget:delete' source.pk %}"
+            href="{% url 'md-source_budget:delete' source.pk %}" data-toggle="modal" data-target="#modalSourceBudgetDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -52,21 +52,21 @@ Allowance Type
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalAllowanceCreate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceCreate" aria-hidden="true">
+<div class="modal fade" id="modalSourceBudgetCreate" tabindex="-1" role="dialog" aria-labelledby="modalSourceBudgetCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceUpdate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceUpdate" aria-hidden="true">
+<div class="modal fade" id="modalSourceBudgetUpdate" tabindex="-1" role="dialog" aria-labelledby="modalSourceBudgetUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceDelete" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceDelete" aria-hidden="true">
+<div class="modal fade" id="modalSourceBudgetDelete" tabindex="-1" role="dialog" aria-labelledby="modalSourceBudgetDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -79,31 +79,31 @@ Allowance Type
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalAllowanceCreate').on('shown.bs.modal', function (e) {
+    $('#modalSourceBudgetCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalAllowanceUpdate').on('shown.bs.modal', function (e) {
+    $('#modalSourceBudgetUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalAllowanceDelete').on('shown.bs.modal', function (e) {
+    $('#modalSourceBudgetDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
   });
 
-  $( "#modalAllowanceCreate").on('submit', 'form', function(e) {
+  $( "#modalSourceBudgetCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalAllowanceUpdate").on('submit', 'form', function(e) {
+  $( "#modalSourceBudgetUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });

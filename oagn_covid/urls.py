@@ -44,7 +44,13 @@ urlpatterns = [
     path('riskAllowance_forms/', include('forms.urls.riskAllowance_forms_urls')),
     # for allowence and OfficeBearer
     path('office_bearer/', include('master_data.urls.officebearer')),
+    path('source_budget/', include('master_data.urls.source_budget')),
     path('allowance_type/', include('master_data.urls.allowance_type')),
+    path('expense_header/', include('master_data.urls.expense_header')),
+    path('cov_hos_managament/', include('master_data.urls.covid_hospital_management_desc')),
+    path('committee/', include('master_data.urls.committee')),
+    path('relief_type/', include('master_data.urls.relief_type')),
+    path('action_plan/', include('master_data.urls.action_plan')),
 
     path('forms/', include('forms.urls.forms_urls')),
 

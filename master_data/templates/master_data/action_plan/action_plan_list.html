@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Allowance Type - Nepal Audit Management System
+  Action Plan - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Allowance Type
+Action Plan
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-allowance_type:create' %}"
-    href="{% url 'md-allowance_type:create' %}" data-toggle="modal" data-target="#modalAllowanceCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-action_plan:create' %}"
+    href="{% url 'md-action_plan:create' %}" data-toggle="modal" data-target="#modalActionPlanCreate">
     <i class="ic-add"></i>
-    Alowance Type थप्नुहोस्
+    Action Plan थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -29,18 +29,18 @@ Allowance Type
     </tr>
   </thead>
   <tbody>
-    {% for allowance in allowance_type_list %}
+    {% for action_plan in action_plan_typies %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ allowance.name }}</td>
-        <td>{{ allowance.description }}</td>
+        <td>{{ action_plan.name }}</td>
+        <td>{{ action_plan.description }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-allowance_type:update' allowance.pk %}"
-            href="{% url 'md-allowance_type:update' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceUpdate">
+          <a data-remote="{% url 'md-action_plan:update' action_plan.pk %}"
+            href="{% url 'md-action_plan:update' action_plan.pk %}" data-toggle="modal" data-target="#modalActionPlanUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'md-allowance_type:delete' allowance.pk %}"
-            href="{% url 'md-allowance_type:delete' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceDelete">
+          <a data-remote="{% url 'md-action_plan:delete' action_plan.pk %}"
+            href="{% url 'md-action_plan:delete' action_plan.pk %}" data-toggle="modal" data-target="#modalActionPlanDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -52,21 +52,21 @@ Allowance Type
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalAllowanceCreate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceCreate" aria-hidden="true">
+<div class="modal fade" id="modalActionPlanCreate" tabindex="-1" role="dialog" aria-labelledby="modalActionPlanCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceUpdate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceUpdate" aria-hidden="true">
+<div class="modal fade" id="modalActionPlanUpdate" tabindex="-1" role="dialog" aria-labelledby="modalActionPlanUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceDelete" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceDelete" aria-hidden="true">
+<div class="modal fade" id="modalActionPlanDelete" tabindex="-1" role="dialog" aria-labelledby="modalActionPlanDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -79,31 +79,31 @@ Allowance Type
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalAllowanceCreate').on('shown.bs.modal', function (e) {
+    $('#modalActionPlanCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalAllowanceUpdate').on('shown.bs.modal', function (e) {
+    $('#modalActionPlanUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalAllowanceDelete').on('shown.bs.modal', function (e) {
+    $('#modalActionPlanDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
   });
 
-  $( "#modalAllowanceCreate").on('submit', 'form', function(e) {
+  $( "#modalActionPlanCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalAllowanceUpdate").on('submit', 'form', function(e) {
+  $( "#modalActionPlanUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });

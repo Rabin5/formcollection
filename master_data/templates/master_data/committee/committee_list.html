@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Allowance Type - Nepal Audit Management System
+  Committee - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Allowance Type
+Committee
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-allowance_type:create' %}"
-    href="{% url 'md-allowance_type:create' %}" data-toggle="modal" data-target="#modalAllowanceCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-committee:create' %}"
+    href="{% url 'md-committee:create' %}" data-toggle="modal" data-target="#modalCommitteeCreate">
     <i class="ic-add"></i>
-    Alowance Type थप्नुहोस्
+    Committee थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -29,18 +29,18 @@ Allowance Type
     </tr>
   </thead>
   <tbody>
-    {% for allowance in allowance_type_list %}
+    {% for committee in committee_typies %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ allowance.name }}</td>
-        <td>{{ allowance.description }}</td>
+        <td>{{ committee.name }}</td>
+        <td>{{ committee.description }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-allowance_type:update' allowance.pk %}"
-            href="{% url 'md-allowance_type:update' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceUpdate">
+          <a data-remote="{% url 'md-committee:update' committee.pk %}"
+            href="{% url 'md-committee:update' committee.pk %}" data-toggle="modal" data-target="#modalCommitteeUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'md-allowance_type:delete' allowance.pk %}"
-            href="{% url 'md-allowance_type:delete' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceDelete">
+          <a data-remote="{% url 'md-committee:delete' committee.pk %}"
+            href="{% url 'md-committee:delete' committee.pk %}" data-toggle="modal" data-target="#modalCommitteeDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -52,21 +52,21 @@ Allowance Type
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalAllowanceCreate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceCreate" aria-hidden="true">
+<div class="modal fade" id="modalCommitteeCreate" tabindex="-1" role="dialog" aria-labelledby="modalCommitteeCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceUpdate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceUpdate" aria-hidden="true">
+<div class="modal fade" id="modalCommitteeUpdate" tabindex="-1" role="dialog" aria-labelledby="modalCommitteeUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceDelete" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceDelete" aria-hidden="true">
+<div class="modal fade" id="modalCommitteeDelete" tabindex="-1" role="dialog" aria-labelledby="modalCommitteeDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -79,31 +79,31 @@ Allowance Type
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalAllowanceCreate').on('shown.bs.modal', function (e) {
+    $('#modalCommitteeCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalAllowanceUpdate').on('shown.bs.modal', function (e) {
+    $('#modalCommitteeUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalAllowanceDelete').on('shown.bs.modal', function (e) {
+    $('#modalCommitteeDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
   });
 
-  $( "#modalAllowanceCreate").on('submit', 'form', function(e) {
+  $( "#modalCommitteeCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalAllowanceUpdate").on('submit', 'form', function(e) {
+  $( "#modalCommitteeUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });

@@ -1,9 +1,109 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+  Office Bearer - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Office Bearer
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-offbearer:create' %}"
+    href="{% url 'md-offbearer:create' %}" data-toggle="modal" data-target="#modalOffBearerCreate">
+    <i class="ic-add"></i>
+    Office Bearer थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for office in office_bearer_typies %}
-<p><a href="{% url 'md-offbearer:update' office.pk %}">{{ office.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>Title</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for office in office_bearer_typies %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ office.title }}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-offbearer:update' office.pk %}"
+            href="{% url 'md-offbearer:update' office.pk %}" data-toggle="modal" data-target="#modalOffBearerUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          <a data-remote="{% url 'md-offbearer:delete' office.pk %}"
+            href="{% url 'md-offbearer:delete' office.pk %}" data-toggle="modal" data-target="#modalOffBearerDelete">
+            <i class="ic-delete"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalOffBearerCreate" tabindex="-1" role="dialog" aria-labelledby="modalOffBearerCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalOffBearerUpdate" tabindex="-1" role="dialog" aria-labelledby="modalOffBearerUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalOffBearerDelete" tabindex="-1" role="dialog" aria-labelledby="modalOffBearerDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalOffBearerCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalOffBearerUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalOffBearerDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+
+  $( "#modalOffBearerCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalOffBearerUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+</script>
+{% endblock extrascripts %}
