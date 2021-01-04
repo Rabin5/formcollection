@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  User - Nepal Audit Management System
+  Groups - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-User
+User Groups
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-users:create' %}"
-    href="{% url 'md-users:create' %}" data-toggle="modal" data-target="#modalUserCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-users:create_group' %}"
+    href="{% url 'md-users:create_group' %}" data-toggle="modal" data-target="#modalUserGroupCreate">
     <i class="ic-add"></i>
-    User थप्नुहोस्
+    User Group थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,32 +23,25 @@ User
   <thead>
     <tr>
       <th>#.</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Username</th>
+      <th>Name</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
   <tbody>
-  
-    {% for user in users %}
+    {% for group in groups %}
       <tr>
-      {{user}}
         <td>{{ forloop.counter }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.username }}</td>
+        <td>{{ group.name }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-users:update' user.pk %}"
-            href="{% url 'md-users:update' user.pk %}" data-toggle="modal" data-target="#modalUserUpdate">
+          <a data-remote="{% url 'md-users:update_group' group.pk %}"
+            href="{% url 'md-users:update_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          {% comment %} <a data-remote="{% url 'md-users:delete' user.pk %}"
-            href="{% url 'md-users:delete' user.pk %}" data-toggle="modal" data-target="#modalUserDelete">
+          
+          <a data-remote="{% url 'md-users:delete_group' group.pk %}"
+            href="{% url 'md-users:delete_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupDelete">
             <i class="ic-delete"></i>
-          </a> {% endcomment %}
+          </a> 
         </td>
       </tr>
     {% endfor %}
@@ -58,26 +51,27 @@ User
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalUserCreate" tabindex="-1" role="dialog" aria-labelledby="modalUserCreate" aria-hidden="true">
+<div class="modal fade" id="modalUserGroupCreate" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalUserUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUserUpdate" aria-hidden="true">
+<div class="modal fade" id="modalUserGroupUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalUserDelete" tabindex="-1" role="dialog" aria-labelledby="modalUserDelete" aria-hidden="true">
+<div class="modal fade" id="modalUserGroupDelete" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
+
 {% endblock modal %}
 
 
@@ -85,33 +79,35 @@ User
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalUserCreate').on('shown.bs.modal', function (e) {
+    $('#modalUserGroupCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+    
+    $('#modalUserGroupUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalUserUpdate').on('shown.bs.modal', function (e) {
+    $('#modalUserGroupDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalUserDelete').on('shown.bs.modal', function (e) {
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
-    });
   });
 
-  $( "#modalUserCreate").on('submit', 'form', function(e) {
+  $( "#modalUserGroupCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalUserUpdate").on('submit', 'form', function(e) {
+  $( "#modalUserGroupUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
+
 </script>
 {% endblock extrascripts %}
