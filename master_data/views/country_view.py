@@ -24,3 +24,10 @@ class CountryUpdateView(UpdateView):
     form_class = CountryForm
     success_url = reverse_lazy('md-country:update')
     context_object_name = 'country_update'
+
+
+class CountryDeleteView(DeleteView):
+    model = Country
+    template_name = "master_data/address/country_delete.html"
+    success_url = reverse_lazy('md-country:list')
+    context_object_name = 'country'

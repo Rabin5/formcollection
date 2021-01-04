@@ -1,9 +1,0 @@
-{% extends 'core/base.html' %}
-
-{% load crispy_forms_tags %}
-
-{% block content %}
-{% for list in laboratory_list %}
-<p><a href="{% url 'md-laboratory:update' list.pk %}">{{ list.name }}</a></p>
-{% endfor %}
-{% endblock content %}

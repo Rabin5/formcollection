@@ -24,3 +24,10 @@ class ProvinceUpdateView(UpdateView):
     form_class = ProvinceForm
     success_url = reverse_lazy('md-province:update')
     context_object_name = 'province_update'
+
+
+class ProvinceDeleteView(DeleteView):
+    model = Province
+    template_name = "master_data/address/province_delete.html"
+    success_url = reverse_lazy('md-province:list')
+    context_object_name = 'province'
