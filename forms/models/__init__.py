@@ -4,3 +4,4 @@ based on the Business Requirement Documents provided.
 """
 
 from .medical_expense import *
+from .form_collection import *

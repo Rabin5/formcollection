@@ -2,9 +2,8 @@ from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
 from forms.utils import STATES, BS_MONTHS
-from master_data.models import FiscalYear, GovernmentBody, \
-    Product
-
+from master_data.models import Product
+from .form_collection import FormCollection
 
 class MedicalExpense(FormBaseModel):
     """
@@ -12,12 +11,11 @@ class MedicalExpense(FormBaseModel):
     Code: medExp
     """
 
-    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medExp_fy')
-    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medExp_gov")
+    collection = models.ForeignKey(FormCollection, on_delete=models.CASCADE, related_name='collection', null=True)
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
-        return f'{self.fiscal_year}'
+        return f'{self.collection}'
 
 
 class MedicalExpenseLine(FormLineBaseModel):

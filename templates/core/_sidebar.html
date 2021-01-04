@@ -12,14 +12,14 @@
     </li>
     <li>
       <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false" aria-controls="collapseExample">मूल तथ्यांक</a>
-      <div class="collapse show" id="master-data">
+      <div class="collapse{% if 'md' in request.resolver_match.view_name %} show {% endif %}" id="master-data">
         <ul class="menu py-0" >
           <li {% if 'md-fy:list' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'md-fy:list'%}" class="pl-4">आर्थिक वर्ष</a>
           </li>
           <li >
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">उत्पादन</a>
-            <div class="collapse show" id="collapseExample1">
+            <div class="collapse{% if 'master-data/product' in request.path %} show {% endif %}" id="collapseExample1">
               <ul class="menu py-0">
                 <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-prod:list'%}" class="pl-4">Product</a>
@@ -35,7 +35,7 @@
           </li>
           <li >
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">सरकारी निकाय</a>
-            <div class="collapse show" id="collapseExample2">
+            <div class="collapse{% if 'master-data/government' in request.path %} show {% endif %}" id="collapseExample2">
               <ul class="menu py-0">
                 <li {% if 'md-gov:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-gov:list'%}" class="pl-4">निकाय</a>
@@ -72,7 +72,7 @@
           </li>
           <li >
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">कोभिड अस्पताल</a>
-            <div class="collapse show" id="collapseExample3">
+            <div class="collapse{% if 'master-data/hospital' in request.path %} show {% endif %}" id="collapseExample3">
               <ul class="menu py-0">
                 {% comment %} <li {% if 'md-hos:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-hos:list'%}" class="pl-4">अस्पताल</a>
@@ -85,7 +85,16 @@
           </li>
         </ul>
       </div>
-      
+    </li>
+    <li>
+      <a href="#form-data" class="hasSub" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapseExample">Forms</a>
+      <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
+        <ul class="menu py-0" >
+          <li {% if 'med-forms:med_exp-create' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'med-forms:med_exp-create'%}" class="pl-4">Medical Expense</a>
+          </li>
+        </ul>
+      </div>
     </li>
   </ul>
   </aside>

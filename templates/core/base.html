@@ -60,13 +60,21 @@
         </div>
         
         <div class="content">
-          <div class="card">
-            <div class="card-body">
+          {% if 'forms' in request.path %}
+            <div class="card card-body">
+          {% else %}
+            <div class="card">
+              <div class="card-body">
+          {% endif %}
+
               {% block content %}
-                {% comment %} use this {% endcomment %}
+                
               {% endblock content %}
+              
+          {% if 'forms' not in request.path %}
+              </div>
             </div>
-          </div>
+          {% endif %}
         </div>
       </main>
 
