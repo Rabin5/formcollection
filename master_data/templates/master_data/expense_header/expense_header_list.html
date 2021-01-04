@@ -1,0 +1,111 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Expense Header - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Expense Header
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-expense_header:create' %}"
+    href="{% url 'md-expense_header:create' %}" data-toggle="modal" data-target="#modalExpenseHeaderCreate">
+    <i class="ic-add"></i>
+    Expense Header थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
+{% block content %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for expense_header in expense_header_typies %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ expense_header.title }}</td>
+        <td>{{ expense_header.description }}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-expense_header:update' expense_header.pk %}"
+            href="{% url 'md-expense_header:update' expense_header.pk %}" data-toggle="modal" data-target="#modalExpenseHeaderUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          <a data-remote="{% url 'md-expense_header:delete' expense_header.pk %}"
+            href="{% url 'md-expense_header:delete' expense_header.pk %}" data-toggle="modal" data-target="#modalExpenseHeaderDelete">
+            <i class="ic-delete"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalExpenseHeaderCreate" tabindex="-1" role="dialog" aria-labelledby="modalExpenseHeaderCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalExpenseHeaderUpdate" tabindex="-1" role="dialog" aria-labelledby="modalExpenseHeaderUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalExpenseHeaderDelete" tabindex="-1" role="dialog" aria-labelledby="modalExpenseHeaderDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalExpenseHeaderCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalExpenseHeaderUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalExpenseHeaderDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+
+  $( "#modalExpenseHeaderCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalExpenseHeaderUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+</script>
+{% endblock extrascripts %}

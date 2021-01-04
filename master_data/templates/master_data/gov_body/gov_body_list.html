@@ -1,9 +1,115 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+  Government Body - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Government Body
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-gov:create' %}"
+    href="{% url 'md-gov:create' %}" data-toggle="modal" data-target="#modalGovCreate">
+    <i class="ic-add"></i>
+    सरकारी निकाय थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for gov_body in gov_bodies %}
-<p><a href="{% url 'md-gov:update' gov_body.pk %}">{{ gov_body.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>Government Body Name</th>
+      <th>Government Body Type</th>
+      <th>Parent</th>
+      <th>Covid Hospital</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for gov_body in gov_bodies %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ gov_body.name }}</td>
+        <td>{{ gov_body.type }}</td>
+        <td>{% if gov_body.parent %}{{gov_body.parent}}{% else %} - {% endif %}</td>
+        <td>{% if gov_body.covid_hospital %}{{gov_body.covid_hospital}}{% else %} - {% endif %}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-gov:update' gov_body.pk %}"
+            href="{% url 'md-gov:update' gov_body.pk %}" data-toggle="modal" data-target="#modalGovUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          <a data-remote="{% url 'md-gov:delete' gov_body.pk %}"
+            href="{% url 'md-gov:delete' gov_body.pk %}" data-toggle="modal" data-target="#modalGovDelete">
+            <i class="ic-delete"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalGovCreate" tabindex="-1" role="dialog" aria-labelledby="modalGovCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalGovUpdate" tabindex="-1" role="dialog" aria-labelledby="modalGovUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalGovDelete" tabindex="-1" role="dialog" aria-labelledby="modalGovDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalGovCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalGovUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalGovDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+
+  $( "#modalGovCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalGovUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+</script>
+{% endblock extrascripts %}

@@ -1,0 +1,113 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Groups - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+User Groups
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-users:create_group' %}"
+    href="{% url 'md-users:create_group' %}" data-toggle="modal" data-target="#modalUserGroupCreate">
+    <i class="ic-add"></i>
+    User Group थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
+{% block content %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>Name</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for group in groups %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ group.name }}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-users:update_group' group.pk %}"
+            href="{% url 'md-users:update_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          
+          <a data-remote="{% url 'md-users:delete_group' group.pk %}"
+            href="{% url 'md-users:delete_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupDelete">
+            <i class="ic-delete"></i>
+          </a> 
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalUserGroupCreate" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalUserGroupUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalUserGroupDelete" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalUserGroupCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+    
+    $('#modalUserGroupUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalUserGroupDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+  });
+
+  $( "#modalUserGroupCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalUserGroupUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+</script>
+{% endblock extrascripts %}

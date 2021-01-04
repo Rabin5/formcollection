@@ -103,15 +103,12 @@ Products
     });
   });
 
-  $("#modalProdCreate").on('submit', 'form', function (e) {
-    var $prod_modal = $(this);
+  $( "#modalProdCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this))
   });
 
-  $("#modalProdUpdate").on('submit', 'form', function (e) {
-    var $prod_modal = $(this);
-    console.log($prod_modal)
+  $( "#modalProdUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this))
   });

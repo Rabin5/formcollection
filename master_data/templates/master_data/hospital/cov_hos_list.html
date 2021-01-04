@@ -1,9 +1,113 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+  Covid Hospital - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Covid Hospital
+{% endblock page_title %}
+
+{% block page_actions %}
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-hos:cov_create' %}"
+    href="{% url 'md-hos:cov_create' %}" data-toggle="modal" data-target="#modalCovHosCreate">
+    <i class="ic-add"></i>
+    कोभिड अस्पताल थप्नुहोस्
+  </a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for cov_hospital in cov_hospitals %}
-    <p><a href="{% url 'md-hos:update' cov_hospital.pk %}">{{ cov_hospital.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>Covid Hospital Name</th>
+      <th>Covid Hospital Type</th>
+      <th>Date Announcement</th>
+      <th class="text-right">कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cov_hospital in cov_hospitals %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ cov_hospital.name }}</td>
+        <td>{% if cov_hospital.type %}{{cov_hospital.type}}{% else %} - {% endif %}</td>
+        <td>{{ cov_hospital.date_announcement }}</td>
+        <td class="action">
+          <a data-remote="{% url 'md-hos:cov_update' cov_hospital.pk %}"
+            href="{% url 'md-hos:cov_update' cov_hospital.pk %}" data-toggle="modal" data-target="#modalCovHosUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
+          <a data-remote="{% url 'md-hos:cov_delete' cov_hospital.pk %}"
+            href="{% url 'md-hos:cov_delete' cov_hospital.pk %}" data-toggle="modal" data-target="#modalCovHosDelete">
+            <i class="ic-delete"></i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalCovHosCreate" tabindex="-1" role="dialog" aria-labelledby="modalCovHosCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCovHosUpdate" tabindex="-1" role="dialog" aria-labelledby="modalCovHosUpdate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCovHosDelete" tabindex="-1" role="dialog" aria-labelledby="modalCovHosDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalCovHosCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalCovHosUpdate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $('#modalCovHosDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+
+  $( "#modalCovHosCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+
+  $( "#modalCovHosUpdate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this)) 
+  });
+</script>
+{% endblock extrascripts %}
