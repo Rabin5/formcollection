@@ -2,10 +2,10 @@ from django.urls import path
 
 from forms.views.risk_allowance_views import RiskAllowanceCreateView, RiskAllowanceUpdateView
 
-app_name = 'forms'
+app_name = 'risk-forms'
 urlpatterns = [
-    path('risk-allowance/create',
+    path('create',
          RiskAllowanceCreateView.as_view(), name='risk_allowance-create'),
-    path('risk-allowance/<int:pk>/update',
+    path('<int:pk>/update',
          RiskAllowanceUpdateView.as_view(), name='risk_allowance-update'),
 ]

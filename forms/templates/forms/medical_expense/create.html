@@ -25,7 +25,7 @@ Medical Expense
 {% block content %}
     {% include 'core/forms/progress_bar.html' %}
     <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य </h6>
+        <h6 class="heading-01 mb-3">औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h6>
 
         <form action="">
           <div class="form-row">
@@ -36,59 +36,8 @@ Medical Expense
           </div>
         </form>
 
-        <table class="table table-01 table-bordered mt-3">
-          <thead>
-            <tr>
-              <th>पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य</th>
-              <th>सम्पादन भएका प्रमुख क्रियाकलापहरु</th>
-              <th class="text-right">खर्च रकम</th>
-              <th class="text-right">कार्य</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य
-              </td>
-              <td>सम्पादन भएका प्रमुख क्रियाकलापहरु</td>
-              <td class="text-right">१०,००,०००.००</td>
-              <td class="action">
-                <a href="">
-                  <i class="ic-edit">
-                  </i>
-                </a>
-                <a href="">
-                  <i class="ic-delete"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="text" class="form-control">
-              </td>
-              <td>
-                <input type="text" class="form-control">
-              </td>
-              <td>
-                <input type="text" class="form-control rtl">
-              </td>
-              <td class="action">
-                <a href="">
-                  <i class="ic-edit">
-                  </i>
-                </a>
-                <a href="">
-                  <i class="ic-delete"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <a href="" class="add-more mt-3">
-          <i class="ic-add"></i>
-          Add More
-        </a>
+        {% crispy form %}
+        
       </div>
     <!-- <div class="container">
         <div class="card">

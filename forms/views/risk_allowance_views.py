@@ -35,7 +35,7 @@ class RiskAllowanceCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('forms:fre-create')
+        return reverse_lazy('risk-forms:fre-create')
 
 
 class RiskAllowanceUpdateView(UpdateView):
@@ -47,10 +47,10 @@ class RiskAllowanceUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = RiskAllowanceLineFormSet(
+            data['lines'] = RiskAllowanceFormSet(
                 self.request.POST, instance=self.object)
         else:
-            data['lines'] = RiskAllowanceFormFormSet(instance=self.object)
+            data['lines'] = RiskAllowanceFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -66,4 +66,4 @@ class RiskAllowanceUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('forms:risk_allowance-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('risk-forms:risk_allowance-update', kwargs={'pk': self.object.pk})

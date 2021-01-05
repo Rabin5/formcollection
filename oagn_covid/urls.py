@@ -41,7 +41,7 @@ urlpatterns = [
     #      include('master_data.urls.covidhospital')),
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
-    path('riskAllowance_forms/', include('forms.urls.riskAllowance_forms_urls')),
+    
     # for allowence and OfficeBearer
     path('office_bearer/', include('master_data.urls.officebearer')),
     path('source_budget/', include('master_data.urls.source_budget')),
@@ -52,7 +52,9 @@ urlpatterns = [
     path('relief_type/', include('master_data.urls.relief_type')),
     path('action_plan/', include('master_data.urls.action_plan')),
 
-    path('forms/', include('forms.urls.forms_urls')),
+    # Forms
+    path('forms/medical-expense/', include('forms.urls.medical_expense')),
+    path('forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
 
     path('', DashboardView.as_view(), name='index'),
 

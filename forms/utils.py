@@ -17,8 +17,3 @@ STATES = [
     ('draft', 'Draft'),
     ('submitted', 'Submitted'),
 ]
-
-FORM_STATE = [
-    (1, 'RiskAllowance'),
-    (2, 'MedicalExpense'),
-]

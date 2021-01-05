@@ -14,6 +14,11 @@ class MedExpLineForm(forms.ModelForm):
         model = MedicalExpenseLine
         exclude = ()
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for _, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
 
 MedExpLineFormSet = inlineformset_factory(
     MedicalExpense, MedicalExpenseLine, form=MedExpLineForm,
@@ -38,17 +43,10 @@ class MedExpForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3 create-label'
-        self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Div(
-                Field('fiscal_year'),
-                Field('body'),
-                Fieldset('Add lines. . .',
+                Fieldset('',
                     Formset('lines')
                 ),
-                HTML('<br>'),
-                ButtonHolder(Submit('submit', 'save')),
             )
         )
