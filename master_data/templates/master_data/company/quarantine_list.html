@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Quarantine - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Quarantine
+{% endblock page_title %}
+
+{% block page_actions %}
+<a class="btn btn-success btn-with-icon" data-remote="{% url 'md-quarantine:create' %}"
+    href="{% url 'md-quarantine:create' %}" data-toggle="modal" data-target="#modalAddCreate">
+    <i class="ic-add"></i>
+    Quarantine थप्नुहोस्
+</a>
+{% endblock page_actions %}
+
+{% block content %}
+<table class="table table-striped table-borderless">
+    <thead>
+        <tr>
+            <th>#.</th>
+            <th>Quarantine</th>
+            <th class="text-right">कार्य</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for quarantine in quarantine_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ quarantine.name }}</td>
+            <td class="action">
+                <a data-remote="{% url 'md-quarantine:update' quarantine.pk %}"
+                    href="{% url 'md-quarantine:update' quarantine.pk %}" data-toggle="modal"
+                    data-target="#modalAddUpdate">
+                    <i class="ic-edit mr-2"></i>
+                </a>
+                <a data-remote="{% url 'md-quarantine:delete' quarantine.pk %}"
+                    href="{% url 'md-quarantine:delete' quarantine.pk %}" data-toggle="modal"
+                    data-target="#modalProdDelete">
+                    <i class="ic-delete"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalAddCreate" tabindex="-1" role="dialog" aria-labelledby="modalAddCreate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAddUpdate" tabindex="-1" role="dialog" aria-labelledby="modalAddUpdate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalAddCreate').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+
+        $('#modalAddUpdate').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+
+        $('#modalProdDelete').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+    });
+
+    $("#modalAddCreate").on('submit', 'form', function (e) {
+        var $prod_modal = $(this);
+        e.preventDefault();
+        saveData($(this))
+    });
+
+    $("#modalAddUpdate").on('submit', 'form', function (e) {
+        var $prod_modal = $(this);
+        console.log($prod_modal)
+        e.preventDefault();
+        saveData($(this))
+    });
+</script>
+{% endblock extrascripts %}

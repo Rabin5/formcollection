@@ -22,5 +22,12 @@ class DistrictUpdateView(UpdateView):
     model = District
     template_name = "master_data/address/district_update.html"
     form_class = DistrictForm
-    success_url = reverse_lazy('md-province:update')
+    success_url = reverse_lazy('md-district:List')
     context_object_name = 'district_update'
+
+
+class DistrictDeleteView(DeleteView):
+    model = District
+    template_name = 'master_data/address/district_delete.html'
+    success_url = reverse_lazy('md-district:list')
+    context_object_name = 'district'

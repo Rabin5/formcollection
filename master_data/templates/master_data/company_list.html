@@ -1,9 +1,0 @@
-{% extends 'core/base.html' %}
-
-{% load crispy_forms_tags %}
-
-{% block content %}
-{% for company in company_list %}
-<p><a href="{% url 'md-company:update' company.pk %}">{{ company.name }}</a></p>
-{% endfor %}
-{% endblock content %}

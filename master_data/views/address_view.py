@@ -24,3 +24,10 @@ class AddressUpdateView(UpdateView):
     form_class = AddressForm
     success_url = reverse_lazy('md-address:update')
     context_object_name = 'address_update'
+
+
+class AddressDeleteView(DeleteView):
+    model = Address
+    template_name = "master_data/address/address_delete.html"
+    success_url = reverse_lazy('md-address:list')
+    context_object_name = 'address'

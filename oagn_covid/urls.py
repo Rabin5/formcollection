@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from reports.views.dashboard_view import DashboardView  
+from reports.views.dashboard_view import DashboardView
 from django.urls import include, path
 
 urlpatterns = [
@@ -39,6 +39,13 @@ urlpatterns = [
     path('master-data/companies/', include('master_data.urls.company')),
     # path('master-data/covidhospital/',
     #      include('master_data.urls.covidhospital')),
+    path('master-data/location/', include('master_data.urls.location')),
+    path('master-data/quanrantinecenter/',
+         include('master_data.urls.quarantinecenter')),
+    path('master-data/isolationcenter/',
+         include('master_data.urls.isolationcenter')),
+    path('master-data/importer/', include('master_data.urls.importer')),
+
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
     path('riskAllowance_forms/', include('forms.urls.riskAllowance_forms_urls')),

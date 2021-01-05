@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Product - Nepal Audit Management System
+Product - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
@@ -11,11 +11,11 @@ Products
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:create' %}"
-    href="{% url 'md-prod:create' %}" data-toggle="modal" data-target="#modalProdCreate">
-    <i class="ic-add"></i>
-    Product थप्नुहोस्
-  </a>
+<a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:create' %}" href="{% url 'md-prod:create' %}"
+  data-toggle="modal" data-target="#modalProdCreate">
+  <i class="ic-add"></i>
+  Product थप्नुहोस्
+</a>
 {% endblock page_actions %}
 
 {% block content %}
@@ -31,22 +31,22 @@ Products
   </thead>
   <tbody>
     {% for prod in prods %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ prod.name }}</td>
-        <td>{{ prod.type }}</td>
-        <td>{% if prod.uom %}{{prod.uom}}{% else %} - {% endif %}</td>
-        <td class="action">
-          <a data-remote="{% url 'md-prod:update' prod.pk %}"
-            href="{% url 'md-prod:update' prod.pk %}" data-toggle="modal" data-target="#modalProdUpdate">
-            <i class="ic-edit mr-2"></i>
-          </a>
-          <a data-remote="{% url 'md-prod:delete' prod.pk %}"
-            href="{% url 'md-prod:delete' prod.pk %}" data-toggle="modal" data-target="#modalProdDelete">
-            <i class="ic-delete"></i>
-          </a>
-        </td>
-      </tr>
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ prod.name }}</td>
+      <td>{{ prod.type }}</td>
+      <td>{% if prod.uom %}{{prod.uom}}{% else %} - {% endif %}</td>
+      <td class="action">
+        <a data-remote="{% url 'md-prod:update' prod.pk %}" href="{% url 'md-prod:update' prod.pk %}"
+          data-toggle="modal" data-target="#modalProdUpdate">
+          <i class="ic-edit mr-2"></i>
+        </a>
+        <a data-remote="{% url 'md-prod:delete' prod.pk %}" href="{% url 'md-prod:delete' prod.pk %}"
+          data-toggle="modal" data-target="#modalProdDelete">
+          <i class="ic-delete"></i>
+        </a>
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
@@ -54,21 +54,24 @@ Products
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalProdCreate" tabindex="-1" role="dialog" aria-labelledby="modalProdCreate" aria-hidden="true">
+<div class="modal fade" id="modalProdCreate" tabindex="-1" role="dialog" aria-labelledby="modalProdCreate"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalProdUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProdUpdate" aria-hidden="true">
+<div class="modal fade" id="modalProdUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProdUpdate"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete" aria-hidden="true">
+<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -102,12 +105,12 @@ Products
 
   $( "#modalProdCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this))
   });
 
   $( "#modalProdUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this))
   });
 </script>
 {% endblock extrascripts %}

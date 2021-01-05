@@ -1,9 +1,117 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+District - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+District
+{% endblock page_title %}
+
+{% block page_actions %}
+<a class="btn btn-success btn-with-icon" data-remote="{% url 'md-district:create' %}"
+    href="{% url 'md-district:create' %}" data-toggle="modal" data-target="#modalDistCreate">
+    <i class="ic-add"></i>
+    district थप्नुहोस्
+</a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for list in district_list %}
-<p><a href="{% url 'md-district:update' list.pk %}">{{ list.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+    <thead>
+        <tr>
+            <th>#.</th>
+            <th>District Name</th>
+            <th class="text-right">कार्य</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for district in district_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ district.name }}</td>
+            <td class="action">
+                <a data-remote="{% url 'md-district:update' district.pk %}"
+                    href="{% url 'md-district:update' district.pk %}" data-toggle="modal"
+                    data-target="#modalDistUpdate">
+                    <i class="ic-edit mr-2"></i>
+                </a>
+                <a data-remote="{% url 'md-district:delete' district.pk %}"
+                    href="{% url 'md-district:delete' district.pk %}" data-toggle="modal"
+                    data-target="#modalDistDelete">
+                    <i class="ic-delete"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalDistCreate" tabindex="-1" role="dialog" aria-labelledby="modalDistCreate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDistUpdate" tabindex="-1" role="dialog" aria-labelledby="modalDistUpdate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDistDelete" tabindex="-1" role="dialog" aria-labelledby="modalDistDelete"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalDistCreate').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+
+        $('#modalDistUpdate').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+
+        $('#modalDistDelete').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+    });
+
+    $("#modalDistCreate").on('submit', 'form', function (e) {
+        var $prod_modal = $(this);
+        e.preventDefault();
+        saveData($(this))
+    });
+
+    $("#modalDistUpdate").on('submit', 'form', function (e) {
+        var $prod_modal = $(this);
+        console.log($prod_modal)
+        e.preventDefault();
+        saveData($(this))
+    });
+</script>
+{% endblock extrascripts %}
