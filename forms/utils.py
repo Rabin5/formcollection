@@ -19,7 +19,6 @@ STATES = [
 ]
 
 FORM_STATE = [
-    (1, ''),
-    (2, ''),
-    (3, '')
+    (1, 'RiskAllowance'),
+    (2, 'MedicalExpense'),
 ]
