@@ -10,7 +10,7 @@ function saveData(form){
         window.location.reload();
     })
     .catch(function(err){
-        console.log(err);    
+        console.log(err);
     });
     return false;
 }

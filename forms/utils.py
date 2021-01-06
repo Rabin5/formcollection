@@ -17,3 +17,8 @@ STATES = [
     ('draft', 'Draft'),
     ('submitted', 'Submitted'),
 ]
+
+CH_STATE = [
+    (1, 'risk_forms'),
+    (2, 'med_forms'),
+]

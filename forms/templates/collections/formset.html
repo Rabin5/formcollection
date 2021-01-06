@@ -12,6 +12,7 @@
                 <th class="text-right">खर्च रकम</th>
                 <th class="text-right">कार्य</th> {% endcomment %}
             {% endfor %}
+                <th class="text-right">कार्य{{form.id}}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,15 @@
                 {{ field }}
             </td>
             {% endfor %}
+            <td class="action">
+                <a href="">
+                    <i class="ic-edit">
+                    </i>
+                </a>
+                <a href="">
+                    <i class="ic-delete"></i>
+                </a>
+            </td>
         </tr>
     {% endfor %}
     </tbody>

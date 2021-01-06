@@ -3,25 +3,40 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
+from django.views import View
+from forms.models import FormCollection
 
-from forms.models.risk_allowance import RiskAllowance, RiskAllowanceLine
-from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLine, RiskAllowanceFormSet
+'''
+class FormCollectionView(View):
+    def get(self, request, *args, **kwargs):
+        pass
 
+    def post(self, request, *args, **kwargs):
+        pass
+'''
 
-class RiskAllowanceCreateView(CreateView):
-    model = RiskAllowance
-    template_name = "forms/risk_allowance/create.html"
-    form_class = RiskAllowanceForm
+class FormCollectionCreateView(CreateView):
+    model = FormCollection
+    success_url = None
+
+    
+
+'''
+
+class MedExpCreateView(CreateView):
+    model = MedicalExpense
+    template_name = "forms/medical_expense/create.html"
+    form_class = MedExpForm
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = RiskAllowanceFormSet(self.request.POST)
+            data['lines'] = MedExpLineFormSet(self.request.POST)
         else:
-            data['lines'] = RiskAllowanceFormSet()
+            data['lines'] = MedExpLineFormSet()
         return data
-
+    
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
@@ -31,29 +46,29 @@ class RiskAllowanceCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-
+        
         return super().form_valid(form)
-
+    
     def get_success_url(self):
-        print('---------------------------')
-        return reverse_lazy('med_forms:create')
+        return reverse_lazy('med_forms:med_exp-create')
 
 
-class RiskAllowanceUpdateView(UpdateView):
-    model = RiskAllowance
-    template_name = "forms/risk_allowance/update.html"
-    form_class = RiskAllowanceForm
+class MedExpUpdateView(UpdateView):
+    model = MedicalExpense
+    template_name = "forms/medical_expense/update.html"
+    form_class = MedExpForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
+        data = super(MedExpUpdateView, self).get_context_data(**kwargs)
+        # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = RiskAllowanceFormSet(
-                self.request.POST, instance=self.object)
+            data['lines'] = MedExpLineFormSet(self.request.POST, instance=self.object)
+            # data['lines'].full_clean()
         else:
-            data['lines'] = RiskAllowanceFormSet(instance=self.object)
+            data['lines'] = MedExpLineFormSet(instance=self.object)
         return data
-
+    
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
@@ -63,8 +78,10 @@ class RiskAllowanceUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-
+        
         return super().form_valid(form)
-
+    
     def get_success_url(self):
-        return reverse_lazy('risk_forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('med_forms:med_exp-update', kwargs={'pk': self.object.pk})
+
+'''

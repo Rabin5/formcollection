@@ -17,7 +17,9 @@ class MedExpLineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type != 'select':
+                field.widget.attrs['class'] = 'form-control'
+            
 
 
 MedExpLineFormSet = inlineformset_factory(
@@ -28,7 +30,7 @@ MedExpLineFormSet = inlineformset_factory(
         'date_imported': NepaliDateInput(),
     },
     extra=1,
-    can_delete=True
+    can_delete=False
 )
 
 

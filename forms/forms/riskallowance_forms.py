@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
@@ -17,7 +18,8 @@ class RiskAllowanceLineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type != 'select':
+                field.widget.attrs['class'] = 'form-control'
 
 
 RiskAllowanceFormSet = inlineformset_factory(
@@ -25,7 +27,7 @@ RiskAllowanceFormSet = inlineformset_factory(
     fields=['body', 'office_bearer',
             'bearer_num', 'allowance_type', 'expense_amount', 'remarks'],
     extra=1,
-    can_delete=True
+    can_delete=False
 )
 
 
@@ -38,6 +40,7 @@ class RiskAllowanceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_id = 'form_to_submit'
         self.helper.form_tag = True
         self.helper.layout = Layout(
             Div(
