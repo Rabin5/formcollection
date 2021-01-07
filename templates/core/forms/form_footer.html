@@ -2,10 +2,17 @@
 
 <div class="text-right mt-3">
     <a class="btn btn-outline-secondary">Previous</a>
-    <a class="btn btn-info ml-2" href="{% url request.resolver_match.view_name  %}" id="next">Next</a>
+    <a class="btn btn-info ml-2"  id="next" onclick="next()">Next</a>
+    {% comment %} <a class="btn btn-info ml-2" href="{% url request.resolver_match.view_name  %}" id="next">Next</a> {% endcomment %}
 </div>
 
-
+<script src="{% static 'js/post_data.js' %}"></script>
 <script>
-    
+    document.getElementById('url').value = "{{ request.resolver_match.view_name }}";
+    function next(){
+        var action = "{% url 'forms:create'  %}"
+        saveData($('#form_to_submit'), action)
+    }
+    {% comment %} var form_data = new FormData($('#form_to_submit')[0]); {% endcomment %}
+
 </script>

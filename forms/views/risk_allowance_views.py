@@ -35,7 +35,6 @@ class RiskAllowanceCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        print('---------------------------')
         return reverse_lazy('med_forms:create')
 
 

@@ -5,24 +5,68 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from django.views import View
 from forms.models import FormCollection
+from django.apps import apps
 
-'''
-class FormCollectionView(View):
-    def get(self, request, *args, **kwargs):
-        pass
+from .save_data import save_model
+from forms.utils import CH_STATE
 
-    def post(self, request, *args, **kwargs):
-        pass
-'''
+
+# from forms.forms import riskallowance_forms, med_exp_forms 
+from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceFormSet
+from forms.forms.med_exp_forms import MedExpForm, MedExpLineFormSet
+from forms.models import MedicalExpense, RiskAllowance
+
+
+# class FormCollectionView(View):
+#     def get(self, request, *args, **kwargs):
+#         pass
+
+#     def post(self, request, *args, **kwargs):
+#         save_model(request)
+#         return None
+
+ROUTE_LINK = {
+    'risk_forms': [RiskAllowanceForm, RiskAllowanceFormSet, RiskAllowance],
+    'med_forms': [MedExpForm, MedExpLineFormSet, MedicalExpense],
+}
 
 class FormCollectionCreateView(CreateView):
-    model = FormCollection
+    model = None
     success_url = None
+    form_class = ''
+    route_link = ''
+    form_set = None
 
+    def get_form_class(self):
+        # import pdb;pdb.set_trace()
+        self.route_link = ROUTE_LINK.get(self.request.POST.get('current_url').split(":")[0])
+        self.form_class = self.route_link[0]
+        self.model = self.route_link[2]
+        self.form_set = self.route_link[1]
+        return self.form_class
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['lines'] = self.form_set(self.request.POST)
+        else:
+            data['lines'] = self.form_set()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        lines = context['lines']
+        with transaction.atomic():
+            form.instance.create_user = self.request.user
+            self.object = form.save()
+            if lines.is_valid():
+                lines.instance = self.object
+                lines.save()
+        
+        return super().form_valid(form)
     
 
 '''
-
 class MedExpCreateView(CreateView):
     model = MedicalExpense
     template_name = "forms/medical_expense/create.html"

@@ -54,7 +54,7 @@ urlpatterns = [
     path('action_plan/', include('master_data.urls.action_plan')),
 
     # Forms
-    path('fomrs/', include('forms.urls.form_collection_urls')),
+    path('forms/', include('forms.urls.form_collection_urls')),
     path('forms/medical-expense/', include('forms.urls.medical_expense')),
     path('forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
 
