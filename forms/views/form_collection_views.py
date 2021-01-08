@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from django.views import View
+from forms import models
 from forms.models import FormCollection
 from django.apps import apps
 
@@ -12,7 +13,7 @@ from forms.utils import CH_STATE
 
 
 # from forms.forms import riskallowance_forms, med_exp_forms 
-from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceFormSet
+from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLineFormSet
 from forms.forms.med_exp_forms import MedExpForm, MedExpLineFormSet
 from forms.models import MedicalExpense, RiskAllowance
 
@@ -26,7 +27,7 @@ from forms.models import MedicalExpense, RiskAllowance
 #         return None
 
 ROUTE_LINK = {
-    'risk_forms': [RiskAllowanceForm, RiskAllowanceFormSet, RiskAllowance],
+    'risk_forms': [RiskAllowanceForm, RiskAllowanceLineFormSet, RiskAllowance],
     'med_forms': [MedExpForm, MedExpLineFormSet, MedicalExpense],
 }
 
@@ -45,26 +46,36 @@ class FormCollectionCreateView(CreateView):
         self.form_set = self.route_link[1]
         return self.form_class
 
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        if self.request.POST:
-            data['lines'] = self.form_set(self.request.POST)
-        else:
-            data['lines'] = self.form_set()
-        return data
+    # def get_context_data(self, **kwargs):
+    #     # import pdb;pdb.set_trace()
+    #     data = super().get_context_data(**kwargs)
+    #     if self.request.POST:
+    #         data['lines'] = self.form_set(self.request.POST)
+    #     else:
+    #         data['lines'] = self.form_set()
+    #     return data
 
-    def form_valid(self, form):
-        context = self.get_context_data()
-        lines = context['lines']
+    def form_valid(self, form, model_formset=None):
         with transaction.atomic():
             form.instance.create_user = self.request.user
             self.object = form.save()
-            if lines.is_valid():
-                lines.instance = self.object
-                lines.save()
-        
-        return super().form_valid(form)
+            if model_formset.is_valid():
+                model_formset.instance = self.object
+                model_formset.save()
+            print('----------', self.object, dir(self.object), type(self.object))
+        return super().form_valid(model_formset)
     
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        model_formset = self.form_set(request.POST)
+        if model_formset.is_valid() and form.is_valid():
+            return self.form_valid(form, model_formset)
+        else:
+            return self.form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('med_forms:med_exp-create')
+        
 
 '''
 class MedExpCreateView(CreateView):

@@ -17,8 +17,8 @@ class MedExpLineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
-            if field.widget.input_type != 'select':
-                field.widget.attrs['class'] = 'form-control'
+            # if field.widget.input_type != 'select':
+            field.widget.attrs['class'] = 'form-control'
             
 
 
@@ -44,6 +44,7 @@ class MedExpForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_id = 'form_to_submit'
         self.helper.form_tag = True
         self.helper.layout = Layout(
             Div(

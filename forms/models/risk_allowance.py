@@ -7,16 +7,19 @@ from master_data.models import FiscalYear, GovernmentBody, OfficeBearer, Allowan
 
 class RiskAllowance(FormBaseModel):
     body = models.ForeignKey(
-        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नामः: ')
-    fiscal_year_from = models.ForeignKey(
-        FiscalYear, on_delete=models.PROTECT, related_name='forms_fre_fy_from', verbose_name='आर्थिक बर्ष: ')
+        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नामः: ', null=True)
+    fiscal_year = models.ForeignKey(
+        FiscalYear, on_delete=models.PROTECT, related_name='forms_fre_fy_from', verbose_name='आर्थिक बर्ष: ', null=True)
+    state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
-        return self.fiscal_year_from
+        return f'{self.fiscal_year}'
 
 
 class RiskAllowanceLine(FormLineBaseModel):
-    body = models.ForeignKey(
+    risk_allowance = models.ForeignKey(
+        RiskAllowance, on_delete=models.PROTECT, related_name='lines', null=True)
+    gov_body = models.ForeignKey(
         GovernmentBody, on_delete=models.PROTECT, verbose_name='खर्च गर्ने निकायको नाम')
     office_bearer = models.ForeignKey(
         OfficeBearer, on_delete=models.PROTECT, verbose_name='जोखिम भत्ता पाउने पदाधिकारी')
@@ -28,8 +31,6 @@ class RiskAllowanceLine(FormLineBaseModel):
         max_digits=19, decimal_places=2, verbose_name='सम्म खर्च रकम')
     remarks = models.DecimalField(
         max_digits=19, decimal_places=2, verbose_name='कैफियत')
-    risk_allowance_line = models.ForeignKey(
-        RiskAllowance, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.body
+        return self.gov_body

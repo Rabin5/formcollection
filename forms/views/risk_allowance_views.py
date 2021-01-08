@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from forms.models.risk_allowance import RiskAllowance, RiskAllowanceLine
-from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLine, RiskAllowanceFormSet
+from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLine, RiskAllowanceLineFormSet
 
 
 class RiskAllowanceCreateView(CreateView):
@@ -17,9 +17,9 @@ class RiskAllowanceCreateView(CreateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = RiskAllowanceFormSet(self.request.POST)
+            data['lines'] = RiskAllowanceLineFormSet(self.request.POST)
         else:
-            data['lines'] = RiskAllowanceFormSet()
+            data['lines'] = RiskAllowanceLineFormSet()
         return data
 
     def form_valid(self, form):
@@ -47,10 +47,10 @@ class RiskAllowanceUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = RiskAllowanceFormSet(
+            data['lines'] = RiskAllowanceLineFormSet(
                 self.request.POST, instance=self.object)
         else:
-            data['lines'] = RiskAllowanceFormSet(instance=self.object)
+            data['lines'] = RiskAllowanceLineFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
