@@ -19,6 +19,12 @@ STATES = [
     ('submitted', 'Submitted'),
 ]
 
+STATUS = [
+    (1, 'START'),
+    (2, 'INCOMPLETE'),
+    (3, 'COMPLETE'),
+]
+
 CH_STATE = [
     (1, 'risk_forms'),
     (2, 'med_forms'),
