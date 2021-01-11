@@ -12,7 +12,7 @@ function saveData(form, action=''){
         body: formdata
     })
     .then(function(response){
-        window.location.reload();
+        // window.location.reload();
     })
     .catch(function(err){
         console.log(err);
