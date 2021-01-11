@@ -12,7 +12,8 @@ function saveData(form, action=''){
         body: formdata
     })
     .then(function(response){
-        // window.location.reload();
+        // console.log(response)
+        window.location.replace(response['url']);
     })
     .catch(function(err){
         console.log(err);

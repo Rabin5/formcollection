@@ -1,11 +1,12 @@
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
+from django.http import request
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.urls.base import reverse
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, detail
 from django.views import View
 from forms import models
 from forms.models import FormCollection, risk_allowance
@@ -42,8 +43,10 @@ def query_user_collection(user, pk=None):
             list: Necessary field values
     '''
     try:
-        val = FormCollection.objects.get(user=user)
-        return [val.state, val.get_state_display(), val.get_status_display()]
+        val = FormCollection.objects.filter(user=user)
+        val = val[len(val)-1]
+        print(val)
+        return [val.state, val.get_state_display(), val.status]
     except:
         return None
 
@@ -72,7 +75,20 @@ class FormCollectionCreateView(CreateView):
         self.field_form = self.route_link[3]
         return self.form_class
 
-    def save_form(self, field_object):
+    def update_form(self, field_object):
+        form_update_fields = {self.field_form:field_object, 'user': self.request.user}
+        details = query_user_collection(self.request.user)
+        if details is not None:
+            if details[0] < len(DICT_CH_STATE):
+                form_update_fields.update({'state': details[0]+1})
+            if details[2] == 1:
+                form_update_fields.update({'status': 2})
+            self.save_form(form_update_fields, details)
+        else:
+            form_update_fields.update({'state': 1, 'status': 2})
+            self.save_form(form_update_fields, [1])
+
+    def save_form(self, field_object, details):
         '''
             Stores instance of form model to form collection field and return next url
 
@@ -83,10 +99,9 @@ class FormCollectionCreateView(CreateView):
                 None
         '''
         form_obj = FormCollection(**field_object)
-        # form_obj = FormCollectionForm(field_object)
-        form_obj.save()
         # import pdb;pdb.set_trace()
-        details = query_user_collection(self.request.user)
+        form_obj.save()
+        print(details, DICT_CH_STATE.get(details[0]+1)+':create')
         if details is not None:
             if details[0] < len(DICT_CH_STATE):
                 self.success_url = reverse(DICT_CH_STATE.get(details[0]+1)+':create')
@@ -101,9 +116,10 @@ class FormCollectionCreateView(CreateView):
             if model_formset.is_valid():
                 model_formset.instance = self.object
                 model_formset.save()
-                self.save_form({self.field_form:self.object})
-        # return HttpResponseRedirect(self.success_url)
-        return super().form_valid(form)
+                self.update_form(self.object)
+        return HttpResponseRedirect(self.success_url)
+        # print("FORM_VALID")
+        # return HttpResponseRedirect(reverse(self.request.POST.get('current_url')))
     
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -111,8 +127,8 @@ class FormCollectionCreateView(CreateView):
         if model_formset.is_valid() and form.is_valid():
             return self.form_valid(form, model_formset)
         else:
-            return self.form_valid(form)
+            print("POST")
+            # return HttpResponseRedirect(reverse(self.request.POST.get('current_url')))
     
     # def get_success_url(self, url):
     #     return reverse_lazy(url)
-    
