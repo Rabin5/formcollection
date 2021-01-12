@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="text-right mt-3">
+    <a class="btn btn-outline-secondary">Previous</a>
+    <a class="btn btn-info ml-2"  id="next" onclick="next()">Next</a>
+</div>
+
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    document.getElementById('url').value = "{{ request.resolver_match.view_name }}";
+    function next(){
+        {% comment %} var action = "{% url 'forms:update'  %}" {% endcomment %}
+        var action = "{% url request.resolver_match.view_name %}"
+        console.log(action)
+        saveData($('#form_to_submit'), action)
+    }
+    {% comment %} var form_data = new FormData($('#form_to_submit')[0]); {% endcomment %}
+
+</script>

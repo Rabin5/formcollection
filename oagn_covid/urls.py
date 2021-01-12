@@ -60,6 +60,7 @@ urlpatterns = [
     path('action_plan/', include('master_data.urls.action_plan')),
 
     path('forms/', include('forms.urls.forms_urls')),
+    path('forms/medical-product-desc/', include('forms.urls.med_purchase_desc_urls')),
 
     path('users/', include('users.urls.user_urls')),
 
