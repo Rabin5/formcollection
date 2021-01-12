@@ -7,6 +7,7 @@ from forms.models.form_collection import FormCollection
 class FormCollectionForm(ModelForm):
     class Meta:
         model = FormCollection
-        fields = {} 
+        fields = '__all__'
+        exclude = ('user', )
         # fields = ['state', 'med_exp', 'risk_allowance', 'status']
         

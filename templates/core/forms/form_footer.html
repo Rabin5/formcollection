@@ -10,7 +10,7 @@
 <script>
     document.getElementById('url').value = "{{ request.resolver_match.view_name }}";
     function next(){
-        var action = "{% url 'forms:create'  %}"
+        var action = "{% url 'forms:update'  %}"
         saveData($('#form_to_submit'), action)
     }
     {% comment %} var form_data = new FormData($('#form_to_submit')[0]); {% endcomment %}

@@ -2,12 +2,13 @@ from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
 from django.http import request
-from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.urls.base import reverse
-from django.views.generic import CreateView, UpdateView, detail
+from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
+from django.views.generic.edit import DeleteView
 from forms import models
 from forms.models import FormCollection, risk_allowance
 from django.apps import apps
@@ -30,6 +31,7 @@ ROUTE_LINK = {
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key:value for key, value in CH_STATE}
 
+# __CURRENT_FORM_COLLECTION_ID = None
 
 def query_user_collection(user, pk=None):
     '''
@@ -50,7 +52,17 @@ def query_user_collection(user, pk=None):
     except:
         return None
 
-class FormCollectionCreateView(CreateView):
+class FormCollectionCreateView(View):
+    def post(self, request, *args, **kwargs):
+        form_collect = FormCollection(user=request.user, status=2)
+        form_collect.save()
+        context = {'url': reverse('risk_forms:create'), 'pk':form_collect.pk}
+        print(form_collect, context)
+        return JsonResponse(context, content_type= 'application/json')
+        # return HttpResponseRedirect(reverse('forms:update', kwargs={'pk': form_collect.pk}))
+    
+
+class FormCollectionUpdateView(UpdateView):
     model = None
     success_url = None
     form_class = ''
@@ -99,7 +111,6 @@ class FormCollectionCreateView(CreateView):
                 None
         '''
         form_obj = FormCollection(**field_object)
-        # import pdb;pdb.set_trace()
         form_obj.save()
         print(details, DICT_CH_STATE.get(details[0]+1)+':create')
         if details is not None:
@@ -121,6 +132,13 @@ class FormCollectionCreateView(CreateView):
         # print("FORM_VALID")
         # return HttpResponseRedirect(reverse(self.request.POST.get('current_url')))
     
+    # def get(self, request, pk, *args, **kwargs):
+    #     form_collect = FormCollection.objects.get(id=pk)
+    #     context = {'url': reverse(DICT_CH_STATE.get(form_collect.state)+':create'), 'pk':form_collect.pk}
+    #     print(form_collect, context)
+    #     return JsonResponse(context)
+        # return redirect(reverse(DICT_CH_STATE.get(form_collect.state)+':create'))
+
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         model_formset = self.form_set(request.POST)
@@ -132,3 +150,12 @@ class FormCollectionCreateView(CreateView):
     
     # def get_success_url(self, url):
     #     return reverse_lazy(url)
+
+
+class FormCollectionListView(ListView):
+    model = FormCollection
+    template_name = "forms/form_collection/list.html"
+    context_object_name = 'form_collections'
+
+class FormCollectionDeleteView(DeleteView):
+    pass
