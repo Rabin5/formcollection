@@ -61,6 +61,7 @@ urlpatterns = [
 
     path('forms/', include('forms.urls.forms_urls')),
     path('forms/medical-product-desc/', include('forms.urls.med_purchase_desc_urls')),
+    path('forms/pcr-lab-detail/', include('forms.urls.pcr_lab_detail_urls')),
 
     path('users/', include('users.urls.user_urls')),
 
