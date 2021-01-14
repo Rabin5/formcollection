@@ -4,88 +4,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    {% block title %}
-    {% comment %} use this {% endcomment %}
-    {% endblock title%}
-  </title>
+    <title>
+      {% block title %}
+        {% comment %} use this {% endcomment %}
+      {% endblock title%}
+    </title>
 
-  {% block styles %}
-  {% include 'core/_styles.html' %}
+    {% block styles %}
+      {% include 'core/_styles.html' %}
 
-  {% block extrastyles %}
-  {% comment %} use this {% endcomment %}
-  {% endblock extrastyles %}
-  {% endblock styles %}
+      {% block extrastyles %}
+        {% comment %} use this {% endcomment %}
+      {% endblock extrastyles %}
+    {% endblock styles %}
 
-  {% include 'core/_head_scripts.html' %}
-</head>
+    {% include 'core/_head_scripts.html' %}
+  </head>
+  
+  <body>
+    {% block modal %}
+      {% comment %} use this {% endcomment %}
+    {% endblock modal %}
+    <div class="dashboard">
+      {% include 'core/_sidebar.html' %}
 
-<body>
-  {% block modal %}
-  {% comment %} use this {% endcomment %}
-  {% endblock modal %}
-  <div class="dashboard">
-    {% include 'core/_sidebar.html' %}
-
-    <main class="dashboard--main">
-      {% include 'core/_header.html' %}
-
-      {% comment %} Page Header {% endcomment %}
-      <div class="page-header">
-        <div class="page-header--title">
-          {% block breadcrumbs %}
-          {% comment %} <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">मूल तथ्यांक</a></li>
-              <li class="breadcrumb-item"><a href="#">सरकार</a></li>
-              <li class="breadcrumb-item active" aria-current="page">सरकारी निकाय</li>
-            </ol>
-          </nav> {% endcomment %}
-          {% endblock breadcrumbs %}
-          <h6 class="page-header--head">
-            {% block page_title %}
-            {% comment %} सरकारी निकाय {% endcomment %}
-            {% endblock page_title %}
-          </h6>
+      <main class="dashboard--main">
+        {% include 'core/_header.html' %}
+        
+        {% comment %} Page Header {% endcomment %}
+        <div class="page-header">
+          <div class="page-header--title">
+            {% block breadcrumbs %}
+              {% comment %} <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">मूल तथ्यांक</a></li>
+                  <li class="breadcrumb-item"><a href="#">सरकार</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">सरकारी निकाय</li>
+                </ol>
+              </nav> {% endcomment %}
+            {% endblock breadcrumbs %}
+            <h6 class="page-header--head">
+              {% block page_title %}
+                {% comment %} सरकारी निकाय {% endcomment %}
+              {% endblock page_title %}
+            </h6>
+          </div>
+          <div class="page-header--actions">
+            {% block page_actions %}
+              {% comment %} <a href="#" class="btn btn-success btn-with-icon">
+                <i class="ic-add"></i>
+                सरकारी निकाय थप्नुहोस्
+              </a> {% endcomment %}
+            {% endblock page_actions %}
+          </div>
         </div>
-        <div class="page-header--actions">
-          {% block page_actions %}
-          {% comment %} <a href="#" class="btn btn-success btn-with-icon">
-            <i class="ic-add"></i>
-            सरकारी निकाय थप्नुहोस्
-          </a> {% endcomment %}
-          {% endblock page_actions %}
-        </div>
-      </div>
-
-      <div class="content">
-        {% if 'forms' in request.path %}
-        <div class="card card-body">
+        
+        <div class="content">
+          {% if 'forms' in request.path %}
+            <div class="card card-body">
           {% else %}
-          <div class="card">
-            <div class="card-body">
-              {% endif %}
+            <div class="card">
+              <div class="card-body">
+          {% endif %}
 
               {% block content %}
-
+                
               {% endblock content %}
-
-              {% if 'forms' not in request.path %}
+              
+          {% if 'forms' not in request.path %}
+              </div>
             </div>
-          </div>
           {% endif %}
         </div>
-    </main>
+      </main>
 
-    {% block scripts %}
-    {% include 'core/_scripts.html' %}
+      {% block scripts %}
+        {% include 'core/_scripts.html' %}
 
-    {% block extrascripts %}
-    {% comment %} use this {% endcomment %}
-    {% endblock extrascripts %}
-    {% endblock scripts %}
-  </div>
-</body>
-
+        {% block extrascripts %}
+          {% comment %} use this {% endcomment %}
+        {% endblock extrascripts %}
+      {% endblock scripts %}
+    </div>
+  </body>
 </html>

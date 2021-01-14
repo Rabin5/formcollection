@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-जोखिम भत्ता सम्बन्धी बिबरण - Nepal Audit Management System
+Medical Expense - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-जोखिम भत्ता सम्बन्धी बिबरण
+Medical Expense
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -24,10 +24,8 @@
 
 {% block content %}
 {% include 'core/forms/progress_bar.html' %}
-
 <div class="card card-body mt-3">
-    <h6 class="heading-01 mb-3">कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन
-        मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h6>
+    <h6 class="heading-01 mb-3">केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
 
     <!-- <form action="">
         <div class="form-row">
@@ -44,4 +42,7 @@
         </table>
     </div>
 </div>
+
+
+{% include 'core/forms/form_footer.html' %}
 {% endblock content %}
