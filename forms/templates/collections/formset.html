@@ -52,29 +52,53 @@
 </a>
 {% comment %} <input type="button" class="add-more mt-3" value="Add More" id="add_more"> {% endcomment %}
 <script>
-    var testElement, testType, testTotal;
+    var testElement, testType, testTotal=0, select2FieldName=[];
     function cloneMore(selector, type) {
+        $(selector).find(".select_class").select2("destroy");
         var newElement = $(selector).clone(true);
+        var split_id;
+        
         var total = $('#id_' + type + '-TOTAL_FORMS').val();
         testElement = newElement;
         testType = type;
         testTotal = total;
+        
         newElement.find(':input').each(function() {
             var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
             var id = 'id_' + name;
+            var split_names = id.split("-")
+            if (select2FieldName.includes(split_names[split_names.length-1])){
+                split_id = split_names[split_names.length-1];
+            }
+            
             $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
         });
         newElement.find('label').each(function() {
             var newFor = $(this).attr('for').replace('-' + (total-1) + '-','-' + total + '-');
             $(this).attr('for', newFor);
         });
+        
         total++;
         $('#id_' + type + '-TOTAL_FORMS').val(total);
         $(selector).after(newElement);
+        
+        $($(".select_class")).select2({
+            tags: true
+        });
+        
     }
 
+    {% comment %} function destroy_select2(selector){
+        for (var i=0; i<select2FieldName.length; i++){
+            $(selector).find("#id_lines-"+testTotal-1+"-"+selector[i]).select2("destroy");
+            console.log();
+        }
+    } {% endcomment %}
+
     $('#add_more').click(function() {
+        select2FieldName = ["laboratory"];
+        //destroy_select2('tbody tr:last');
         // cloneMore('tr.formset_row-{{ formset.prefix }}:last', 'lines');
-        cloneMore('tbody tr:last', 'lines');
+        cloneMore('tbody tr:last','lines');
     });
 </script>

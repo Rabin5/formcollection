@@ -24,7 +24,10 @@ class PcrLaboratoryDetailLineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type == 'select':
+                field.widget.attrs['class'] = 'form-control select_class'
+            else:
+                field.widget.attrs['class'] = 'form-control'
 
 
 PcrLaboratoryDetailLineFormSet = inlineformset_factory(

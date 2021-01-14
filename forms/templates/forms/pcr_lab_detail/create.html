@@ -11,7 +11,7 @@ PCR Lab Details
 {% endblock page_title %}
 
 {% block extrastyles %}
-    <link href="{% static 'styles/tagify.css' %}" rel="stylesheet">
+    {% comment %} <link href="{% static 'styles/tagify.css' %}" rel="stylesheet"> {% endcomment %}
 {% endblock extrastyles %}
 
 {% block page_actions %}
@@ -47,8 +47,16 @@ PCR Lab Details
 {% endblock content %}
 
 {% block extrascripts %}
-<script src="{% static 'js/tagify.min.js' %}"></script>
+{% comment %} <script src="{% static 'js/tagify.min.js' %}"></script> {% endcomment %}
 <script>
-  
+  //'.select_class'
+  $('.select_class').select2({
+      //tags: true
+  });
+ /*
+  $('#id_lines-0-laboratory').select2({
+      //tags: true
+  });
+  */
 </script>
 {% endblock extrascripts %}
