@@ -51,12 +51,20 @@ PCR Lab Details
 <script>
   //'.select_class'
   $('.select_class').select2({
-      //tags: true
+    tags: true
   });
- /*
-  $('#id_lines-0-laboratory').select2({
-      //tags: true
-  });
-  */
+
+  function get_select_value(e){
+    e = e || window.event;
+    var targ = e.target || e.srcElement;
+    console.log($('#'+$(targ).attr("id")+" option:selected").val())
+    
+  }
+
+/*
+  $('.select_class').on('change', function(){
+    console.log($(".select_class option:selected").text())
+  })
+*/
 </script>
 {% endblock extrascripts %}

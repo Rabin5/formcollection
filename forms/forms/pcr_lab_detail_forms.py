@@ -25,7 +25,8 @@ class PcrLaboratoryDetailLineForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
             if field.widget.input_type == 'select':
-                field.widget.attrs['class'] = 'form-control select_class'
+                field.widget.attrs.update({'class': 'form-control select_class', 'onchange': 'get_select_value(event)'})
+                # field.widget.attrs['class'] = 'form-control select_class'
             else:
                 field.widget.attrs['class'] = 'form-control'
 

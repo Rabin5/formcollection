@@ -84,16 +84,8 @@
         
         $($(".select_class")).select2({
             tags: true
-        });
-        
+        });   
     }
-
-    {% comment %} function destroy_select2(selector){
-        for (var i=0; i<select2FieldName.length; i++){
-            $(selector).find("#id_lines-"+testTotal-1+"-"+selector[i]).select2("destroy");
-            console.log();
-        }
-    } {% endcomment %}
 
     $('#add_more').click(function() {
         select2FieldName = ["laboratory"];
@@ -101,4 +93,10 @@
         // cloneMore('tr.formset_row-{{ formset.prefix }}:last', 'lines');
         cloneMore('tbody tr:last','lines');
     });
+
+    {% comment %} function get_select_value(selectId){
+        $(selectId).on('change', function() {
+            alert( this.value );
+        }); 
+    }{% endcomment %}
 </script>
