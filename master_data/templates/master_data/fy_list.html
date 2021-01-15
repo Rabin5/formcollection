@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block page_title %}
-आर्थिक वर्षहरु
+आर्थिक वर्षहरु 
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -82,8 +82,8 @@
   $(document).ready(function () {
     $('#modalFyCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
+      var modal = $(this)
+     modal.find('.modal-content').load(button.data("remote"));
     });
 
     $('#modalFyUpdate').on('shown.bs.modal', function (e) {
@@ -101,12 +101,13 @@
   
     $( "#modalFyCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+   
+    saveData($(this), "#modalFyCreate")
   });
 
   $( "#modalFyUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalFyUpdate") 
   });
 
 </script>
