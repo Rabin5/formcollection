@@ -3,23 +3,22 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
+from forms.models.rdttestdetail import RdtTestDetail
+from forms.forms.rdt_test import RdtTestFormLine, RdtTestFormSet
 
-from forms.models import MedicalExpense, MedicalExpenseLine
-from forms.forms.med_exp_forms import MedExpForm, MedExpLineFormSet
 
-
-class MedExpCreateView(CreateView):
-    model = MedicalExpense
-    template_name = "forms/medical_expense/create.html"
-    form_class = MedExpForm
+class RdtTestCreateView(CreateView):
+    model = RdtTestDetail
+    template_name = "forms/rdt_test/create.html"
+    form_class = RdtTestFormLine
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = MedExpLineFormSet(self.request.POST)
+            data['lines'] = RdtTestFormSet(self.request.POST)
         else:
-            data['lines'] = MedExpLineFormSet()
+            data['lines'] = RdtTestFormSet()
         return data
 
     def form_valid(self, form):
@@ -31,31 +30,31 @@ class MedExpCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+
         collection = context.get('collection')
         if collection:
             collection.risk_allowance = self.object
             collection.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('med-forms:med_exp-create')
+        return reverse_lazy('medical-forms:fre-create')
 
 
-class MedExpUpdateView(UpdateView):
-    model = MedicalExpense
-    template_name = "forms/medical_expense/update.html"
-    form_class = MedExpForm
+class RdtTestUpdateView(UpdateView):
+    model = RdtTestDetail
+    template_name = "forms/rdt_test/update.html"
+    form_class = RdtTestFormLine
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(MedExpUpdateView, self).get_context_data(**kwargs)
-        # import pdb;pdb.set_trace()
+        data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = MedExpLineFormSet(
+            data['lines'] = RdtTestFormSet(
                 self.request.POST, instance=self.object)
-            # data['lines'].full_clean()
         else:
-            data['lines'] = MedExpLineFormSet(instance=self.object)
+            data['lines'] = RdtTestFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -71,4 +70,4 @@ class MedExpUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('med-forms:med_exp-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('medical-forms:medical_receipt-update', kwargs={'pk': self.object.pk})

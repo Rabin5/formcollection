@@ -25,26 +25,25 @@
 {% block content %}
 {% include 'core/forms/progress_bar.html' %}
 
-
-
 <div class="card card-body mt-3">
     <h6 class="heading-01 mb-3">2. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन
         मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h6>
 
     <form action="">
-        {% crispy form %}
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="">निकायको नाम</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
     </form>
 
-</div>
-<!-- <div class="container">
-    <div class="card">
-        <div class="card-header">
-            Add Fund Receipt Expense
-        </div>
-        <div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-01 table-bordered mt-3">
             {% crispy form %}
-        </div>
+        </table>
     </div>
-</div> -->
+</div>
+
 
 {% endblock content %}
