@@ -1,32 +1,33 @@
-from django.core.exceptions import ValidationError
-from django.forms import ModelForm
-from master_data.models.address import Province, District, LocalLevel
 from django import forms
 from django.forms.models import inlineformset_factory
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
-from master_data.custom_layout_object import Formset
+
+from forms.custom_layout_object import Formset
+from forms.models.medical_receipt import MedicalReceiptLine, MedicalReceipt
 
 
-class LocalLevelForm(forms.ModelForm):
+class MedicalReceiptLineForm(forms.ModelForm):
+
     class Meta:
-        model = LocalLevel
+        model = MedicalReceiptLine
         exclude = ()
 
 
-LocalLevelFormSet = inlineformset_factory(
-    District, LocalLevel, form=LocalLevelForm,
-    fields=['name', ],
+MedicalReceiptFormSet = inlineformset_factory(
+    MedicalReceipt, MedicalReceiptLine, form=MedicalReceiptLineForm,
+    fields=['product', 'provider_institution', 'provider_body',
+            'quantity', 'cost_received_items', 'usage_situation'],
     extra=1,
     can_delete=True
 )
 
 
-class LocalLevelLine(forms.ModelForm):
-    #province = forms.ModelChoiceField(queryset=Province.objects.all())
+class MedicalReceiptForm(forms.ModelForm):
 
     class Meta:
-        model = District
+        model = MedicalReceipt
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):
@@ -38,12 +39,12 @@ class LocalLevelLine(forms.ModelForm):
         self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Div(
-                Field('name'),
-                Field('province'),
-                Fieldset('Add LocalLevel. . .',
+                Field('body'),
+                Field('fiscal_year'),
+                Fieldset('Add lines. . .',
                          Formset('lines')
                          ),
                 HTML('<br>'),
-
+                ButtonHolder(Submit('submit', 'save')),
             )
         )

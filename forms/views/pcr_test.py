@@ -3,23 +3,22 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
+from forms.models.pcr_test_compliance_detail import PcrTestComplianceDetail
+from forms.forms.pcr_test import PcrTestFormLine, PcrTestForm, PcrTestFormSet
 
-from forms.models import MedicalExpense, MedicalExpenseLine
-from forms.forms.med_exp_forms import MedExpForm, MedExpLineFormSet
 
-
-class MedExpCreateView(CreateView):
-    model = MedicalExpense
-    template_name = "forms/medical_expense/create.html"
-    form_class = MedExpForm
+class PcrTestCreateView(CreateView):
+    model = PcrTestComplianceDetail
+    template_name = "forms/pcr_test/create.html"
+    form_class = PcrTestFormLine
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = MedExpLineFormSet(self.request.POST)
+            data['lines'] = PcrTestFormSet(self.request.POST)
         else:
-            data['lines'] = MedExpLineFormSet()
+            data['lines'] = PcrTestFormSet()
         return data
 
     def form_valid(self, form):
@@ -38,24 +37,22 @@ class MedExpCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('med-forms:med_exp-create')
+        return reverse_lazy('medical-forms:fre-create')
 
 
-class MedExpUpdateView(UpdateView):
-    model = MedicalExpense
-    template_name = "forms/medical_expense/update.html"
-    form_class = MedExpForm
+class PcrTestUpdateView(UpdateView):
+    model = PcrTestComplianceDetail
+    template_name = "forms/pcr_test/update.html"
+    form_class = PcrTestFormLine
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(MedExpUpdateView, self).get_context_data(**kwargs)
-        # import pdb;pdb.set_trace()
+        data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = MedExpLineFormSet(
+            data['lines'] = PcrTestFormSet(
                 self.request.POST, instance=self.object)
-            # data['lines'].full_clean()
         else:
-            data['lines'] = MedExpLineFormSet(instance=self.object)
+            data['lines'] = PcrTestFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -71,4 +68,4 @@ class MedExpUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('med-forms:med_exp-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('medical_use:medical_use-update', kwargs={'pk': self.object.pk})
