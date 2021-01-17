@@ -7,16 +7,12 @@ function saveData(form,modal_id){
         body: formdata
     })
     .then(function(response){
-        console.log(response)
         response.text().then(function(data){
-            console.log(data)
             $(modal_id).find('.modal-content').html(data)
-   
         });
-        // window.location.reload();
     })
     .catch(function(err){
-        console.log(err);    
+        console.log(err); 
     });
     return false;
 }
