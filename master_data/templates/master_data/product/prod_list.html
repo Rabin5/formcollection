@@ -14,7 +14,7 @@ Products
 <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:create' %}" href="{% url 'md-prod:create' %}"
   data-toggle="modal" data-target="#modalProdCreate">
   <i class="ic-add"></i>
-  Product थप्नुहोस्
+  सामार्गी थप्नुहोस्
 </a>
 {% endblock page_actions %}
 
@@ -23,9 +23,9 @@ Products
   <thead>
     <tr>
       <th>#.</th>
-      <th>Product Name</th>
-      <th>Product Type</th>
-      <th>Measurement</th>
+      <th>सामार्गी नाम </th>
+      <th>सामार्गी प्रकार</th>
+      <th>मापनको एकाई</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
@@ -105,12 +105,14 @@ Products
 
   $( "#modalProdCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this))
+    saveData($(this));
+    
   });
 
   $( "#modalProdUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this))
+    saveData($(this));
+    
   });
 </script>
 {% endblock extrascripts %}
