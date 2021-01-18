@@ -10,3 +10,4 @@ from .medical_receipt import *
 from .medical_use import *
 from .pcr_test_compliance_detail import *
 from .rdttestdetail import *
+from .fund_receipt_expense import *

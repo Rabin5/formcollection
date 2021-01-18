@@ -9,9 +9,9 @@ from master_data.models.company import Institution
 
 class MedicalReceipt(FormBaseModel):
     body = models.ForeignKey(
-        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नामः: ')
+        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नाम')
     fiscal_year = models.ForeignKey(
-        FiscalYear, on_delete=models.PROTECT, related_name='medical_receipt', verbose_name='आर्थिक बर्ष: ')
+        FiscalYear, on_delete=models.PROTECT, related_name='medical_receipt', verbose_name='आर्थिक बर्ष')
 
     def __str__(self):
         return self.body.name
