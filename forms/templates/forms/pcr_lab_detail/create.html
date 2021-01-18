@@ -41,9 +41,9 @@ PCR Lab Details
         </form>
 
         <div class="table-responsive">
-          <table class="table table-01 table-bordered mt-3">
+          
             {% crispy form %}
-          </table>
+          
         </div>   
       </div>
     {% include 'core/forms/form_footer.html' %}
@@ -57,35 +57,23 @@ PCR Lab Details
     tags: true
   });
 
+  var date_choice = {{date_choice|safe}};
+  var capacity_choice = {{capacity_choice|safe}};
+
   $('#id_lines-0-laboratory').attr('onchange','get_select_value(event)')
 
   function get_select_value(e){
     e = e || window.event;
     var targ = e.target || e.srcElement;
-    var selected_val = $('#'+$(targ).attr("id")+" option:selected").val();
-    $('#id_lines-0-capacity_daily_test').val( selected_val);
+    var id_tag = '#'+$(targ).attr("id");
+    var id_tag_num = id_tag.split('-')[1];
+    //console.log(id_tag_num)
+    var selected_val = $(id_tag+" option:selected").val();
     
-    $('#select2-id_lines-0-capacity_daily_test-container').text($('#id_lines-0-capacity_daily_test option:selected').text())
+    $('#id_lines-'+id_tag_num+'-capacity_daily_test').val(capacity_choice[selected_val])
+    
+    $('#id_lines-'+id_tag_num+'-date_establishment').val(date_choice[selected_val])
   }
-
-  fetch("{% url 'pcrlab-forms:get_lab_data' %}", {
-      headers: { "X-CSRFToken": '{{ csrf_token }}' },
-      method: "POST",
-      body: {
-        
-      }
-  })
-  .then(function(response){
-       console.log(response)
-  })
-  .catch(function(err){
-      console.log(err);
-  });
-
-  $.ajax({
-    
-  })
-
 
 /*
   $('.select_class').on('change', function(){

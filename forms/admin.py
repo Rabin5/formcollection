@@ -11,5 +11,9 @@ admin.site.register([
     models.MedicalPurchaseDescription,
     models.MedicalPurchaseDescriptionLine,
     models.PcrLaboratoryDetail,
-    models.PcrLaboratoryDetailLine
+    models.PcrLaboratoryDetailLine,
+    models.PcrKitUsage,
+    models.PcrKitUsageLine,
+    models.CovidHospitalEquipment,
+    models.CovidHospitalEquipmentLine
 ])

@@ -4,21 +4,21 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models import MedicalPurchaseDescription, MedicalPurchaseDescriptionLine
-from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm, MedPurchaseDescLineFormSet
+from forms.models import PcrKitUsage, PcrKitUsageLine
+from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm, PcrKitUsageLineFormSet
 
-class MedPurchaseDescCreateView(CreateView):
-    model = MedicalPurchaseDescription
-    template_name = "forms/med_purchase_desc/create.html"
-    form_class = MedPurchaseDescForm
+class PcrKitUsageCreateView(CreateView):
+    model = PcrKitUsage
+    template_name = "forms/pcr_kit_usage/create.html"
+    form_class = PcrKitUsageForm
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = MedPurchaseDescLineFormSet(self.request.POST)
+            data['lines'] = PcrKitUsageLineFormSet(self.request.POST)
         else:
-            data['lines'] = MedPurchaseDescLineFormSet()
+            data['lines'] = PcrKitUsageLineFormSet()
         return data
     
     def form_valid(self, form):
@@ -32,29 +32,29 @@ class MedPurchaseDescCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.med_purchase_desc = self.object
+            collection.pcr_kit_usage = self.object
             collection.save()
         
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('medDesc-forms:create')
+        return reverse_lazy('pcrKit-forms:create')
 
 
-class MedPurchaseDescUpdateView(UpdateView):
-    model = MedicalPurchaseDescription
-    template_name = "forms/med_purchase_desc/update.html"
-    form_class = MedPurchaseDescForm
+class PcrKitUsageUpdateView(UpdateView):
+    model = PcrKitUsage
+    template_name = "forms/pcr_kit_usage/update.html"
+    form_class = PcrKitUsageForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(MedPurchaseDescUpdateView, self).get_context_data(**kwargs)
+        data = super(PcrKitUsageUpdateView, self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = MedPurchaseDescLineFormSet(self.request.POST, instance=self.object)
+            data['lines'] = PcrKitUsageLineFormSet(self.request.POST, instance=self.object)
             # data['lines'].full_clean()
         else:
-            data['lines'] = MedPurchaseDescLineFormSet(instance=self.object)
+            data['lines'] = PcrKitUsageLineFormSet(instance=self.object)
         return data
     
     def form_valid(self, form):
@@ -73,6 +73,6 @@ class MedPurchaseDescUpdateView(UpdateView):
     
     def form_invalid(self, form, lines=None):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
-    
+
     def get_success_url(self):
-        return reverse_lazy('medDesc-forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('pcrKit-forms:update', kwargs={'pk': self.object.pk})

@@ -5,13 +5,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
-from forms.models import MedicalPurchaseDescription, MedicalPurchaseDescriptionLine
-from master_data.widgets import NepaliDateInput
+from forms.models import PcrKitUsage, PcrKitUsageLine
 
-class MedPurchaseDescLineForm(forms.ModelForm):
+class PcrKitUsageLineForm(forms.ModelForm):
 
     class Meta:
-        model = MedicalPurchaseDescriptionLine
+        model = PcrKitUsageLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
@@ -22,22 +21,21 @@ class MedPurchaseDescLineForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 
-MedPurchaseDescLineFormSet = inlineformset_factory(
-    MedicalPurchaseDescription, MedicalPurchaseDescriptionLine, form=MedPurchaseDescLineForm,
-    fields=['medical_purchase', 'product', 'uom', 'product_specificaiton', 'date_procure_agreement', 'date_received', 'qty', 'rate', 'total_amt'],
+PcrKitUsageLineFormSet = inlineformset_factory(
+    PcrKitUsage, PcrKitUsageLine, form=PcrKitUsageLineForm,
+    fields=['pcr_kit_usage', 'laboratory', 'num_kit_received', 'num_kit_expensed', 'num_kit_available', 'num_tests', 'num_wasted'],
     widgets = {
-        'date_procure_agreement': NepaliDateInput(),
-        'date_received': NepaliDateInput(),
+
     },
     extra=1,
     can_delete=False
 )
 
 
-class MedPurchaseDescForm(forms.ModelForm):
+class PcrKitUsageForm(forms.ModelForm):
 
     class Meta:
-        model = MedicalPurchaseDescription
+        model = PcrKitUsage
         fields = '__all__'
         exclude = ('create_user', )
     

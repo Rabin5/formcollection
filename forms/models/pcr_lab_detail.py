@@ -12,10 +12,9 @@ class PcrLaboratoryDetail(FormBaseModel):
 
     fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_pcr_lab_fy')
     body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_pcr_lab_gov")
-    state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
-        return f'{self.fiscal_year}'
+        return f'{self.body.name}'
 
 
 class PcrLaboratoryDetailLine(FormLineBaseModel):

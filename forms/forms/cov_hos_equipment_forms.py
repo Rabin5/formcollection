@@ -5,13 +5,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
-from forms.models import MedicalPurchaseDescription, MedicalPurchaseDescriptionLine
-from master_data.widgets import NepaliDateInput
+from forms.models import CovidHospitalEquipment, CovidHospitalEquipmentLine
 
-class MedPurchaseDescLineForm(forms.ModelForm):
+class CovidHospitalEquipmentLineForm(forms.ModelForm):
 
     class Meta:
-        model = MedicalPurchaseDescriptionLine
+        model = CovidHospitalEquipmentLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
@@ -22,22 +21,21 @@ class MedPurchaseDescLineForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 
-MedPurchaseDescLineFormSet = inlineformset_factory(
-    MedicalPurchaseDescription, MedicalPurchaseDescriptionLine, form=MedPurchaseDescLineForm,
-    fields=['medical_purchase', 'product', 'uom', 'product_specificaiton', 'date_procure_agreement', 'date_received', 'qty', 'rate', 'total_amt'],
+CovidHospitalEquipmentLineFormSet = inlineformset_factory(
+    CovidHospitalEquipment, CovidHospitalEquipmentLine, form=CovidHospitalEquipmentLineForm,
+    fields=['cov_hos_equip', 'product', 'num_required', 'available', 'num_still_required'],
     widgets = {
-        'date_procure_agreement': NepaliDateInput(),
-        'date_received': NepaliDateInput(),
+
     },
     extra=1,
     can_delete=False
 )
 
 
-class MedPurchaseDescForm(forms.ModelForm):
+class CovidHospitalEquipmentForm(forms.ModelForm):
 
     class Meta:
-        model = MedicalPurchaseDescription
+        model = CovidHospitalEquipment
         fields = '__all__'
         exclude = ('create_user', )
     
@@ -49,8 +47,8 @@ class MedPurchaseDescForm(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
+                Column('cov_hospital', css_class='col-md-6 mb-0'),
+                Column('location', css_class='col-md-6 mb-0'),
                 css_class='form-row'
                 ),
             Div(
@@ -58,4 +56,5 @@ class MedPurchaseDescForm(forms.ModelForm):
                     Formset('lines')
                 ),
             )
+
         )

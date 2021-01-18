@@ -7,3 +7,5 @@ from .medical_expense import *
 from .risk_allowance import *
 from .med_purchase_desc import *
 from .pcr_lab_detail import *
+from .pcr_kit_usage import *
+from .covid_hos_equip import *

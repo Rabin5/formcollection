@@ -4,21 +4,21 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models import MedicalPurchaseDescription, MedicalPurchaseDescriptionLine
-from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm, MedPurchaseDescLineFormSet
+from forms.models import CovidHospitalEquipment, CovidHospitalEquipmentLine
+from forms.forms.cov_hos_equipment_forms import CovidHospitalEquipmentForm, CovidHospitalEquipmentLineFormSet
 
-class MedPurchaseDescCreateView(CreateView):
-    model = MedicalPurchaseDescription
-    template_name = "forms/med_purchase_desc/create.html"
-    form_class = MedPurchaseDescForm
+class CovidHospitalEquipmentCreateView(CreateView):
+    model = CovidHospitalEquipment
+    template_name = "forms/cov_hos_equip/create.html"
+    form_class = CovidHospitalEquipmentForm
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = MedPurchaseDescLineFormSet(self.request.POST)
+            data['lines'] = CovidHospitalEquipmentLineFormSet(self.request.POST)
         else:
-            data['lines'] = MedPurchaseDescLineFormSet()
+            data['lines'] = CovidHospitalEquipmentLineFormSet()
         return data
     
     def form_valid(self, form):
@@ -32,29 +32,29 @@ class MedPurchaseDescCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.med_purchase_desc = self.object
+            collection.cov_hos_equip = self.object
             collection.save()
         
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('medDesc-forms:create')
+        return reverse_lazy('covHosEquip-forms:create')
 
 
-class MedPurchaseDescUpdateView(UpdateView):
-    model = MedicalPurchaseDescription
-    template_name = "forms/med_purchase_desc/update.html"
-    form_class = MedPurchaseDescForm
+class CovidHospitalEquipmentUpdateView(UpdateView):
+    model = CovidHospitalEquipment
+    template_name = "forms/cov_hos_equip/update.html"
+    form_class = CovidHospitalEquipmentForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(MedPurchaseDescUpdateView, self).get_context_data(**kwargs)
+        data = super(CovidHospitalEquipmentUpdateView, self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = MedPurchaseDescLineFormSet(self.request.POST, instance=self.object)
+            data['lines'] = CovidHospitalEquipmentLineFormSet(self.request.POST, instance=self.object)
             # data['lines'].full_clean()
         else:
-            data['lines'] = MedPurchaseDescLineFormSet(instance=self.object)
+            data['lines'] = CovidHospitalEquipmentLineFormSet(instance=self.object)
         return data
     
     def form_valid(self, form):
@@ -75,4 +75,4 @@ class MedPurchaseDescUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
     
     def get_success_url(self):
-        return reverse_lazy('medDesc-forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('covHosEquip-forms:update', kwargs={'pk': self.object.pk})
