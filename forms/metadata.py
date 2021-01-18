@@ -1,4 +1,4 @@
-
+from forms.forms.fund_receipt_expense_forms import FundReceiptExpenseForm
 from forms.forms.riskallowance_forms import RiskAllowanceForm
 from forms.forms.med_exp_forms import MedExpForm
 from forms.forms.medical_receipt import MedicalReceiptForm
@@ -9,6 +9,7 @@ from forms.forms.rdt_test import RdtTestForm
 from forms import models
 
 from forms.views import (
+    fund_receipt_expense_views,
     risk_allowance_views,
     medical_expense_views,
     medical_receipt,
@@ -68,5 +69,13 @@ ROUTE_LINK = {
         'model': models.RdtTestDetail,
         'form_field': 'rdt_test_detail',
         'update_view': rdt_test.RdtTestUpdateView,
+    },
+
+    'fund_receipt_expense': {
+        'title': 'कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा प्राप्त रकम र खर्च सम्बन्धी बिबरण',
+        'form': FundReceiptExpenseForm,
+        'model': models.FundReceiptExpense,
+        'form_field': 'fund_receipt_expense',
+        'update_view': fund_receipt_expense_views.FundReceiptExpenseUpdateView,
     },
 }
