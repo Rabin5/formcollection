@@ -4,13 +4,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from forms.models.rdttestdetail import RdtTestDetail
-from forms.forms.rdt_test import RdtTestFormLine, RdtTestFormSet
+from forms.forms.rdt_test import RdtTestForm, RdtTestFormSet
 
 
 class RdtTestCreateView(CreateView):
     model = RdtTestDetail
     template_name = "forms/rdt_test/create.html"
-    form_class = RdtTestFormLine
+    form_class = RdtTestForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -45,7 +45,7 @@ class RdtTestCreateView(CreateView):
 class RdtTestUpdateView(UpdateView):
     model = RdtTestDetail
     template_name = "forms/rdt_test/update.html"
-    form_class = RdtTestFormLine
+    form_class = RdtTestForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -66,8 +66,13 @@ class RdtTestUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
         return super().form_valid(form)
+
+    def form_invalid(self, form, lines=None):
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('medical-forms:medical_receipt-update', kwargs={'pk': self.object.pk})

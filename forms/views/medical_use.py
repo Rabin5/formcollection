@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from master_data.models.government import GovernmentBody
 from forms.models import MedicalUse
-from forms.forms.medical_use import MedicalUseFormLine, MedicalUseForm, MedicalUseFormSet
+from forms.forms.medical_use import MedicalUseLineForm, MedicalUseForm, MedicalUseFormSet
 
 
 class MedicalUseCreateView(CreateView):
     model = MedicalUse
     template_name = "forms/medical_use/create.html"
-    form_class = MedicalUseFormLine
+    form_class = MedicalUseForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -45,7 +45,7 @@ class MedicalUseCreateView(CreateView):
 class MedicalUseUpdateView(UpdateView):
     model = MedicalUse
     template_name = "forms/medical_use/update.html"
-    form_class = MedicalUseFormLine
+    form_class = MedicalUseForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -66,8 +66,13 @@ class MedicalUseUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
         return super().form_valid(form)
+
+    def form_invalid(self, form, lines=None):
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('medical_use:medical_use-update', kwargs={'pk': self.object.pk})

@@ -1,29 +1,72 @@
 
-from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLineFormSet
-from forms.forms.med_exp_forms import MedExpForm, MedExpLineFormSet
-from forms.models import MedicalExpense, RiskAllowance
-from forms.views import risk_allowance_views, medical_expense_views
+from forms.forms.riskallowance_forms import RiskAllowanceForm
+from forms.forms.med_exp_forms import MedExpForm
+from forms.forms.medical_receipt import MedicalReceiptForm
+from forms.forms.medical_use import MedicalUseForm
+from forms.forms.pcr_test import PcrTestForm
+from forms.forms.rdt_test import RdtTestForm
 
+from forms import models
+
+from forms.views import (
+    risk_allowance_views,
+    medical_expense_views,
+    medical_receipt,
+    medical_use,
+    pcr_test,
+    rdt_test,
+)
 
 # Asign form, model, form collection field to route view name
 """
 ROUTE_LINK is a dictionary containing form metadata used for all form collections.
 """
 ROUTE_LINK = {
-    'risk_forms': {
+    'risk_allowance': {
+        'title': 'जोखिम भत्ता सम्बन्धी बिबरण',
         'form': RiskAllowanceForm,
-        'lines_set': RiskAllowanceLineFormSet,
-        'model': RiskAllowance,
+        'model': models.RiskAllowance,
         'form_field': 'risk_allowance',
-        'create_view': risk_allowance_views.RiskAllowanceCreateView,
         'update_view': risk_allowance_views.RiskAllowanceUpdateView,
     },
-    'med_forms': {
+
+    'medical_expense': {
+        'title': 'औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद',
         'form': MedExpForm,
-        'lines_set': MedExpLineFormSet,
-        'model': MedicalExpense,
-        'form_field': 'med_exp',
-        'create_view': medical_expense_views.MedExpCreateView,
+        'model': models.MedicalExpense,
+        'form_field': 'medical_expense',
         'update_view': medical_expense_views.MedExpUpdateView,
+    },
+
+    'medical_receipt': {
+        'title': 'औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति',
+        'form': MedicalReceiptForm,
+        'model': models.MedicalReceipt,
+        'form_field': 'medical_receipt',
+        'update_view': medical_receipt.MedicalReceiptUpdateView,
+    },
+
+    'medical_use': {
+        'title': 'औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग',
+        'form': MedicalUseForm,
+        'model': models.MedicalUse,
+        'form_field': 'medical_use',
+        'update_view': medical_use.MedicalUseUpdateView,
+    },
+
+    'pcr_test_compliance_detail': {
+        'title': 'पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण',
+        'form': PcrTestForm,
+        'model': models.PcrTestComplianceDetail,
+        'form_field': 'pcr_test_compliance_detail',
+        'update_view': pcr_test.PcrTestUpdateView,
+    },
+
+    'rdt_test_detail': {
+        'title': 'आरडीटी परीक्षण सम्बन्धी बिबरण',
+        'form': RdtTestForm,
+        'model': models.RdtTestDetail,
+        'form_field': 'rdt_test_detail',
+        'update_view': rdt_test.RdtTestUpdateView,
     },
 }

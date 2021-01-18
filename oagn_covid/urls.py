@@ -25,7 +25,6 @@ urlpatterns = [
     path('master-data/product/', include('master_data.urls.product')),
     path('master-data/hospital/', include('master_data.urls.hospital')),
     path('master-data/government/', include('master_data.urls.government')),
-    path('master-data/users/', include('users.urls.user_urls')),
 
     # auth views urls
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
@@ -49,7 +48,6 @@ urlpatterns = [
 
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
-    path('riskAllowance_forms/', include('forms.urls.riskAllowance_forms_urls')),
     path('medicalreceipt_forms/', include('forms.urls.medicalreceipt_forms_urls')),
     path('medicaluse_forms/', include('forms.urls.medical-use')),
     path('pcr_test_forms/', include('forms.urls.pcr_test')),
