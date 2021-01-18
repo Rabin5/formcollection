@@ -4,6 +4,8 @@ based on the Business Requirement Documents provided.
 """
 
 from .medical_expense import *
+from .form_collection import *
+from .risk_allowance import *
 from .medical_receipt import *
 from .medical_use import *
 from .pcr_test_compliance_detail import *

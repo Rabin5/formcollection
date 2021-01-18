@@ -28,6 +28,8 @@ class GovernmentBody(models.Model):
         CovidHospital, on_delete=models.CASCADE, blank=False, verbose_name="अस्पताल")
 
     def __str__(self) -> str:
+        if self.name==None:
+            return "ERROR- NAME IS NULL"
         return self.name
 
 class OfficeBearer(models.Model):
