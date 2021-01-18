@@ -36,7 +36,11 @@ PCR Lab Details
           </div>
         </form>
 
-        {% crispy form %}
+        <div class="table-responsive">
+          <table class="table table-01 table-bordered mt-3">
+            {% crispy form %}
+          </table>
+        </div> 
         
       </div>
     {% include 'core/forms/form_footer.html' %}

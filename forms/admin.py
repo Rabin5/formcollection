@@ -9,5 +9,7 @@ admin.site.register([
     models.RiskAllowance,
     models.RiskAllowanceLine,
     models.MedicalPurchaseDescription,
-    models.MedicalPurchaseDescriptionLine
+    models.MedicalPurchaseDescriptionLine,
+    models.PcrLaboratoryDetail,
+    models.PcrLaboratoryDetailLine
 ])

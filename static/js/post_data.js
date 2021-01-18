@@ -8,6 +8,7 @@ function saveData(form, action=''){
         action = form.attr('action')
     }
     fetch(action, {
+        headers: { "X-CSRFToken": '{{ csrf_token }}' },
         method: form.attr("method"),
         body: formdata
     })

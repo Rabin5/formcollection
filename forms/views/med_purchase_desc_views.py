@@ -30,6 +30,10 @@ class MedPurchaseDescCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+        collection = context.get('collection')
+        if collection:
+            collection.med_purchase_desc = self.object
+            collection.save()
         
         return super().form_valid(form)
     
@@ -62,6 +66,10 @@ class MedPurchaseDescUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+        collection = context.get('collection')
+        if collection:
+            collection.med_purchase_desc = self.object
+            collection.save()
         
         return super().form_valid(form)
     
