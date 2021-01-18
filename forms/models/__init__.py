@@ -10,3 +10,7 @@ from .medical_receipt import *
 from .medical_use import *
 from .pcr_test_compliance_detail import *
 from .rdttestdetail import *
+from .med_purchase_desc import *
+from .pcr_lab_detail import *
+from .pcr_kit_usage import *
+from .covid_hos_equip import *

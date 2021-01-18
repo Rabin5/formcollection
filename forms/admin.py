@@ -17,4 +17,14 @@ admin.site.register([
     models.PcrTestComplianceDetailLine,
     models.RdtTestDetail,
     models.RdtTestDetailLine,
+    models.RiskAllowance,
+    models.RiskAllowanceLine,
+    models.MedicalPurchaseDescription,
+    models.MedicalPurchaseDescriptionLine,
+    models.PcrLaboratoryDetail,
+    models.PcrLaboratoryDetailLine,
+    models.PcrKitUsage,
+    models.PcrKitUsageLine,
+    models.CovidHospitalEquipment,
+    models.CovidHospitalEquipmentLine
 ])

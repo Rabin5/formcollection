@@ -67,6 +67,10 @@ urlpatterns = [
     path('forms/', include('forms.urls.form_collection_urls')),
     path('forms/medical-expense/', include('forms.urls.medical_expense')),
     path('forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
+    path('forms/medical-product-desc/', include('forms.urls.med_purchase_desc_urls')),
+    path('forms/pcr-lab-detail/', include('forms.urls.pcr_lab_detail_urls')),
+    path('forms/pcr-kit-usage/', include('forms.urls.pcr_kit_usage_urls')),
+    path('forms/cov-hos-equip/', include('forms.urls.cov_hos_equip_urls')),
 
     path('users/', include('users.urls.user_urls')),
 

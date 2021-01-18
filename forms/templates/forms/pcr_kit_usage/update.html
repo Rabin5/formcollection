@@ -3,19 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-<<<<<<< HEAD
-  Medical Expense - Nepal Audit Management System
+  PCR Kit Usage - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Medical Expense
-=======
-  Medical Purchase Description - Nepal Audit Management System
-{% endblock title %}
-
-{% block page_title %}
-Medical Purchase Description
->>>>>>> form-1_6
+PCR Kit Usage
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -33,7 +25,7 @@ Medical Purchase Description
 {% block content %}
     {% include 'core/forms/progress_bar.html' %}
     <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
+        <h6 class="heading-01 mb-3">पिसीआर किटको उपयोग सम्बन्धी बिबरण</h6>
 
         <form action="">
           <div class="form-row">
@@ -44,15 +36,11 @@ Medical Purchase Description
           </div>
         </form>
 
-<<<<<<< HEAD
-        {% crispy form %}
-=======
         <div class="table-responsive">
           <table class="table table-01 table-bordered mt-3">
             {% crispy form %}
           </table>
         </div> 
->>>>>>> form-1_6
         
       </div>
     {% include 'core/forms/form_footer.html' %}

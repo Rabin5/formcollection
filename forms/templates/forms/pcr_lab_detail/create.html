@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  PCR Lab Details - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+PCR Lab Details
+{% endblock page_title %}
+
+{% block extrastyles %}
+    {% comment %} <link href="{% static 'styles/tagify.css' %}" rel="stylesheet"> {% endcomment %}
+{% endblock extrastyles %}
+
+{% block page_actions %}
+    <div class="align-vertical">
+        <div class="fiscal-year">
+            <span class="text-secondary des">आर्थिक वर्ष</span>
+            <span>२०७७/७८</span>
+            <a href="" class="ic-settings">
+            </a>
+        </div>
+        <a href="" class="btn btn-success text-white ml-3">Save</a>
+    </div>
+{% endblock page_actions %}
+
+{% block content %}
+    {% include 'core/forms/progress_bar.html' %}
+    <div class="card card-body mt-3">
+        <h6 class="heading-01 mb-3">पिसीआर प्रयोगशाला सम्बन्धी बिबरण</h6>
+
+        <form action="">
+          <div class="form-row">
+            <div class="col-md-4">
+              <label for="">निकायको नाम</label>
+              <input type="text" class="form-control">
+            </div>
+          </div>
+        </form>
+
+        <div class="table-responsive">
+          
+            {% crispy form %}
+          
+        </div>   
+      </div>
+    {% include 'core/forms/form_footer.html' %}
+{% endblock content %}
+
+{% block extrascripts %}
+{% comment %} <script src="{% static 'js/tagify.min.js' %}"></script> {% endcomment %}
+<script>
+  //'.select_class'
+  $('.select_class').select2({
+    tags: true
+  });
+
+  var date_choice = {{date_choice|safe}};
+  var capacity_choice = {{capacity_choice|safe}};
+
+  $('#id_lines-0-laboratory').attr('onchange','get_select_value(event)')
+
+  function get_select_value(e){
+    e = e || window.event;
+    var targ = e.target || e.srcElement;
+    var id_tag = '#'+$(targ).attr("id");
+    var id_tag_num = id_tag.split('-')[1];
+    //console.log(id_tag_num)
+    var selected_val = $(id_tag+" option:selected").val();
+    
+    $('#id_lines-'+id_tag_num+'-capacity_daily_test').val(capacity_choice[selected_val])
+    
+    $('#id_lines-'+id_tag_num+'-date_establishment').val(date_choice[selected_val])
+  }
+
+/*
+  $('.select_class').on('change', function(){
+    console.log($(".select_class option:selected").text())
+  })
+*/
+</script>
+{% endblock extrascripts %}
