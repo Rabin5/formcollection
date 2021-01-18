@@ -8,5 +8,13 @@ admin.site.register([
     models.MedicalExpenseLine,
     models.FormCollection,
     models.RiskAllowance,
-    models.RiskAllowanceLine
+    models.RiskAllowanceLine,
+    models.MedicalReceipt,
+    models.MedicalReceiptLine,
+    models.MedicalUse,
+    models.MedicalUseLine,
+    models.PcrTestComplianceDetail,
+    models.PcrTestComplianceDetailLine,
+    models.RdtTestDetail,
+    models.RdtTestDetailLine,
 ])

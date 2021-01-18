@@ -39,8 +39,12 @@ STATUS = [
 ]
 
 CH_STATE = [
-    (0, 'risk_forms'),
-    (1, 'med_forms'),
+    (0, 'risk_allowance'),
+    (1, 'medical_expense'),
+    (2, 'medical_receipt'),
+    (3, 'medical_use'),
+    (4, 'pcr_test_compliance_detail'),
+    (5, 'rdt_test_detail'),
 ]
 
 

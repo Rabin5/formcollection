@@ -62,7 +62,6 @@ class FormCollectionUpdateView(UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
-        form_set => routelink.form
         form_field => routelink.form_field
         is_first_form => True if first form in collection
         is_last_form => True if last form in collection
@@ -77,7 +76,6 @@ class FormCollectionUpdateView(UpdateView):
     success_url = 'forms:list'
     form_class = ''
     route_link = ''
-    form_set = None
     form_field = None
     is_first_form = False
     is_last_form = False
@@ -104,7 +102,6 @@ class FormCollectionUpdateView(UpdateView):
         self.form_class = self.route_link['form']
         self.model = self.route_link['model']
         self.template_name = self.route_link['update_view'].template_name
-        self.form_set = self.route_link['lines_set']
         self.form_view = self.route_link['update_view']
         self.form_field = self.route_link['form_field']
         self.current_form_instance = self._get_cur_form_instance(pk)

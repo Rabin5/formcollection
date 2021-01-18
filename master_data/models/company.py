@@ -19,6 +19,9 @@ class Company(Address):
     name = models.CharField(max_length=300)
     date_establishment = models.DateField(null=False)
 
+    def __str__(self):
+        return self.name
+
 
 class Importer(Company):
     pass

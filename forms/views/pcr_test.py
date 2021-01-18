@@ -4,13 +4,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from forms.models.pcr_test_compliance_detail import PcrTestComplianceDetail
-from forms.forms.pcr_test import PcrTestFormLine, PcrTestForm, PcrTestFormSet
+from forms.forms.pcr_test import PcrTestLineForm, PcrTestForm, PcrTestFormSet
 
 
 class PcrTestCreateView(CreateView):
     model = PcrTestComplianceDetail
     template_name = "forms/pcr_test/create.html"
-    form_class = PcrTestFormLine
+    form_class = PcrTestForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -43,7 +43,7 @@ class PcrTestCreateView(CreateView):
 class PcrTestUpdateView(UpdateView):
     model = PcrTestComplianceDetail
     template_name = "forms/pcr_test/update.html"
-    form_class = PcrTestFormLine
+    form_class = PcrTestForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -64,8 +64,13 @@ class PcrTestUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
         return super().form_valid(form)
+
+    def form_invalid(self, form, lines=None):
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('medical_use:medical_use-update', kwargs={'pk': self.object.pk})

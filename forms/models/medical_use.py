@@ -14,13 +14,13 @@ class MedicalUse(FormBaseModel):
         FiscalYear, on_delete=models.PROTECT, related_name='medical_use', verbose_name='आर्थिक बर्ष: ')
 
     def __str__(self):
-        return self.fiscal_year
+        return self.body.name
 
 
-class MedicalUseLine(FormBaseModel):
+class MedicalUseLine(FormLineBaseModel):
     product = models.ForeignKey(
         Product, on_delete=models.PROTECT, verbose_name='स्वास्थ्य सामाग्री उपकरणको विवरण')
-    is_purchased = models.BooleanField(default=False, verbose_name='खरिद ')
+    is_purchased = models.BooleanField(default=False, verbose_name='खरीद गरिएको ?')
     product_price = models.FloatField(verbose_name='सामानको मुल्य')
     unused_qty = models.IntegerField(verbose_name='प्रयोगमा नआएको परिमाण')
     unused_reason = models.CharField(
