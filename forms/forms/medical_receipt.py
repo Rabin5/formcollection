@@ -2,7 +2,7 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
 from forms.models.medical_receipt import MedicalReceiptLine, MedicalReceipt
@@ -13,6 +13,13 @@ class MedicalReceiptLineForm(forms.ModelForm):
     class Meta:
         model = MedicalReceiptLine
         exclude = ()
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+        for _, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
 
 MedicalReceiptFormSet = inlineformset_factory(
@@ -20,7 +27,7 @@ MedicalReceiptFormSet = inlineformset_factory(
     fields=['product', 'provider_institution', 'provider_body',
             'quantity', 'cost_received_items', 'usage_situation'],
     extra=1,
-    can_delete=True
+    can_delete=False
 )
 
 
@@ -29,22 +36,23 @@ class MedicalReceiptForm(forms.ModelForm):
     class Meta:
         model = MedicalReceipt
         fields = '__all__'
-
+        exclude = ('create_user', )
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_id = 'form_to_submit'
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3 create-label'
-        self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
+            Hidden('next_state', 'next'),
+            Row(
+                Column('body', css_class='col-md-6 mb-0'),
+                Column('fiscal_year', css_class='col-md-6 mb-0'),
+                css_class='form-row'
+                ),
             Div(
-                Field('body'),
-                Field('fiscal_year'),
-                Fieldset('Add lines. . .',
-                         Formset('lines')
-                         ),
-                HTML('<br>'),
-                ButtonHolder(Submit('submit', 'save')),
+                Fieldset('',
+                    Formset('lines')
+                ),
             )
         )

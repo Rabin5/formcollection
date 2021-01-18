@@ -13,7 +13,50 @@ BS_MONTHS = [
     (12, "चैत्र"),
 ]
 
+DEVANAGARI_DIGITS = (
+    "०",
+    "१",
+    "२",
+    "३",
+    "४",
+    "५",
+    "६",
+    "७",
+    "८",
+    "९"
+)
+
 STATES = [
     ('draft', 'Draft'),
     ('submitted', 'Submitted'),
 ]
+
+STATUS = [
+    ('started', 'STARTED'),
+    ('incomplete', 'INCOMPLETE'),
+    ('submitted', 'SUBMITTED'),
+    ('completed', 'COMPLETED'),
+]
+
+CH_STATE = [
+    (0, 'risk_allowance'),
+    (1, 'medical_expense'),
+    (2, 'medical_receipt'),
+    (3, 'medical_use'),
+    (4, 'pcr_test_compliance_detail'),
+    (5, 'rdt_test_detail'),
+]
+
+
+def num_to_devanagari(num):
+    """
+    Utility function to convert an integer number to Devanagari
+    """
+    dev_num = ''
+    if type(num) != int:
+        return -1
+
+    for digit in str(num):
+        dev_num += DEVANAGARI_DIGITS[int(digit)]
+    
+    return dev_num

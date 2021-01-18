@@ -38,7 +38,7 @@ class MedExpCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('med-forms:med_exp-create')
+        return reverse_lazy('med_forms:create')
 
 
 class MedExpUpdateView(UpdateView):
@@ -49,11 +49,9 @@ class MedExpUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super(MedExpUpdateView, self).get_context_data(**kwargs)
-        # import pdb;pdb.set_trace()
         if self.request.POST:
             data['lines'] = MedExpLineFormSet(
                 self.request.POST, instance=self.object)
-            # data['lines'].full_clean()
         else:
             data['lines'] = MedExpLineFormSet(instance=self.object)
         return data
@@ -71,4 +69,4 @@ class MedExpUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('med-forms:med_exp-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('med_forms:update', kwargs={'pk': self.object.pk})

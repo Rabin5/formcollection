@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from forms.models import form_collection
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from reports.views.dashboard_view import DashboardView
@@ -24,7 +25,6 @@ urlpatterns = [
     path('master-data/product/', include('master_data.urls.product')),
     path('master-data/hospital/', include('master_data.urls.hospital')),
     path('master-data/government/', include('master_data.urls.government')),
-    path('master-data/users/', include('users.urls.user_urls')),
 
     # auth views urls
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
@@ -48,7 +48,6 @@ urlpatterns = [
 
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
-    path('riskAllowance_forms/', include('forms.urls.riskAllowance_forms_urls')),
     path('medicalreceipt_forms/', include('forms.urls.medicalreceipt_forms_urls')),
     path('medicaluse_forms/', include('forms.urls.medical-use')),
     path('pcr_test_forms/', include('forms.urls.pcr_test')),
@@ -64,7 +63,10 @@ urlpatterns = [
     path('relief_type/', include('master_data.urls.relief_type')),
     path('action_plan/', include('master_data.urls.action_plan')),
 
-    path('forms/', include('forms.urls.forms_urls')),
+    # Forms
+    path('forms/', include('forms.urls.form_collection_urls')),
+    path('forms/medical-expense/', include('forms.urls.medical_expense')),
+    path('forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
 
     path('users/', include('users.urls.user_urls')),
 

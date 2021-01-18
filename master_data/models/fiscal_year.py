@@ -5,8 +5,21 @@ from django.db import models
 import nepali_datetime
 
 
+class FyQuerySet(models.QuerySet):
+    def current_fy(self):
+        for fy in self:
+            if fy.is_current:
+                return fy
+
+
+class FyManager(models.Manager):
+    def get_current_fy(self):
+        return self.get_queryset().current_fy()
+
+
 class FiscalYear(models.Model):
     ordering = ['start_date']
+    objects = FyManager.from_queryset(FyQuerySet)()
     date_start = models.DateField(null=False)
     date_end = models.DateField(null=False)
     name = models.CharField(max_length=15, blank=False,

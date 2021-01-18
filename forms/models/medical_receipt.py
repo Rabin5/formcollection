@@ -14,7 +14,7 @@ class MedicalReceipt(FormBaseModel):
         FiscalYear, on_delete=models.PROTECT, related_name='medical_receipt', verbose_name='आर्थिक बर्ष: ')
 
     def __str__(self):
-        return self.fiscal_year
+        return self.body.name
 
 
 class MedicalReceiptLine(FormBaseModel):

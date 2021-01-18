@@ -13,13 +13,13 @@ class PcrTestComplianceDetail(FormBaseModel):
         FiscalYear, on_delete=models.PROTECT, related_name='pctr_test_fiscal_year', verbose_name='आर्थिक बर्ष: ')
 
     def __str__(self):
-        return self.fiscal_year
+        return self.body.name
 
 
 choices = BS_MONTHS
 
 
-class PcrTestComplianceDetailLine(FormBaseModel):
+class PcrTestComplianceDetailLine(FormLineBaseModel):
     month = models.IntegerField(
         choices=choices, blank=True, null=True, verbose_name='महिना')
     year = models.IntegerField(verbose_name='बर्ष:')
@@ -45,6 +45,3 @@ class PcrTestComplianceDetailLine(FormBaseModel):
         verbose_name='Non-priority  क्षेत्रमा गरेको संक्रमित संख्या')
     pcrtest_compliance_detail = models.ForeignKey(
         PcrTestComplianceDetail, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.month

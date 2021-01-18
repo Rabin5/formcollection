@@ -14,10 +14,10 @@ class RdtTestDetail(FormBaseModel):
         FiscalYear, on_delete=models.PROTECT, related_name='rdt_test_fiscal_year', verbose_name='आर्थिक बर्ष: ')
 
     def __str__(self):
-        return self.fiscal_year
+        return self.body.name
 
 
-class RdtTestDetailLine(FormBaseModel):
+class RdtTestDetailLine(FormLineBaseModel):
     laboratory = models.ForeignKey(
         Laboratory, on_delete=models.PROTECT, verbose_name='ल्यावको नाम र स्थान')
     num_tested_fy_end = models.IntegerField(
@@ -29,6 +29,3 @@ class RdtTestDetailLine(FormBaseModel):
 
     rdt_test_detail = models.ForeignKey(
         RdtTestDetail, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.laboratory

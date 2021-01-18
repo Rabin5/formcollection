@@ -138,11 +138,13 @@
       </div>
     </li>
     <li>
-      <a href="#form-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
-        aria-controls="collapseExample">Forms</a>
+      <a href="#form-data" class="hasSub" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapseExample">Forms</a>
       <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
-        <ul class="menu py-0">
+        <ul class="menu py-0" >
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
+          </li>
+          {% comment %} <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'medical-forms:medical_receipt-create'%}" class="pl-4">Medical Receipt</a>
           </li>
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
@@ -153,7 +155,7 @@
           </li>
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'rdt_test:rdt_test-create'%}" class="pl-4">RdtTest</a>
-          </li>
+          </li> {% endcomment %}
         </ul>
       </div>
     </li>
