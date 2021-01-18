@@ -28,9 +28,9 @@ class RiskAllowanceLine(FormLineBaseModel):
     allowance_type = models.ForeignKey(
         AllowanceType, on_delete=models.PROTECT, verbose_name='भत्ताको प्रकार')
     expense_amount = models.DecimalField(
-        max_digits=19, decimal_places=2, verbose_name='सम्म खर्च रकम')
-    remarks = models.DecimalField(
-        max_digits=19, decimal_places=2, verbose_name='कैफियत')
+        max_digits=19, decimal_places=2, verbose_name='खर्च रकम')
+    remarks = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name='कैफियत')
 
     def __str__(self):
-        return self.gov_body
+        return self.gov_body.name

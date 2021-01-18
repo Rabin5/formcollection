@@ -1,16 +1,34 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Add Fund Receipt Expense
-            </div>
-            <div class="card-body">
-                {% crispy form %}
-            </div>
+{% block title %}
+  Risk Allowance - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+Risk Allowance
+{% endblock page_title %}
+
+{% block page_actions %}
+    <div class="align-vertical">
+        <div class="fiscal-year">
+            <span class="text-secondary des">आर्थिक वर्ष</span>
+            <span>२०७७/७८</span>
+            <a href="" class="ic-settings">
+            </a>
         </div>
+        <a href="" class="btn btn-success text-white ml-3">Save</a>
     </div>
+{% endblock page_actions %}
+
+{% block content %}
+    {% include 'core/forms/progress_bar.html' %}
+    <div class="card card-body mt-3">
+        <h6 class="heading-01 mb-3">जोखिम भत्ता सम्बन्धी बिबरण</h6>
+
+        {% crispy form %}
+        
+      </div>
+    {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

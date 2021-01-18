@@ -34,7 +34,7 @@ class MedExpCreateView(CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('med_forms:med_exp-create')
+        return reverse_lazy('med_forms:create')
 
 
 class MedExpUpdateView(UpdateView):
@@ -66,4 +66,4 @@ class MedExpUpdateView(UpdateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('med_forms:med_exp-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('med_forms:update', kwargs={'pk': self.object.pk})

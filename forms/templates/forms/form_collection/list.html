@@ -31,7 +31,7 @@ Form Collections
     {% for form_collection in form_collections %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ form_collection.get_state_display }}</td>
+        <td>{{ form_collection }}</td>
         <td>{{ form_collection.get_status_display }}</td>
         <td class="action">
           <a href="{% url 'forms:update' form_collection.pk %}">
@@ -50,34 +50,21 @@ Form Collections
 {% endblock content %}
 
 {% block extrascripts %}
-{% comment %} <script src="{% static 'js/post_data.js' %}"></script> {% endcomment %}
 <script>
     $(document).ready(function(){
     $('#create_collection').on('click', function(){
-        fetch("{% url 'forms:create' %}", {
-            method: 'POST',
-            dataType: "json",
-            headers: { "X-CSRFToken": '{{csrf_token}}' },
-        })
-        .then(function(response){
-            console.log(JSON.parse(response))
-            console.log(response['body'])
-            // window.location.replace(response['url']);
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-        /*
-        $.ajax({
-            headers: { "X-CSRFToken": '{{csrf_token}}' },
-            url: "{% url 'forms:create' %}",
-            method: 'POST',
-            success: function(data) {
-                //console.log(data)
-                window.location.replace(data['url']);
-            }
-        })
-        */
+      fetch("{% url 'forms:create' %}", {
+        method: 'POST',
+        dataType: "json",
+        headers: { "X-CSRFToken": '{{csrf_token}}' },
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.location.href = data.url
+      })
+      .catch(function(err){
+          console.log(err);
+      });
     })
 })
 </script>

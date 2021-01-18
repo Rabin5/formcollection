@@ -28,12 +28,7 @@ Risk Allowance
         <h6 class="heading-01 mb-3">जोखिम भत्ता सम्बन्धी बिबरण</h6>
 
         <form action="">
-          <div class="form-row">
-            <div class="col-md-4">
-              <label for="">निकायको नाम</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
+          {{ form|crispy }}
         </form>
 
         {% crispy form %}
@@ -49,5 +44,5 @@ Risk Allowance
             </div>
         </div>
     </div> -->
-    {% include 'core/forms/form_footer.html' %}
+    {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

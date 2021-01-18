@@ -10,5 +10,9 @@ class FormCollection(models.Model):
     state = models.IntegerField(choices=CH_STATE, default=1, blank=True)
     med_exp = models.OneToOneField(MedicalExpense, on_delete=models.CASCADE, null=True)
     risk_allowance = models.OneToOneField(RiskAllowance, on_delete=models.CASCADE, null=True)
-    status = models.IntegerField(choices=STATUS, default=1)
+    status = models.CharField(choices=STATUS, default='started', max_length=20)
+
+    def __str__(self):
+        display_name = f"{self.user.body} ({self.get_state_display()})"
+        return display_name
     
