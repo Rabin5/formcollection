@@ -7,14 +7,14 @@
 {% endblock title %}
 
 {% block page_title %}
-Expense Header
+खर्च शीर्षलेख
 {% endblock page_title %}
 
 {% block page_actions %}
   <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-expense_header:create' %}"
     href="{% url 'md-expense_header:create' %}" data-toggle="modal" data-target="#modalExpenseHeaderCreate">
     <i class="ic-add"></i>
-    Expense Header थप्नुहोस्
+    खर्च शीर्षलेख थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,8 +23,9 @@ Expense Header
   <thead>
     <tr>
       <th>#.</th>
-      <th>Title</th>
-      <th>Description</th>
+      <th>शीर्षक</th>
+      <th>वर्णन</th>
+
       <th class="text-right">कार्य</th>
     </tr>
   </thead>

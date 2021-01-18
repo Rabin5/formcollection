@@ -1,4 +1,5 @@
 function saveData(form,modal_id){
+    // window.location.reload();
     // var form = $(this);
     // console.log(form, form[0])
     var formdata = new FormData(form[0]);
@@ -8,9 +9,13 @@ function saveData(form,modal_id){
         body: formdata
     })
     .then(function(response){
-        response.text().then(function(data){
-            $(modal_id).find('.modal-content').html(data)
-        });
+        if (response.redirected == false) {
+            response.text().then(function(data){
+                $(modal_id).find('.modal-content').html(data)
+            });   
+        } else{
+            window.location.replace(response['url'])
+        }
     })
     .catch(function(err){
         console.log(err); 

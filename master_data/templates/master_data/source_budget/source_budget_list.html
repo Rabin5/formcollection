@@ -7,14 +7,14 @@
 {% endblock title %}
 
 {% block page_title %}
-Source Budget
+स्रोत बजेट
 {% endblock page_title %}
 
 {% block page_actions %}
   <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-source_budget:create' %}"
     href="{% url 'md-source_budget:create' %}" data-toggle="modal" data-target="#modalSourceBudgetCreate">
     <i class="ic-add"></i>
-    Source Budget थप्नुहोस्
+    स्रोत बजेट थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,8 +23,9 @@ Source Budget
   <thead>
     <tr>
       <th>#.</th>
-      <th>Title</th>
-      <th>Description</th>
+      <th>शीर्षक</th>
+      <th>वर्णन</th>
+
       <th class="text-right">कार्य</th>
     </tr>
   </thead>

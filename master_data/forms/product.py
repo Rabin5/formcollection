@@ -9,7 +9,7 @@ class ProdForm(ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'type', 'uom']
-    
+     
 class UomForm(ModelForm):
     class Meta:
         model = UnitOfMeasure
