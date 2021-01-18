@@ -44,8 +44,12 @@ CH_STATE = [
     (2, 'medical_expense'),
     (3, 'medical_receipt'),
     (4, 'medical_use'),
-    (5, 'pcr_test_compliance_detail'),
-    (6, 'rdt_test_detail'),
+    (5, 'med_purchase_desc'),
+    (6, 'pcr_test_compliance_detail'),
+    (7, 'pcr_lab_detail'),
+    (8, 'rdt_test_detail'),
+    (9, 'pcr_kit_usage'),
+    # (11, 'cov_hos_equipment'),
 ]
 
 

@@ -24,5 +24,7 @@ admin.site.register([
     models.PcrKitUsage,
     models.PcrKitUsageLine,
     models.CovidHospitalEquipment,
-    models.CovidHospitalEquipmentLine
+    models.CovidHospitalEquipmentLine,
+    models.FundReceiptExpense,
+    models.FundReceiptExpenseLine
 ])

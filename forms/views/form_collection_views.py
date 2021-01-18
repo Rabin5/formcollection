@@ -33,12 +33,11 @@ class FormCollectionCreateView(View):
 
         col_update_params = {}
         fiscal_year = FiscalYear.objects.get_current_fy()
-        for form in LIST_CH_STATE:
+        for form in LIST_CH_STATE:            
             form_obj = ROUTE_LINK[form]['model'].objects.create(
                 body=self.request.user.body,
                 fiscal_year=fiscal_year,
                 create_user=self.request.user,
-
             )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
         

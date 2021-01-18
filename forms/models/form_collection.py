@@ -8,6 +8,10 @@ from .medical_use import MedicalUse
 from .pcr_test_compliance_detail import PcrTestComplianceDetail
 from .rdttestdetail import RdtTestDetail
 from .fund_receipt_expense import FundReceiptExpense
+from .med_purchase_desc import MedicalPurchaseDescription
+from .pcr_lab_detail import PcrLaboratoryDetail
+from .pcr_kit_usage import PcrKitUsage
+from .covid_hos_equip import CovidHospitalEquipment
     
 from users.models.user import User
 from forms.utils import CH_STATE, STATUS
@@ -23,6 +27,10 @@ class FormCollection(models.Model):
     pcr_test_compliance_detail = models.OneToOneField(PcrTestComplianceDetail, on_delete=models.CASCADE, null=True)
     rdt_test_detail = models.OneToOneField(RdtTestDetail, on_delete=models.CASCADE, null=True)
     fund_receipt_expense = models.OneToOneField(FundReceiptExpense, on_delete=models.CASCADE, null=True)
+    med_purchase_desc = models.OneToOneField(MedicalPurchaseDescription, on_delete=models.CASCADE, null=True)
+    pcr_lab_detail = models.OneToOneField(PcrLaboratoryDetail, on_delete=models.CASCADE, null=True)
+    pcr_kit_usage = models.OneToOneField(PcrKitUsage, on_delete=models.CASCADE, null=True)
+    # cov_hos_equipment = models.OneToOneField(CovidHospitalEquipment, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         display_name = f"{self.user.body} ({self.get_state_display()})"
