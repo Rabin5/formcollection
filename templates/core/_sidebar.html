@@ -24,13 +24,13 @@
             <div class="collapse{% if 'master-data/product' in request.path %} show {% endif %}" id="collapseExample1">
               <ul class="menu py-0">
                 <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-prod:list'%}" class="pl-4">Product</a>
+                  <a href="{% url 'md-prod:list'%}" class="pl-4">सामग्री</a>
                 </li>
                 <li {% if 'md-prod:uom_list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-prod:uom_list'%}" class="pl-4">Unit of Measurement</a>
+                  <a href="{% url 'md-prod:uom_list'%}" class="pl-4">मापनको एकाई</a>
                 </li>
                 <li {% if 'md-prod:procurement_list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-prod:procurement_list'%}" class="pl-4">Procurement Method</a>
+                  <a href="{% url 'md-prod:procurement_list'%}" class="pl-4">खरीद विधि</a>
                 </li>
               </ul>
             </div>
@@ -48,23 +48,23 @@
                   <a href="{% url 'md-gov:gov_type_list'%}" class="pl-4">सरकारी निकायको प्रकार</a>
                 </li>
                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-offbearer:list'%}" class="pl-4">Office Bearer</a>
+                  <a href="{% url 'md-offbearer:list'%}" class="pl-4">कार्यालय वाहक
+</a>
                 </li>
                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-allowance_type:list'%}" class="pl-4">Allowance Type</a>
+                  <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
                 </li>
                 <li {% if 'md-source_budget:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-source_budget:list'%}" class="pl-4">Source Budget</a>
+                  <a href="{% url 'md-source_budget:list'%}" class="pl-4"> स्रोत बजेट</a>
                 </li>
                 <li {% if 'md-expense_header:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-expense_header:list'%}" class="pl-4">Expense Header</a>
+                  <a href="{% url 'md-expense_header:list'%}" class="pl-4">खर्च शीर्षलेख</a>
                 </li>
                 <li {% if 'md-cov_hos_managament:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-cov_hos_managament:list'%}" class="pl-4">Covid Hospital Management Type</a>
+                  <a href="{% url 'md-cov_hos_managament:list'%}" class="pl-4">कोविड अस्पताल प्रबन्धन प्रकार</a>
                 </li>
                 <li {% if 'md-committee:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-committee:list'%}" class="pl-4">Committee</a>
-                </li>
+                  <a href="{% url 'md-committee:list'%}" class="pl-4">समिति</a></li>
                 <li {% if 'md-relief_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-relief_type:list'%}" class="pl-4">Relief Type</a>
                 </li>
