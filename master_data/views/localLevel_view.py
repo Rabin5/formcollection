@@ -22,5 +22,12 @@ class LocalLevelUpdateView(UpdateView):
     model = LocalLevel
     template_name = "master_data/address/locallevel_update.html"
     form_class = LocallevelForm
-    success_url = reverse_lazy('md-locallevel:update')
+    success_url = reverse_lazy('md-locallevel:list')
     context_object_name = 'locallevel_update'
+
+
+class LocalLevelDeleteView(DeleteView):
+    model = LocalLevel
+    template_name = "master_data/address/locallevel_delete.html"
+    success_url = reverse_lazy('md-locallevel:list')
+    context_object_name = 'local'

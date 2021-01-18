@@ -116,7 +116,7 @@ class FormCollectionUpdateView(UpdateView):
         Returns metadata used in rendering form page of collection
         """
         total_forms = len(LIST_CH_STATE)
-        if self.object.state in ('started', 'incomplete'):
+        if self.object.status in ('started', 'incomplete'):
             current_form = LIST_CH_STATE.index(self.current_form)
         else:
             current_form = total_forms

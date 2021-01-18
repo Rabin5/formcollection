@@ -1,4 +1,4 @@
-function saveData(form, action=''){
+function saveData(form,modal_id){
     // var form = $(this);
     // console.log(form, form[0])
     var formdata = new FormData(form[0])
@@ -12,11 +12,12 @@ function saveData(form, action=''){
         body: formdata
     })
     .then(function(response){
-        // console.log(response)
-        window.location.replace(response['url']);
+        response.text().then(function(data){
+            $(modal_id).find('.modal-content').html(data)
+        });
     })
     .catch(function(err){
-        console.log(err);
+        console.log(err); 
     });
     return false;
 }

@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Procurement - Nepal Audit Management System
+Procurement - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
@@ -11,11 +11,11 @@ Procurement Method
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:procurement_create' %}"
-    href="{% url 'md-prod:procurement_create' %}" data-toggle="modal" data-target="#modalProcurementCreate">
-    <i class="ic-add"></i>
-    Procurement थप्नुहोस्
-  </a>
+<a class="btn btn-success btn-with-icon" data-remote="{% url 'md-prod:procurement_create' %}"
+  href="{% url 'md-prod:procurement_create' %}" data-toggle="modal" data-target="#modalProcurementCreate">
+  <i class="ic-add"></i>
+  Procurement थप्नुहोस्
+</a>
 {% endblock page_actions %}
 
 {% block content %}
@@ -29,20 +29,22 @@ Procurement Method
   </thead>
   <tbody>
     {% for procurement in procurements %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ procurement.name }}</td>
-        <td class="action">
-          <a data-remote="{% url 'md-prod:procurement_update' procurement.pk %}"
-            href="{% url 'md-prod:procurement_update' procurement.pk %}" data-toggle="modal" data-target="#modalProcurementUpdate">
-            <i class="ic-edit mr-2"></i>
-          </a>
-          <a data-remote="{% url 'md-prod:procurement_delete' procurement.pk %}"
-            href="{% url 'md-prod:procurement_delete' procurement.pk %}" data-toggle="modal" data-target="#modalProcurementDelete">
-            <i class="ic-delete"></i>
-          </a>
-        </td>
-      </tr>
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ procurement.name }}</td>
+      <td class="action">
+        <a data-remote="{% url 'md-prod:procurement_update' procurement.pk %}"
+          href="{% url 'md-prod:procurement_update' procurement.pk %}" data-toggle="modal"
+          data-target="#modalProcurementUpdate">
+          <i class="ic-edit mr-2"></i>
+        </a>
+        <a data-remote="{% url 'md-prod:procurement_delete' procurement.pk %}"
+          href="{% url 'md-prod:procurement_delete' procurement.pk %}" data-toggle="modal"
+          data-target="#modalProcurementDelete">
+          <i class="ic-delete"></i>
+        </a>
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
@@ -50,21 +52,24 @@ Procurement Method
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalProcurementCreate" tabindex="-1" role="dialog" aria-labelledby="modalProcurementCreate" aria-hidden="true">
+<div class="modal fade" id="modalProcurementCreate" tabindex="-1" role="dialog" aria-labelledby="modalProcurementCreate"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalProcurementUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProcurementUpdate" aria-hidden="true">
+<div class="modal fade" id="modalProcurementUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProcurementUpdate"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalProcurementDelete" tabindex="-1" role="dialog" aria-labelledby="modalProcurementDelete" aria-hidden="true">
+<div class="modal fade" id="modalProcurementDelete" tabindex="-1" role="dialog" aria-labelledby="modalProcurementDelete"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -96,17 +101,17 @@ Procurement Method
     });
   });
 
-  $( "#modalProcurementCreate").on('submit', 'form', function(e) {
+  $("#modalProcurementCreate").on('submit', 'form', function (e) {
     {% comment %} var $prod_modal = $(this); {% endcomment %}
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this))
   });
 
-  $( "#modalProcurementUpdate").on('submit', 'form', function(e) {
+  $("#modalProcurementUpdate").on('submit', 'form', function (e) {
     {% comment %} var $prod_modal = $(this); {% endcomment %}
     console.log($prod_modal)
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this))
   });
 </script>
 {% endblock extrascripts %}

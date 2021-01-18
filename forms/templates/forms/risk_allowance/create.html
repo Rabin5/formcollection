@@ -3,46 +3,47 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Risk Allowance - Nepal Audit Management System
+जोखिम भत्ता सम्बन्धी बिबरण - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Risk Allowance
+जोखिम भत्ता सम्बन्धी बिबरण
 {% endblock page_title %}
 
 {% block page_actions %}
-    <div class="align-vertical">
-        <div class="fiscal-year">
-            <span class="text-secondary des">आर्थिक वर्ष</span>
-            <span>२०७७/७८</span>
-            <a href="" class="ic-settings">
-            </a>
-        </div>
-        <a href="" class="btn btn-success text-white ml-3">Save</a>
+<div class="align-vertical">
+    <div class="fiscal-year">
+        <span class="text-secondary des">आर्थिक वर्ष</span>
+        <span>२०७७/७८</span>
+        <a href="" class="ic-settings">
+        </a>
     </div>
+    <a href="" class="btn btn-success text-white ml-3">Save</a>
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">जोखिम भत्ता सम्बन्धी बिबरण</h6>
+{% include 'core/forms/progress_bar.html' %}
 
-        <form action="">
-          {{ form|crispy }}
-        </form>
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">2. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन
+        मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h6>
 
-        {% crispy form %}
-        
-      </div>
-    <!-- <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Add Fund Receipt Expense
-            </div>
-            <div class="card-body">
-                {% crispy form %}
+    <form action="">
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="">निकायको नाम</label>
+                <input type="text" class="form-control">
             </div>
         </div>
-    </div> -->
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-01 table-bordered mt-3">
+            {% crispy form %}
+        </table>
+    </div>
+</div>
+
+
 {% endblock content %}

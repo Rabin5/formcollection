@@ -7,20 +7,27 @@ from django.urls import reverse_lazy
 
 class InstitutionCreateView(CreateView):
     model = Institution
-    template_name = "master_data/institution_create.html"
+    template_name = "master_data/company/institution_create.html"
     form_class = InstitutionForm
     success_url = reverse_lazy('md-institution:list')
 
 
 class InstitutionListView(ListView):
     model = Institution
-    template_name = "master_data/institution_list.html"
+    template_name = "master_data/company/institution_list.html"
     context_object_name = 'institution_list'
 
 
 class InstitutionUpdateView(UpdateView):
     model = Institution
-    template_name = "master_data/institution_update.html"
+    template_name = "master_data/company/institution_update.html"
     form_class = InstitutionForm
     success_url = reverse_lazy('md-institution:update')
     context_object_name = 'institution_update'
+
+
+class InstitutionDeleteView(DeleteView):
+    model = Institution
+    template_name = "master_data/company/institution_delete.html"
+    success_url = reverse_lazy('md-institution:list')
+    context_object_name = 'institution'

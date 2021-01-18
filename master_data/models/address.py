@@ -2,7 +2,14 @@ from django.db import models
 from datetime import datetime
 
 
-class LocalLevel(models.Model):
+class Country(models.Model):
+    name = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.name
+
+
+class Province(models.Model):
     name = models.CharField(max_length=300)
 
     def __str__(self):
@@ -11,22 +18,17 @@ class LocalLevel(models.Model):
 
 class District(models.Model):
     name = models.CharField(max_length=300)
-    local_level = models.ForeignKey(LocalLevel, on_delete=models.CASCADE)
+    province = models.ForeignKey(
+        Province, related_name='province_to_district', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
-class Province(models.Model):
+class LocalLevel(models.Model):
     name = models.CharField(max_length=300)
-    district = models.ForeignKey(District, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-class Country(models.Model):
-    name = models.CharField(max_length=300)
+    district = models.ForeignKey(
+        District, related_name='local_to_district', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -1,9 +1,121 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block title %}
+Province - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+province
+{% endblock page_title %}
+
+{% block page_actions %}
+<a class="btn btn-success btn-with-icon" data-remote="{% url 'md-province:create' %}"
+    href="{% url 'md-province:create' %}" data-toggle="modal" data-target="#modalProCreate">
+    <i class="ic-add"></i>
+    province थप्नुहोस्
+</a>
+{% endblock page_actions %}
+
 {% block content %}
-{% for list in province_list %}
-<p><a href="{% url 'md-province:update' list.pk %}">{{ list.name }}</a></p>
-{% endfor %}
+<table class="table table-striped table-borderless">
+    <thead>
+        <tr>
+            <th>#.</th>
+            <th>province Name</th>
+            <th>Disctrict Name</th>
+            <th>Local level</th>
+            <th class="text-right">कार्य</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for province in province_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ province.name }}</td>
+            <td>{{ province.district }}</td>
+            <td>{{ province.district.local_level }}</td>
+
+            <td class="action">
+                <a data-remote="{% url 'md-province:update' province.pk %}"
+                    href="{% url 'md-province:update' province.pk %}" data-toggle="modal" data-target="#modalProUpdate">
+                    <i class="ic-edit mr-2"></i>
+                </a>
+                <a data-remote="{% url 'md-province:delete' province.pk %}"
+                    href="{% url 'md-province:delete' province.pk %}" data-toggle="modal"
+                    data-target="#modalDistDelete">
+                    <i class="ic-delete"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalProCreate" tabindex="-1" role="dialog" aria-labelledby="modalProCreate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalProUpdate" tabindex="-1" role="dialog" aria-labelledby="modalProUpdate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDistDelete" tabindex="-1" role="dialog" aria-labelledby="modalDistDelete"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#modalProCreate').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+
+        $('#modalProUpdate').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+
+        $('#modalDistDelete').on('shown.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-content').load(button.data("remote"));
+        });
+    });
+
+    $("#modalProCreate").on('submit', 'form', function (e) {
+        var $prod_modal = $(this);
+        e.preventDefault();
+        saveData($(this))
+    });
+
+    $("#modalProUpdate").on('submit', 'form', function (e) {
+        var $prod_modal = $(this);
+        console.log($prod_modal)
+        e.preventDefault();
+        saveData($(this))
+    });
+</script>
+{% endblock extrascripts %}

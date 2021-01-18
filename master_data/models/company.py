@@ -30,4 +30,3 @@ class Laboratory(Company):
 
 class Institution(Company):
     pass
-

@@ -1,11 +1,18 @@
-{% extends 'core/base.html' %}
-
 {% load crispy_forms_tags %}
 
-{% block content %}
-    <form method="post" action="{% url 'md-users:update' user.pk %}">
-        {% csrf_token %}
-        {{ form|crispy  }}
-        <input type="submit" value="Submit">
-    </form>
-{% endblock content %}
+<div class="modal-header">
+  <h6 class="modal-title" id="exampleModalLabel">User Update</h6>
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body pt-2">
+  <form id="user_update" method="post" action="{% url 'md-users:update' user.pk %}">
+    {% csrf_token %}
+    {{ form|crispy  }}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+  <button id="btn_user_update" form="user_update" type="submit" class="btn btn-success">Save</button>
+</div>

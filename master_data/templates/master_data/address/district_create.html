@@ -3,9 +3,21 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="post" action="{% url 'md-district:create' %}">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Submit">
-</form>
+
+<div class="modal-header">
+    <h6 class="modal-title" id="exampleModalLabel">District</h6>
+    <a class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </a>
+</div>
+<div class="modal-body pt-2">
+    <form id="district_create" method="post" action="{% url 'md-district:create' %}">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+    <button id="btn_district_create" form="district_create" type="submit" class="btn btn-success">Save</button>
+</div>
 {% endblock content %}

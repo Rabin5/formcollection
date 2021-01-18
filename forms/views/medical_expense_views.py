@@ -7,6 +7,7 @@ from django.views.generic import CreateView, UpdateView
 from forms.models import MedicalExpense, MedicalExpenseLine
 from forms.forms.med_exp_forms import MedExpForm, MedExpLineFormSet
 
+
 class MedExpCreateView(CreateView):
     model = MedicalExpense
     template_name = "forms/medical_expense/create.html"
@@ -20,7 +21,7 @@ class MedExpCreateView(CreateView):
         else:
             data['lines'] = MedExpLineFormSet()
         return data
-    
+
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
@@ -30,9 +31,12 @@ class MedExpCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-        
+        collection = context.get('collection')
+        if collection:
+            collection.risk_allowance = self.object
+            collection.save()
         return super().form_valid(form)
-    
+
     def get_success_url(self):
         return reverse_lazy('med_forms:create')
 
@@ -47,12 +51,13 @@ class MedExpUpdateView(UpdateView):
         data = super(MedExpUpdateView, self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = MedExpLineFormSet(self.request.POST, instance=self.object)
+            data['lines'] = MedExpLineFormSet(
+                self.request.POST, instance=self.object)
             # data['lines'].full_clean()
         else:
             data['lines'] = MedExpLineFormSet(instance=self.object)
         return data
-    
+
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
@@ -62,8 +67,8 @@ class MedExpUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-        
+
         return super().form_valid(form)
-    
+
     def get_success_url(self):
         return reverse_lazy('med_forms:update', kwargs={'pk': self.object.pk})

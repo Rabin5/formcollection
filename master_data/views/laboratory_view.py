@@ -7,20 +7,27 @@ from django.urls import reverse_lazy
 
 class LaboratoryCreateView(CreateView):
     model = Laboratory
-    template_name = "master_data/laboratory_create.html"
+    template_name = "master_data/company/laboratory_create.html"
     form_class = LaboratoryForm
     success_url = reverse_lazy('md-laboratory:list')
 
 
 class LaboratoryListView(ListView):
     model = Laboratory
-    template_name = "master_data/laboratory_list.html"
+    template_name = "master_data/company/laboratory_list.html"
     context_object_name = 'laboratory_list'
 
 
 class LaboratoryUpdateView(UpdateView):
     model = Laboratory
-    template_name = "master_data/laboratory_update.html"
+    template_name = "master_data/company/laboratory_update.html"
     form_class = LaboratoryForm
     success_url = reverse_lazy('md-laboratory:update')
     context_object_name = 'laboratory_update'
+
+
+class LaboratoryDeleteView(DeleteView):
+    model = Laboratory
+    template_name = "master_data/company/laboratory_delete.html"
+    success_url = reverse_lazy('md-laboratory:list')
+    context_object_name = 'laboratory'
