@@ -102,13 +102,13 @@ ROUTE_LINK = {
         'update_view': pcr_kit_usage_views.PcrKitUsageUpdateView,
     },
 
-    'cov_hos_equipment': {
-        'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण',
-        'form': CovidHospitalEquipmentForm,
-        'model': models.CovidHospitalEquipment,
-        'form_field': 'cov_hos_equipment',
-        'update_view': cov_hos_equipment_views.CovidHospitalEquipmentUpdateView,
-    },
+    # 'cov_hos_equipment': {
+    #     'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण',
+    #     'form': CovidHospitalEquipmentForm,
+    #     'model': models.CovidHospitalEquipment,
+    #     'form_field': 'cov_hos_equipment',
+    #     'update_view': cov_hos_equipment_views.CovidHospitalEquipmentUpdateView,
+    # },
 
     'fund_receipt_expense': {
         'title': 'कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा प्राप्त रकम र खर्च सम्बन्धी बिबरण',
