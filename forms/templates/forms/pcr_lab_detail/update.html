@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  PCR Lab Details - Nepal Audit Management System
+पिसीआर प्रयोगशाला सम्बन्धी बिबरण - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-PCR Lab Details
+पिसीआर प्रयोगशाला सम्बन्धी बिबरण
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -27,21 +27,8 @@ PCR Lab Details
     <div class="card card-body mt-3">
         <h6 class="heading-01 mb-3">पिसीआर प्रयोगशाला सम्बन्धी बिबरण</h6>
 
-        <form action="">
-          <div class="form-row">
-            <div class="col-md-4">
-              <label for="">निकायको नाम</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-        </form>
-
-        <div class="table-responsive">
-          <table class="table table-01 table-bordered mt-3">
-            {% crispy form %}
-          </table>
-        </div> 
+        {% crispy form %}
         
       </div>
-    {% include 'core/forms/form_footer.html' %}
+    {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
