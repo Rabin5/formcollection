@@ -58,6 +58,7 @@
             var split_names = id.split("-")
             if (select2FieldName.includes(split_names[split_names.length-1])){
                 split_id = split_names[split_names.length-1];
+                console.log(id)
             }
             
             $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');

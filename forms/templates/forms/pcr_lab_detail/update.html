@@ -32,3 +32,51 @@
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+
+  function next(){
+
+        var action = "{% url 'pcrlab-forms:create' %}"
+        saveDataDemo($('#form_to_submit'), action)
+    }
+
+  //'.select_class'
+  $('.select_class').select2({
+    tags: true
+  });
+
+  var date_choice = {{date_choice|safe}};
+  var capacity_choice = {{capacity_choice|safe}};
+
+    $( document ).ready(function() {
+        $("div.table-responsive select").each(function(){
+            var select_field = $(this).attr('id');
+            //console.log(select_field)
+            get_select_value(select_field);
+        });
+    });
+
+  //$('#id_lines-0-laboratory').attr('onchange','get_select_value(event)')
+
+  function get_select_value(e){
+    e = e || window.event;
+    var targ = e.target || e.srcElement;
+    if (targ){
+        var id_tag = '#'+$(targ).attr("id");
+    }else{
+        var id_tag = '#'+e;
+    }
+
+    var id_tag_num = id_tag.split('-')[1];
+    var selected_val = $(id_tag+" option:selected").val();
+    
+    $('#id_lines-'+id_tag_num+'-capacity_daily_test').val(capacity_choice[selected_val])
+    
+    $('#id_lines-'+id_tag_num+'-date_establishment').val(date_choice[selected_val])
+  }
+
+</script>
+{% endblock extrascripts %}
