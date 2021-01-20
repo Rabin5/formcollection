@@ -117,8 +117,13 @@ class PcrLaboratoryDetailUpdateView(UpdateView):
                     # new_est = nepali_datetime.datetime.strptime(est, '%d/%m/%Y').strftime('%Y-%m-%d')
                     new_est = nepali_datetime.datetime.strptime(est, '%d/%m/%Y').to_datetime_date()
                     data = {'name': lab_data, 'capacity_daily_test': capacity, 'date_establishment':new_est}
-                    lab = Laboratory.objects.get_or_create(**data)
-                    line.cleaned_data.update({'laboratory': lab[0]})
+                    # import pdb;pdb.set_trace()
+                    lab, created = Laboratory.objects.get_or_create(**data)
+                    line.cleaned_data.update({'laboratory': lab})
+                    line.cleaned_data.pop('date_establishment')
+                    line.cleaned_data.pop('capacity_daily_test')
+                    pcr, _ = PcrLaboratoryDetailLine.objects.get_or_create(**line.cleaned_data)
+                    pcr.save()
                     # import pdb;pdb.set_trace()
                     
             if lines.is_valid():
