@@ -47,3 +47,6 @@ class Address(models.Model):
 
     def __str__(self):
         return "%s %s %s %s" % (self.country, self.province, self.district, self.local_level)
+    
+    class Meta:
+        abstract = True
