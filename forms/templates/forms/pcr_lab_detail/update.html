@@ -37,12 +37,6 @@
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
 
-  function next(){
-
-        var action = "{% url 'pcrlab-forms:create' %}"
-        saveDataDemo($('#form_to_submit'), action)
-    }
-
   //'.select_class'
   $('.select_class').select2({
     tags: true

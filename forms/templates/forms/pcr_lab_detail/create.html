@@ -22,7 +22,6 @@ PCR Lab Details
             <a href="" class="ic-settings">
             </a>
         </div>
-        <a class="btn btn-info ml-2"  id="next" onclick="next()">Next</a>
         <a href="" class="btn btn-success text-white ml-3">Save</a>
     </div>
 {% endblock page_actions %}
@@ -44,12 +43,6 @@ PCR Lab Details
 {% block extrascripts %}
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
-
-  function next(){
-
-        var action = "{% url 'pcrlab-forms:create' %}"
-        saveDataDemo($('#form_to_submit'), action)
-    }
 
   //'.select_class'
   $('.select_class').select2({
