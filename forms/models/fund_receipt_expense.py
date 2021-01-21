@@ -22,7 +22,8 @@ class FundReceiptExpense(FormBaseModel):
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
-        return f'{self.fiscal_year_from} {self.get_fy_month_from_display()} to {self.fiscal_year_to} {self.get_fy_month_to_display}'
+        return f'{self.fiscal_year_from} '
+        # return f'{self.fiscal_year_from} {self.get_fy_month_from_display()} to {self.fiscal_year_to} {self.get_fy_month_to_display}'
 
 
 class FundReceiptExpenseLine(FormLineBaseModel):

@@ -1,3 +1,4 @@
+from forms.models.covid_hos_equip import CovidHospitalEquipment
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -34,11 +35,17 @@ class FormCollectionCreateView(View):
         col_update_params = {}
         fiscal_year = FiscalYear.objects.get_current_fy()
         for form in LIST_CH_STATE:
-            form_obj = ROUTE_LINK[form]['model'].objects.create(
-                body=self.request.user.body,
-                fiscal_year=fiscal_year,
-                create_user=self.request.user,
-            )
+            print(fiscal_year)
+            if ROUTE_LINK[form]['form_field'] == 'cov_hos_equipment':
+                form_obj = ROUTE_LINK[form]['model'].objects.create(
+                    create_user=self.request.user,
+                )
+            else:
+                form_obj = ROUTE_LINK[form]['model'].objects.create(
+                    body=self.request.user.body,
+                    fiscal_year=fiscal_year,
+                    create_user=self.request.user,
+                )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
         
         FormCollection.objects.filter(pk=self.object.pk).update(**col_update_params)
@@ -205,7 +212,7 @@ class FormCollectionUpdateView(UpdateView):
             'collection_pk': pk,
             'collection': FormCollection.objects.get(pk=pk),
         }
-
+        
         form_response = self.form_view.as_view(extra_context=context)(request, pk=self.current_form_instance.pk)
         return self._response(form_response)
 

@@ -15,3 +15,5 @@ from .pcr_lab_detail import *
 from .pcr_kit_usage import *
 from .covid_hos_equip import *
 from .fund_receipt_expense import *
+from .quarantine_management_detail import *
+from .quarantine_construct_expenditure import *

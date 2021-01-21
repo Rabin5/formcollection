@@ -72,6 +72,8 @@ urlpatterns = [
     path('forms/pcr-kit-usage/', include('forms.urls.pcr_kit_usage_urls')),
     path('forms/cov-hos-equip/', include('forms.urls.cov_hos_equip_urls')),
     path('forms/fund-receipt-expense/', include('forms.urls.fund_receipt_expense')),
+    path('forms/quarantine-management-detail/', include('forms.urls.quarantine_manage_urls')),
+    path('forms/quarantine-construction-expenditure/', include('forms.urls.quarantine_contruct_urls')),
 
     path('users/', include('users.urls.user_urls')),
 
