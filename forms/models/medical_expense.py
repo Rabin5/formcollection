@@ -10,22 +10,13 @@ class MedicalExpense(FormBaseModel):
     Model for form class: 1_covid_hospital/3.puml
     Code: medExp
     """
-<<<<<<< Updated upstream
+
     fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medExp_fy', null=True)
     body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medExp_gov", null=True)
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
-=======
-
-    fiscal_year = models.ForeignKey(
-        FiscalYear, on_delete=models.PROTECT, related_name='forms_medExp_fy')
-    body = models.ForeignKey(
-        GovernmentBody, on_delete=models.CASCADE, related_name="forms_medExp_gov")
-    state = models.CharField(
-        max_length=25, choices=STATES, default='draft', blank=True)
->>>>>>> Stashed changes
 
     def __str__(self):
-        return f'{self.fiscal_year}'
+        return self.fiscal_year.name
 
 
 class MedicalExpenseLine(FormLineBaseModel):
