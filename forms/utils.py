@@ -51,7 +51,8 @@ CH_STATE = [
     (9, 'pcr_kit_usage'),
     (10, 'cov_hos_equipment'),
     (11, 'quarantine_management_detail'),
-    (12, 'quarantine_contruction_expenditure')
+    (12, 'quarantine_contruction_expenditure'),
+    (13, 'cov_hos_management_checklist')
 ]
 
 

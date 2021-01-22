@@ -6,7 +6,12 @@
         <thead>
             <tr>
             {% for field in formset.forms.0.visible_fields %}
-                <th>{{ field.label }}</th>
+                {% if field.name == 'is_yes' %}
+                    <th>छ</th>
+                    <th>छैन</th>
+                {% else %}
+                    <th>{{ field.label }}</th>
+                {% endif %}
             {% endfor %}
                 <th class="text-right">कार्य{{form.id}}</th>
             </tr>
@@ -22,7 +27,20 @@
                             {{ hidden }}
                         {% endfor %}
                     {% endif %}
-                    {{ field|as_crispy_field }}
+                    {% if field.name == 'is_yes' %}
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name='{{field.name}}'>
+                                <label class="custom-control-label" for="customCheck1"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" name='{{field.name}}'>
+                                <label class="custom-control-label" for="customCheck2"></label>
+                            </div>
+                    {% else %}
+                        {{ field|as_crispy_field }}
+                    {% endif %}
                 </td>
                 {% endfor %}
                 <td class="action">
@@ -81,6 +99,24 @@
         select2FieldName = ["laboratory"];
         cloneMore('tbody tr:last','lines');
     });
+
+    $("input:checkbox").on('click', function() {
+        // in the handler, 'this' refers to the box clicked on
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            // the name of the box is retrieved using the .attr() method
+            // as it is assumed and expected to be immutable
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // the checked state of the group/box on the other hand will change
+            // and the current value is retrieved using .prop() method
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+    });
+
+    console.log('{{ request}}')
 
     {% comment %} function get_select_value(selectId){
         $(selectId).on('change', function() {

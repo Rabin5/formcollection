@@ -12,6 +12,7 @@ from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
 from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
 from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
 from forms.forms.quarantine_construction_expenditure_forms import QuarantineConstructionExpenditureForm
+from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
 
 from forms import models
 
@@ -27,7 +28,8 @@ from forms.views import (
     med_purchase_desc_views,
     pcr_kit_usage_views,
     pcr_lab_detail_views,
-    quarantine_construct_expenditure_views
+    quarantine_construct_expenditure_views,
+    cov_hos_management_checklist_views
 )
 
 # Asign form, model, form collection field to route view name
@@ -134,5 +136,12 @@ ROUTE_LINK = {
         'model': models.QuarantineConstructionExpenditure,
         'form_field': 'quarantine_contruction_expenditure',
         'update_view': quarantine_construct_expenditure_views.QuarantineConstructionExpenditureUpdateView,
+    },
+    'cov_hos_management_checklist': {
+        'title': 'कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट',
+        'form': CovidHospitalManagementChecklistForm,
+        'model': models.CovidHospitalManagementChecklist,
+        'form_field': 'cov_hos_management_checklist',
+        'update_view': cov_hos_management_checklist_views.CovidHospitalManagementChecklistUpdateView,
     },
 }

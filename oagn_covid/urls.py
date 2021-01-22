@@ -74,6 +74,7 @@ urlpatterns = [
     path('forms/fund-receipt-expense/', include('forms.urls.fund_receipt_expense')),
     path('forms/quarantine-management-detail/', include('forms.urls.quarantine_manage_urls')),
     path('forms/quarantine-construction-expenditure/', include('forms.urls.quarantine_contruct_urls')),
+    path('forms/cov-hos-management/', include('forms.urls.cov_hos_management_checklist_urls')),
 
     path('users/', include('users.urls.user_urls')),
 

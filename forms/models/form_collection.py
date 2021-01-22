@@ -14,7 +14,8 @@ from .pcr_kit_usage import PcrKitUsage
 from .covid_hos_equip import CovidHospitalEquipment
 from .quarantine_management_detail import QuarantineManagementDetail
 from.quarantine_construct_expenditure import QuarantineConstructionExpenditure
-    
+from .cov_hos_management_checklist import CovidHospitalManagementChecklist
+
 from users.models.user import User
 from forms.utils import CH_STATE, STATUS
 
@@ -35,6 +36,7 @@ class FormCollection(models.Model):
     cov_hos_equipment = models.OneToOneField(CovidHospitalEquipment, on_delete=models.CASCADE, null=True)
     quarantine_management_detail = models.OneToOneField(QuarantineManagementDetail, on_delete=models.CASCADE, null=True)
     quarantine_contruction_expenditure = models.OneToOneField(QuarantineConstructionExpenditure, on_delete=models.CASCADE, null=True)
+    cov_hos_management_checklist = models.OneToOneField(CovidHospitalManagementChecklist, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         display_name = f"{self.user.body} ({self.get_state_display()})"

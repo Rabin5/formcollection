@@ -33,7 +33,7 @@ class QuarantineManagementDetailCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.risk_allowance = self.object
+            collection.quarantine_management_detail = self.object
             collection.save()
         return super().form_valid(form)
 

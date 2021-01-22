@@ -34,7 +34,7 @@ class MedicalReceiptCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.risk_allowance = self.object
+            collection.medical_receipt = self.object
             collection.save()
 
         return super().form_valid(form)

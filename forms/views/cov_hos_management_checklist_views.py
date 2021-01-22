@@ -3,22 +3,23 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from forms.models.pcr_test_compliance_detail import PcrTestComplianceDetail
-from forms.forms.pcr_test import PcrTestLineForm, PcrTestForm, PcrTestFormSet
+
+from forms.models import CovidHospitalManagementChecklist, CovidHospitalManagementChecklistLine
+from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm, CovidHospitalManagementChecklistLineFormSet
 
 
-class PcrTestCreateView(CreateView):
-    model = PcrTestComplianceDetail
-    template_name = "forms/pcr_test/create.html"
-    form_class = PcrTestForm
+class CovidHospitalManagementChecklistCreateView(CreateView):
+    model = CovidHospitalManagementChecklist
+    template_name = "forms/cov_hos_management/create.html"
+    form_class = CovidHospitalManagementChecklistForm
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = PcrTestFormSet(self.request.POST)
+            data['lines'] = CovidHospitalManagementChecklistLineFormSet(self.request.POST)
         else:
-            data['lines'] = PcrTestFormSet()
+            data['lines'] = CovidHospitalManagementChecklistLineFormSet()
         return data
 
     def form_valid(self, form):
@@ -32,27 +33,27 @@ class PcrTestCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.pcr_test_compliance_detail = self.object
+            collection.cov_hos_management_checklist = self.object
             collection.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('medical-forms:fre-create')
+        return reverse_lazy('covHosManagement-forms:create')
 
 
-class PcrTestUpdateView(UpdateView):
-    model = PcrTestComplianceDetail
-    template_name = "forms/pcr_test/update.html"
-    form_class = PcrTestForm
+class CovidHospitalManagementChecklistUpdateView(UpdateView):
+    model = CovidHospitalManagementChecklist
+    template_name = "forms/cov_hos_management/update.html"
+    form_class = CovidHospitalManagementChecklistForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
+        data = super(CovidHospitalManagementChecklistUpdateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = PcrTestFormSet(
+            data['lines'] = CovidHospitalManagementChecklistLineFormSet(
                 self.request.POST, instance=self.object)
         else:
-            data['lines'] = PcrTestFormSet(instance=self.object)
+            data['lines'] = CovidHospitalManagementChecklistLineFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -64,13 +65,8 @@ class PcrTestUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-            else:
-                return self.form_invalid(form, lines)
 
         return super().form_valid(form)
 
-    def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
-
     def get_success_url(self):
-        return reverse_lazy('medical_use:medical_use-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('covHosManagement-forms:update', kwargs={'pk': self.object.pk})

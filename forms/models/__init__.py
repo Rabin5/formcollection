@@ -17,3 +17,4 @@ from .covid_hos_equip import *
 from .fund_receipt_expense import *
 from .quarantine_management_detail import *
 from .quarantine_construct_expenditure import *
+from .cov_hos_management_checklist import *
