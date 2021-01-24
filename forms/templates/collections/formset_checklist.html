@@ -23,26 +23,26 @@
                 <tr class="{% cycle 'row1' 'row2' %} formset_row-{{ formset.prefix }}">
                     {% if not forloop.first %}
                         <td>
-                            <input type="hidden" name="lines-{{forloop.counter0}}-cov_hos_management" value="{{formset.forms.0.fields.cov_hos_management}}" id="id_lines-{{forloop.counter0}}-cov_hos_management">
-                            <input type="hidden" name="lines-{{forloop.counter0}}-id" value="{{value}}" id="id_lines-{{forloop.counter0}}-id">
-                            <input type="hidden" name="lines-{{forloop.counter0}}-description" value="{{value}}" id="id_lines-{{forloop.counter0}}-description">
+                            <input type="hidden" name="lines-{{forloop.counter}}-cov_hos_management" value="{{formset.forms.0.fields.cov_hos_management}}" id="id_lines-{{forloop.counter}}-cov_hos_management">
+                            <input type="hidden" name="lines-{{forloop.counter}}-id" value="{{value}}" id="id_lines-{{forloop.counter}}-id">
+                            <input type="hidden" name="lines-{{forloop.counter}}-description" value="{{value}}" id="id_lines-{{forloop.counter}}-description">
                             {{text}}
                         </td>
                         <td class="table-checkbox">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="lines-{{forloop.counter0}}-is_yes">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="lines-{{forloop.counter}}-is_yes">
                                 <label class="custom-control-label" for="customCheck1"></label>
                             </div>
                         </td>
                         <td class="table-checkbox">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2" name="lines-{{forloop.counter0}}-is_yes">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" name="lines-{{forloop.counter}}-is_yes">
                                 <label class="custom-control-label" for="customCheck2"></label>
                             </div>
                         </td>
                         <td> 
-                            <div id="div_id_lines-{{forloop.counter0}}-remarks" class="form-group"> 
-                                <input type="text" name="lines-{{forloop.counter0}}-remarks" class="form-control" id="id_lines-{{forloop.counter0}}-remarks">
+                            <div id="div_id_lines-{{forloop.counter}}-remarks" class="form-group"> 
+                                <input type="text" name="lines-{{forloop.counter}}-remarks" class="form-control" id="id_lines-{{forloop.counter}}-remarks">
                             </div>
                         </td>
                         

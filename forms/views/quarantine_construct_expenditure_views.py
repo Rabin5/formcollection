@@ -59,14 +59,20 @@ class QuarantineConstructionExpenditureUpdateView(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
+        print(self.request.POST)
         with transaction.atomic():
             form.instance.create_user = self.request.user
             self.object = form.save()
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
         return super().form_valid(form)
+
+    def form_invalid(self, form, lines=None):
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('quarantine_construct_forms:update', kwargs={'pk': self.object.pk})

@@ -65,7 +65,6 @@ class MedicalReceiptUpdateView(UpdateView):
             form.instance.create_user = self.request.user
             self.object = form.save()
             if lines.is_valid():
-                # import pdb;pdb.set_trace()
                 lines.instance = self.object
                 lines.save()
             else:
