@@ -44,7 +44,6 @@ class EpidemicOutbreakWorklineUpdateView(UpdateView):
         data = super(EpidemicOutbreakWorklineUpdateView,
                      self).get_context_data(**kwargs)
         if self.request.POST:
-            print('1')
             data['lines'] = EpidemicWorkLineFormSet(
                 self.request.POST, instance=self.object)
         else:
