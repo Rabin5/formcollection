@@ -1,22 +1,22 @@
 from django.urls import reverse_lazy
 from django.db import transaction
 from django.views.generic import CreateView, UpdateView
-from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOutbreakPreparatoryWorkLineForm, EpidemicOutbreakPreparatoryWorkForm, EpidemicWorkLineFormSet
-from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
+from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm, ActionPlanImplementationLineForm,ActionPlanImplementationFormSet
+from forms.models.action_plan_implementation import ActionPlanImplementation
 
 
-class EpidemicOutbreakWorklineCreateView(CreateView):
-    model = EpidemicOutbreakPreparatoryWork
-    template_name = 'forms/epi_outbreak_workline/create.html'
-    form_class = EpidemicOutbreakPreparatoryWorkForm
+class ActionPlanImplementationCreateView(CreateView):
+    model = ActionPlanImplementation
+    template_name = 'forms/action_plan_implementation/create.html'
+    form_class =ActionPlanImplementationForm
     success_url = None
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = EpidemicWorkLineFormSet(self.request.POST)
+            data['lines'] = ActionPlanImplementationFormSet(self.request.POST)
         else:
-            data['lines'] = EpidemicWorkLineFormSet()
+            data['lines'] = ActionPlanImplementationFormSet()
         return data
 
     def form_valid(self, form):
@@ -30,28 +30,28 @@ class EpidemicOutbreakWorklineCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.epidemic_outbreak_preparatory_work = self.object
+            collection.action_plan_implementation = self.object
             collection.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('epidemic_forms:epidemic_outbreak_workline-create')
+        return reverse_lazy('action_plan_forms:action_plan_implementation-create')
 
 
-class EpidemicOutbreakWorklineUpdateView(UpdateView):
-    model = EpidemicOutbreakPreparatoryWork
-    template_name = 'forms/epi_outbreak_workline/update.html'
-    form_class = EpidemicOutbreakPreparatoryWorkForm
+class ActionPlanImplementationUpdateView(UpdateView):
+    model = ActionPlanImplementation
+    template_name = 'forms/action_plan_implementation/update.html'
+    form_class = ActionPlanImplementationForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(EpidemicOutbreakWorklineUpdateView,
+        data = super(ActionPlanImplementationUpdateView,
                      self).get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = EpidemicWorkLineFormSet(
+            data['lines'] = ActionPlanImplementationFormSet(
                 self.request.POST, instance=self.object)
         else:
-            data['lines'] = EpidemicWorkLineFormSet(instance=self.object)
+            data['lines'] = ActionPlanImplementationFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -72,4 +72,4 @@ class EpidemicOutbreakWorklineUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('epidemic_forms:epidemic_outbreak_workline-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('action_plan_forms:action_plan_implementation-update', kwargs={'pk': self.object.pk})

@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Medical Expense - Nepal Audit Management System
+महामारीको प्रकोप तयारी कार्य - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
@@ -37,12 +37,8 @@ Medical Expense - Nepal Audit Management System
         </div>
     </form> -->
 
-    <div class="table-responsive">
-        <table class="table table-01 table-bordered mt-3">
-            {% crispy form %}
-        </table>
-    </div>
-</div>
+   {% crispy form %}
+ 
 
 
 {% include 'core/forms/form_footer.html' %}

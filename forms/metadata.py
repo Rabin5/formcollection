@@ -9,7 +9,8 @@ from forms.forms.cov_hos_equipment_forms import CovidHospitalEquipmentForm
 from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
 from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
 from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
-
+from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOutbreakPreparatoryWorkForm
+from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm
 from forms import models
 
 from forms.views import (
@@ -23,7 +24,9 @@ from forms.views import (
     cov_hos_equipment_views,
     med_purchase_desc_views,
     pcr_kit_usage_views,
-    pcr_lab_detail_views
+    pcr_lab_detail_views,
+    epi_outbreak_workline_views,
+    action_plan_views,
 )
 
 # Asign form, model, form collection field to route view name
@@ -117,4 +120,21 @@ ROUTE_LINK = {
         'form_field': 'fund_receipt_expense',
         'update_view': fund_receipt_expense_views.FundReceiptExpenseUpdateView,
     },
+    'epidemic_outbreak_preparatory_work':
+    {'title': 'महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य',
+     'form': EpidemicOutbreakPreparatoryWorkForm,
+     'model': models.EpidemicOutbreakPreparatoryWork,
+     'form_field': 'epidemic_outbreak_preparatory_work',
+     'update_view': epi_outbreak_workline_views.EpidemicOutbreakWorklineUpdateView,
+
+     },
+    'action_plan_implementation':
+    {'title': 'महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको कार्य योजना कार्यान्वयन ',
+     'form': ActionPlanImplementationForm,
+     'model': models.ActionPlanImplementation,
+     'form_field': 'action_plan_implementation',
+     'update_view': action_plan_views.ActionPlanImplementationUpdateView,
+
+     },
+
 }

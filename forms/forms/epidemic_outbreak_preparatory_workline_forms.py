@@ -11,6 +11,13 @@ class EpidemicOutbreakPreparatoryWorkLineForm(forms.ModelForm):
         model = EpidemicOutbreakPreparatoryWorkLine
         exclude = ()
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+        for _, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
 
 EpidemicWorkLineFormSet = inlineformset_factory(EpidemicOutbreakPreparatoryWork, EpidemicOutbreakPreparatoryWorkLine, form=EpidemicOutbreakPreparatoryWorkLineForm, fields=[
                                                 'preparation_work_to_do', 'major_activities', 'amt_expense'], extra=1, can_delete=False)

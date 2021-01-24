@@ -16,3 +16,4 @@ from .pcr_kit_usage import *
 from .covid_hos_equip import *
 from .fund_receipt_expense import *
 from .epidemic_outbreak_preparatory_work import *
+from .action_plan_implementation import *

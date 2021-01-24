@@ -29,4 +29,6 @@ admin.site.register([
     models.FundReceiptExpenseLine,
     models.EpidemicOutbreakPreparatoryWork,
     models.EpidemicOutbreakPreparatoryWorkLine,
+    models.ActionPlanImplementation,
+    models.ActionPlanImplementationLine,
 ])
