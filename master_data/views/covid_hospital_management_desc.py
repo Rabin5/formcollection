@@ -14,13 +14,13 @@ class CovidHospitalManagementChecklistDescriptionCreateView(CreateView):
     form_class = CovidHospitalManagementChecklistDescriptionForm
     success_url = reverse_lazy('md-cov_hos_managament:list')
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        cov_hos = CovidHospitalManagementChecklistLine(description=self.object)
-        cov_hos.save()
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.save()
+    #     cov_hos = CovidHospitalManagementChecklistLine(description=self.object)
+    #     cov_hos.save()
 
-        return HttpResponseRedirect(self.success_url)
+    #     return HttpResponseRedirect(self.success_url)
 
 
 class CovidHospitalManagementChecklistDescriptionListView(ListView):
@@ -36,13 +36,13 @@ class CovidHospitalManagementChecklistDescriptionUpdateView(UpdateView):
     success_url = reverse_lazy('md-cov_hos_managament:list')
     context_object_name = 'cov_hos_managament_type'
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        cov_hos = CovidHospitalManagementChecklistLine(description=self.object)
-        cov_hos.save()
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.save()
+    #     cov_hos = CovidHospitalManagementChecklistLine(description=self.object)
+    #     cov_hos.save()
 
-        return HttpResponseRedirect(self.success_url)
+    #     return HttpResponseRedirect(self.success_url)
 
 class CovidHospitalManagementChecklistDescriptionDeleteView(DeleteView):
     model = CovidHospitalManagementChecklistDescription

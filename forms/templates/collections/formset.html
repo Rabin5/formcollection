@@ -7,8 +7,7 @@
             <tr>
             {% for field in formset.forms.0.visible_fields %}
                 {% if field.name == 'is_yes' %}
-                    <th>छ</th>
-                    <th>छैन</th>
+                    <th>छ?</th>
                 {% else %}
                     <th>{{ field.label }}</th>
                 {% endif %}
@@ -17,45 +16,6 @@
             </tr>
         </thead>
         <tbody>
-
-        {% if formset.forms.0.fields.is_yes %}
-            {% for value, text in formset.forms.0.fields.description.choices %}
-                <tr class="{% cycle 'row1' 'row2' %} formset_row-{{ formset.prefix }}">
-                    {% if not forloop.first %}
-                        <td>
-                            <input type="hidden" name="lines-{{forloop.counter0}}-cov_hos_management" value="{{formset.forms.0.fields.cov_hos_management}}" id="id_lines-{{forloop.counter0}}-cov_hos_management">
-                            <input type="hidden" name="lines-{{forloop.counter0}}-id" value="{{value}}" id="id_lines-{{forloop.counter0}}-id">
-                            <input type="hidden" name="lines-{{forloop.counter0}}-description" value="{{value}}" id="id_lines-{{forloop.counter0}}-description">
-                            {{text}}
-                        </td>
-                        <td class="table-checkbox">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="lines-{{forloop.counter0}}-is_yes">
-                                <label class="custom-control-label" for="customCheck1"></label>
-                            </div>
-                        </td>
-                        <td class="table-checkbox">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2" name="lines-{{forloop.counter0}}-is_yes">
-                                <label class="custom-control-label" for="customCheck2"></label>
-                            </div>
-                        </td>
-                        <td> 
-                            <div id="div_id_lines-{{forloop.counter0}}-remarks" class="form-group"> 
-                                <input type="text" name="lines-{{forloop.counter0}}-remarks" class="form-control" id="id_lines-{{forloop.counter0}}-remarks">
-                            </div>
-                        </td>
-                        
-                        <td class="action">
-                            <a href="">
-                                <i class="ic-delete"></i>
-                            </a>
-                        </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-        {% else %}
-
             {% for form in formset.forms %} 
                 <tr class="{% cycle 'row1' 'row2' %} formset_row-{{ formset.prefix }}">
                     {% for field in form.visible_fields %}
@@ -66,8 +26,27 @@
                                 {{ hidden }}
                             {% endfor %}
                         {% endif %}
+
+                        {% if field.name == 'description' %}
+                            {% comment %} {{form.instance.pk}} {% endcomment %}
+                            <input type="hidden" name="{{form.description.html_name}}" value="{{field.value}}" id="id_{{form.description.html_name}}">
+                            {{form.instance.description}}
                         
-                        {{ field|as_crispy_field }}
+                        {% comment %} {% elif field.name == 'is_yes' %}
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="{{form.is_yes.html_name}}">
+                                <label class="custom-control-label" for="customCheck1"></label>
+                            </div>
+                        </td>
+                        <td class="table-checkbox">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" name="{{form.is_yes.html_name}}">
+                                <label class="custom-control-label" for="customCheck2"></label>
+                            </div> {% endcomment %}
+
+                        {%else%}
+                            {{ field|as_crispy_field }}
+                        {% endif %}
                         
                     </td>
                     {% endfor %}
@@ -78,8 +57,6 @@
                     </td>
                 </tr>
             {% endfor %}
-
-        {% endif %}
 
         
         </tbody>
@@ -93,6 +70,9 @@
     </a>
 {% endif %}
 <script>
+    {% if formset.forms.0.fields.is_yes %}
+        $("tbody tr:last").remove();
+    {% endif %}
     var testElement, testType, testTotal=0, select2FieldName=[];
     function cloneMore(selector, type) {
         $(selector).find(".select_class").select2("destroy");
@@ -134,7 +114,7 @@
         cloneMore('tbody tr:last','lines');
     });
 
-    $("input:checkbox").on('click', function() {
+    {% comment %} $("input:checkbox").on('click', function() {
         // in the handler, 'this' refers to the box clicked on
         var $box = $(this);
         if ($box.is(":checked")) {
@@ -145,12 +125,13 @@
             // and the current value is retrieved using .prop() method
             $(group).prop("checked", false);
             $box.prop("checked", true);
+            console.log(group)
         } else {
             $box.prop("checked", false);
         }
-    });
+    }); {% endcomment %}
 
-    console.log('{{ request}}')
+    
 
     {% comment %} function get_select_value(selectId){
         $(selectId).on('change', function() {

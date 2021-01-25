@@ -4,9 +4,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from django.views import View
-from forms.models import CovidHospitalManagementChecklist, CovidHospitalManagementChecklistLine
+from forms.models import CovidHospitalManagementChecklist, CovidHospitalManagementChecklistLine, cov_hos_management_checklist
 from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm, CovidHospitalManagementChecklistLineFormSet
-
+from master_data.models import CovidHospitalManagementChecklistDescription
 
 class CovidHospitalManagementChecklistCreateView(CreateView):
     model = CovidHospitalManagementChecklist
@@ -53,6 +53,10 @@ class CovidHospitalManagementChecklistUpdateView(UpdateView):
             data['lines'] = CovidHospitalManagementChecklistLineFormSet(
                 self.request.POST, instance=self.object)
         else:
+            cov_checklist = CovidHospitalManagementChecklistDescription.objects.all()
+            for cov in cov_checklist:
+                    get_checklist, checklist = CovidHospitalManagementChecklistLine.objects.get_or_create(cov_hos_management=self.object, description=cov)
+                    get_checklist.save()
             data['lines'] = CovidHospitalManagementChecklistLineFormSet(instance=self.object)
         
         return data
@@ -61,14 +65,15 @@ class CovidHospitalManagementChecklistUpdateView(UpdateView):
         context = self.get_context_data()
         lines = context['lines']
         with transaction.atomic():
-            print(self.request.POST)
-            # form.instance.create_user = self.request.user
-            # self.object = form.save()
-            # if lines.is_valid():
-            #     lines.instance = self.object
-            #     lines.save()
-            # else:
-            #     return self.form_invalid(form, lines)
+            
+            form.instance.create_user = self.request.user
+            self.object = form.save()
+            
+            if lines.is_valid():
+                lines.instance = self.object
+                lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
         return super().form_valid(form)
 

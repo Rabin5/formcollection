@@ -9,6 +9,8 @@ from forms.models import CovidHospitalManagementChecklist, CovidHospitalManageme
 
 class CovidHospitalManagementChecklistLineForm(forms.ModelForm):
 
+    # is_yes = forms.CheckboxSelectMultiple(choices=((0, True), (1, False)))
+
     class Meta:
         model = CovidHospitalManagementChecklistLine
         exclude = ()
