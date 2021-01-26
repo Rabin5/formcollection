@@ -4,22 +4,24 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models import PcrKitUsage, PcrKitUsageLine
-from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm, PcrKitUsageLineFormSet
+from forms.models.isolationconstructionexpenditure import IsolationConstructionExependiture
+from forms.forms.isolationconstructionexpenditure import IsolationConstructionExependitureLine, IsolationConstructionExependitureFormSet
 
 
-class PcrKitUsageCreateView(CreateView):
-    model = PcrKitUsage
-    template_name = "forms/pcr_kit_usage/create.html"
-    form_class = PcrKitUsageForm
+class IsolationConsExpenditureCreateView(CreateView):
+    model = IsolationConstructionExependiture
+    template_name = "forms/isolation_cons_expenditure/create.html"
+    form_class = IsolationConstructionExependitureLine
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
+        data = super(IsolationConsExpenditureCreateView,
+                     self).get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = PcrKitUsageLineFormSet(self.request.POST)
+            data['lines'] = IsolationConstructionExependitureFormSet(
+                self.request.POST)
         else:
-            data['lines'] = PcrKitUsageLineFormSet()
+            data['lines'] = IsolationConstructionExependitureFormSet()
         return data
 
     def form_valid(self, form):
@@ -33,30 +35,32 @@ class PcrKitUsageCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.pcr_kit_usage = self.object
+            collection.isolationconstructonexpenditure = self.object
             collection.save()
 
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('pcrKit-forms:create')
+        return reverse_lazy('iso_cons_expenditure:create')
 
 
-class PcrKitUsageUpdateView(UpdateView):
-    model = PcrKitUsage
+class IsolationConsExpenditureUpdateView(UpdateView):
+    model = IsolationConstructionExependiture
     template_name = "forms/pcr_kit_usage/update.html"
-    form_class = PcrKitUsageForm
+    form_class = IsolationConstructionExependitureLine
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(PcrKitUsageUpdateView, self).get_context_data(**kwargs)
+        data = super(IsolationConsExpenditureUpdateView,
+                     self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = PcrKitUsageLineFormSet(
+            data['lines'] = IsolationConstructionExependitureFormSet(
                 self.request.POST, instance=self.object)
             # data['lines'].full_clean()
         else:
-            data['lines'] = PcrKitUsageLineFormSet(instance=self.object)
+            data['lines'] = IsolationConstructionExependitureFormSet(
+                instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -77,4 +81,4 @@ class PcrKitUsageUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('pcrKit-forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('iso_cons_expenditure:update', kwargs={'pk': self.object.pk})

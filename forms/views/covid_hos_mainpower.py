@@ -4,22 +4,22 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models import PcrKitUsage, PcrKitUsageLine
-from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm, PcrKitUsageLineFormSet
+from forms.models.covid_hospital_manpower import CovidHospitalManpower
+from forms.forms.covid_hos_mainpower import CovidHospitalManpowerLine, CovidHospitalmainpowerFormSet
 
 
-class PcrKitUsageCreateView(CreateView):
-    model = PcrKitUsage
-    template_name = "forms/pcr_kit_usage/create.html"
-    form_class = PcrKitUsageForm
+class CovidHospitalMainpowerCreateView(CreateView):
+    model = CovidHospitalManpower
+    template_name = "forms/covid_hos_mainpower/create.html"
+    form_class = CovidHospitalManpowerLine
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = PcrKitUsageLineFormSet(self.request.POST)
+            data['lines'] = CovidHospitalmainpowerFormSet(self.request.POST)
         else:
-            data['lines'] = PcrKitUsageLineFormSet()
+            data['lines'] = CovidHospitalmainpowerFormSet()
         return data
 
     def form_valid(self, form):
@@ -39,24 +39,24 @@ class PcrKitUsageCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('pcrKit-forms:create')
+        return reverse_lazy('covid_hos_mainpower:create')
 
 
-class PcrKitUsageUpdateView(UpdateView):
-    model = PcrKitUsage
-    template_name = "forms/pcr_kit_usage/update.html"
-    form_class = PcrKitUsageForm
+class CovidHospitalMainpowerUpdateView(UpdateView):
+    model = CovidHospitalManpower
+    template_name = "forms/covid_hos_mainpower/update.html"
+    form_class = CovidHospitalManpowerLine
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super(PcrKitUsageUpdateView, self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = PcrKitUsageLineFormSet(
+            data['lines'] = CovidHospitalmainpowerFormSet(
                 self.request.POST, instance=self.object)
             # data['lines'].full_clean()
         else:
-            data['lines'] = PcrKitUsageLineFormSet(instance=self.object)
+            data['lines'] = CovidHospitalmainpowerFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -68,13 +68,14 @@ class PcrKitUsageUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-            else:
-                return self.form_invalid(form, lines)
+            if collection:
+                collection.covid_hos_mainpower = self.object
+                collection.save()
 
-        return super().form_valid(form)
+            return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('pcrKit-forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('covid_hos_mainpower:update', kwargs={'pk': self.object.pk})
