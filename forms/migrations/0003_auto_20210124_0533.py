@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('updated_date', models.DateField(auto_now=True, verbose_name='अद्यावधिक मिति')),
                 ('state', models.CharField(blank=True, choices=[('draft', 'Draft'), ('submitted', 'Submitted')], default='draft', max_length=25)),
                 ('create_user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('hospital', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='master_data.hospital', verbose_name='अस्पतालको नामः: ')),
+                ('hospital', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='master_data.covidhospital', verbose_name='अस्पतालको नामः: ')),
             ],
             options={
                 'abstract': False,
@@ -57,11 +57,6 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-        ),
-        migrations.AddField(
-            model_name='covidhospitalequipment',
-            name='location',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='forms_location', to='master_data.location', verbose_name='स्थान: '),
         ),
         migrations.AddField(
             model_name='formcollection',

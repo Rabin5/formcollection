@@ -2,14 +2,14 @@ from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
 from forms.utils import STATES
-from master_data.models import Hospital, CovidHospitalManagementChecklistDescription
+from master_data.models import CovidHospital, CovidHospitalManagementChecklistDescription
 
 
 class CovidHospitalManagementChecklist(FormBaseModel):
     """
     Model for form class: 1_covid_hospital/18.puml
     """
-    hospital = models.ForeignKey(Hospital, on_delete=models.PROTECT, null=True, verbose_name='अस्पतालको नामः: ')
+    hospital = models.ForeignKey(CovidHospital, on_delete=models.PROTECT, null=True, verbose_name='अस्पतालको नामः: ')
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
