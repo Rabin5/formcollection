@@ -25,6 +25,9 @@ class ProvinceInstitutionManagementLineForm(forms.ModelForm):
         model = ProvinceInstitutionManagementLine
         fields = "__all__"
         exclude = ()
+        widgets = {
+            "major_works": forms.Textarea(attrs={"cols": 40, "rows": 2}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
