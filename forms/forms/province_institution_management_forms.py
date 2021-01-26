@@ -23,7 +23,7 @@ from forms.models.province_institution_management import (
 class ProvinceInstitutionManagementLineForm(forms.ModelForm):
     class Meta:
         model = ProvinceInstitutionManagementLine
-        fields = "__all__"
+        # fields = "__all__"
         exclude = ()
         widgets = {
             "major_works": forms.Textarea(attrs={"cols": 40, "rows": 2}),
@@ -41,7 +41,7 @@ ProvinceInstitutionManagementLineFormSet = inlineformset_factory(
     ProvinceInstitutionManagement,
     ProvinceInstitutionManagementLine,
     form=ProvinceInstitutionManagementLineForm,
-    fields=["province_institution_management", "committee", "major_works"],
+    fields=["committee", "major_works"],
     extra=1,
     can_delete=False,
 )
