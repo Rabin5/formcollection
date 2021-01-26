@@ -80,4 +80,4 @@ class IsolationdetailMangementUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('iso_mgt_detail:update')
+        return reverse_lazy('iso_mgt_detail:update', kwargs={'pk': self.object.pk})
