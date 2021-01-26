@@ -21,7 +21,6 @@ def get_lab_val(request):
         print(nep_date)
         DATE_CHOICEFIELD.update({lab['id']: nep_date.strftime("%d/%m/%Y")})
         CAPACITY_CHOICEFIELD.update({lab['id']: lab['capacity_daily_test']})
-        print(DATE_CHOICEFIELD, CAPACITY_CHOICEFIELD)
     
     return {'date_choice': DATE_CHOICEFIELD, 'capacity_choice': CAPACITY_CHOICEFIELD}
 
@@ -36,6 +35,7 @@ class PcrLaboratoryDetailCreateView(CreateView):
         
         if self.request.POST:
             data['lines'] = PcrLaboratoryDetailLineFormSet(self.request.POST)
+            data.update(get_lab_val(self.request))
         else:
             data['lines'] = PcrLaboratoryDetailLineFormSet()
             data.update(get_lab_val(self.request))
@@ -92,40 +92,62 @@ class PcrLaboratoryDetailUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super(PcrLaboratoryDetailUpdateView, self).get_context_data(**kwargs)
-        # import pdb;pdb.set_trace()
         if self.request.POST:
             data['lines'] = PcrLaboratoryDetailLineFormSet(self.request.POST, instance=self.object)
-            # data['lines'].full_clean()
+            data.update(get_lab_val(self.request))
         else:
             data['lines'] = PcrLaboratoryDetailLineFormSet(instance=self.object)
             data.update(get_lab_val(self.request))
         return data
+    
+    def _process_laboratory(self, line, index):
+        """
+        Check if laboratory already exists in the database
+        if it does, update date establishment and capacity_daily_test values
+        If it doesn't, create laboratory with the data from the form
+        """
+        if line.is_valid():
+            laboratory = line.cleaned_data.get('laboratory')
+            date_establishment = line.cleaned_data.get('date_establishment')
+            capacity_daily_test = line.cleaned_data.get('capacity_daily_test')
+            if laboratory and date_establishment and capacity_daily_test:
+                date_estd_ad = nepali_datetime.datetime.strptime(date_establishment, '%d/%m/%Y').to_datetime_date()
+                Laboratory.objects.filter(pk=laboratory.pk).update(
+                    date_establishment=date_estd_ad,
+                    capacity_daily_test=capacity_daily_test
+                )
+        else:
+            laboratory = line.data.get(f'lines-{index}-laboratory')
+            # Validate if laboratory exists in system already and form is actually invalid
+            if laboratory.isnumeric() and \
+                Laboratory.objects.filter(pk=int(laboratory)).exists():
+                return
+            
+            capacity = line.cleaned_data.get('capacity_daily_test')
+            date_estd = line.cleaned_data.get('date_establishment')
+            if laboratory and date_estd and capacity:
+                date_estd_ad = nepali_datetime.datetime.strptime(date_estd, '%d/%m/%Y').to_datetime_date()
+                data = {'name': laboratory, 'capacity_daily_test': capacity, 'date_establishment':date_estd_ad}
+                lab, created = Laboratory.objects.get_or_create(**data)
+
+                line.data._mutable = True  # Update laboratory value in form
+                line.data[f'lines-{index}-laboratory'] = f'{lab.id}'
+                line.data._mutable = False
+                line.cleaned_data.update({'laboratory': lab})
+                line.cleaned_data.pop('date_establishment')
+                line.cleaned_data.pop('capacity_daily_test')
     
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
         with transaction.atomic():
             form.instance.create_user = self.request.user
-            # self.object = form.save()
             for indx, line in enumerate(lines):
-                if line.is_valid():
-                    print('YOSSSSS', line.cleaned_data)
-                else:
-                    lab_data = line.data.get(f'lines-{indx}-laboratory')
-                    capacity = line.cleaned_data.get('capacity_daily_test')
-                    est = line.cleaned_data.get('date_establishment')
-                    # new_est = nepali_datetime.datetime.strptime(est, '%d/%m/%Y').strftime('%Y-%m-%d')
-                    new_est = nepali_datetime.datetime.strptime(est, '%d/%m/%Y').to_datetime_date()
-                    data = {'name': lab_data, 'capacity_daily_test': capacity, 'date_establishment':new_est}
-                    # import pdb;pdb.set_trace()
-                    lab, created = Laboratory.objects.get_or_create(**data)
-                    line.cleaned_data.update({'laboratory': lab})
-                    line.cleaned_data.pop('date_establishment')
-                    line.cleaned_data.pop('capacity_daily_test')
-                    pcr, _ = PcrLaboratoryDetailLine.objects.get_or_create(**line.cleaned_data)
-                    pcr.save()
-                    # import pdb;pdb.set_trace()
+                
+                # Process laboratory field
+                self._process_laboratory(line, indx)
                     
+            lines = context['lines'] = PcrLaboratoryDetailLineFormSet(self.request.POST, instance=self.object)
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
@@ -135,7 +157,8 @@ class PcrLaboratoryDetailUpdateView(UpdateView):
         return super().form_valid(form)
     
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        context=self.get_context_data(form=form, lines=lines)
+        return self.render_to_response(context)
 
     
     def get_success_url(self):

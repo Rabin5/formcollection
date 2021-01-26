@@ -52,3 +52,7 @@ class FiscalYear(models.Model):
                 return False
 
         return True
+
+
+def get_current_fy():
+    return FiscalYear.objects.get_current_fy().id
