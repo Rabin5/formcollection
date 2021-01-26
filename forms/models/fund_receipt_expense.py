@@ -15,9 +15,9 @@ class FundReceiptExpense(FormBaseModel):
         GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नाम')
     fiscal_year = models.ForeignKey(
         FiscalYear, on_delete=models.PROTECT, related_name='fund_receipt_expenses', verbose_name='आर्थिक बर्ष')
-    fiscal_year_from = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='fre_fy_from', default=FiscalYear.objects.get_current_fy(), verbose_name='सुरु आर्थिक वर्ष')
+    fiscal_year_from = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='fre_fy_from', null=True, verbose_name='सुरु आर्थिक वर्ष')
     fy_month_from = models.IntegerField(choices=BS_MONTHS, default=4, verbose_name='सुरु महिना')
-    fiscal_year_to = models.ForeignKey(FiscalYear, on_delete=models.RESTRICT, related_name='fre_fy_to', default=FiscalYear.objects.get_current_fy(), verbose_name='अन्त्य आर्थिक वर्ष')
+    fiscal_year_to = models.ForeignKey(FiscalYear, on_delete=models.RESTRICT, related_name='fre_fy_to', null=True, verbose_name='अन्त्य आर्थिक वर्ष')
     fy_month_to = models.IntegerField(choices=BS_MONTHS, default=3, verbose_name='अन्त्य महिना')
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 

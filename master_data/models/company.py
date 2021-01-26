@@ -6,6 +6,9 @@ from .address import Address
 class Location(Address):
     name = models.CharField(max_length=300)
 
+    class Meta:
+        abstract = True
+
 
 class QuanrantineCenter(Location):
     pass
@@ -18,10 +21,13 @@ class IsolationCenter(Location):
 
 class Company(Address):
     name = models.CharField(max_length=300)
-    date_establishment = models.DateField(null=False)
+    date_establishment = models.DateField(null=True, blank=False)
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        abstract = True
 
 
 class Importer(Company):

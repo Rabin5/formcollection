@@ -2,8 +2,7 @@ from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
 from forms.utils import STATES
-from master_data.models import CovidHospital, Location, \
-    Product
+from master_data.models import CovidHospital, Product
 
 
 class CovidHospitalEquipment(FormBaseModel):
@@ -11,8 +10,7 @@ class CovidHospitalEquipment(FormBaseModel):
     Model for form class: 1_covid_hospital/12.puml
     """
 
-    cov_hospital = models.ForeignKey(CovidHospital, on_delete=models.CASCADE, related_name='forms_cov_hos', blank=True, null=True, verbose_name='अस्पतालको नामः: ')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="forms_location", blank=True, null=True, verbose_name='स्थान: ')
+    cov_hospital = models.ForeignKey(CovidHospital, on_delete=models.CASCADE, related_name='forms_cov_hos')
 
     def __str__(self):
         return f'{self.cov_hospital}'
