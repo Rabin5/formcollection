@@ -19,3 +19,4 @@ from .covid_hospital_manpower import *
 from .covidhospitaldetail import *
 from .isolationmanagementdetail import *
 from .isolationconstructionexpenditure import *
+from .districtcovidmanagement import *

@@ -78,6 +78,9 @@ urlpatterns = [
     path('covid_hos_destail/', include('forms.urls.covidhosptaldetail')),
     path('iso_mgt_destail/', include('forms.urls.isolationmanagementdetail')),
     path('iso_cons_expenditure/', include('forms.urls.isolationconexpenditure')),
+
+    path('district_covid_management/',
+         include('forms.urls.district_covi_dmanagement')),
     path('users/', include('users.urls.user_urls')),
 
     path('', DashboardView.as_view(), name='index'),
