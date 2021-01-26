@@ -1,30 +1,29 @@
-from forms.forms.fund_receipt_expense_forms import FundReceiptExpenseForm
-from forms.forms.riskallowance_forms import RiskAllowanceForm
-from forms.forms.med_exp_forms import MedExpForm
-from forms.forms.medical_receipt import MedicalReceiptForm
-from forms.forms.medical_use import MedicalUseForm
-from forms.forms.pcr_test import PcrTestForm
-from forms.forms.rdt_test import RdtTestForm
-from forms.forms.cov_hos_equipment_forms import CovidHospitalEquipmentForm
-from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
-from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
-from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
 
 from forms import models
-
-from forms.views import (
-    fund_receipt_expense_views,
-    risk_allowance_views,
-    medical_expense_views,
-    medical_receipt,
-    medical_use,
-    pcr_test,
-    rdt_test,
-    cov_hos_equipment_views,
-    med_purchase_desc_views,
-    pcr_kit_usage_views,
-    pcr_lab_detail_views
-)
+from forms.forms.cov_hos_equipment_forms import CovidHospitalEquipmentForm
+from forms.forms.covid_hos_mainpower import CovidHospitalManpower
+from forms.forms.covidhospitaldetail import CovidHospitalDetailLine
+from forms.forms.fund_receipt_expense_forms import FundReceiptExpenseForm
+from forms.forms.isolationconstructionexpenditure import \
+    IsolationConstructionExependitureLine
+from forms.forms.isolationmanagementdetail import IsolationDetailManagementLine
+from forms.forms.med_exp_forms import MedExpForm
+from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
+from forms.forms.medical_receipt import MedicalReceiptForm
+from forms.forms.medical_use import MedicalUseForm
+from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
+from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
+from forms.forms.pcr_test import PcrTestForm
+from forms.forms.rdt_test import RdtTestForm
+from forms.forms.riskallowance_forms import RiskAllowanceForm
+from forms.views import (cov_hos_equipment_views, covid_hos_mainpower,
+                         covidhospitaldetail, fund_receipt_expense_views,
+                         isolationmanagementdetail, med_purchase_desc_views,
+                         medical_expense_views, medical_receipt, medical_use,
+                         pcr_kit_usage_views, pcr_lab_detail_views, pcr_test,
+                         rdt_test, risk_allowance_views, covid_hos_mainpower,
+                         covidhospitaldetail, isolationconsexpenditure,
+                         isolationmanagementdetail)
 
 # Asign form, model, form collection field to route view name
 """
@@ -116,5 +115,34 @@ ROUTE_LINK = {
         'model': models.FundReceiptExpense,
         'form_field': 'fund_receipt_expense',
         'update_view': fund_receipt_expense_views.FundReceiptExpenseUpdateView,
+    },
+
+    'covid_hos_mainpower': {
+        'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण ',
+        'form': CovidHospitalManpower,
+        'model': models.CovidHospitalManpower,
+        'form_field': 'manpower',
+        'update_view': covid_hos_mainpower.CovidHospitalMainpowerUpdateView,
+    },
+    'covidhospitaldetail': {
+        'title': 'कोभिड अस्पताल सम्बन्धी बिबरण',
+        'form': CovidHospitalDetailLine,
+        'model': models.CovidHospitalDetail,
+        'form_field': 'covidhospital',
+        'update_view': covidhospitaldetail.CovidHospitalDetailUpdateView,
+    },
+    'isolationmanagementdetail': {
+        'title': 'आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण ',
+        'form': IsolationDetailManagementLine,
+        'model': models.IsolationManagementDetail,
+        'form_field': 'isolationcenter',
+        'update_view': isolationmanagementdetail.IsolationdetailMangementUpdateView,
+    },
+    'isolationconstructonexpenditure': {
+        'title': 'आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया ',
+        'form': IsolationConstructionExependitureLine,
+        'model': models.IsolationConstructionExependiture,
+        'form_field': 'product',
+        'update_view': isolationconsexpenditure.IsolationConsExpenditureUpdateView,
     },
 }

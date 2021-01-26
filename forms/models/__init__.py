@@ -15,3 +15,7 @@ from .pcr_lab_detail import *
 from .pcr_kit_usage import *
 from .covid_hos_equip import *
 from .fund_receipt_expense import *
+from .covid_hospital_manpower import *
+from .covidhospitaldetail import *
+from .isolationmanagementdetail import *
+from .isolationconstructionexpenditure import *
