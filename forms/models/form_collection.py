@@ -3,21 +3,27 @@ from django.db.models.enums import Choices
 from forms.utils import CH_STATE, STATUS
 from users.models.user import User
 
-from .covid_hos_equip import CovidHospitalEquipment
 from .covid_hospital_manpower import CovidHospitalManpower
 from .covidhospitaldetail import CovidHospitalDetail
-from .fund_receipt_expense import FundReceiptExpense
 from .isolationmanagementdetail import IsolationManagementDetail
-from .med_purchase_desc import MedicalPurchaseDescription
 from .medical_expense import MedicalExpense
 from .medical_receipt import MedicalReceipt
 from .medical_use import MedicalUse
-from .pcr_kit_usage import PcrKitUsage
-from .pcr_lab_detail import PcrLaboratoryDetail
 from .pcr_test_compliance_detail import PcrTestComplianceDetail
 from .rdttestdetail import RdtTestDetail
 from .risk_allowance import RiskAllowance
+from .fund_receipt_expense import FundReceiptExpense
+from .med_purchase_desc import MedicalPurchaseDescription
+from .pcr_lab_detail import PcrLaboratoryDetail
+from .pcr_kit_usage import PcrKitUsage
+from .covid_hos_equip import CovidHospitalEquipment
+from .quarantine_management_detail import QuarantineManagementDetail
+from .quarantine_construct_expenditure import QuarantineConstructionExpenditure
+from .cov_hos_management_checklist import CovidHospitalManagementChecklist
+from .isolationconstructionexpenditure import IsolationConstructionExependiture
 
+from users.models.user import User
+from forms.utils import CH_STATE, STATUS
 
 class FormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -47,10 +53,18 @@ class FormCollection(models.Model):
         CovidHospitalManpower, on_delete=models.CASCADE, null=True)
     covid_hospital_detail = models.OneToOneField(
         CovidHospitalDetail, on_delete=models.CASCADE, null=True)
-    IsolationManagementDetail = models.OneToOneField(
+    isolation_management_detail = models.OneToOneField(
         IsolationManagementDetail, on_delete=models.CASCADE, null=True)
     cov_hos_equipment = models.OneToOneField(
         CovidHospitalEquipment, on_delete=models.CASCADE, null=True)
+    quarantine_management_detail = models.OneToOneField(
+        QuarantineManagementDetail, on_delete=models.CASCADE, null=True)
+    quarantine_contruction_expenditure = models.OneToOneField(
+        QuarantineConstructionExpenditure, on_delete=models.CASCADE, null=True)
+    cov_hos_management_checklist = models.OneToOneField(
+        CovidHospitalManagementChecklist, on_delete=models.CASCADE, null=True)
+    isolation_construction_expenditure = models.OneToOneField(
+        IsolationConstructionExependiture, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         display_name = f"{self.user.body} ({self.get_state_display()})"

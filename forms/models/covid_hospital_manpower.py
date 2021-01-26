@@ -9,7 +9,7 @@ from master_data.models.government import GovernmentBody, Manpower
 
 class CovidHospitalManpower(FormBaseModel):
     covidhospital = models.ForeignKey(
-        CovidHospital, on_delete=models.PROTECT, verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम:: ')
+        CovidHospital, on_delete=models.PROTECT, verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम:: ', null=True, blank=True)
 
     def __str__(self):
         return self.covidhospital

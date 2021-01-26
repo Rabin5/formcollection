@@ -34,7 +34,7 @@ CovidHospitaldetatilFormSet = inlineformset_factory(
 )
 
 
-class CovidHospitalDetailLine(forms.ModelForm):
+class CovidHospitalDetailForm(forms.ModelForm):
 
     class Meta:
         model = CovidHospitalDetail

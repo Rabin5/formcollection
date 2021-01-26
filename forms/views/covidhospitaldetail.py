@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from forms.models.covidhospitaldetail import CovidHospitalDetail
-from forms.forms.covidhospitaldetail import CovidHospitalDetailLine, CovidHospitaldetatilFormSet
+from forms.forms.covidhospitaldetail import CovidHospitalDetailForm, CovidHospitaldetatilFormSet
 
 
 class CovidHospitalDetailCreateView(CreateView):
     model = CovidHospitalDetail
     template_name = "forms/covid_hospital/create.html"
-    form_class = CovidHospitalDetailLine
+    form_class = CovidHospitalDetailForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -33,7 +33,7 @@ class CovidHospitalDetailCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.covidhospitaldetail = self.object
+            collection.covid_hospital_detail = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -45,7 +45,7 @@ class CovidHospitalDetailCreateView(CreateView):
 class CovidHospitalDetailUpdateView(UpdateView):
     model = CovidHospitalDetail
     template_name = "forms/covid_hospital/update.html"
-    form_class = CovidHospitalDetailLine
+    form_class = CovidHospitalDetailForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -69,10 +69,6 @@ class CovidHospitalDetailUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-            collection = context.get('collection')
-            if collection:
-                collection.isolationconstructonexpenditure = self.object
-                collection.save()
 
             return super().form_valid(form)
 

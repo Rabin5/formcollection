@@ -31,27 +31,19 @@ PCR Lab Details
     <div class="card card-body mt-3">
         <h6 class="heading-01 mb-3">पिसीआर प्रयोगशाला सम्बन्धी बिबरण</h6>
 
-        <form action="">
-          <div class="form-row">
-            <div class="col-md-4">
-              <label for="">निकायको नाम</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-        </form>
-
         <div class="table-responsive">
-          
+          <table class="table table-01 table-bordered mt-3">
             {% crispy form %}
-          
+          </table>
         </div>   
       </div>
     {% include 'core/forms/form_footer.html' %}
 {% endblock content %}
 
 {% block extrascripts %}
-{% comment %} <script src="{% static 'js/tagify.min.js' %}"></script> {% endcomment %}
+<script src="{% static 'js/post_data.js' %}"></script>
 <script>
+
   //'.select_class'
   $('.select_class').select2({
     tags: true
@@ -60,7 +52,8 @@ PCR Lab Details
   var date_choice = {{date_choice|safe}};
   var capacity_choice = {{capacity_choice|safe}};
 
-  $('#id_lines-0-laboratory').attr('onchange','get_select_value(event)')
+  {% comment %} $('#id_lines-0-laboratory').attr('onchange','get_select_value(event)') {% endcomment %}
+
 
   function get_select_value(e){
     e = e || window.event;
@@ -74,6 +67,8 @@ PCR Lab Details
     
     $('#id_lines-'+id_tag_num+'-date_establishment').val(date_choice[selected_val])
   }
+
+
 
 /*
   $('.select_class').on('change', function(){

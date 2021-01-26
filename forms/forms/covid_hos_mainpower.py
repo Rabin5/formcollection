@@ -34,7 +34,7 @@ CovidHospitalmainpowerFormSet = inlineformset_factory(
 )
 
 
-class CovidHospitalManpowerLine(forms.ModelForm):
+class CovidHospitalManpowerForm(forms.ModelForm):
 
     class Meta:
         model = CovidHospitalManpower

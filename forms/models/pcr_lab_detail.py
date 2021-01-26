@@ -10,8 +10,8 @@ class PcrLaboratoryDetail(FormBaseModel):
     Model for form class: 1_covid_hospital/8.puml
     """
 
-    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_pcr_lab_fy')
-    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_pcr_lab_gov")
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_pcr_lab_fy', verbose_name='आर्थिक बर्ष: ')
+    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_pcr_lab_gov", verbose_name='निकायको नामः: ')
 
     def __str__(self):
         return f'{self.body.name}'

@@ -1,29 +1,44 @@
-
-from forms import models
-from forms.forms.cov_hos_equipment_forms import CovidHospitalEquipmentForm
-from forms.forms.covid_hos_mainpower import CovidHospitalManpower
-from forms.forms.covidhospitaldetail import CovidHospitalDetailLine
+from forms.forms.covid_hos_mainpower import CovidHospitalManpowerForm
+from forms.forms.covidhospitaldetail import CovidHospitalDetailForm
+from forms.forms.quarantine_management_detail_forms import QuarantineManagementDetailForm
 from forms.forms.fund_receipt_expense_forms import FundReceiptExpenseForm
 from forms.forms.isolationconstructionexpenditure import \
-    IsolationConstructionExependitureLine
-from forms.forms.isolationmanagementdetail import IsolationDetailManagementLine
+    IsolationConstructionExependitureForm
+from forms.forms.isolationmanagementdetail import IsolationManagementDetailForm
 from forms.forms.med_exp_forms import MedExpForm
-from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
 from forms.forms.medical_receipt import MedicalReceiptForm
 from forms.forms.medical_use import MedicalUseForm
-from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
-from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
 from forms.forms.pcr_test import PcrTestForm
 from forms.forms.rdt_test import RdtTestForm
 from forms.forms.riskallowance_forms import RiskAllowanceForm
-from forms.views import (cov_hos_equipment_views, covid_hos_mainpower,
-                         covidhospitaldetail, fund_receipt_expense_views,
-                         isolationmanagementdetail, med_purchase_desc_views,
-                         medical_expense_views, medical_receipt, medical_use,
-                         pcr_kit_usage_views, pcr_lab_detail_views, pcr_test,
-                         rdt_test, risk_allowance_views, covid_hos_mainpower,
-                         covidhospitaldetail, isolationconsexpenditure,
-                         isolationmanagementdetail)
+from forms.forms.cov_hos_equipment_forms import CovidHospitalEquipmentForm
+from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
+from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
+from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
+from forms.forms.quarantine_construction_expenditure_forms import QuarantineConstructionExpenditureForm
+from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
+
+from forms import models
+
+from forms.views import (
+    fund_receipt_expense_views, quarantine_management_detail_views,
+    risk_allowance_views,
+    medical_expense_views,
+    medical_receipt,
+    medical_use,
+    pcr_test,
+    rdt_test,
+    cov_hos_equipment_views,
+    med_purchase_desc_views,
+    pcr_kit_usage_views,
+    pcr_lab_detail_views,
+    quarantine_construct_expenditure_views,
+    cov_hos_management_checklist_views,
+    covid_hos_mainpower,
+    covidhospitaldetail,
+    isolationmanagementdetail,
+    isolationconsexpenditure
+)
 
 # Asign form, model, form collection field to route view name
 """
@@ -101,13 +116,13 @@ ROUTE_LINK = {
         'update_view': pcr_kit_usage_views.PcrKitUsageUpdateView,
     },
 
-    # 'cov_hos_equipment': {
-    #     'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण',
-    #     'form': CovidHospitalEquipmentForm,
-    #     'model': models.CovidHospitalEquipment,
-    #     'form_field': 'cov_hos_equipment',
-    #     'update_view': cov_hos_equipment_views.CovidHospitalEquipmentUpdateView,
-    # },
+    'cov_hos_equipment': {
+        'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण',
+        'form': CovidHospitalEquipmentForm,
+        'model': models.CovidHospitalEquipment,
+        'form_field': 'cov_hos_equipment',
+        'update_view': cov_hos_equipment_views.CovidHospitalEquipmentUpdateView,
+    },
 
     'fund_receipt_expense': {
         'title': 'कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा प्राप्त रकम र खर्च सम्बन्धी बिबरण',
@@ -119,30 +134,51 @@ ROUTE_LINK = {
 
     'covid_hos_mainpower': {
         'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण ',
-        'form': CovidHospitalManpower,
+        'form': CovidHospitalManpowerForm,
         'model': models.CovidHospitalManpower,
-        'form_field': 'manpower',
+        'form_field': 'covid_hos_mainpower',
         'update_view': covid_hos_mainpower.CovidHospitalMainpowerUpdateView,
     },
-    'covidhospitaldetail': {
+    'covid_hospital_detail': {
         'title': 'कोभिड अस्पताल सम्बन्धी बिबरण',
-        'form': CovidHospitalDetailLine,
+        'form': CovidHospitalDetailForm,
         'model': models.CovidHospitalDetail,
-        'form_field': 'covidhospital',
+        'form_field': 'covid_hospital_detail',
         'update_view': covidhospitaldetail.CovidHospitalDetailUpdateView,
     },
-    'isolationmanagementdetail': {
+    'isolation_management_detail': {
         'title': 'आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण ',
-        'form': IsolationDetailManagementLine,
+        'form': IsolationManagementDetailForm,
         'model': models.IsolationManagementDetail,
-        'form_field': 'isolationcenter',
+        'form_field': 'isolation_management_detail',
         'update_view': isolationmanagementdetail.IsolationdetailMangementUpdateView,
     },
-    'isolationconstructonexpenditure': {
+    'isolation_construction_expenditure': {
         'title': 'आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया ',
-        'form': IsolationConstructionExependitureLine,
+        'form': IsolationConstructionExependitureForm,
         'model': models.IsolationConstructionExependiture,
-        'form_field': 'product',
+        'form_field': 'isolation_construction_expenditure',
         'update_view': isolationconsexpenditure.IsolationConsExpenditureUpdateView,
+    },
+    'quarantine_management_detail': {
+        'title': 'क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण',
+        'form': QuarantineManagementDetailForm,
+        'model': models.QuarantineManagementDetail,
+        'form_field': 'quarantine_management_detail',
+        'update_view': quarantine_management_detail_views.QuarantineManagementDetailUpdateView,
+    },
+    'quarantine_contruction_expenditure': {
+        'title': 'क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया',
+        'form': QuarantineConstructionExpenditureForm,
+        'model': models.QuarantineConstructionExpenditure,
+        'form_field': 'quarantine_contruction_expenditure',
+        'update_view': quarantine_construct_expenditure_views.QuarantineConstructionExpenditureUpdateView,
+    },
+    'cov_hos_management_checklist': {
+        'title': 'कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट',
+        'form': CovidHospitalManagementChecklistForm,
+        'model': models.CovidHospitalManagementChecklist,
+        'form_field': 'cov_hos_management_checklist',
+        'update_view': cov_hos_management_checklist_views.CovidHospitalManagementChecklistUpdateView,
     },
 }

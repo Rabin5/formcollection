@@ -11,13 +11,9 @@ from forms.models import PcrLaboratoryDetail, PcrLaboratoryDetailLine
 from master_data import widgets
 from master_data.widgets import NepaliDateInput
 
-
-
-
 class PcrLaboratoryDetailLineForm(forms.ModelForm):
     date_establishment = forms.CharField(max_length=15, label='स्थापना मिति', widget=NepaliDateInput())
     capacity_daily_test = forms.IntegerField(label='दैनिक परीक्षण क्षमता')
-    
 
     class Meta:
         model = PcrLaboratoryDetailLine
@@ -31,11 +27,11 @@ class PcrLaboratoryDetailLineForm(forms.ModelForm):
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'form-control select_class'})
-                # field.widget.attrs.update({'class': 'form-control select_class', 'onchange': 'get_select_value(event)'})
+                field.widget.attrs.update({'class': 'select_class', 'onchange': 'get_select_value(event)'})
+                # field.widget.attrs.update({'class': 'select_class'})
             else:
                 field.widget.attrs['class'] = 'form-control'
-
+        
 
 PcrLaboratoryDetailLineFormSet = inlineformset_factory(
     PcrLaboratoryDetail, PcrLaboratoryDetailLine, form=PcrLaboratoryDetailLineForm,

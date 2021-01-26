@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from forms.models.covid_hospital_manpower import CovidHospitalManpower
-from forms.forms.covid_hos_mainpower import CovidHospitalManpowerLine, CovidHospitalmainpowerFormSet
+from forms.forms.covid_hos_mainpower import CovidHospitalManpowerForm, CovidHospitalmainpowerFormSet
 
 
 class CovidHospitalMainpowerCreateView(CreateView):
     model = CovidHospitalManpower
     template_name = "forms/covid_hos_mainpower/create.html"
-    form_class = CovidHospitalManpowerLine
+    form_class = CovidHospitalManpowerForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -33,7 +33,7 @@ class CovidHospitalMainpowerCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.pcr_kit_usage = self.object
+            collection.covid_hos_mainpower = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -45,11 +45,11 @@ class CovidHospitalMainpowerCreateView(CreateView):
 class CovidHospitalMainpowerUpdateView(UpdateView):
     model = CovidHospitalManpower
     template_name = "forms/covid_hos_mainpower/update.html"
-    form_class = CovidHospitalManpowerLine
+    form_class = CovidHospitalManpowerForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(PcrKitUsageUpdateView, self).get_context_data(**kwargs)
+        data = super(CovidHospitalMainpowerUpdateView, self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
             data['lines'] = CovidHospitalmainpowerFormSet(
@@ -68,9 +68,6 @@ class CovidHospitalMainpowerUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-            if collection:
-                collection.covid_hos_mainpower = self.object
-                collection.save()
 
             return super().form_valid(form)
 

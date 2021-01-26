@@ -6,13 +6,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from forms.models.isolationmanagementdetail import IsolationManagementDetail
-from forms.forms.isolationmanagementdetail import IsolationDetailManagementLine, IsolationManagementDetailFormSet
+from forms.forms.isolationmanagementdetail import IsolationManagementDetailFormSet, IsolationManagementDetailForm
 
 
 class IsolationdetailMangementCreateView(CreateView):
     model = IsolationManagementDetail
     template_name = "forms/isolation_management/create.html"
-    form_class = IsolationDetailManagementLine
+    form_class = IsolationManagementDetailForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class IsolationdetailMangementCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.pcr_kit_usage = self.object
+            collection.isolation_management_detail = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -45,8 +45,8 @@ class IsolationdetailMangementCreateView(CreateView):
 
 class IsolationdetailMangementUpdateView(UpdateView):
     model = IsolationManagementDetail
-    template_name = "forms/pcr_kit_usage/update.html"
-    form_class = IsolationDetailManagementLine
+    template_name = "forms/isolation_management/update.html"
+    form_class = IsolationManagementDetailForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -71,12 +71,13 @@ class IsolationdetailMangementUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-            collection = context.get('collection')
-            if collection:
-                collection.isolationmanagementdetail = self.object
-                collection.save()
+            else:
+                return self.form_invalid(form, lines)
 
             return super().form_valid(form)
+
+    def form_invalid(self, form, lines=None):
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('iso_mgt_detail:update')
