@@ -7,7 +7,7 @@ from forms.utils import STATES
 
 class EpidemicOutbreakPreparatoryWork(FormBaseModel):
     body = models.ForeignKey(
-        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नामः:')
+        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नामः')
     fiscal_year = models.ForeignKey(
         FiscalYear, on_delete=models.PROTECT, related_name='epidemic_outbreak_preparatory_work', verbose_name='आर्थिक बर्ष: ')
     state = models.CharField(

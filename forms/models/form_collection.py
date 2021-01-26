@@ -4,6 +4,7 @@ from django.db.models.enums import Choices
 from .risk_allowance import RiskAllowance
 from .epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
 from .action_plan_implementation import ActionPlanImplementation
+from .case_investigation_tracing import CaseInvestigationTracing
 from .medical_expense import MedicalExpense
 from .medical_receipt import MedicalReceipt
 from .medical_use import MedicalUse
@@ -45,7 +46,10 @@ class FormCollection(models.Model):
         PcrKitUsage, on_delete=models.CASCADE, null=True)
     epidemic_outbreak_preparatory_work = models.OneToOneField(
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)
-    action_plan_implementation=models.OneToOneField(ActionPlanImplementation,on_delete=models.CASCADE,null=True)
+    action_plan_implementation = models.OneToOneField(
+        ActionPlanImplementation, on_delete=models.CASCADE, null=True)
+    case_investigation_tracing = models.OneToOneField(
+        CaseInvestigationTracing, on_delete=models.CASCADE, null=True)
     # cov_hos_equipment = models.OneToOneField(CovidHospitalEquipment, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

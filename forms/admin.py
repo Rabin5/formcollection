@@ -31,4 +31,6 @@ admin.site.register([
     models.EpidemicOutbreakPreparatoryWorkLine,
     models.ActionPlanImplementation,
     models.ActionPlanImplementationLine,
+    models.CaseInvestigationTracing,
+    models.CaseInvestigationTracingLine,
 ])

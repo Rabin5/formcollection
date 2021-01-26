@@ -11,6 +11,7 @@ from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
 from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
 from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOutbreakPreparatoryWorkForm
 from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm
+from forms.forms.case_investigation_tracing_forms import CaseInvestigationTracingForm
 from forms import models
 
 from forms.views import (
@@ -27,6 +28,7 @@ from forms.views import (
     pcr_lab_detail_views,
     epi_outbreak_workline_views,
     action_plan_views,
+    case_investigation_views,
 )
 
 # Asign form, model, form collection field to route view name
@@ -135,6 +137,13 @@ ROUTE_LINK = {
      'form_field': 'action_plan_implementation',
      'update_view': action_plan_views.ActionPlanImplementationUpdateView,
 
+     },
+    'case_investigation_tracing':
+    {'title': 'केस ईन्भेष्टीगेशन तथा कन्ट्रय्याक्ट ट्रेसिङ्ग',
+     'form': CaseInvestigationTracingForm,
+     'model': models.CaseInvestigationTracing,
+     'form_field': 'case_investigation_tracing',
+     'update_view': case_investigation_views.CaseInvestigationTracingUpdateView,
      },
 
 }

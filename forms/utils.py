@@ -50,7 +50,8 @@ CH_STATE = [
     (8, 'rdt_test_detail'),
     (9, 'pcr_kit_usage'),
     (10, 'epidemic_outbreak_preparatory'),
-    (11,'action_plan_implementation'),
+    (11, 'action_plan_implementation'),
+    (12, 'case_investigation_tracing'),
     # (11, 'cov_hos_equipment'),
 ]
 
