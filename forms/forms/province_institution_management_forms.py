@@ -6,8 +6,6 @@ from crispy_forms.layout import (
     Hidden,
     Layout,
     Row,
-    ButtonHolder,
-    Submit,
 )
 from django import forms
 from django.forms.forms import Form
@@ -65,6 +63,5 @@ class ProvinceInstitutionManagementForm(forms.ModelForm):
             ),
             Div(
                 Fieldset("", Formset("lines")),
-                ButtonHolder(Submit("submit", "save")),
             ),
         )
