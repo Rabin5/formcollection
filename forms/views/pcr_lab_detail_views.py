@@ -16,9 +16,7 @@ def get_lab_val(request):
     CAPACITY_CHOICEFIELD = {}
     lab_value = Laboratory.objects.all().values('id','capacity_daily_test', 'date_establishment')
     for lab in lab_value:
-        print(lab)
         nep_date = nepali_datetime.date.from_datetime_date(lab['date_establishment'])
-        print(nep_date)
         DATE_CHOICEFIELD.update({lab['id']: nep_date.strftime("%d/%m/%Y")})
         CAPACITY_CHOICEFIELD.update({lab['id']: lab['capacity_daily_test']})
     

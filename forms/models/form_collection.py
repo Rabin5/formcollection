@@ -27,7 +27,7 @@ from forms.utils import CH_STATE, STATUS
 
 class FormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    state = models.IntegerField(choices=CH_STATE, default=1, blank=True)
+    state = models.IntegerField(choices=CH_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
     medical_expense = models.OneToOneField(
         MedicalExpense, on_delete=models.CASCADE, null=True)
