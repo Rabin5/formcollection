@@ -16,14 +16,4 @@ class Migration(migrations.Migration):
             name='state',
             field=models.CharField(blank=True, choices=[('draft', 'Draft'), ('submitted', 'Submitted')], default='draft', max_length=25),
         ),
-        migrations.AddField(
-            model_name='formcollection',
-            name='epidemic_outbreak_preparatory_work',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='forms.epidemicoutbreakpreparatorywork'),
-        ),
-        migrations.AlterField(
-            model_name='formcollection',
-            name='state',
-            field=models.IntegerField(blank=True, choices=[(0, 'fund_receipt_expense'), (1, 'risk_allowance'), (2, 'medical_expense'), (3, 'medical_receipt'), (4, 'medical_use'), (5, 'med_purchase_desc'), (6, 'pcr_test_compliance_detail'), (7, 'pcr_lab_detail'), (8, 'rdt_test_detail'), (9, 'pcr_kit_usage'), (10, 'epidemic_outbreak_preparatory')], default=1),
-        ),
     ]

@@ -1,7 +1,7 @@
 from django.db import models
 from forms.abstract import FormBaseModel, FormLineBaseModel
 from master_data.models import GovernmentBody, ActionPlanActivity
-from forms.utils import STATES
+from collection.utils import STATES
 
 
 class ActionPlanImplementation(FormBaseModel):

@@ -85,7 +85,7 @@ urlpatterns = [
 
     # Province
     # path('province/forms/', include('collection.urls.province_form_collection_urls')),
-    # path('forms/', include('forms.urls.epidemic_outbreak_preparatory_workline')),
+    path('province/forms/epidemic-outbreak/', include('forms.urls.epidemic_outbreak_preparatory_workline')),
     # path('forms/', include('forms.urls.action_plan_implementation_urls')),
     # path('forms/',include('forms.urls.case_investigation_tracing_urls')),
 
