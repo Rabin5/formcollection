@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from forms import models
 from forms.models import FormCollection
@@ -231,3 +232,8 @@ class FormCollectionListView(ListView):
 
 class FormCollectionDeleteView(DeleteView):
     pass
+
+
+class FormCollectionReview(DetailView):
+    model = FormCollection
+    template_name = "forms/templates/collections/collection_review.html"
