@@ -16,6 +16,7 @@ from forms.forms.med_purchase_desc_forms import MedPurchaseDescForm
 from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
 from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
 from forms.forms.quarantine_construction_expenditure_forms import QuarantineConstructionExpenditureForm
+from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOutbreakPreparatoryWorkForm
 from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
 from forms import models
 
@@ -32,11 +33,12 @@ from forms.views import (
     pcr_kit_usage_views,
     pcr_lab_detail_views,
     quarantine_construct_expenditure_views,
-    cov_hos_management_checklist_views,
     covid_hos_mainpower,
     covidhospitaldetail,
     isolationmanagementdetail,
     isolationconsexpenditure,
+    epi_outbreak_workline_views,
+    cov_hos_management_checklist_views,
 )
 
 # Asign form, model, form collection field to route view name
@@ -186,6 +188,14 @@ ROUTE_LINK = {
         'model': models.CovidHospitalManagementChecklist,
         'form_field': 'cov_hos_management_checklist',
         'update_view': cov_hos_management_checklist_views.CovidHospitalManagementChecklistUpdateView,
+    },
+
+    'epidemic_outbreak_prep': {
+        'title': 'महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य',
+        'form': EpidemicOutbreakPreparatoryWorkForm,
+        'model': models.EpidemicOutbreakPreparatoryWork,
+        'form_field': 'epidemic_outbreak_prep',
+        'update_view': epi_outbreak_workline_views.EpidemicOutbreakWorklineUpdateView,
     },
 
 }

@@ -1,4 +1,3 @@
-
 {% extends 'core/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
@@ -23,24 +22,13 @@
 </div>
 {% endblock page_actions %}
 
+
 {% block content %}
-{% include 'core/forms/progress_bar.html' %}
-<div class="card card-body mt-3">
-    <h6 class="heading-01 mb-3">महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य </h6>
+    {% include 'core/forms/progress_bar.html' %}
+    <div class="card card-body mt-3">
+        <h6 class="heading-01 mb-3">महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य</h6>
 
-    <!-- <form action="">
-        <div class="form-row">
-            <div class="col-md-4">
-                <label for="">निकायको नाम</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-    </form> -->
-
-   
- {% crispy form %}
-
-
-
-{% include 'core/forms/form_footer.html' %}
+        {% crispy form %}
+      </div>
+    {% include 'core/forms/form_footer.html' %}
 {% endblock content %}

@@ -59,6 +59,26 @@ CH_STATE = [
     (17, 'cov_hos_management_checklist'),
 ]
 
+PROVINCE_STATE = [
+    (0, 'epidemic_outbreak_prep'),
+    (1, 'fund_receipt_expense'),
+    (2, 'risk_allowance'),
+    (3, 'medical_expense'),
+    (4, 'medical_receipt'),
+    (5, 'medical_use'),
+    (6, 'med_purchase_desc'),
+    (7, 'pcr_test_compliance_detail'),
+    (8, 'pcr_lab_detail'),
+    (9, 'rdt_test_detail'),
+    (10, 'pcr_kit_usage'),
+    (11, 'covid_hos_mainpower'),
+    (12, 'cov_hos_equipment'),
+    (13, 'covid_hospital_detail'),
+    (14, 'quarantine_management_detail'),
+    (15, 'isolation_management_detail'),
+    (16, 'quarantine_contruction_expenditure'),
+    (17, 'isolation_construction_expenditure'),
+]
 
 def num_to_devanagari(num):
     """

@@ -3,9 +3,9 @@ from forms.views.epi_outbreak_workline_views import EpidemicOutbreakWorklineCrea
 app_name = 'epidemic_forms'
 urlpatterns = [
     path('create', EpidemicOutbreakWorklineCreateView.as_view(),
-         name='epidemic_outbreak_workline-create'),
+         name='create'),
     path('<int:pk>/update/',
-         EpidemicOutbreakWorklineUpdateView.as_view(), name='epidemic_outbreak_workline-update'),
+         EpidemicOutbreakWorklineUpdateView.as_view(), name='update'),
 
 
 ]

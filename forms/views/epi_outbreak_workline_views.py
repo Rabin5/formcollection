@@ -35,7 +35,7 @@ class EpidemicOutbreakWorklineCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('epidemic_forms:epidemic_outbreak_workline-create')
+        return reverse_lazy('epidemic_forms:create')
 
 
 class EpidemicOutbreakWorklineUpdateView(UpdateView):
@@ -72,4 +72,4 @@ class EpidemicOutbreakWorklineUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('epidemic_forms:epidemic_outbreak_workline-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('epidemic_forms:update', kwargs={'pk': self.object.pk})
