@@ -12,8 +12,8 @@ class MedicalPurchaseDescription(FormBaseModel):
     Code: med_purchase_desc
     """
 
-    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medPurchase_fy')
-    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medPurchase_gov")
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medPurchase_fy', verbose_name='आर्थिक बर्ष: ')
+    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medPurchase_gov", verbose_name='निकायको नामः: ')
 
     def __str__(self):
         return f'{self.body.name}'

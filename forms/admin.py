@@ -33,4 +33,8 @@ admin.site.register([
     models.ActionPlanImplementationLine,
     models.CaseInvestigationTracing,
     models.CaseInvestigationTracingLine,
+    models.QuarantineManagementDetail,
+    models.QuarantineManagementDetailLine,
+    models.CovidHospitalManagementChecklist,
+    models.CovidHospitalManagementChecklistLine,
 ])

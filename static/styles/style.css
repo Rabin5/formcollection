@@ -3712,7 +3712,7 @@ input[type="button"].btn-block {
   flex-wrap: wrap;
   padding: 0 0;
   margin-bottom: 0.25rem;
-  font-size: 0.694rem;
+  font-size: 0.875rem;
   list-style: none;
   background-color: #ffffff;
   border-radius: 0; }
@@ -8108,6 +8108,8 @@ a.text-dark:hover, a.text-dark:focus {
         color: #2044a8; }
   .table-checkbox {
     width: 1px; }
+    .table-checkbox .custom-control input {
+      min-width: auto; }
   .table-01 thead th {
     background-color: #053559;
     color: white; }
@@ -8182,7 +8184,7 @@ a.text-dark:hover, a.text-dark:focus {
         color: #E8E8E8; }
 
 .breadcrumb {
-  font-size: 0.694rem; }
+  font-size: 0.875rem; }
   .breadcrumb-item a {
     color: #808080; }
 
@@ -8253,7 +8255,24 @@ a.text-dark:hover, a.text-dark:focus {
   list-style: none;
   padding: 0;
   margin: 0;
-  padding: 0.75rem 0; }
+  padding: 0.75rem 0;
+  height: 100%;
+  overflow: auto;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */ }
+  .menu::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; }
+  .menu::-webkit-scrollbar-track {
+    background: rgba(232, 232, 232, 0.16);
+    border-radius: 4px; }
+  .menu::-webkit-scrollbar-thumb {
+    background: #4e85c0;
+    border-radius: 4px; }
+  .menu::-webkit-scrollbar-thumb:hover {
+    cursor: pointer; }
   .menu li a {
     display: flex;
     align-items: center;

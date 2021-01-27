@@ -48,10 +48,6 @@ urlpatterns = [
 
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
-    path('medicalreceipt_forms/', include('forms.urls.medicalreceipt_forms_urls')),
-    path('medicaluse_forms/', include('forms.urls.medical-use')),
-    path('pcr_test_forms/', include('forms.urls.pcr_test')),
-    path('rdt_test_forms/', include('forms.urls.rdt_test')),
     # for allowence and OfficeBearer
     path('office_bearer/', include('master_data.urls.officebearer')),
     path('source_budget/', include('master_data.urls.source_budget')),
@@ -77,6 +73,18 @@ urlpatterns = [
     path('forms/', include('forms.urls.epidemic_outbreak_preparatory_workline')),
     path('forms/', include('forms.urls.action_plan_implementation_urls')),
     path('forms/',include('forms.urls.case_investigation_tracing_urls')),
+
+    path('forms/medicalreceipt_forms/', include('forms.urls.medicalreceipt_forms_urls')),
+    path('forms/medicaluse_forms/', include('forms.urls.medical-use')),
+    path('forms/pcr_test_forms/', include('forms.urls.pcr_test')),
+    path('forms/rdt_test_forms/', include('forms.urls.rdt_test')),
+    path('forms/covid_hos_mainpwer/', include('forms.urls.covid_hos_mainpower')),
+    path('forms/covid_hos_destail/', include('forms.urls.covidhosptaldetail')),
+    path('forms/iso_mgt_destail/', include('forms.urls.isolationmanagementdetail')),
+    path('forms/iso_cons_expenditure/', include('forms.urls.isolationconexpenditure')),
+    path('forms/quarantine-management-detail/', include('forms.urls.quarantine_manage_urls')),
+    path('forms/quarantine-construction-expenditure/', include('forms.urls.quarantine_contruct_urls')),
+    path('forms/cov-hos-management/', include('forms.urls.cov_hos_management_checklist_urls')),
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
 

@@ -1,3 +1,4 @@
+from forms.models.covid_hos_equip import CovidHospitalEquipment
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -18,8 +19,9 @@ from forms.utils import CH_STATE, num_to_devanagari
 from master_data.models import FiscalYear
 
 # Convert utils CH_STATE to dict
-DICT_CH_STATE = {key:value for key, value in CH_STATE}
+DICT_CH_STATE = {key: value for key, value in CH_STATE}
 LIST_CH_STATE = [value for key, value in CH_STATE]
+
 
 class FormCollectionCreateView(View):
     """
@@ -33,29 +35,37 @@ class FormCollectionCreateView(View):
 
         col_update_params = {}
         fiscal_year = FiscalYear.objects.get_current_fy()
-        for form in LIST_CH_STATE:            
-            form_obj = ROUTE_LINK[form]['model'].objects.create(
-                body=self.request.user.body,
-                fiscal_year=fiscal_year,
-                create_user=self.request.user,
-            )
+        for form in LIST_CH_STATE:
+            print(fiscal_year)
+            if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower', 'cov_hos_management_checklist']:
+                form_obj = ROUTE_LINK[form]['model'].objects.create(
+                    create_user=self.request.user,
+                )
+            else:
+                form_obj = ROUTE_LINK[form]['model'].objects.create(
+                    body=self.request.user.body,
+                    fiscal_year=fiscal_year,
+                    create_user=self.request.user,
+                )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
-        
-        FormCollection.objects.filter(pk=self.object.pk).update(**col_update_params)
+
+        FormCollection.objects.filter(
+            pk=self.object.pk).update(**col_update_params)
         return True
 
     def post(self, request, *args, **kwargs):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = FormCollection(user=request.user, status='started', state=0)
+        form_collect = FormCollection(
+            user=request.user, status='started', state=0)
         form_collect.save()
         self.object = form_collect
         self.init_forms()
         form_url = f"{reverse('forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_CH_STATE.get(0)}"
         context = {'url': form_url}
-        return JsonResponse(context, content_type= 'application/json')
-    
+        return JsonResponse(context, content_type='application/json')
+
 
 class FormCollectionUpdateView(UpdateView):
     """
@@ -106,7 +116,7 @@ class FormCollectionUpdateView(UpdateView):
         self.current_form_instance = self._get_cur_form_instance(pk)
         self.next_state = self.request.POST.get('next_state', 'next')
         return self.form_class
-    
+
     def _get_metadata(self):
         """
         Returns metadata used in rendering form page of collection
@@ -120,7 +130,7 @@ class FormCollectionUpdateView(UpdateView):
 
         if self.current_form == LIST_CH_STATE[0]:
             self.is_first_form = True
-        
+
         if self.current_form == LIST_CH_STATE[-1]:
             self.is_last_form = True
 
@@ -134,7 +144,7 @@ class FormCollectionUpdateView(UpdateView):
         }
 
         return metadata
-    
+
     def get(self, request, pk, *args, **kwargs):
         """
         Get and return form template response
@@ -147,10 +157,11 @@ class FormCollectionUpdateView(UpdateView):
             'metadata': self._get_metadata(),
             'collection_pk': pk,
         }
-        response = self.form_view.as_view(extra_context=context)(request, pk=self.current_form_instance.pk)
-        
+        response = self.form_view.as_view(extra_context=context)(
+            request, pk=self.current_form_instance.pk)
+
         return response
-    
+
     def _get_state(self):
         """
         set next_form attribute
@@ -167,9 +178,9 @@ class FormCollectionUpdateView(UpdateView):
             next_state = len(LIST_CH_STATE) - 1
         elif next_state < 0:
             next_state = 0
-        
+
         return next_state
-    
+
     def _update(self):
         """
         Update Form Collection object
@@ -185,7 +196,8 @@ class FormCollectionUpdateView(UpdateView):
         if form_response.status_code == 302:
             self._update()
             if self.next_form:
-                next_url = reverse('forms:update', kwargs={'pk': self.object.pk})+f'?form={self.next_form}'
+                next_url = reverse('forms:update', kwargs={
+                                   'pk': self.object.pk})+f'?form={self.next_form}'
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
@@ -206,7 +218,8 @@ class FormCollectionUpdateView(UpdateView):
             'collection': FormCollection.objects.get(pk=pk),
         }
 
-        form_response = self.form_view.as_view(extra_context=context)(request, pk=self.current_form_instance.pk)
+        form_response = self.form_view.as_view(extra_context=context)(
+            request, pk=self.current_form_instance.pk)
         return self._response(form_response)
 
 
@@ -214,6 +227,7 @@ class FormCollectionListView(ListView):
     model = FormCollection
     template_name = "forms/form_collection/list.html"
     context_object_name = 'form_collections'
+
 
 class FormCollectionDeleteView(DeleteView):
     pass

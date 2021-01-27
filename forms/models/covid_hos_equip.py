@@ -10,8 +10,9 @@ class CovidHospitalEquipment(FormBaseModel):
     Model for form class: 1_covid_hospital/12.puml
     """ 
 
-    cov_hospital = models.ForeignKey(
-        CovidHospital, on_delete=models.CASCADE, related_name='forms_cov_hos')
+
+    cov_hospital = models.ForeignKey(CovidHospital, on_delete=models.CASCADE, related_name='forms_cov_hos', null=True, blank=True)
+
 
     def __str__(self):
         return self.cov_hospital.name

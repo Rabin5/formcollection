@@ -11,8 +11,8 @@ class MedicalExpense(FormBaseModel):
     Code: medExp
     """
 
-    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medExp_fy', null=True)
-    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medExp_gov", null=True)
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medExp_fy', null=True, verbose_name='आर्थिक बर्ष: ')
+    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medExp_gov", null=True, verbose_name='निकायको नामः: ')
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
