@@ -1,6 +1,6 @@
 from django.urls import path
 
-from forms.views.form_collection_views import FormCollectionCreateView, FormCollectionListView, \
+from collection.views.form_collection_views import FormCollectionCreateView, FormCollectionListView, \
     FormCollectionDeleteView, FormCollectionUpdateView
 
 app_name = 'forms'

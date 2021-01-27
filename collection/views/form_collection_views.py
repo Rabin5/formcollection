@@ -1,4 +1,3 @@
-from forms.models.covid_hos_equip import CovidHospitalEquipment
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -11,11 +10,12 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
-from forms.models import FormCollection
+
 from django.apps import apps
 
-from forms.metadata import ROUTE_LINK
-from forms.utils import CH_STATE, num_to_devanagari
+from collection.models import FormCollection
+from collection.metadata import ROUTE_LINK
+from collection.utils import CH_STATE, num_to_devanagari
 from master_data.models import FiscalYear
 
 # Convert utils CH_STATE to dict
@@ -224,7 +224,7 @@ class FormCollectionUpdateView(UpdateView):
 
 class FormCollectionListView(ListView):
     model = FormCollection
-    template_name = "forms/form_collection/list.html"
+    template_name = "cov_hos_form_collection/list.html"
     context_object_name = 'form_collections'
 
 

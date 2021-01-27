@@ -1,29 +1,27 @@
 from django.db import models
 from django.db.models.enums import Choices
-from forms.utils import CH_STATE, STATUS
-from users.models.user import User
 
-from .covid_hospital_manpower import CovidHospitalManpower
-from .covidhospitaldetail import CovidHospitalDetail
-from .isolationmanagementdetail import IsolationManagementDetail
-from .medical_expense import MedicalExpense
-from .medical_receipt import MedicalReceipt
-from .medical_use import MedicalUse
-from .pcr_test_compliance_detail import PcrTestComplianceDetail
-from .rdttestdetail import RdtTestDetail
-from .risk_allowance import RiskAllowance
-from .fund_receipt_expense import FundReceiptExpense
-from .med_purchase_desc import MedicalPurchaseDescription
-from .pcr_lab_detail import PcrLaboratoryDetail
-from .pcr_kit_usage import PcrKitUsage
-from .covid_hos_equip import CovidHospitalEquipment
-from .quarantine_management_detail import QuarantineManagementDetail
-from .quarantine_construct_expenditure import QuarantineConstructionExpenditure
-from .cov_hos_management_checklist import CovidHospitalManagementChecklist
-from .isolationconstructionexpenditure import IsolationConstructionExependiture
+from forms.models.covid_hospital_manpower import CovidHospitalManpower
+from forms.models.covidhospitaldetail import CovidHospitalDetail
+from forms.models.isolationmanagementdetail import IsolationManagementDetail
+from forms.models.medical_expense import MedicalExpense
+from forms.models.medical_receipt import MedicalReceipt
+from forms.models.medical_use import MedicalUse
+from forms.models.pcr_test_compliance_detail import PcrTestComplianceDetail
+from forms.models.rdttestdetail import RdtTestDetail
+from forms.models.risk_allowance import RiskAllowance
+from forms.models.fund_receipt_expense import FundReceiptExpense
+from forms.models.med_purchase_desc import MedicalPurchaseDescription
+from forms.models.pcr_lab_detail import PcrLaboratoryDetail
+from forms.models.pcr_kit_usage import PcrKitUsage
+from forms.models.covid_hos_equip import CovidHospitalEquipment
+from forms.models.quarantine_management_detail import QuarantineManagementDetail
+from forms.models.quarantine_construct_expenditure import QuarantineConstructionExpenditure
+from forms.models.cov_hos_management_checklist import CovidHospitalManagementChecklist
+from forms.models.isolationconstructionexpenditure import IsolationConstructionExependiture
 
 from users.models.user import User
-from forms.utils import CH_STATE, STATUS
+from collection.utils import CH_STATE, STATUS
 
 class FormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

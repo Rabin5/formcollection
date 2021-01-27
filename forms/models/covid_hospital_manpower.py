@@ -1,7 +1,7 @@
 from master_data.models import FiscalYear
 from django.db import models
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES, BS_MONTHS
+from collection.utils import STATES, BS_MONTHS
 from master_data.models.hospital import CovidHospital
 from master_data.models.company import Location
 from master_data.models.government import GovernmentBody, Manpower
