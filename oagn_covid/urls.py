@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from collection.models import form_collection
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from reports.views.dashboard_view import DashboardView
@@ -60,27 +59,32 @@ urlpatterns = [
     path('action_plan/', include('master_data.urls.action_plan')),
 
     # Forms
-    path('forms/', include('collection.urls.form_collection_urls')),
-    path('forms/medical-expense/', include('forms.urls.medical_expense')),
-    path('forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
-    path('forms/medical-product-desc/',
+
+    # Covid Hospital
+    path('cov-hos/forms/', include('collection.urls.cov_hos_form_collection_urls')),
+    path('cov-hos/forms/medical-expense/', include('forms.urls.medical_expense')),
+    path('cov-hos/forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
+    path('cov-hos/forms/medical-product-desc/',
          include('forms.urls.med_purchase_desc_urls')),
-    path('forms/pcr-lab-detail/', include('forms.urls.pcr_lab_detail_urls')),
-    path('forms/pcr-kit-usage/', include('forms.urls.pcr_kit_usage_urls')),
-    path('forms/cov-hos-equip/', include('forms.urls.cov_hos_equip_urls')),
-    path('forms/fund-receipt-expense/',
+    path('cov-hos/forms/pcr-lab-detail/', include('forms.urls.pcr_lab_detail_urls')),
+    path('cov-hos/forms/pcr-kit-usage/', include('forms.urls.pcr_kit_usage_urls')),
+    path('cov-hos/forms/cov-hos-equip/', include('forms.urls.cov_hos_equip_urls')),
+    path('cov-hos/forms/fund-receipt-expense/',
          include('forms.urls.fund_receipt_expense')),
-    path('forms/medicalreceipt_forms/', include('forms.urls.medicalreceipt_forms_urls')),
-    path('forms/medicaluse_forms/', include('forms.urls.medical-use')),
-    path('forms/pcr_test_forms/', include('forms.urls.pcr_test')),
-    path('forms/rdt_test_forms/', include('forms.urls.rdt_test')),
-    path('forms/covid_hos_mainpwer/', include('forms.urls.covid_hos_mainpower')),
-    path('forms/covid_hos_detail/', include('forms.urls.covidhosptaldetail')),
-    path('forms/iso_mgt_destail/', include('forms.urls.isolationmanagementdetail')),
-    path('forms/iso_cons_expenditure/', include('forms.urls.isolationconexpenditure')),
-    path('forms/quarantine-management-detail/', include('forms.urls.quarantine_manage_urls')),
-    path('forms/quarantine-construction-expenditure/', include('forms.urls.quarantine_contruct_urls')),
-    path('forms/cov-hos-management/', include('forms.urls.cov_hos_management_checklist_urls')),
+    path('cov-hos/forms/medicalreceipt/', include('forms.urls.medicalreceipt_forms_urls')),
+    path('cov-hos/forms/medicaluse/', include('forms.urls.medical-use')),
+    path('cov-hos/forms/pcr_test/', include('forms.urls.pcr_test')),
+    path('cov-hos/forms/rdt_test/', include('forms.urls.rdt_test')),
+    path('cov-hos/forms/covid_hos_mainpwer/', include('forms.urls.covid_hos_mainpower')),
+    path('cov-hos/forms/covid_hos_detail/', include('forms.urls.covidhosptaldetail')),
+    path('cov-hos/forms/iso_mgt_destail/', include('forms.urls.isolationmanagementdetail')),
+    path('cov-hos/forms/iso_cons_expenditure/', include('forms.urls.isolationconexpenditure')),
+    path('cov-hos/forms/quarantine-management-detail/', include('forms.urls.quarantine_manage_urls')),
+    path('cov-hos/forms/quarantine-construction-expenditure/', include('forms.urls.quarantine_contruct_urls')),
+    path('cov-hos/forms/cov-hos-management/', include('forms.urls.cov_hos_management_checklist_urls')),
+
+    # Province
+    # path('province/forms/', include('collection.urls.province_form_collection_urls')),
 
     path('users/', include('users.urls.user_urls')),
 

@@ -23,7 +23,7 @@ from forms.models.isolationconstructionexpenditure import IsolationConstructionE
 from users.models.user import User
 from collection.utils import CH_STATE, STATUS
 
-class FormCollection(models.Model):
+class CovHosFormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=CH_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)

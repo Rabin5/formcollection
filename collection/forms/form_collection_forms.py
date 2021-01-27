@@ -2,11 +2,11 @@ from django.core.exceptions import ValidationError
 from django.db.models import fields
 from django.forms import ModelForm
 
-from collection.models.form_collection import FormCollection
+from collection.models.cov_hos_form_collection import CovHosFormCollection
 
-class FormCollectionForm(ModelForm):
+class CovHosFormCollectionForm(ModelForm):
     class Meta:
-        model = FormCollection
+        model = CovHosFormCollection
         fields = '__all__'
         exclude = ('user', )
         # fields = ['state', 'med_exp', 'risk_allowance', 'status']

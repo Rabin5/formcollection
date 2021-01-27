@@ -34,11 +34,11 @@
         <td>{{ form_collection }}</td>
         <td>{{ form_collection.get_status_display }}</td>
         <td class="action">
-          <a href="{% url 'forms:update' form_collection.pk %}">
+          <a href="{% url 'cov_hos_forms:update' form_collection.pk %}">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'forms:delete' form_collection.pk %}"
-            href="{% url 'forms:delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
+          <a data-remote="{% url 'cov_hos_forms:delete' form_collection.pk %}"
+            href="{% url 'cov_hos_forms:delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -53,7 +53,7 @@
 <script>
     $(document).ready(function(){
     $('#create_collection').on('click', function(){
-      fetch("{% url 'forms:create' %}", {
+      fetch("{% url 'cov_hos_forms:create' %}", {
         method: 'POST',
         dataType: "json",
         headers: { "X-CSRFToken": '{{csrf_token}}' },
