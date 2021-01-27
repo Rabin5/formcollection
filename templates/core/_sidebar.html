@@ -48,8 +48,10 @@
                   <a href="{% url 'md-gov:gov_type_list'%}" class="pl-4">सरकारी निकायको प्रकार</a>
                 </li>
                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+
                   <a href="{% url 'md-offbearer:list'%}" class="pl-4">कार्यालय वाहक
                   </a>
+
                 </li>
                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>

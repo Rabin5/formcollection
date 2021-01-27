@@ -26,8 +26,14 @@ admin.site.register([
     models.CovidHospitalEquipmentLine,
     models.FundReceiptExpense,
     models.FundReceiptExpenseLine,
+    models.EpidemicOutbreakPreparatoryWork,
+    models.EpidemicOutbreakPreparatoryWorkLine,
+    models.ActionPlanImplementation,
+    models.ActionPlanImplementationLine,
+    models.CaseInvestigationTracing,
+    models.CaseInvestigationTracingLine,
     models.QuarantineManagementDetail,
     models.QuarantineManagementDetailLine,
     models.CovidHospitalManagementChecklist,
-    models.CovidHospitalManagementChecklistLine
+    models.CovidHospitalManagementChecklistLine,
 ])

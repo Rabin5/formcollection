@@ -64,6 +64,7 @@ class CovHosFormCollection(models.Model):
     isolation_construction_expenditure = models.OneToOneField(
         IsolationConstructionExependiture, on_delete=models.CASCADE, null=True)
 
+
     def __str__(self):
         display_name = f"{self.user.body} ({self.get_state_display()})"
         return display_name

@@ -17,7 +17,6 @@ from forms.forms.pcr_lab_detail_forms import PcrLaboratoryDetailForm
 from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
 from forms.forms.quarantine_construction_expenditure_forms import QuarantineConstructionExpenditureForm
 from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
-
 from forms import models
 
 from forms.views import (
@@ -37,7 +36,7 @@ from forms.views import (
     covid_hos_mainpower,
     covidhospitaldetail,
     isolationmanagementdetail,
-    isolationconsexpenditure
+    isolationconsexpenditure,
 )
 
 # Asign form, model, form collection field to route view name
@@ -188,4 +187,5 @@ ROUTE_LINK = {
         'form_field': 'cov_hos_management_checklist',
         'update_view': cov_hos_management_checklist_views.CovidHospitalManagementChecklistUpdateView,
     },
+
 }
