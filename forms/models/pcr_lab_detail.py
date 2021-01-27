@@ -22,6 +22,6 @@ class PcrLaboratoryDetailLine(FormLineBaseModel):
     laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, verbose_name='पीसीआर ल्यावको नाम र स्थान')
     num_tested_fy_end = models.IntegerField(blank=True, null=True, verbose_name="आषाढ मसान्तसम्म परीक्षण गरेको कुल संख्या")
     num_infected = models.IntegerField(blank=True, null=True, verbose_name='परीक्षण मध्ये संक्रमितको संख्या')
-    time_test_result = models.FloatField(blank=True, null=True, verbose_name='दनतिजा दिन लाग्ने औषत समय')
+    time_test_result = models.FloatField(blank=True, null=True, verbose_name='नतिजा दिन लाग्ने औषत समय')
     expense_pcr_test = models.FloatField(blank=True, null=True, verbose_name='पीसीआर परीक्षणमा आषाढ समान्त सम्म भएको खर्च')
     

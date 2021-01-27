@@ -19,7 +19,7 @@ class MedicalUse(FormBaseModel):
 
 class MedicalUseLine(FormLineBaseModel):
     product = models.ForeignKey(
-        Product, on_delete=models.PROTECT, verbose_name='स्वास्थ्य सामाग्री उपकरणको विवरण')
+        Product, on_delete=models.PROTECT, verbose_name='औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम')
     is_purchased = models.BooleanField(default=False, verbose_name='खरीद गरिएको ?')
     product_price = models.FloatField(verbose_name='सामानको मुल्य')
     unused_qty = models.IntegerField(verbose_name='प्रयोगमा नआएको परिमाण')

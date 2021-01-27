@@ -37,7 +37,6 @@ class FormCollectionCreateView(View):
         col_update_params = {}
         fiscal_year = FiscalYear.objects.get_current_fy()
         for form in LIST_CH_STATE:
-            print(fiscal_year)
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower', 'cov_hos_management_checklist']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
                     create_user=self.request.user,

@@ -45,6 +45,14 @@ from forms.views import (
 ROUTE_LINK is a dictionary containing form metadata used for all form collections.
 """
 ROUTE_LINK = {
+    'fund_receipt_expense': {
+        'title': 'कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा प्राप्त रकम र खर्च सम्बन्धी बिबरण',
+        'form': FundReceiptExpenseForm,
+        'model': models.FundReceiptExpense,
+        'form_field': 'fund_receipt_expense',
+        'update_view': fund_receipt_expense_views.FundReceiptExpenseUpdateView,
+    },
+
     'risk_allowance': {
         'title': 'जोखिम भत्ता सम्बन्धी बिबरण',
         'form': RiskAllowanceForm,
@@ -77,21 +85,6 @@ ROUTE_LINK = {
         'update_view': medical_use.MedicalUseUpdateView,
     },
 
-    'pcr_test_compliance_detail': {
-        'title': 'पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण',
-        'form': PcrTestForm,
-        'model': models.PcrTestComplianceDetail,
-        'form_field': 'pcr_test_compliance_detail',
-        'update_view': pcr_test.PcrTestUpdateView,
-    },
-
-    'rdt_test_detail': {
-        'title': 'आरडीटी परीक्षण सम्बन्धी बिबरण',
-        'form': RdtTestForm,
-        'model': models.RdtTestDetail,
-        'form_field': 'rdt_test_detail',
-        'update_view': rdt_test.RdtTestUpdateView,
-    },
     'med_purchase_desc': {
         'title': 'केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)',
         'form': MedPurchaseDescForm,
@@ -100,12 +93,28 @@ ROUTE_LINK = {
         'update_view': med_purchase_desc_views.MedPurchaseDescUpdateView,
     },
 
+    'pcr_test_compliance_detail': {
+        'title': 'पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण',
+        'form': PcrTestForm,
+        'model': models.PcrTestComplianceDetail,
+        'form_field': 'pcr_test_compliance_detail',
+        'update_view': pcr_test.PcrTestUpdateView,
+    },
+
     'pcr_lab_detail': {
-        'title': 'पिसीआर प्रयोगशाला  सम्बन्धी बिबरण',
+        'title': 'पिसीआर प्रयोगशाला सम्बन्धी बिबरण',
         'form': PcrLaboratoryDetailForm,
         'model': models.PcrLaboratoryDetail,
         'form_field': 'pcr_lab_detail',
         'update_view': pcr_lab_detail_views.PcrLaboratoryDetailUpdateView,
+    },
+
+    'rdt_test_detail': {
+        'title': 'आरडीटी परीक्षण सम्बन्धी बिबरण',
+        'form': RdtTestForm,
+        'model': models.RdtTestDetail,
+        'form_field': 'rdt_test_detail',
+        'update_view': rdt_test.RdtTestUpdateView,
     },
 
     'pcr_kit_usage': {
@@ -116,6 +125,14 @@ ROUTE_LINK = {
         'update_view': pcr_kit_usage_views.PcrKitUsageUpdateView,
     },
 
+    'covid_hos_mainpower': {
+        'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण ',
+        'form': CovidHospitalManpowerForm,
+        'model': models.CovidHospitalManpower,
+        'form_field': 'covid_hos_mainpower',
+        'update_view': covid_hos_mainpower.CovidHospitalMainpowerUpdateView,
+    },
+
     'cov_hos_equipment': {
         'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण',
         'form': CovidHospitalEquipmentForm,
@@ -124,42 +141,14 @@ ROUTE_LINK = {
         'update_view': cov_hos_equipment_views.CovidHospitalEquipmentUpdateView,
     },
 
-    'fund_receipt_expense': {
-        'title': 'कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा प्राप्त रकम र खर्च सम्बन्धी बिबरण',
-        'form': FundReceiptExpenseForm,
-        'model': models.FundReceiptExpense,
-        'form_field': 'fund_receipt_expense',
-        'update_view': fund_receipt_expense_views.FundReceiptExpenseUpdateView,
-    },
-
-    'covid_hos_mainpower': {
-        'title': 'कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण ',
-        'form': CovidHospitalManpowerForm,
-        'model': models.CovidHospitalManpower,
-        'form_field': 'covid_hos_mainpower',
-        'update_view': covid_hos_mainpower.CovidHospitalMainpowerUpdateView,
-    },
     'covid_hospital_detail': {
-        'title': 'कोभिड अस्पताल सम्बन्धी बिबरण',
+        'title': 'कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )',
         'form': CovidHospitalDetailForm,
         'model': models.CovidHospitalDetail,
         'form_field': 'covid_hospital_detail',
         'update_view': covidhospitaldetail.CovidHospitalDetailUpdateView,
     },
-    'isolation_management_detail': {
-        'title': 'आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण ',
-        'form': IsolationManagementDetailForm,
-        'model': models.IsolationManagementDetail,
-        'form_field': 'isolation_management_detail',
-        'update_view': isolationmanagementdetail.IsolationdetailMangementUpdateView,
-    },
-    'isolation_construction_expenditure': {
-        'title': 'आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया ',
-        'form': IsolationConstructionExependitureForm,
-        'model': models.IsolationConstructionExependiture,
-        'form_field': 'isolation_construction_expenditure',
-        'update_view': isolationconsexpenditure.IsolationConsExpenditureUpdateView,
-    },
+
     'quarantine_management_detail': {
         'title': 'क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण',
         'form': QuarantineManagementDetailForm,
@@ -167,6 +156,15 @@ ROUTE_LINK = {
         'form_field': 'quarantine_management_detail',
         'update_view': quarantine_management_detail_views.QuarantineManagementDetailUpdateView,
     },
+
+    'isolation_management_detail': {
+        'title': 'आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण ',
+        'form': IsolationManagementDetailForm,
+        'model': models.IsolationManagementDetail,
+        'form_field': 'isolation_management_detail',
+        'update_view': isolationmanagementdetail.IsolationdetailMangementUpdateView,
+    },
+
     'quarantine_contruction_expenditure': {
         'title': 'क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया',
         'form': QuarantineConstructionExpenditureForm,
@@ -174,6 +172,15 @@ ROUTE_LINK = {
         'form_field': 'quarantine_contruction_expenditure',
         'update_view': quarantine_construct_expenditure_views.QuarantineConstructionExpenditureUpdateView,
     },
+
+    'isolation_construction_expenditure': {
+        'title': 'आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया ',
+        'form': IsolationConstructionExependitureForm,
+        'model': models.IsolationConstructionExependiture,
+        'form_field': 'isolation_construction_expenditure',
+        'update_view': isolationconsexpenditure.IsolationConsExpenditureUpdateView,
+    },
+
     'cov_hos_management_checklist': {
         'title': 'कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट',
         'form': CovidHospitalManagementChecklistForm,

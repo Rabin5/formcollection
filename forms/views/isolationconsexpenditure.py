@@ -46,7 +46,7 @@ class IsolationConsExpenditureCreateView(CreateView):
 
 class IsolationConsExpenditureUpdateView(UpdateView):
     model = IsolationConstructionExependiture
-    template_name = "forms/pcr_kit_usage/update.html"
+    template_name = "forms/isolation_cons_expenditure/update.html"
     form_class = IsolationConstructionExependitureForm
     success_url = None
 
