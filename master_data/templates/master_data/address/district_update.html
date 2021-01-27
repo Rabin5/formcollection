@@ -13,7 +13,7 @@
 <div class="modal-body pt-2">
     <form id="district_update" method="post" action="{% url 'md-district:update' district_update.pk %}">
         {% csrf_token %}
-        {{ form|crispy }}
+        {% crispy form %}
     </form>
 </div>
 <div class="modal-footer">

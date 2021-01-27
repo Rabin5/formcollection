@@ -49,7 +49,14 @@ CH_STATE = [
     (7, 'pcr_lab_detail'),
     (8, 'rdt_test_detail'),
     (9, 'pcr_kit_usage'),
-    # (11, 'cov_hos_equipment'),
+    (10, 'covid_hos_mainpower'),
+    (11, 'cov_hos_equipment'),
+    (12, 'covid_hospital_detail'),
+    (13, 'quarantine_management_detail'),
+    (14, 'isolation_management_detail'),
+    (15, 'quarantine_contruction_expenditure'),
+    (16, 'isolation_construction_expenditure'),
+    (17, 'cov_hos_management_checklist'),
 ]
 
 
@@ -63,5 +70,5 @@ def num_to_devanagari(num):
 
     for digit in str(num):
         dev_num += DEVANAGARI_DIGITS[int(digit)]
-    
+
     return dev_num

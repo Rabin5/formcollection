@@ -16,3 +16,10 @@ from .pcr_kit_usage import *
 from .covid_hos_equip import *
 from .fund_receipt_expense import *
 from .province_institution_management import *
+from .covid_hospital_manpower import *
+from .covidhospitaldetail import *
+from .isolationmanagementdetail import *
+from .isolationconstructionexpenditure import *
+from .quarantine_management_detail import *
+from .quarantine_construct_expenditure import *
+from .cov_hos_management_checklist import *

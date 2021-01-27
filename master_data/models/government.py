@@ -1,5 +1,5 @@
 from django.db import models
-from .hospital import CovidHospital
+from master_data.models.hospital import CovidHospital
 
 
 class GovernmentBodyType(models.Model):
@@ -28,9 +28,10 @@ class GovernmentBody(models.Model):
         CovidHospital, on_delete=models.CASCADE, blank=False, verbose_name="अस्पताल")
 
     def __str__(self) -> str:
-        if self.name==None:
+        if self.name == None:
             return "ERROR- NAME IS NULL"
         return self.name
+
 
 class OfficeBearer(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -38,6 +39,7 @@ class OfficeBearer(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
 
 class SourceBudget(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -47,6 +49,7 @@ class SourceBudget(models.Model):
     def __str__(self) -> str:
         return self.title
 
+
 class ExpenseHeader(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=30, blank=True, null=True)
@@ -55,9 +58,11 @@ class ExpenseHeader(models.Model):
     def __str__(self) -> str:
         return self.title
 
+
 class Manpower(models.Model):
     # TODO: UI integration for manpower
     pass
+
 
 class AllowanceType(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -67,9 +72,14 @@ class AllowanceType(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
 class CovidHospitalManagementChecklistDescription(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
+
+    def __str__(self):
+        return self.description
+    
 
 
 class Committee(models.Model):
@@ -87,6 +97,7 @@ class ReliefType(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
 
 class ActionPlanActivity(models.Model):
     created = models.DateTimeField(auto_now_add=True)

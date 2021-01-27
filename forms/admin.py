@@ -28,5 +28,9 @@ admin.site.register([
     models.FundReceiptExpense,
     models.FundReceiptExpenseLine,
     models.ProvinceInstitutionManagement,
-    models.ProvinceInstitutionManagementLine
+    models.ProvinceInstitutionManagementLine,
+    models.QuarantineManagementDetail,
+    models.QuarantineManagementDetailLine,
+    models.CovidHospitalManagementChecklist,
+    models.CovidHospitalManagementChecklistLine
 ])
