@@ -48,7 +48,6 @@ class CovidHospitalEquipmentForm(forms.ModelForm):
             Hidden('next_state', 'next'),
             Row(
                 Column('cov_hospital', css_class='col-md-6 mb-0'),
-                Column('location', css_class='col-md-6 mb-0'),
                 css_class='form-row'
                 ),
             Div(

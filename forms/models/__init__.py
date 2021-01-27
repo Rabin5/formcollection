@@ -4,7 +4,6 @@ based on the Business Requirement Documents provided.
 """
 
 from .medical_expense import *
-from .form_collection import *
 from .risk_allowance import *
 from .medical_receipt import *
 from .medical_use import *
@@ -20,3 +19,7 @@ from .covidhospitaldetail import *
 from .isolationmanagementdetail import *
 from .isolationconstructionexpenditure import *
 from .districtcovidmanagement import *
+from .quarantine_management_detail import *
+from .quarantine_construct_expenditure import *
+from .cov_hos_management_checklist import *
+

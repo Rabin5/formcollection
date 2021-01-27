@@ -7,7 +7,7 @@ from forms.custom_layout_object import Formset
 from forms.models import IsolationConstructionExependiture, IsolationConstructionExependitureLine
 
 
-class IsolationConstructionExependitureFrom(forms.ModelForm):
+class IsolationConstructionExependitureLineForm(forms.ModelForm):
 
     class Meta:
         model = IsolationConstructionExependitureLine
@@ -22,7 +22,7 @@ class IsolationConstructionExependitureFrom(forms.ModelForm):
 
 
 IsolationConstructionExependitureFormSet = inlineformset_factory(
-    IsolationConstructionExependiture, IsolationConstructionExependitureLine, form=IsolationConstructionExependitureFrom,
+    IsolationConstructionExependiture, IsolationConstructionExependitureLine, form=IsolationConstructionExependitureLineForm,
     fields=['product', 'oum', 'number',
             'unit_cost', 'amt_expense', 'procure_method', 'remarks'],
     widgets={
@@ -33,7 +33,7 @@ IsolationConstructionExependitureFormSet = inlineformset_factory(
 )
 
 
-class IsolationConstructionExependitureLine(forms.ModelForm):
+class IsolationConstructionExependitureForm(forms.ModelForm):
 
     class Meta:
         model = IsolationConstructionExependiture

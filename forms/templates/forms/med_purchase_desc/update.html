@@ -3,41 +3,32 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Medical Purchase Description - Nepal Audit Management System
+  केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Medical Purchase Description
+केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण
 {% endblock page_title %}
 
 {% block page_actions %}
-<div class="align-vertical">
-  <div class="fiscal-year">
-    <span class="text-secondary des">आर्थिक वर्ष</span>
-    <span>२०७७/७८</span>
-    <a href="" class="ic-settings">
-    </a>
-  </div>
-  <a href="" class="btn btn-success text-white ml-3">Save</a>
-</div>
+    <div class="align-vertical">
+        <div class="fiscal-year">
+            <span class="text-secondary des">आर्थिक वर्ष</span>
+            <span>२०७७/७८</span>
+            <a href="" class="ic-settings">
+            </a>
+        </div>
+        <a href="" class="btn btn-success text-white ml-3">Save</a>
+    </div>
 {% endblock page_actions %}
 
 {% block content %}
-{% include 'core/forms/progress_bar.html' %}
-<div class="card card-body mt-3">
-  <h6 class="heading-01 mb-3">केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
-
-  <form action="">
-    <div class="form-row">
-      <div class="col-md-4">
-        <label for="">निकायको नाम</label>
-        <input type="text" class="form-control">
+    {% include 'core/forms/progress_bar.html' %}
+    <div class="card card-body mt-3">
+        <h6 class="heading-01 mb-3">केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
+        
+        {% crispy form %}
+        
       </div>
-    </div>
-  </form>
-
-  {% crispy form %}
-
-</div>
-{% include 'core/forms/form_footer.html' %}
+    {% include 'core/forms/form_footer.html' %}
 {% endblock content %}

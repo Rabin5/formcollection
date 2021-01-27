@@ -1,7 +1,7 @@
 from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES
+from collection.utils import STATES
 from master_data.models import FiscalYear, GovernmentBody, \
     Laboratory
 
@@ -11,8 +11,8 @@ class PcrKitUsage(FormBaseModel):
     Model for form class: 1_covid_hospital/10.puml
     """
 
-    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_pcrKit_fy')
-    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_pcrKit_gov")
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_pcrKit_fy', verbose_name='आर्थिक बर्ष: ')
+    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_pcrKit_gov", verbose_name='निकायको नामः: ')
 
     def __str__(self):
         return f'{self.body.name}'

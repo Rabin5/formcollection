@@ -34,7 +34,7 @@ IsolationManagementDetailFormSet = inlineformset_factory(
 )
 
 
-class IsolationDetailManagementLine(forms.ModelForm):
+class IsolationManagementDetailForm(forms.ModelForm):
 
     class Meta:
         model = IsolationManagementDetail

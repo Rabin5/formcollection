@@ -6,7 +6,6 @@ from forms import models
 admin.site.register([
     models.MedicalExpense,
     models.MedicalExpenseLine,
-    models.FormCollection,
     models.RiskAllowance,
     models.RiskAllowanceLine,
     models.MedicalReceipt,
@@ -26,5 +25,9 @@ admin.site.register([
     models.CovidHospitalEquipment,
     models.CovidHospitalEquipmentLine,
     models.FundReceiptExpense,
-    models.FundReceiptExpenseLine
+    models.FundReceiptExpenseLine,
+    models.QuarantineManagementDetail,
+    models.QuarantineManagementDetailLine,
+    models.CovidHospitalManagementChecklist,
+    models.CovidHospitalManagementChecklistLine
 ])

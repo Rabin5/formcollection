@@ -15,7 +15,8 @@ class QuanrantineCenter(Location):
 
 
 class IsolationCenter(Location):
-    pass
+    def __str__(self):
+        return self.name
 
 
 class Company(Address):

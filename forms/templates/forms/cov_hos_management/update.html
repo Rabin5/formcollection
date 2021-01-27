@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट
+{% endblock page_title %}
+
+{% block page_actions %}
+    <div class="align-vertical">
+        <div class="fiscal-year">
+            <span class="text-secondary des">आर्थिक वर्ष</span>
+            <span>२०७७/७८</span>
+            <a href="" class="ic-settings">
+            </a>
+        </div>
+        <a href="" class="btn btn-success text-white ml-3">Save</a>
+    </div>
+{% endblock page_actions %}
+
+{% block content %}
+    {% include 'core/forms/progress_bar.html' %}
+    <div class="card card-body mt-3">
+        <div class="align-vertical justify-content-between mb-3">
+            <div class="align-vertical">
+                <i class="ic-info des text-secondary mr-2"></i>
+                <p class="text-secondary">छ जाँच गर्नुहोस् यदि विवरण मेल खान्छ भने । यदि छैन भने छैन जाँच गर्नुहोस् ।</p>
+            </div>
+
+            <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-cov_hos_managament:create' %}"
+                href="{% url 'md-cov_hos_managament:create' %}" data-toggle="modal" data-target="#modalCovHosManagementTypeCreate">
+                <i class="ic-add"></i>
+                चेकलिस्ट वस्तु थप्नुहोस्
+            </a>
+        </div>
+
+        {% crispy form %}
+        
+      </div>
+    {% include 'core/forms/form_footer.html' with pk=pk %}
+{% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalCovHosManagementTypeCreate" tabindex="-1" role="dialog" aria-labelledby="modalCovHosManagementTypeCreate" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#modalCovHosManagementTypeCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+  });
+
+  $( "#modalCovHosManagementTypeCreate").on('submit', 'form', function(e) {
+    e.preventDefault();
+    saveData($(this), modal_id='',win_reload=true)
+  });
+
+</script>
+{% endblock extrascripts %}

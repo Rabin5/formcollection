@@ -10,11 +10,12 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
-from forms.models import FormCollection
+
 from django.apps import apps
 
-from forms.metadata import ROUTE_LINK
-from forms.utils import CH_STATE, num_to_devanagari
+from collection.models import FormCollection
+from collection.metadata import ROUTE_LINK
+from collection.utils import CH_STATE, num_to_devanagari
 from master_data.models import FiscalYear
 
 # Convert utils CH_STATE to dict
@@ -35,11 +36,16 @@ class FormCollectionCreateView(View):
         col_update_params = {}
         fiscal_year = FiscalYear.objects.get_current_fy()
         for form in LIST_CH_STATE:
-            form_obj = ROUTE_LINK[form]['model'].objects.create(
-                body=self.request.user.body,
-                fiscal_year=fiscal_year,
-                create_user=self.request.user,
-            )
+            if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower', 'cov_hos_management_checklist']:
+                form_obj = ROUTE_LINK[form]['model'].objects.create(
+                    create_user=self.request.user,
+                )
+            else:
+                form_obj = ROUTE_LINK[form]['model'].objects.create(
+                    body=self.request.user.body,
+                    fiscal_year=fiscal_year,
+                    create_user=self.request.user,
+                )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
 
         FormCollection.objects.filter(
@@ -218,7 +224,7 @@ class FormCollectionUpdateView(UpdateView):
 
 class FormCollectionListView(ListView):
     model = FormCollection
-    template_name = "forms/form_collection/list.html"
+    template_name = "cov_hos_form_collection/list.html"
     context_object_name = 'form_collections'
 
 
