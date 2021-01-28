@@ -74,7 +74,6 @@
 <table class="table-review">
   <tr>
     <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
-    <!-- <th>आपूर्तिकर्ताको नाम</th> -->
     <th>सम्झौता रकम</th>
     <th>आपूर्ति गर्नुपर्ने मिति</th>
     <th>आपूर्ति गरेको मिति</th>
@@ -85,12 +84,12 @@
 
   {% for obj in object.medical_expense.lines.all  %}
       <tr>
-        <td>{{ obj.medical_expense }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.amt_agreement }}</td>
         <td>{{ obj.date_to_import }}</td>
         <td>{{ obj.date_imported }}</td>
         <td>{{ obj.amt_imported }}</td>
+        <td>खरिद विधि</td>
         <td>{{ obj.remarks }}</td>
       </tr>
   {% endfor %}
@@ -120,6 +119,68 @@
         <td>{{ obj.quantity }}</td>
         <td>{{ obj.cost_received_items }}</td>
         <td>{{ obj.usage_situation }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+----
+
+<h3>5. औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h3>
+<h5>निकायको नामः {{ object.medical_use.body }}</h5>
+<h5>आर्थिक बर्ष: {{ object.medical_use.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
+
+<table class="table-review">
+  <tr>
+    <th>औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम</th>
+    <th>खरिद वा प्राप्ती </th>
+    <th>सामानको मुल्य</th>
+    <th>प्रयोगमा नआएको परिमाण</th>
+    <th>प्रयोगमा नआएको कारण</th>
+    <th>कैफियत</th>
+  </tr>
+
+  {% for obj in object.medical_use.medical_use_lines.all  %}
+      <tr>
+        <td>{{ obj.product }}</td>
+        <td>{{ obj.is_purchased }}</td>
+        <!-- if na then product_price -->
+        <td>{{ obj.unused_qty }}</td>
+        <td>{{ obj.unused_reason }}</td>
+        <td>{{ obj.remarks }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+----
+
+<h3>6. केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h3>
+<h5>निकायको नामः {{ object.med_purchase_desc.body }}</h5>
+<h5>आर्थिक बर्ष: {{ object.med_purchase_desc.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
+
+<table class="table-review">
+  <tr>
+    <th>सामानको नाम</th>
+    <th>सामानको छोटो स्पेशिफिकेशन</th>
+    <th>खरिद सम्झौता मिति</th>
+    <th>सामान प्राप्त मिति</th>
+    <th>इकाई</th>
+    <th>परीमाण</th>
+    <th>दर</th>
+    <th>कुल रकम</th>
+  </tr>
+
+  {% for obj in object.med_purchase_desc.lines.all  %}
+      <tr>
+        <td>{{ obj.product }}</td>
+        <td>{{ obj.product_specificaiton }}</td>
+        <td>{{ obj.date_procure_agreement }}</td>
+        <td>{{ obj.date_received }}</td>
+        <td>{{ obj.uom }}</td>
+        <td>{{ obj.qty }}</td>
+        <td>{{ obj.rate }}</td>
+        <td>{{ obj.total_amt }}</td>
       </tr>
   {% endfor %}
 </table>
