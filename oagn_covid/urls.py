@@ -88,7 +88,10 @@ urlpatterns = [
     path('province/forms/epidemic-outbreak/', include('forms.urls.epidemic_outbreak_preparatory_workline')),
     path('province/forms/district_covid_management/',
          include('forms.urls.district_covi_dmanagement')),
-    # path('forms/', include('forms.urls.action_plan_implementation_urls')),
+
+     # Internal Affairs
+     path('internal-affairs/forms/', include('collection.urls.internal_affairs_form_collection_urls')),
+    path('forms/action_plan', include('forms.urls.action_plan_implementation_urls')),
     # path('forms/',include('forms.urls.case_investigation_tracing_urls')),
 
     path('users/', include('users.urls.user_urls')),

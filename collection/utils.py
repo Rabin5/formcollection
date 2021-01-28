@@ -81,6 +81,13 @@ PROVINCE_STATE = [
     (18, 'district_covid_management'),
 ]
 
+INTERNAL_AFFAIRS_STATE = [
+    (0, 'epidemic_outbreak_prep'),
+    (1, 'fund_receipt_expense'),
+    (2, 'risk_allowance'),
+    (3, 'action_plan_implementation'),
+]
+
 def num_to_devanagari(num):
     """
     Utility function to convert an integer number to Devanagari

@@ -35,7 +35,7 @@ class ActionPlanImplementationCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('action_plan_forms:action_plan_implementation-create')
+        return reverse_lazy('action_plan_forms:create')
 
 
 class ActionPlanImplementationUpdateView(UpdateView):
@@ -72,4 +72,4 @@ class ActionPlanImplementationUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('action_plan_forms:action_plan_implementation-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('action_plan_forms:update', kwargs={'pk': self.object.pk})

@@ -32,9 +32,10 @@ class ActionPlanImplementationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3 create-label'
-        self.helper.field_class = 'col-md-9'
+        self.helper.form_id = 'form_to_submit'
+        # self.helper.form_class = 'form-horizontal'
+        # self.helper.label_class = 'col-md-3 create-label'
+        # self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(Column('body', css_class='col-md-6 mb-0'),

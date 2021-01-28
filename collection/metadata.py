@@ -19,6 +19,7 @@ from forms.forms.quarantine_construction_expenditure_forms import QuarantineCons
 from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOutbreakPreparatoryWorkForm
 from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
 from forms.forms.districtcovid_management import DistrictCovidManagementForm
+from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm
 
 from forms import models
 
@@ -41,7 +42,8 @@ from forms.views import (
     isolationconsexpenditure,
     epi_outbreak_workline_views,
     cov_hos_management_checklist_views,
-    district_covid_management
+    district_covid_management,
+    action_plan_views
 )
 
 # Asign form, model, form collection field to route view name
@@ -207,6 +209,14 @@ ROUTE_LINK = {
         'model': models.DistrictCovidManagement,
         'form_field': 'district_covid_management',
         'update_view': district_covid_management.DistrictCovidManagementUpdateView,
+    },
+
+    'action_plan_implementation': {
+        'title': 'कार्ययोजना कार्यान्वयन- कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा स्वदेश आउनैपर्ने अवस्थामा रहेका नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्वन्धी आदेश, २०७७ को लागि तयार पारिएको नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै प्रदेश सरकारको समेत जिम्मेवारी हुने सहयोग गर्नुपर्ने गरी तोकेको छ । यस सम्बन्धमा प्रदेश सरकारबाट भएका क्रियाकलाप र यसमा भएको खर्च खुलाउनु होस् ।',
+        'form': ActionPlanImplementationForm,
+        'model': models.ActionPlanImplementation,
+        'form_field': 'action_plan_implementation',
+        'update_view': action_plan_views.ActionPlanImplementationUpdateView,
     },
 
 }

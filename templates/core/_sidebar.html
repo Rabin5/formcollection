@@ -150,6 +150,9 @@
           </li>
           <li {% if '/province/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'province_forms:list'%}" class="pl-4">प्रदेश</a>
+          </li>
+          <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
           </li> 
           
         </ul>
