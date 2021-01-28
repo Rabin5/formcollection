@@ -1,10 +1,6 @@
-"""
-All forms are based on the UML (https://gitlab.com/ai-python-django/covid-reporting-uml)
-based on the Business Requirement Documents provided.
-"""
+
 
 from .medical_expense import *
-from .form_collection import *
 from .risk_allowance import *
 from .medical_receipt import *
 from .medical_use import *
@@ -15,10 +11,19 @@ from .pcr_lab_detail import *
 from .pcr_kit_usage import *
 from .covid_hos_equip import *
 from .fund_receipt_expense import *
+from .epidemic_outbreak_preparatory_work import *
+from .action_plan_implementation import *
+from .case_investigation_tracing import *
+from .province_institution_management import *
 from .covid_hospital_manpower import *
 from .covidhospitaldetail import *
 from .isolationmanagementdetail import *
 from .isolationconstructionexpenditure import *
+from .districtcovidmanagement import *
 from .quarantine_management_detail import *
 from .quarantine_construct_expenditure import *
 from .cov_hos_management_checklist import *
+from .districtcovidmanagement import *
+from .case_inve_trac_operations import *
+from .reliefprocuredistribution import *
+from .reliefprocurementdetail import *
