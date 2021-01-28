@@ -235,4 +235,4 @@ class FormCollectionDeleteView(DeleteView):
 
 class FormCollectionReview(DetailView):
     model = FormCollection
-    template_name = "forms/templates/collections/collection_review.html"
+    template_name = "collections/collection_review.html"
