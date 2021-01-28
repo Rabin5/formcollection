@@ -1,0 +1,95 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div class="table-responsive">
+    <table class="table table-01 table-bordered mt-3">
+        {{ formset.management_form|crispy }}
+        <thead>
+            <tr>
+                {% for field in formset.forms.0.visible_fields %}
+                <th>{{ field.label }}</th>
+                {% endfor %}
+                <th class="text-right">कार्य{{form.id}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in formset.forms %}
+            <tr class="{% cycle 'row1' 'row2' %} formset_row-{{ formset.prefix }}">
+                {% for field in form.visible_fields %}
+                <td>
+                    {# Include the hidden fields in the form #}
+                    {% if forloop.first %}
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+                    {% endif %}
+                    {{ field|as_crispy_field }}
+                </td>
+                {% endfor %}
+                <td class="action">
+                    <a href="">
+                        <i class="ic-delete"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<a href="" class="add-more mt-3" onclick="test(event);">
+    <i class="ic-add"></i>
+    Add More
+</a>
+<br>
+<br>
+
+<script>
+    var testElement, testType, testTotal = 0, select2FieldName = [];
+    function cloneMore(selector, type) {
+        $(selector).find(".select_class").select2("destroy");
+        var newElement = $(selector).clone(true);
+        var split_id;
+
+        var total = $('#id_' + type + '-TOTAL_FORMS').val();
+        testElement = newElement;
+        testType = type;
+        testTotal = total;
+
+        newElement.find(':input').each(function () {
+            var name = $(this).attr('name').replace('-' + (total - 1) + '-', '-' + total + '-');
+            var id = 'id_' + name;
+            var split_names = id.split("-")
+            if (select2FieldName.includes(split_names[split_names.length - 1])) {
+                split_id = split_names[split_names.length - 1];
+            }
+
+            $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+        });
+        newElement.find('label').each(function () {
+            var newFor = $(this).attr('for').replace('-' + (total - 1) + '-', '-' + total + '-');
+            $(this).attr('for', newFor);
+        });
+
+        total++;
+        $('#id_' + type + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+
+        $($(".select_class")).select2({
+            tags: true
+        });
+    }
+
+    function test(e) {
+        e.preventDefault();
+        console.log(e.target.parentNode.id)
+        select2FieldName = ["laboratory"];
+        cloneMore('#' + e.target.parentNode.id + ' tbody tr:last', 'lines');
+
+    }
+
+    {% comment %} function get_select_value(selectId) {
+        $(selectId).on('change', function () {
+            alert(this.value);
+        });
+    } {% endcomment %}
+</script>
