@@ -40,13 +40,13 @@ class DistrictCovidManagementCreateView(CreateView):
             if iso_lines.is_valid() and qua_lines.is_valid() and lab_lines.is_valid():
                 iso_lines.instance = self.object
                 qua_lines.instance = self.object
-                lab_linesinstance = self.object
+                lab_lines.instance = self.object
                 iso_lines.save()
                 qua_lines.save()
                 lab_lines.save()
         collection = context.get('collection')
         if collection:
-            collection.pcr_kit_usage = self.object
+            collection.district_covid_management = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -58,32 +58,43 @@ class DistrictCovidManagementCreateView(CreateView):
 class DistrictCovidManagementUpdateView(UpdateView):
     model = DistrictCovidManagement
     template_name = "forms/covid_district_management/update.html"
-    form_class = DistrictCovidManagement
+    form_class = DistrictCovidManagementForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(PcrKitUsageUpdateView, self).get_context_data(**kwargs)
+        data = super(DistrictCovidManagementUpdateView, self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = CovidHospitalmainpowerFormSet(
+            data['isolationlines'] = DistrictCovidIsolManagementFormSet(
+                self.request.POST, instance=self.object)
+            data['quarentinelines'] = DistrictCovidQuaManagementFormSet(
+                self.request.POST, instance=self.object)
+            data['labtestlines'] = DistrictCovidLabtTestManagementFormSet(
                 self.request.POST, instance=self.object)
             # data['lines'].full_clean()
         else:
-            data['lines'] = CovidHospitalmainpowerFormSet(instance=self.object)
+            data['isolationlines'] = DistrictCovidIsolManagementFormSet(instance=self.object)
+            data['quarentinelines'] = DistrictCovidQuaManagementFormSet(instance=self.object)
+            data['labtestlines'] = DistrictCovidLabtTestManagementFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        lines = context['lines']
+        iso_lines = context['isolationlines']
+        qua_lines = context['quarentinelines']
+        lab_lines = context['labtestlines']
         with transaction.atomic():
             form.instance.create_user = self.request.user
             self.object = form.save()
-            if lines.is_valid():
-                lines.instance = self.object
-                lines.save()
-            if collection:
-                collection.covid_hos_mainpower = self.object
-                collection.save()
+            if iso_lines.is_valid() and qua_lines.is_valid() and lab_lines.is_valid():
+                iso_lines.instance = self.object
+                qua_lines.instance = self.object
+                lab_lines.instance = self.object
+                iso_lines.save()
+                qua_lines.save()
+                lab_lines.save()
+            else:
+                return self.form_invalid(form, iso_lines)
 
             return super().form_valid(form)
 

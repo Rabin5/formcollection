@@ -19,6 +19,7 @@ from forms.models.quarantine_management_detail import QuarantineManagementDetail
 from forms.models.quarantine_construct_expenditure import QuarantineConstructionExpenditure
 from forms.models.isolationconstructionexpenditure import IsolationConstructionExependiture
 from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
+from forms.models.districtcovidmanagement import DistrictCovidManagement
 
 from users.models.user import User
 from collection.utils import PROVINCE_STATE, STATUS
@@ -63,6 +64,8 @@ class ProvinceFormCollection(models.Model):
         IsolationConstructionExependiture, on_delete=models.CASCADE, null=True)
     epidemic_outbreak_prep = models.OneToOneField(
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)
+    district_covid_management = models.OneToOneField(
+        DistrictCovidManagement, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):

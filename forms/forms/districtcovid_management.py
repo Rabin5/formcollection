@@ -7,7 +7,7 @@ from forms.custom_layout_object import Formsett
 from forms.models.districtcovidmanagement import DistrictCovidManagement, DisctrictQuarantineManagementLine, DistrictIsolationManagementLine, DistrictLabTestLine
 
 
-class DistrictQuarantineManagementLine(forms.ModelForm):
+class DistrictQuarantineManagementLineForm(forms.ModelForm):
 
     class Meta:
         model = DisctrictQuarantineManagementLine
@@ -50,7 +50,7 @@ class DistrictLabTestLineForm(forms.ModelForm):
 
 
 DistrictCovidQuaManagementFormSet = inlineformset_factory(
-    DistrictCovidManagement, DisctrictQuarantineManagementLine, form=DistrictQuarantineManagementLine,
+    DistrictCovidManagement, DisctrictQuarantineManagementLine, form=DistrictQuarantineManagementLineForm,
     fields=['district', 'num_prepared_quarantine', 'num_quarantined_person',
             'num_home_quarantined_person', 'num_insufficient_bed', ],
     extra=1,

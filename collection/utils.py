@@ -78,6 +78,7 @@ PROVINCE_STATE = [
     (15, 'isolation_management_detail'),
     (16, 'quarantine_contruction_expenditure'),
     (17, 'isolation_construction_expenditure'),
+    (18, 'district_covid_management'),
 ]
 
 def num_to_devanagari(num):

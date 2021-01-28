@@ -18,6 +18,8 @@ from forms.forms.pcr_kit_usage_forms import PcrKitUsageForm
 from forms.forms.quarantine_construction_expenditure_forms import QuarantineConstructionExpenditureForm
 from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOutbreakPreparatoryWorkForm
 from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
+from forms.forms.districtcovid_management import DistrictCovidManagementForm
+
 from forms import models
 
 from forms.views import (
@@ -39,6 +41,7 @@ from forms.views import (
     isolationconsexpenditure,
     epi_outbreak_workline_views,
     cov_hos_management_checklist_views,
+    district_covid_management
 )
 
 # Asign form, model, form collection field to route view name
@@ -196,6 +199,14 @@ ROUTE_LINK = {
         'model': models.EpidemicOutbreakPreparatoryWork,
         'form_field': 'epidemic_outbreak_prep',
         'update_view': epi_outbreak_workline_views.EpidemicOutbreakWorklineUpdateView,
+    },
+
+    'district_covid_management': {
+        'title': 'प्रदेश अन्तर्गत कोभिड-१९ को पहिचान, परीक्षण र उपचार एवं पूर्वाधार सम्बन्धी जिल्लागत विवरण (२०७७ आषाढ मसान्त सम्म)',
+        'form': DistrictCovidManagementForm,
+        'model': models.DistrictCovidManagement,
+        'form_field': 'district_covid_management',
+        'update_view': district_covid_management.DistrictCovidManagementUpdateView,
     },
 
 }

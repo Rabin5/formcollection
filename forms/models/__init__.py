@@ -25,4 +25,4 @@ from .districtcovidmanagement import *
 from .quarantine_management_detail import *
 from .quarantine_construct_expenditure import *
 from .cov_hos_management_checklist import *
-
+from .districtcovidmanagement import *
