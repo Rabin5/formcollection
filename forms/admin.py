@@ -30,5 +30,13 @@ admin.site.register([
     models.QuarantineManagementDetail,
     models.QuarantineManagementDetailLine,
     models.CovidHospitalManagementChecklist,
-    models.CovidHospitalManagementChecklistLine
+    models.CovidHospitalManagementChecklistLine,
+    models.FundOperation,
+    models.FundOperationLine,
+    models.WardReliefProcureDistribution,
+    models.WardReliefProcureDistributionLine,
+    models.ReceivedReliefDetail,
+    models.ReceivedReliefDetailLine,
+    models.ReliefDistributionExpense,
+    models.ReliefDistributionExpenseLine,
 ])

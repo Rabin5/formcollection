@@ -22,3 +22,7 @@ from .isolationconstructionexpenditure import *
 from .quarantine_management_detail import *
 from .quarantine_construct_expenditure import *
 from .cov_hos_management_checklist import *
+from .fund_operation import *
+from .ward_relief_procure_distribution import *
+from .received_relief_detail import *
+from .relief_distribution_expense import *
