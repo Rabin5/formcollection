@@ -1,4 +1,6 @@
+{% extends 'core/base.html' %}
 {% load static %}
+{% block content %}
 <link src="{% static 'styles/style.css' %}">
 {% load crispy_forms_tags %}
 <h2>कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा प्रदेश अस्पताल र प्रयोगशालाले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h2>
@@ -6,8 +8,9 @@
 <h3>1. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h3>
 <h5>निकायको नामः {{ object.fund_receipt_expense.body }}</h5>
 आर्थिक बर्ष २०७६।७७ र २०७७।७८ को आश्विन मसान्तसम्म
+<h5><a href="{% url 'forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></h5>
 <table class="table-review">
-  <tr>
+  <tr class="tr-review-head">
     <th>बजेट/आम्दानीको स्रोत</th>
     <th>२०७७ असार मसान्तसम्म प्राप्त रकम</th>
     <th>२०७७ आश्विन मसान्तसम्म प्राप्त रकम</th>
@@ -38,11 +41,10 @@
 
 <h5>निकायको नामः {{ object.risk_allowance.body }}</h5>
 <h5>जोखिम भत्ता सम्बन्धी बिबरण</h5>
-<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
-
+<h5><a href="{% url 'forms:update' object.pk %}?form=risk_allowance">Edit</a></h5>
 
 <table class="table-review">
-  <tr>
+  <tr class="tr-review-head">
     <th>खर्च गर्ने निकायको नाम</th>
     <th>जोखिम भत्ता पाउने पदाधिकारी</th>
     <th>कर्मचारी वा पदाधिकारी संख्या</th>
@@ -68,11 +70,10 @@
 <h3>3. औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद</h3>
 <h5>निकायको नामः {{ object.medical_expense.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_expense.fiscal_year }}</h5>
-<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
-
+<h5><a href="{% url 'forms:update' object.pk %}?form=medical_expense">Edit</a></h5>
 
 <table class="table-review">
-  <tr>
+  <tr class="tr-review-head">
     <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
     <th>सम्झौता रकम</th>
     <th>आपूर्ति गर्नुपर्ने मिति</th>
@@ -100,17 +101,16 @@
 <h3>4. औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति</h3>
 <h5>निकायको नामः {{ object.medical_receipt.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_receipt.fiscal_year }}</h5>
-<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=medical_receipt">Edit</a></h5>
 
 <table class="table-review">
-  <tr>
+  <tr class="tr-review-head">
     <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
     <th>प्रदान गर्ने निकाय वा संस्था</th>
     <th>परिमाण</th>
     <th>प्राप्त औषधी स्वास्थ्य सामग्री उपकरणको मूल्य</th>
     <th>प्रयोगको अवस्था</th>
   </tr>
-
   {% for obj in object.medical_receipt.lines.all  %}
       <tr>
         <td>{{ obj.product }}</td>
@@ -128,10 +128,9 @@
 <h3>5. औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h3>
 <h5>निकायको नामः {{ object.medical_use.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_use.fiscal_year }}</h5>
-<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
-
+<h5><a href="{% url 'forms:update' object.pk %}?form=medical_use">Edit</a></h5>
 <table class="table-review">
-  <tr>
+  <tr class="tr-review-head">
     <th>औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम</th>
     <th>खरिद वा प्राप्ती </th>
     <th>सामानको मुल्य</th>
@@ -157,10 +156,9 @@
 <h3>6. केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h3>
 <h5>निकायको नामः {{ object.med_purchase_desc.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.med_purchase_desc.fiscal_year }}</h5>
-<h5><a href="{% url 'forms:update' object.pk %}">Edit</a></h5>
-
+<h5><a href="{% url 'forms:update' object.pk %}?form=med_purchase_desc">Edit</a></h5>
 <table class="table-review">
-  <tr>
+  <tr class="tr-review-head">
     <th>सामानको नाम</th>
     <th>सामानको छोटो स्पेशिफिकेशन</th>
     <th>खरिद सम्झौता मिति</th>
@@ -184,3 +182,5 @@
       </tr>
   {% endfor %}
 </table>
+
+{% endblock content %}
