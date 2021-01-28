@@ -17,6 +17,7 @@ from .fund_receipt_expense import *
 from .epidemic_outbreak_preparatory_work import *
 from .action_plan_implementation import *
 from .case_investigation_tracing import *
+from .province_institution_management import *
 from .covid_hospital_manpower import *
 from .covidhospitaldetail import *
 from .isolationmanagementdetail import *

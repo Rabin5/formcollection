@@ -69,8 +69,7 @@ urlpatterns = [
     path('cov-hos/forms/pcr-lab-detail/', include('forms.urls.pcr_lab_detail_urls')),
     path('cov-hos/forms/pcr-kit-usage/', include('forms.urls.pcr_kit_usage_urls')),
     path('cov-hos/forms/cov-hos-equip/', include('forms.urls.cov_hos_equip_urls')),
-    path('cov-hos/forms/fund-receipt-expense/',
-         include('forms.urls.fund_receipt_expense')),
+    path('cov-hos/forms/fund-receipt-expense/', include('forms.urls.fund_receipt_expense')),
     path('cov-hos/forms/medicalreceipt/', include('forms.urls.medicalreceipt_forms_urls')),
     path('cov-hos/forms/medicaluse/', include('forms.urls.medical-use')),
     path('cov-hos/forms/pcr_test/', include('forms.urls.pcr_test')),
@@ -91,8 +90,11 @@ urlpatterns = [
 
      # Internal Affairs
      path('internal-affairs/forms/', include('collection.urls.internal_affairs_form_collection_urls')),
-    path('forms/action_plan', include('forms.urls.action_plan_implementation_urls')),
+     path('forms/action_plan', include('forms.urls.action_plan_implementation_urls')),
     # path('forms/',include('forms.urls.case_investigation_tracing_urls')),
+
+     # Chief minister
+     path('forms/province-institution-management/', include('forms.urls.province_institution_management_urls')),
 
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
