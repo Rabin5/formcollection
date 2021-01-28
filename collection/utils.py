@@ -88,6 +88,13 @@ INTERNAL_AFFAIRS_STATE = [
     (3, 'action_plan_implementation'),
 ]
 
+CHIEF_MINISTER_STATE = [
+    (0, 'epidemic_outbreak_prep'),
+    (1, 'fund_receipt_expense'),
+    (2, 'risk_allowance'),
+    (3, 'province_institute_management'),
+]
+
 def num_to_devanagari(num):
     """
     Utility function to convert an integer number to Devanagari

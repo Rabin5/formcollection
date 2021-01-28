@@ -40,7 +40,7 @@ class ProvinceInstitutionManagementCreateView(CreateView):
 
         collection = context.get("collection")
         if collection:
-            collection.province_institution_management = self.object
+            collection.province_institute_management = self.object
             collection.save()
 
         return super().form_valid(form)

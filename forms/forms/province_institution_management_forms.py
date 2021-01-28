@@ -39,7 +39,7 @@ ProvinceInstitutionManagementLineFormSet = inlineformset_factory(
     ProvinceInstitutionManagement,
     ProvinceInstitutionManagementLine,
     form=ProvinceInstitutionManagementLineForm,
-    fields=["committee", "major_works"],
+    fields=["province_institution_management", "committee", "major_works"],
     extra=1,
     can_delete=False,
 )

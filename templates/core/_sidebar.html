@@ -154,6 +154,9 @@
           <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
           </li> 
+          <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'chief_minister_forms:list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
+          </li> 
           
         </ul>
       </div>

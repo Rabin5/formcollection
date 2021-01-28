@@ -20,6 +20,7 @@ from forms.forms.epidemic_outbreak_preparatory_workline_forms import EpidemicOut
 from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManagementChecklistForm
 from forms.forms.districtcovid_management import DistrictCovidManagementForm
 from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm
+from forms.forms.province_institution_management_forms import ProvinceInstitutionManagementForm
 
 from forms import models
 
@@ -43,7 +44,8 @@ from forms.views import (
     epi_outbreak_workline_views,
     cov_hos_management_checklist_views,
     district_covid_management,
-    action_plan_views
+    action_plan_views,
+    province_institution_management_views
 )
 
 # Asign form, model, form collection field to route view name
@@ -217,6 +219,14 @@ ROUTE_LINK = {
         'model': models.ActionPlanImplementation,
         'form_field': 'action_plan_implementation',
         'update_view': action_plan_views.ActionPlanImplementationUpdateView,
+    },
+
+    'province_institute_management': {
+        'title': 'संस्थागत व्यवस्था- कोभिड-१९ को रोकथाम, नियन्त्रण तथा व्यवस्थापनमा प्रदेश सरकारको भूमिका महत्वपूर्ण रहँदै आएको छ । उल्लिखित भूमिका निर्वाहको लागि तहमा प्रदेश सरकार अन्तर्गत गठन भएको PCCMC लगायतका संस्थागत व्यवस्था र ती संरचनबाट सम्पादित कार्यको सम्बन्धमा उल्लेख गर्नुहोस् ।',
+        'form': ProvinceInstitutionManagementForm,
+        'model': models.ProvinceInstitutionManagement,
+        'form_field': 'province_institute_management',
+        'update_view': province_institution_management_views.ProvinceInstitutionManagementUpdateView,
     },
 
 }

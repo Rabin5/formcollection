@@ -4,14 +4,14 @@ from django.db.models.enums import Choices
 from forms.models.risk_allowance import RiskAllowance
 from forms.models.fund_receipt_expense import FundReceiptExpense
 from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
-# from forms.models.action_plan_implementation import ActionPlanImplementation
+from forms.models.province_institution_management import ProvinceInstitutionManagement
 
 from users.models.user import User
-from collection.utils import INTERNAL_AFFAIRS_STATE, STATUS
+from collection.utils import CHIEF_MINISTER_STATE, STATUS
 
-class InternalAffairFormCollection(models.Model):
+class ChiefMinisterOfficeFormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    state = models.IntegerField(choices=INTERNAL_AFFAIRS_STATE, default=0, blank=True)
+    state = models.IntegerField(choices=CHIEF_MINISTER_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
     
     risk_allowance = models.OneToOneField(
@@ -20,8 +20,8 @@ class InternalAffairFormCollection(models.Model):
         FundReceiptExpense, on_delete=models.CASCADE, null=True)
     epidemic_outbreak_prep = models.OneToOneField(
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)
-    # action_plan_implementation = models.OneToOneField(
-    #     ActionPlanImplementation, on_delete=models.CASCADE, null=True)
+    province_institute_management = models.OneToOneField(
+        ProvinceInstitutionManagement, on_delete=models.CASCADE, null=True)
     
 
 

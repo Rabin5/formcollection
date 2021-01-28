@@ -5,5 +5,6 @@ from collection import models
 admin.site.register([
     models.CovHosFormCollection,
     models.ProvinceFormCollection,
-    models.InternalAffairFormCollection
+    models.InternalAffairFormCollection,
+    models.ChiefMinisterOfficeFormCollection
 ])
