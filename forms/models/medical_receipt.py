@@ -31,4 +31,4 @@ class MedicalReceiptLine(FormLineBaseModel):
     usage_situation = models.CharField(
         max_length=300, verbose_name='प्रयोगको अवस्था')
     medical_receipt_line = models.ForeignKey(
-        MedicalReceipt, on_delete=models.PROTECT)
+        MedicalReceipt, on_delete=models.PROTECT, related_name='lines')
