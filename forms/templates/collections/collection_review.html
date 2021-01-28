@@ -183,4 +183,28 @@
   {% endfor %}
 </table>
 
+<button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'forms:submit_form' form_pk=object.pk %}">Submit</button>
+
 {% endblock content %}
+
+{% block extrascripts %}
+    <script>
+        $( '#submit' ).on('click', function(event){
+          var pk = $(this).attr("data-pk");
+          var dataurl = $(this).attr("dataurl");
+          $.ajax({
+            url: dataurl,
+            method: 'POST',
+            data: {
+              'csrfmiddlewaretoken': '{{ csrf_token }}',
+              'pk': pk,
+            },
+            dataType: 'json',
+
+            success: function(response){
+              window.location.href = "{% url 'forms:list' %}"
+            }
+          })
+        });
+    </script>
+{% endblock extrascripts %}

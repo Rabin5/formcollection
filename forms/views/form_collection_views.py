@@ -201,6 +201,9 @@ class FormCollectionUpdateView(UpdateView):
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
+            if self.next_state == 'review':
+                return HttpResponseRedirect(reverse('forms:review', kwargs={
+                                   'pk': self.object.pk}))
             return HttpResponseRedirect(next_url)
         else:
             return form_response
@@ -236,3 +239,9 @@ class FormCollectionDeleteView(DeleteView):
 class FormCollectionReview(DetailView):
     model = FormCollection
     template_name = "collections/collection_review.html"
+
+def submit_form(request, form_pk):
+    form_obj = FormCollection.objects.get(id=form_pk)
+    form_obj.status = 'submitted'
+    form_obj.save()
+    return JsonResponse({'success': '200'}, status=200)
