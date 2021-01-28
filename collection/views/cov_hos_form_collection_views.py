@@ -1,4 +1,3 @@
-from forms.models.covid_hos_equip import CovidHospitalEquipment
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -11,11 +10,12 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
-from forms.models import FormCollection
+
 from django.apps import apps
 
-from forms.metadata import ROUTE_LINK
-from forms.utils import CH_STATE, num_to_devanagari
+from collection.models import CovHosFormCollection
+from collection.metadata import ROUTE_LINK
+from collection.utils import CH_STATE, num_to_devanagari
 from master_data.models import FiscalYear
 
 # Convert utils CH_STATE to dict
@@ -23,7 +23,7 @@ DICT_CH_STATE = {key: value for key, value in CH_STATE}
 LIST_CH_STATE = [value for key, value in CH_STATE]
 
 
-class FormCollectionCreateView(View):
+class CovHosFormCollectionCreateView(View):
     """
     Creates form collection and initializes all forms in the collection
     """
@@ -48,7 +48,7 @@ class FormCollectionCreateView(View):
                 )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
 
-        FormCollection.objects.filter(
+        CovHosFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
 
@@ -56,17 +56,17 @@ class FormCollectionCreateView(View):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = FormCollection(
+        form_collect = CovHosFormCollection(
             user=request.user, status='started', state=0)
         form_collect.save()
         self.object = form_collect
         self.init_forms()
-        form_url = f"{reverse('forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_CH_STATE.get(0)}"
+        form_url = f"{reverse('cov_hos_forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_CH_STATE.get(0)}"
         context = {'url': form_url}
         return JsonResponse(context, content_type='application/json')
 
 
-class FormCollectionUpdateView(UpdateView):
+class CovHosFormCollectionUpdateView(UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -80,8 +80,8 @@ class FormCollectionUpdateView(UpdateView):
             submit: submit form collection
         next_form: form to return and render next; determined by next_state
     """
-    model = FormCollection
-    success_url = 'forms:list'
+    model = CovHosFormCollection
+    success_url = 'cov_hos_forms:list'
     form_class = ''
     route_link = ''
     form_field = None
@@ -95,7 +95,7 @@ class FormCollectionUpdateView(UpdateView):
         """
         returns instance of the current form
         """
-        collection = FormCollection.objects.get(pk=pk)
+        collection = CovHosFormCollection.objects.get(pk=pk)
         return getattr(collection, self.form_field)
 
     def get_form_class(self, pk):
@@ -148,9 +148,9 @@ class FormCollectionUpdateView(UpdateView):
         """
         Get and return form template response
         """
-        self.object = FormCollection.objects.get(pk=pk)
+        self.object = CovHosFormCollection.objects.get(pk=pk)
         if not request.GET.get('form'):
-            return HttpResponseRedirect(reverse('forms:update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
+            return HttpResponseRedirect(reverse('cov_hos_forms:update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
         self.get_form_class(pk)
         context = {
             'metadata': self._get_metadata(),
@@ -195,7 +195,7 @@ class FormCollectionUpdateView(UpdateView):
         if form_response.status_code == 302:
             self._update()
             if self.next_form:
-                next_url = reverse('forms:update', kwargs={
+                next_url = reverse('cov_hos_forms:update', kwargs={
                                    'pk': self.object.pk})+f'?form={self.next_form}'
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
@@ -208,13 +208,13 @@ class FormCollectionUpdateView(UpdateView):
         """
         Handle post request
         """
-        self.object = FormCollection.objects.get(pk=pk)
+        self.object = CovHosFormCollection.objects.get(pk=pk)
         self.get_form_class(pk)
 
         context = {
             'metadata': self._get_metadata(),
             'collection_pk': pk,
-            'collection': FormCollection.objects.get(pk=pk),
+            'collection': CovHosFormCollection.objects.get(pk=pk),
         }
 
         form_response = self.form_view.as_view(extra_context=context)(
@@ -222,11 +222,11 @@ class FormCollectionUpdateView(UpdateView):
         return self._response(form_response)
 
 
-class FormCollectionListView(ListView):
-    model = FormCollection
-    template_name = "forms/form_collection/list.html"
+class CovHosFormCollectionListView(ListView):
+    model = CovHosFormCollection
+    template_name = "cov_hos_form_collection/list.html"
     context_object_name = 'form_collections'
 
 
-class FormCollectionDeleteView(DeleteView):
+class CovHosFormCollectionDeleteView(DeleteView):
     pass

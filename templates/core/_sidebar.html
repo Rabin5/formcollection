@@ -48,8 +48,10 @@
                   <a href="{% url 'md-gov:gov_type_list'%}" class="pl-4">सरकारी निकायको प्रकार</a>
                 </li>
                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+
                   <a href="{% url 'md-offbearer:list'%}" class="pl-4">कार्यालय वाहक
                   </a>
+
                 </li>
                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
@@ -143,31 +145,19 @@
         aria-controls="collapseExample">Forms</a>
       <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
         <ul class="menu py-0">
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
+          <li {% if '/cov-hos/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'cov_hos_forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
           </li>
-          {% comment %}
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'medical-forms:medical_receipt-create'%}" class="pl-4">Medical Receipt</a>
+          <li {% if '/province/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'province_forms:list'%}" class="pl-4">प्रदेश</a>
           </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'medical_use:medical_use-create'%}" class="pl-4">Medical use</a>
-          </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'pcr_test:pcr_test-create'%}" class="pl-4">PcrTestComplianceDetail</a>
-          </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'rdt_test:rdt_test-create'%}" class="pl-4">RdtTest</a>
-          </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'covid_hos_mainpower:create'%}" class="pl-4">covid hopistal manpower</a>
-          </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'covid_hos_detail:create'%}" class="pl-4">covid hospital detail</a>
-          </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'iso_mgt_detail:create'%}" class="pl-4">isolation detail management</a>
-          </li>{% endcomment %}
+          <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
+          </li> 
+          <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'chief_minister_forms:list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
+          </li> 
+          
         </ul>
       </div>
     </li>

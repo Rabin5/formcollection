@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  कोभिड अस्पतालका लागि प्रश्नावलीहरू - Nepal Audit Management System
+  कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-कोभिड अस्पतालका लागि प्रश्नावलीहरू
+कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा प्रदेश मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण 
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -34,11 +34,11 @@
         <td>{{ form_collection }}</td>
         <td>{{ form_collection.get_status_display }}</td>
         <td class="action">
-          <a href="{% url 'forms:update' form_collection.pk %}">
+          <a href="{% url 'province_forms:update' form_collection.pk %}">
             <i class="ic-edit mr-2"></i>
           </a>
-          <a data-remote="{% url 'forms:delete' form_collection.pk %}"
-            href="{% url 'forms:delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
+          <a data-remote="{% url 'province_forms:delete' form_collection.pk %}"
+            href="{% url 'province_forms:delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
             <i class="ic-delete"></i>
           </a>
         </td>
@@ -53,7 +53,7 @@
 <script>
     $(document).ready(function(){
     $('#create_collection').on('click', function(){
-      fetch("{% url 'forms:create' %}", {
+      fetch("{% url 'province_forms:create' %}", {
         method: 'POST',
         dataType: "json",
         headers: { "X-CSRFToken": '{{csrf_token}}' },

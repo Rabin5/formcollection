@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from forms.models import form_collection
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from reports.views.dashboard_view import DashboardView
@@ -60,7 +59,9 @@ urlpatterns = [
     path('action_plan/', include('master_data.urls.action_plan')),
 
     # Forms
-    path('forms/', include('forms.urls.form_collection_urls')),
+
+    # Covid Hospital
+    path('cov-hos/forms/', include('collection.urls.cov_hos_form_collection_urls')),
     path('forms/medical-expense/', include('forms.urls.medical_expense')),
     path('forms/risk-allowance/', include('forms.urls.riskAllowance_forms_urls')),
     path('forms/medical-product-desc/',
@@ -75,6 +76,11 @@ urlpatterns = [
     path('forms/medicaluse_forms/', include('forms.urls.medical-use')),
     path('forms/pcr_test_forms/', include('forms.urls.pcr_test')),
     path('forms/rdt_test_forms/', include('forms.urls.rdt_test')),
+    path('forms/fund-receipt-expense/', include('forms.urls.fund_receipt_expense')),
+    path('forms/medicalreceipt/', include('forms.urls.medicalreceipt_forms_urls')),
+    path('forms/medicaluse/', include('forms.urls.medical-use')),
+    path('forms/pcr_test/', include('forms.urls.pcr_test')),
+    path('forms/rdt_test/', include('forms.urls.rdt_test')),
     path('forms/covid_hos_mainpwer/', include('forms.urls.covid_hos_mainpower')),
     path('forms/covid_hos_detail/', include('forms.urls.covidhosptaldetail')),
     path('forms/iso_mgt_destail/', include('forms.urls.isolationmanagementdetail')),
@@ -91,8 +97,22 @@ urlpatterns = [
     path('forms/received-relief/', include('forms.urls.received_relief_urls')),
     path('forms/relief-distribution/',include('forms.urls.relief_distribution_urls')),
 
-    path('users/', include('users.urls.user_urls')),
+    # Province
+    path('province/forms/', include('collection.urls.province_form_collection_urls')),
+    path('forms/epidemic-outbreak/', include('forms.urls.epidemic_outbreak_preparatory_workline')),
+    path('forms/district_covid_management/',
+         include('forms.urls.district_covi_dmanagement')),
 
+     # Internal Affairs
+     path('internal-affairs/forms/', include('collection.urls.internal_affairs_form_collection_urls')),
+     path('forms/action_plan', include('forms.urls.action_plan_implementation_urls')),
+    # path('forms/',include('forms.urls.case_investigation_tracing_urls')),
+
+     # Chief minister
+     path('chief-minister-office/forms/', include('collection.urls.chief_minister_form_collection_urls')),
+     path('forms/province-institution-management/', include('forms.urls.province_institution_management_urls')),
+
+    path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
 
 ]

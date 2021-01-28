@@ -1,7 +1,7 @@
 from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES, BS_MONTHS
+from collection.utils import STATES, BS_MONTHS
 from master_data.models import Product, FiscalYear, GovernmentBody
 
 
@@ -10,16 +10,18 @@ class MedicalExpense(FormBaseModel):
     Model for form class: 1_covid_hospital/3.puml
     Code: medExp
     """
+
     fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, related_name='forms_medExp_fy', null=True, verbose_name='आर्थिक बर्ष: ')
     body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE, related_name="forms_medExp_gov", null=True, verbose_name='निकायको नामः: ')
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
-        return f'{self.fiscal_year}'
+        return self.fiscal_year.name
 
 
 class MedicalExpenseLine(FormLineBaseModel):
-    medical_expense = models.ForeignKey(MedicalExpense, on_delete=models.CASCADE, related_name='lines')
+    medical_expense = models.ForeignKey(
+        MedicalExpense, on_delete=models.CASCADE, related_name='lines')
     # TODO: relate procure_method, importer
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product', verbose_name="स्वास्थ्य सामाग्री उपकरणको विवरण")
     # importer = models.ForeignKey(Importer, on_delete=models.PROTECT, related_name='importer')
