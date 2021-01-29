@@ -39,4 +39,4 @@ class CovidHospitalDetailLine(FormLineBaseModel):
     expense_treatment = models.FloatField(
         verbose_name='२०७७ असार मसान्तसम्म उपचारमा भएको खर्च')
     covidhospital_hospital_detail_line = models.ForeignKey(
-        CovidHospitalDetail, on_delete=models.PROTECT)
+        CovidHospitalDetail, on_delete=models.PROTECT, related_name='lines')
