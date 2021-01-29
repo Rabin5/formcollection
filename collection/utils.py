@@ -79,6 +79,7 @@ PROVINCE_STATE = [
     (16, 'quarantine_contruction_expenditure'),
     (17, 'isolation_construction_expenditure'),
     (18, 'district_covid_management'),
+    (19, 'fund_operation'),
 ]
 
 INTERNAL_AFFAIRS_STATE = [

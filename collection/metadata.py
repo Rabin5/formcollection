@@ -21,6 +21,7 @@ from forms.forms.cov_hos_management_checklist_forms import CovidHospitalManageme
 from forms.forms.districtcovid_management import DistrictCovidManagementForm
 from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm
 from forms.forms.province_institution_management_forms import ProvinceInstitutionManagementForm
+from forms.forms.fund_operation_forms import FundOperationForm
 
 from forms import models
 
@@ -45,7 +46,8 @@ from forms.views import (
     cov_hos_management_checklist_views,
     district_covid_management,
     action_plan_views,
-    province_institution_management_views
+    province_institution_management_views,
+    fund_operation_views
 )
 
 # Asign form, model, form collection field to route view name
@@ -227,6 +229,14 @@ ROUTE_LINK = {
         'model': models.ProvinceInstitutionManagement,
         'form_field': 'province_institute_management',
         'update_view': province_institution_management_views.ProvinceInstitutionManagementUpdateView,
+    },
+
+    'fund_operation': {
+        'title': 'कोष सञ्चालन',
+        'form': FundOperationForm,
+        'model': models.FundOperation,
+        'form_field': 'fund_operation',
+        'update_view': fund_operation_views.FundOperationUpdateView,
     },
 
 }

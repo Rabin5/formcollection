@@ -69,13 +69,6 @@ urlpatterns = [
     path('forms/pcr-lab-detail/', include('forms.urls.pcr_lab_detail_urls')),
     path('forms/pcr-kit-usage/', include('forms.urls.pcr_kit_usage_urls')),
     path('forms/cov-hos-equip/', include('forms.urls.cov_hos_equip_urls')),
-    path('forms/fund-receipt-expense/',
-         include('forms.urls.fund_receipt_expense')),
-    path('forms/medicalreceipt_forms/',
-         include('forms.urls.medicalreceipt_forms_urls')),
-    path('forms/medicaluse_forms/', include('forms.urls.medical-use')),
-    path('forms/pcr_test_forms/', include('forms.urls.pcr_test')),
-    path('forms/rdt_test_forms/', include('forms.urls.rdt_test')),
     path('forms/fund-receipt-expense/', include('forms.urls.fund_receipt_expense')),
     path('forms/medicalreceipt/', include('forms.urls.medicalreceipt_forms_urls')),
     path('forms/medicaluse/', include('forms.urls.medical-use')),
@@ -92,7 +85,7 @@ urlpatterns = [
          include('forms.urls.quarantine_contruct_urls')),
     path('forms/cov-hos-management/',
          include('forms.urls.cov_hos_management_checklist_urls')),
-    path('forms/fund-operation/', include('forms.urls.fund_operation_urls')),
+    
     path('forms/ward-relief/', include('forms.urls.ward_relief_urls')),
     path('forms/received-relief/', include('forms.urls.received_relief_urls')),
     path('forms/relief-distribution/',include('forms.urls.relief_distribution_urls')),
@@ -102,6 +95,7 @@ urlpatterns = [
     path('forms/epidemic-outbreak/', include('forms.urls.epidemic_outbreak_preparatory_workline')),
     path('forms/district_covid_management/',
          include('forms.urls.district_covi_dmanagement')),
+    path('forms/fund-operation/', include('forms.urls.fund_operation_urls')),
 
      # Internal Affairs
      path('internal-affairs/forms/', include('collection.urls.internal_affairs_form_collection_urls')),
