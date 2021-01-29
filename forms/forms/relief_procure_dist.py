@@ -9,7 +9,7 @@ from forms.custom_layout_object import Formset
 from forms.models.reliefprocuredistribution import ReliefProcureDistribution, ReliefProcureDistributionLine
 
 
-class ReliefProcureDistributionForm(forms.ModelForm):
+class ReliefProcureDistributionLineForm(forms.ModelForm):
 
     class Meta:
         model = ReliefProcureDistributionLine
@@ -25,7 +25,7 @@ class ReliefProcureDistributionForm(forms.ModelForm):
 
 
 ReliefProcureDistributionFormSet = inlineformset_factory(
-    ReliefProcureDistribution, ReliefProcureDistributionLine, form=ReliefProcureDistributionForm,
+    ReliefProcureDistribution, ReliefProcureDistributionLine, form=ReliefProcureDistributionLineForm,
     fields=['product', 'uom', 'qty_purchase',
             'rate', 'amt_total', 'qty_distributed', 'qty_remaining', 'has_quality_complaint'],
     extra=1,
@@ -33,7 +33,7 @@ ReliefProcureDistributionFormSet = inlineformset_factory(
 )
 
 
-class ReliefProcureDistributionLineForm(forms.ModelForm):
+class ReliefProcureDistributionForm(forms.ModelForm):
 
     class Meta:
         model = ReliefProcureDistribution

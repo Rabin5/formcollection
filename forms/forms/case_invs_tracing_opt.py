@@ -8,7 +8,7 @@ from forms.custom_layout_object import Formset
 from forms.models.case_inve_trac_operations import CaseInvestigationTracingOperationsLine, CaseInvestigationTracingOperations
 
 
-class CaseInvestigationTracingOptForm(forms.ModelForm):
+class CaseInvestigationTracingOptLineForm(forms.ModelForm):
 
     class Meta:
         model = CaseInvestigationTracingOperationsLine
@@ -23,7 +23,7 @@ class CaseInvestigationTracingOptForm(forms.ModelForm):
 
 
 CaseInvestigationTracingOptFormSet = inlineformset_factory(
-    CaseInvestigationTracingOperations, CaseInvestigationTracingOperationsLine, form=CaseInvestigationTracingOptForm,
+    CaseInvestigationTracingOperations, CaseInvestigationTracingOperationsLine, form=CaseInvestigationTracingOptLineForm,
     fields=['body', 'num_team_members', 'amt_expense',
             'num_case', 'num_contact_identified', 'num_consult_refer', 'num_sample_collect_test'],
     widgets={
@@ -34,7 +34,7 @@ CaseInvestigationTracingOptFormSet = inlineformset_factory(
 )
 
 
-class CaseInvestigationTracingOptLine(forms.ModelForm):
+class CaseInvestigationTracingOptForm(forms.ModelForm):
 
     class Meta:
         model = CaseInvestigationTracingOperations

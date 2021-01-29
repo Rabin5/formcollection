@@ -96,6 +96,25 @@ CHIEF_MINISTER_STATE = [
     (3, 'province_institute_management'),
 ]
 
+LOCAL_LEVEL_STATE = [
+    (0, 'epidemic_outbreak_prep'),
+    (1, 'fund_receipt_expense'),
+    (2, 'risk_allowance'),
+    (3, 'medical_expense'),
+    (4, 'medical_receipt'),
+    (5, 'medical_use'),
+    (6, 'med_purchase_desc'),
+    (7, 'case_investigation_tracing'),
+    (8, 'covid_hos_mainpower'),
+    (9, 'cov_hos_equipment'),
+    (10, 'quarantine_management_detail'),
+    (11, 'isolation_management_detail'),
+    (12, 'quarantine_contruction_expenditure'),
+    (13, 'isolation_construction_expenditure'),
+    (14, 'district_covid_management'),
+    (19, 'fund_operation'),
+]
+
 def num_to_devanagari(num):
     """
     Utility function to convert an integer number to Devanagari

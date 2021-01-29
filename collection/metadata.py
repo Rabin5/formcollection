@@ -1,3 +1,6 @@
+from forms.models import relief_distribution_expense
+from forms.models.reliefprocurementdetail import ReliefProcurementDetail
+from forms.models.case_investigation_tracing import CaseInvestigationTracing
 from forms.forms.covid_hos_mainpower import CovidHospitalManpowerForm
 from forms.forms.covidhospitaldetail import CovidHospitalDetailForm
 from forms.forms.quarantine_management_detail_forms import QuarantineManagementDetailForm
@@ -22,6 +25,14 @@ from forms.forms.districtcovid_management import DistrictCovidManagementForm
 from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm
 from forms.forms.province_institution_management_forms import ProvinceInstitutionManagementForm
 from forms.forms.fund_operation_forms import FundOperationForm
+from forms.forms.case_investigation_tracing_forms import CaseInvestigationTracingForm
+from forms.forms.case_invs_tracing_opt import CaseInvestigationTracingOptForm
+from forms.forms.reliefprocurementdetail import ReliefProcurementDetailForm
+from forms.forms.relief_procure_dist import ReliefProcureDistributionForm
+from forms.forms.ward_relief_forms import WardReliefProcureDistributionForm
+from forms.forms.received_relief_forms import ReceivedReliefDetailForm
+from forms.forms.relief_distribution_forms import ReliefDistributionExpenseForm
+
 
 from forms import models
 
@@ -47,7 +58,14 @@ from forms.views import (
     district_covid_management,
     action_plan_views,
     province_institution_management_views,
-    fund_operation_views
+    fund_operation_views,
+    case_invs_tracing_opt,
+    case_investigation_views,
+    relief_procure_dist,
+    reliefprocurementdetail,
+    relief_distribution_views,
+    received_relief_views,
+    ward_relief_views
 )
 
 # Asign form, model, form collection field to route view name
@@ -237,6 +255,62 @@ ROUTE_LINK = {
         'model': models.FundOperation,
         'form_field': 'fund_operation',
         'update_view': fund_operation_views.FundOperationUpdateView,
+    },
+
+    'case_investigation_tracing': {
+        'title': 'कोष सञ्चालन',
+        'form': CaseInvestigationTracingForm,
+        'model': models.CaseInvestigationTracing,
+        'form_field': 'case_investigation_tracing',
+        'update_view': case_investigation_views.CaseInvestigationTracingUpdateView,
+    },
+
+    'case_investigation_tracing_operation': {
+        'title': 'कोष सञ्चालन',
+        'form': CaseInvestigationTracingOptForm,
+        'model': models.CaseInvestigationTracingOperations,
+        'form_field': 'case_investigation_tracing_operation',
+        'update_view': case_invs_tracing_opt.CaseInvTacingOptUpdateView,
+    },
+
+    'relief_procurement_detail': {
+        'title': 'कोष सञ्चालन',
+        'form': ReliefProcurementDetailForm,
+        'model': models.ReliefProcurementDetail,
+        'form_field': 'relief_procurement_detail',
+        'update_view': reliefprocurementdetail.ReliefProcurementDetailUpdateView,
+    },
+    
+    'relief_procurement_distribution': {
+        'title': 'कोष सञ्चालन',
+        'form': ReliefProcureDistributionForm,
+        'model': models.ReliefProcureDistribution,
+        'form_field': 'relief_procurement_distribution',
+        'update_view': relief_procure_dist.ReliefProcureDistributionUpdateView,
+    },
+
+    'ward_relief_procurement_dist': {
+        'title': 'कोष सञ्चालन',
+        'form': WardReliefProcureDistributionForm,
+        'model': models.WardReliefProcureDistribution,
+        'form_field': 'ward_relief_procurement_dist',
+        'update_view': ward_relief_views.WardReliefProcureDistributionUpdateView,
+    },
+
+    'received_relief_detail': {
+        'title': 'कोष सञ्चालन',
+        'form': ReceivedReliefDetailForm,
+        'model': models.ReceivedReliefDetail,
+        'form_field': 'received_relief_detail',
+        'update_view': received_relief_views.ReceivedReliefDetailUpdateView,
+    },
+
+    'relief_distribution_expense': {
+        'title': 'कोष सञ्चालन',
+        'form': ReliefDistributionExpenseForm,
+        'model': models.ReliefDistributionExpense,
+        'form_field': 'relief_distribution_expense',
+        'update_view': relief_distribution_views.ReliefDistributionExpenseUpdateView,
     },
 
 }
