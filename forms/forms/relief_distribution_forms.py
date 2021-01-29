@@ -24,8 +24,8 @@ class ReliefDistributionExpenseLineForm(forms.ModelForm):
 
 ReliefDistributionExpenseFormSet = inlineformset_factory(
     ReliefDistributionExpense, ReliefDistributionExpenseLine, form=ReliefDistributionExpenseLineForm,
-    fields=['amt_expense', 'relief_type', 'num_relif_beneficiary', 'remarks'
-            ],
+    fields=['amt_expense', 'relief_type', 'num_relif_beneficiary', 'remarks',
+            'relief_distribution'],
     extra=1,
     can_delete=False
 )

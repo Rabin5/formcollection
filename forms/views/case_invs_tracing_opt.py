@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from forms.models.case_inve_trac_operations import CaseInvestigationTracingOperations
-from forms.forms.case_invs_tracing_opt import CaseInvestigationTracingOptLine, CaseInvestigationTracingOptFormSet
+from forms.forms.case_invs_tracing_opt import CaseInvestigationTracingOptForm, CaseInvestigationTracingOptFormSet
 
 
 class CaseInvTacingOptCreateView(CreateView):
     model = CaseInvestigationTracingOperations
     template_name = "forms/case_inc_tracing_opt/create.html"
-    form_class = CaseInvestigationTracingOptLine
+    form_class = CaseInvestigationTracingOptForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class CaseInvTacingOptCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.cov_hos_equip = self.object
+            collection.case_investigation_tracing_operation = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -46,7 +46,7 @@ class CaseInvTacingOptCreateView(CreateView):
 class CaseInvTacingOptUpdateView(UpdateView):
     model = CaseInvestigationTracingOperations
     template_name = "forms/case_inc_tracing_opt/update.html"
-    form_class = CaseInvestigationTracingOptLine
+    form_class = CaseInvestigationTracingOptForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -79,4 +79,4 @@ class CaseInvTacingOptUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('case_inv_tracing_opt:create')
+        return reverse_lazy('case_inv_tracing_opt:update', kwargs={'pk': self.object.pk})

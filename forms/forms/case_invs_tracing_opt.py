@@ -8,7 +8,7 @@ from forms.custom_layout_object import Formset
 from forms.models.case_inve_trac_operations import CaseInvestigationTracingOperationsLine, CaseInvestigationTracingOperations
 
 
-class CaseInvestigationTracingOptForm(forms.ModelForm):
+class CaseInvestigationTracingOptLineForm(forms.ModelForm):
 
     class Meta:
         model = CaseInvestigationTracingOperationsLine
@@ -23,9 +23,10 @@ class CaseInvestigationTracingOptForm(forms.ModelForm):
 
 
 CaseInvestigationTracingOptFormSet = inlineformset_factory(
-    CaseInvestigationTracingOperations, CaseInvestigationTracingOperationsLine, form=CaseInvestigationTracingOptForm,
-    fields=['body', 'num_team_members', 'amt_expense',
-            'num_case', 'num_contact_identified', 'num_consult_refer', 'num_sample_collect_test'],
+    CaseInvestigationTracingOperations, CaseInvestigationTracingOperationsLine, form=CaseInvestigationTracingOptLineForm,
+    fields=['case_invs_body', 'num_team_members', 'amt_expense',
+            'num_case', 'num_contact_identified', 'num_consult_refer', 'num_sample_collect_test',
+            'caseinvestigationtracingoperations_line'],
     widgets={
 
     },
@@ -34,7 +35,7 @@ CaseInvestigationTracingOptFormSet = inlineformset_factory(
 )
 
 
-class CaseInvestigationTracingOptLine(forms.ModelForm):
+class CaseInvestigationTracingOptForm(forms.ModelForm):
 
     class Meta:
         model = CaseInvestigationTracingOperations
@@ -57,7 +58,7 @@ class CaseInvestigationTracingOptLine(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
+                # ButtonHolder(Submit('submit', 'save')),
             )
 
         )

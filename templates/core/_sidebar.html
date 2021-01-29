@@ -157,7 +157,9 @@
           <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'chief_minister_forms:list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
           </li> 
-          
+          <li {% if '/local-level/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'local_level_forms:list'%}" class="pl-4">स्थानीय स्तर</a>
+          </li>           
         </ul>
       </div>
     </li>

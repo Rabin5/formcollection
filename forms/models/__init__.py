@@ -1,5 +1,3 @@
-
-
 from .medical_expense import *
 from .risk_allowance import *
 from .medical_receipt import *

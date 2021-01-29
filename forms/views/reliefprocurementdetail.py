@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from forms.models import ReliefProcurementDetail
-from forms.forms.reliefprocurementdetail import ReliefProcurementDetailFormSet,  ReliefProcurementDetailLineForm
+from forms.forms.reliefprocurementdetail import ReliefProcurementDetailFormSet,  ReliefProcurementDetailLineForm, ReliefProcurementDetailForm
 
 
 class ReliefProcurementDetailCreateView(CreateView):
     model = ReliefProcurementDetail
     template_name = "forms/relief_proc_detail/create.html"
-    form_class = ReliefProcurementDetailLineForm
+    form_class = ReliefProcurementDetailForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class ReliefProcurementDetailCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.cov_hos_equip = self.object
+            collection.relief_procurement_detail = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -46,11 +46,11 @@ class ReliefProcurementDetailCreateView(CreateView):
 class ReliefProcurementDetailUpdateView(UpdateView):
     model = ReliefProcurementDetail
     template_name = "forms/relief_proc_detail/update.html"
-    form_class = ReliefProcurementDetailLineForm
+    form_class = ReliefProcurementDetailForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(CovidHospitalEquipmentUpdateView,
+        data = super(ReliefProcurementDetailUpdateView,
                      self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:
@@ -80,4 +80,4 @@ class ReliefProcurementDetailUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('relief_procu_detail:update')
+        return reverse_lazy('relief_procu_detail:update', kwargs={'pk': self.object.pk})

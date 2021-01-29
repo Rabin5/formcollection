@@ -86,17 +86,6 @@ urlpatterns = [
          include('forms.urls.quarantine_contruct_urls')),
     path('forms/cov-hos-management/',
          include('forms.urls.cov_hos_management_checklist_urls')),
-    
-    path('forms/ward-relief/', include('forms.urls.ward_relief_urls')),
-    path('forms/received-relief/', include('forms.urls.received_relief_urls')),
-    path('forms/relief-distribution/',include('forms.urls.relief_distribution_urls')),
-    # local
-    path('local/forms/case_invs_tracing_opt/',
-         include('forms.urls.case_invs_tracing_opt')),
-    path('local/forms/relief_procure_dis/',
-         include('forms.urls.relief_procure_dis')),
-    path('local/forms/relief_procurement_detail/',
-         include('forms.urls.reliefprocurementdetail')),
 
     # Province
     path('province/forms/', include('collection.urls.province_form_collection_urls')),
@@ -110,13 +99,28 @@ urlpatterns = [
     path('internal-affairs/forms/',
          include('collection.urls.internal_affairs_form_collection_urls')),
     path('forms/action_plan', include('forms.urls.action_plan_implementation_urls')),
-    # path('forms/',include('forms.urls.case_investigation_tracing_urls')),
 
     # Chief minister
     path('chief-minister-office/forms/',
          include('collection.urls.chief_minister_form_collection_urls')),
     path('forms/province-institution-management/',
          include('forms.urls.province_institution_management_urls')),
+
+     # Local level
+     path('local-level/forms/',
+         include('collection.urls.local_level_form_collection_urls')),
+     path('forms/ward-relief/', include('forms.urls.ward_relief_urls')),
+     path('forms/received-relief/', include('forms.urls.received_relief_urls')),
+     path('forms/relief-distribution/',include('forms.urls.relief_distribution_urls')),
+     path('forms/case_invs_tracing_opt/',
+         include('forms.urls.case_invs_tracing_opt')),
+     path('forms/relief_procure_dis/',
+         include('forms.urls.relief_procure_dis')),
+     path('forms/relief_procurement_detail/',
+         include('forms.urls.reliefprocurementdetail')),
+     path('forms/case_invs_tracing/',
+          include('forms.urls.case_investigation_tracing_urls')),
+
 
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),

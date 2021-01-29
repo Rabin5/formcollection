@@ -24,7 +24,8 @@ class WardReliefProcureDistributionLineForm(forms.ModelForm):
 
 WardReliefProcureDistributionFormSet = inlineformset_factory(
     WardReliefProcureDistribution, WardReliefProcureDistributionLine, form=WardReliefProcureDistributionLineForm,
-    fields=['ward_num', 'amt_relief_material_purchase', 'procure_method', 'relief_beneficiary_family', 'num_relief_benefitted', 'remarks'
+    fields=['ward_num', 'amt_relief_material_purchase', 'procure_method', 'relief_beneficiary_family', 'num_relief_benefitted', 'remarks',
+        'ward_relief'
             ],
     extra=1,
     can_delete=False
