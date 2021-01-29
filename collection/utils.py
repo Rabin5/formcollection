@@ -111,8 +111,13 @@ LOCAL_LEVEL_STATE = [
     (11, 'isolation_management_detail'),
     (12, 'quarantine_contruction_expenditure'),
     (13, 'isolation_construction_expenditure'),
-    (14, 'district_covid_management'),
-    (19, 'fund_operation'),
+    (14, 'case_investigation_tracing_operation'),
+    (15, 'relief_procurement_detail'),
+    (16, 'relief_procurement_distribution'),
+    (17, 'ward_relief_procurement_dist'),
+    (18, 'received_relief_detail'),
+    (19, 'relief_distribution_expense'),
+    (20, 'action_plan_implementation')
 ]
 
 def num_to_devanagari(num):

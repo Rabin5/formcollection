@@ -258,7 +258,7 @@ ROUTE_LINK = {
     },
 
     'case_investigation_tracing': {
-        'title': 'कोष सञ्चालन',
+        'title': 'केस ईन्भेष्टीगेशन तथा कन्ट्रय्याक्ट ट्रेसिङ्ग २०७६।७७',
         'form': CaseInvestigationTracingForm,
         'model': models.CaseInvestigationTracing,
         'form_field': 'case_investigation_tracing',
@@ -266,7 +266,7 @@ ROUTE_LINK = {
     },
 
     'case_investigation_tracing_operation': {
-        'title': 'कोष सञ्चालन',
+        'title': 'केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम  परिचालन',
         'form': CaseInvestigationTracingOptForm,
         'model': models.CaseInvestigationTracingOperations,
         'form_field': 'case_investigation_tracing_operation',
@@ -274,7 +274,7 @@ ROUTE_LINK = {
     },
 
     'relief_procurement_detail': {
-        'title': 'कोष सञ्चालन',
+        'title': 'राहत सामग्री खरिद विधिसम्बन्धी विवरण',
         'form': ReliefProcurementDetailForm,
         'model': models.ReliefProcurementDetail,
         'form_field': 'relief_procurement_detail',
@@ -282,7 +282,7 @@ ROUTE_LINK = {
     },
     
     'relief_procurement_distribution': {
-        'title': 'कोष सञ्चालन',
+        'title': ' राहात सामग्रीको खरिद र वितरणको परिमाण',
         'form': ReliefProcureDistributionForm,
         'model': models.ReliefProcureDistribution,
         'form_field': 'relief_procurement_distribution',
@@ -290,7 +290,7 @@ ROUTE_LINK = {
     },
 
     'ward_relief_procurement_dist': {
-        'title': 'कोष सञ्चालन',
+        'title': 'वडा अनुसारको राहात सामग्री खरिद र वितरणको विवरण',
         'form': WardReliefProcureDistributionForm,
         'model': models.WardReliefProcureDistribution,
         'form_field': 'ward_relief_procurement_dist',
@@ -298,7 +298,7 @@ ROUTE_LINK = {
     },
 
     'received_relief_detail': {
-        'title': 'कोष सञ्चालन',
+        'title': ' संघ संस्था तथा व्यक्तीबाट राहत वितरणको लागि प्राप्त उपभोग्य वस्तुहरुको परिमाण र वितरण',
         'form': ReceivedReliefDetailForm,
         'model': models.ReceivedReliefDetail,
         'form_field': 'received_relief_detail',
@@ -306,7 +306,7 @@ ROUTE_LINK = {
     },
 
     'relief_distribution_expense': {
-        'title': 'कोष सञ्चालन',
+        'title': 'राहत वितरण खर्च सम्वन्धी विवरण',
         'form': ReliefDistributionExpenseForm,
         'model': models.ReliefDistributionExpense,
         'form_field': 'relief_distribution_expense',

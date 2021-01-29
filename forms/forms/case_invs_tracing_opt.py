@@ -24,8 +24,9 @@ class CaseInvestigationTracingOptLineForm(forms.ModelForm):
 
 CaseInvestigationTracingOptFormSet = inlineformset_factory(
     CaseInvestigationTracingOperations, CaseInvestigationTracingOperationsLine, form=CaseInvestigationTracingOptLineForm,
-    fields=['body', 'num_team_members', 'amt_expense',
-            'num_case', 'num_contact_identified', 'num_consult_refer', 'num_sample_collect_test'],
+    fields=['case_invs_body', 'num_team_members', 'amt_expense',
+            'num_case', 'num_contact_identified', 'num_consult_refer', 'num_sample_collect_test',
+            'caseinvestigationtracingoperations_line'],
     widgets={
 
     },
@@ -57,7 +58,7 @@ class CaseInvestigationTracingOptForm(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
+                # ButtonHolder(Submit('submit', 'save')),
             )
 
         )

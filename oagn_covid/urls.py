@@ -107,6 +107,8 @@ urlpatterns = [
          include('forms.urls.province_institution_management_urls')),
 
      # Local level
+     path('local-level/forms/',
+         include('collection.urls.local_level_form_collection_urls')),
      path('forms/ward-relief/', include('forms.urls.ward_relief_urls')),
      path('forms/received-relief/', include('forms.urls.received_relief_urls')),
      path('forms/relief-distribution/',include('forms.urls.relief_distribution_urls')),

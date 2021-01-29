@@ -27,7 +27,8 @@ class ReliefProcureDistributionLineForm(forms.ModelForm):
 ReliefProcureDistributionFormSet = inlineformset_factory(
     ReliefProcureDistribution, ReliefProcureDistributionLine, form=ReliefProcureDistributionLineForm,
     fields=['product', 'uom', 'qty_purchase',
-            'rate', 'amt_total', 'qty_distributed', 'qty_remaining', 'has_quality_complaint'],
+            'rate', 'amt_total', 'qty_distributed', 'qty_remaining', 'has_quality_complaint',
+            'reliefprocuredistribution_line'],
     extra=1,
     can_delete=False
 )
@@ -55,6 +56,6 @@ class ReliefProcureDistributionForm(forms.ModelForm):
             Div(
                 Fieldset('', Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
+                # ButtonHolder(Submit('submit', 'save')),
             )
         )

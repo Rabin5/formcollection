@@ -16,7 +16,7 @@ class CaseInvestigationTracingOperations(FormBaseModel):
 
 
 class CaseInvestigationTracingOperationsLine(FormLineBaseModel):
-    body = models.ForeignKey(
+    case_invs_body = models.ForeignKey(
         GovernmentBody, on_delete=models.CASCADE, related_name='case_investigation_body', verbose_name='निकायको नामः: ')
     num_team_members = models.IntegerField(
         blank=True, null=True, verbose_name='टीमको सदस्य संख्या')

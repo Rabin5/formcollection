@@ -25,11 +25,11 @@ from forms.models.reliefprocurementdetail import ReliefProcurementDetail
 
 
 from users.models.user import User
-from collection.utils import PROVINCE_STATE, STATUS
+from collection.utils import LOCAL_LEVEL_STATE, STATUS
 
-class ProvinceFormCollection(models.Model):
+class LocalLevelFormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    state = models.IntegerField(choices=PROVINCE_STATE, default=0, blank=True)
+    state = models.IntegerField(choices=LOCAL_LEVEL_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
     
     epidemic_outbreak_prep = models.OneToOneField(
@@ -50,7 +50,7 @@ class ProvinceFormCollection(models.Model):
         IsolationManagementDetail, on_delete=models.CASCADE, null=True)
     cov_hos_equipment = models.OneToOneField(
         CovidHospitalEquipment, on_delete=models.CASCADE, null=True)
-    cov_hos_manpower = models.OneToOneField(
+    covid_hos_mainpower = models.OneToOneField(
         CovidHospitalManpower, on_delete=models.CASCADE, null=True)
     quarantine_management_detail = models.OneToOneField(
         QuarantineManagementDetail, on_delete=models.CASCADE, null=True)

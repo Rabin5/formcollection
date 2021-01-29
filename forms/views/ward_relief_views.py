@@ -31,6 +31,10 @@ class WardReliefProcureDistributionCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+        collection = context.get('collection')
+        if collection:
+            collection.ward_relief_procurement_dist = self.object
+            collection.save()
         return super().form_valid(form)
 
     def get_success_url(self):

@@ -24,7 +24,8 @@ class ReceivedReliefDetailLineForm(forms.ModelForm):
 
 ReceivedReliefDetailFormSet = inlineformset_factory(
     ReceivedReliefDetail, ReceivedReliefDetailLine, form=ReceivedReliefDetailLineForm,
-    fields=['provider', 'unit', 'qty_received', 'qty_distributed', 'relief_material', 'qty_remaining'
+    fields=['provider', 'unit', 'qty_received', 'qty_distributed', 'relief_material', 'qty_remaining',
+    'ward_relief'
             ],
     extra=1,
     can_delete=False

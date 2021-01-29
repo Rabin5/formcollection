@@ -25,7 +25,7 @@ class ReliefProcurementDetailLineForm(forms.ModelForm):
 
 ReliefProcurementDetailFormSet = inlineformset_factory(
     ReliefProcurementDetail, ReliefProcurementDetailLine, form=ReliefProcurementDetailLineForm,
-    fields=['procure_method', 'amt_purchase', 'reason_procure_method'],
+    fields=['procure_method', 'amt_purchase', 'reason_procure_method', 'reliefprocurementdetail_line'],
     extra=1,
     can_delete=False
 )
@@ -53,6 +53,6 @@ class ReliefProcurementDetailForm(forms.ModelForm):
             Div(
                 Fieldset('', Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
+                # ButtonHolder(Submit('submit', 'save')),
             )
         )

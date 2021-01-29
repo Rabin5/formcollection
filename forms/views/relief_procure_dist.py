@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from forms.models.reliefprocuredistribution import ReliefProcureDistribution, ReliefProcureDistributionLine
-from forms.forms.relief_procure_dist import ReliefProcureDistributionLineForm, ReliefProcureDistributionFormSet
+from forms.forms.relief_procure_dist import ReliefProcureDistributionForm, ReliefProcureDistributionFormSet
 
 
 class ReliefProcureDistributionCreateView(CreateView):
-    model = ReliefProcureDistributionLine
+    model = ReliefProcureDistribution
     template_name = "forms/relief_procure_dist/create.html"
-    form_class = ReliefProcureDistributionLineForm
+    form_class = ReliefProcureDistributionForm
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class ReliefProcureDistributionCreateView(CreateView):
 
         collection = context.get('collection')
         if collection:
-            collection.risk_allowance = self.object
+            collection.relief_procurement_distribution = self.object
             collection.save()
 
         return super().form_valid(form)
@@ -46,7 +46,7 @@ class ReliefProcureDistributionCreateView(CreateView):
 class ReliefProcureDistributionUpdateView(UpdateView):
     model = ReliefProcureDistribution
     template_name = "forms/relief_procure_dist/update.html"
-    form_class = ReliefProcureDistributionLineForm
+    form_class = ReliefProcureDistributionForm
     success_url = None
 
     def get_context_data(self, **kwargs):

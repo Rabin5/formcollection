@@ -6,5 +6,6 @@ admin.site.register([
     models.CovHosFormCollection,
     models.ProvinceFormCollection,
     models.InternalAffairFormCollection,
-    models.ChiefMinisterOfficeFormCollection
+    models.ChiefMinisterOfficeFormCollection,
+    models.LocalLevelFormCollection
 ])
