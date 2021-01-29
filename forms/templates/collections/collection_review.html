@@ -465,6 +465,79 @@
 
 <br>
 
+----
+
+<h3>15. आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने) </h3>
+<h5>निकाय अस्पतालको नामः {{ object.isolation_management_detail.body }}</h5>
+<h5>स्थान:आर्थिक बर्ष: {{ object.isolation_management_detail.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=isolation_management_detail">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको आईसोलेशन केन्द्रको नाम</th>
+    <th rowspan="2">निर्माण खर्च</th>
+    <th rowspan="2">बेड संख्या</th>
+    <th colspan="2">आईसोलेशन केन्द्रमा बस्नेहरुको संख्या</th>
+    <th rowspan="2">ब्यबस्थापन प्रयोजनको खर्च</th>
+  </tr>
+  <tr>
+    <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+    <th>आषाढ मसान्त सम्म आईसोलेशन केन्द्रमा बसेकाहरुको कुल संख्या</th>
+  </tr>
+
+  {% for obj in object.isolation_management_detail.lines.all  %}
+      <tr>
+        <td>{{ obj.isolationcenter }}</td>
+        <td>{{ obj.cost_construction }}</td>
+        <td>{{ obj.num_bed }}</td>
+        <td>{{ obj.max_num_daily_stay }}</td>
+        <td>{{ obj.num_stayed_till_fy_end }}</td>
+        <td>{{ obj.expense_operations }}</td>
+      </tr>
+  {% endfor %}
+  <tr>
+    <td>जम्मा</td>
+  </tr>
+</table>
+
+<br>
+
+----
+
+<h3>16. क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट सञ्चालित क्वारेन्टिन निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h3>
+<h5>निकाय । अस्पतालको नामः {{ object.quarantine_contruction_expenditure.body }}</h5>
+<h5>स्थान:आर्थिक बर्ष: {{ object.quarantine_contruction_expenditure.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>खरिद भएका सामग्री</th>
+    <th>इकाई</th>
+    <th>संख्या</th>
+    <th>प्रति ईकाइ दर</th>
+    <th>खर्च रकम</th>
+    <th>खरिद विधि</th>
+    <th>कैफियत</th>
+  </tr>
+
+  {% for obj in object.quarantine_contruction_expenditure.lines.all  %}
+      <tr>
+        <td>{{ obj.product }}</td>
+        <td>{{ obj.uom }}</td>
+        <td>{{ obj.number }}</td>
+        <td>{{ obj.unit_cost }}</td>
+        <td>{{ obj.amt_expense }}</td>
+        <td>{{ obj.procure_method }}</td>
+        <td>{{ obj.remarks }}</td>
+      </tr>
+  {% endfor %}
+  <tr>
+    <td>जम्मा</td>
+  </tr>
+</table>
+
+<br>
+
+----
+
 <button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'forms:submit_form' form_pk=object.pk %}">Submit</button>
 
 {% endblock content %}
