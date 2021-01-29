@@ -28,14 +28,8 @@
         <div class="align-vertical justify-content-between mb-3">
             <div class="align-vertical">
                 <i class="ic-info des text-secondary mr-2"></i>
-                <p class="text-secondary">छ जाँच गर्नुहोस् यदि विवरण मेल खान्छ भने । यदि छैन भने छैन जाँच गर्नुहोस् ।</p>
+                <p class="text-secondary">उचित रूपमा टिक गर्नुहोस्।</p>
             </div>
-
-            <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-cov_hos_managament:create' %}"
-                href="{% url 'md-cov_hos_managament:create' %}" data-toggle="modal" data-target="#modalCovHosManagementTypeCreate">
-                <i class="ic-add"></i>
-                चेकलिस्ट वस्तु थप्नुहोस्
-            </a>
         </div>
 
         {% crispy form %}
@@ -43,32 +37,3 @@
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
-
-{% block modal %}
-<div class="modal fade" id="modalCovHosManagementTypeCreate" tabindex="-1" role="dialog" aria-labelledby="modalCovHosManagementTypeCreate" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>
-{% endblock modal %}
-
-
-{% block extrascripts %}
-<script src="{% static 'js/post_data.js' %}"></script>
-<script>
-  $(document).ready(function () {
-    $('#modalCovHosManagementTypeCreate').on('shown.bs.modal', function (e) {
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
-    });
-  });
-
-  $( "#modalCovHosManagementTypeCreate").on('submit', 'form', function(e) {
-    e.preventDefault();
-    saveData($(this), modal_id='',win_reload=true)
-  });
-
-</script>
-{% endblock extrascripts %}

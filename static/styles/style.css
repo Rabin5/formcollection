@@ -8469,3 +8469,6 @@ a.text-dark:hover, a.text-dark:focus {
   align-items: center;
   margin-bottom: .5rem; }
 
+input[type='number'] {
+  text-align: right;
+}

@@ -5,10 +5,13 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
-from forms.models.medical_receipt import MedicalReceiptLine, MedicalReceipt
+from forms.fields import ModelChoiceFieldWithCreate
+from forms.models.medical_receipt import MedicalReceiptLine, MedicalReceipt, Institution, Product
 
 
 class MedicalReceiptLineForm(forms.ModelForm):
+    product = ModelChoiceFieldWithCreate(queryset=Product.objects.all(), blank=False, label='स्वास्थ्य सामाग्री उपकरण', save_to_field='name')
+    provider_institution = ModelChoiceFieldWithCreate(queryset=Institution.objects.all(), label='यदि संस्था भए, प्रदान गर्ने संस्था', save_to_field='name')
 
     class Meta:
         model = MedicalReceiptLine
@@ -19,7 +22,10 @@ class MedicalReceiptLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type == 'select':
+                field.widget.attrs.update({'class': 'select_class'})
+            else:
+                field.widget.attrs['class'] = 'form-control'
 
 
 MedicalReceiptFormSet = inlineformset_factory(

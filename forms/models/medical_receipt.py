@@ -21,9 +21,9 @@ class MedicalReceiptLine(FormLineBaseModel):
     product = models.ForeignKey(
         Product, on_delete=models.PROTECT, verbose_name='स्वास्थ्य सामाग्री उपकरणको विवरण')
     provider_institution = models.ForeignKey(
-        Institution, on_delete=models.PROTECT, related_name='institution_pro', verbose_name='प्रदान गर्ने संस्था')
+        Institution, on_delete=models.PROTECT, related_name='institution_pro', verbose_name='यदि संस्था भए, प्रदान गर्ने संस्था')
     provider_body = models.ForeignKey(
-        GovernmentBody, on_delete=models.PROTECT, related_name='body_pro', verbose_name='प्रदान गर्ने निकाय')
+        GovernmentBody, on_delete=models.PROTECT, related_name='body_pro', verbose_name='यदि निकाय भए, प्रदान गर्ने निकाय')
     quantity = models.IntegerField(verbose_name='परिमाण')
 
     cost_received_items = models.FloatField(

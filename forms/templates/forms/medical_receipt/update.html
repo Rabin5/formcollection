@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद - Nepal Audit Management System
+औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद
+औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -25,10 +25,19 @@
 {% block content %}
     {% include 'core/forms/progress_bar.html' %}
     <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद</h6>
+        <h6 class="heading-01 mb-3">औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h6>
 
         {% crispy form %}
         
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
+
+{% block extrascripts %}
+<script>
+    $(".select_class").select2({
+        tags: true
+    })
+
+</script>
+{% endblock extrascripts %}

@@ -13,6 +13,15 @@ class PcrTestLineForm(forms.ModelForm):
     class Meta:
         model = PcrTestComplianceDetailLine
         exclude = ()
+        widgets = {
+            'year': forms.TextInput()
+        }
+    
+    def clean_year(self):
+        year = self.cleaned_data.get('year')
+        if 2076 <= year <= 2080:
+            return year
+        raise forms.ValidationError('Invalid year.')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

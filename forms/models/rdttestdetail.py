@@ -21,11 +21,11 @@ class RdtTestDetailLine(FormLineBaseModel):
     laboratory = models.ForeignKey(
         Laboratory, on_delete=models.PROTECT, verbose_name='ल्यावको नाम र स्थान')
     num_tested_fy_end = models.IntegerField(
-        verbose_name='आषाढ मसान्तसम्म आरडीटी परीक्षण गरेको संख्या')
+        verbose_name='आषाढ मसान्तसम्म आरडीटी परीक्षण गरेको संख्या', default=0)
     num_tested_pcr = models.IntegerField(
-        verbose_name='परीक्षण मध्ये पिसीआर गरिएको संख्या')
+        verbose_name='परीक्षण मध्ये पिसीआर गरिएको संख्या', default=0)
     expense_rdt_test = models.IntegerField(
-        verbose_name='आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च')
+        verbose_name='आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च', default=0)
 
     rdt_test_detail = models.ForeignKey(
         RdtTestDetail, on_delete=models.PROTECT)

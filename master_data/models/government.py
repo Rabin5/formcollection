@@ -60,8 +60,11 @@ class ExpenseHeader(models.Model):
 
 
 class Manpower(models.Model):
-    # TODO: UI integration for manpower
-    pass
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=30, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class AllowanceType(models.Model):
