@@ -183,6 +183,84 @@
   {% endfor %}
 </table>
 
+----
+
+<h3>7. पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण</h3>
+<h5>निकायको नामः {{ object.pcr_test_compliance_detail.body }}</h5>
+<h5>आर्थिक बर्ष: {{ object.pcr_test_compliance_detail.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th rowspan="2">महिना</th>
+    <th colspan="2">सबै क्षेत्रमा गरेको कुल परीक्षण संख्या</th>
+    <th colspan="2">Priority-1क्षेत्रमा गरेको परीक्षण संख्या</th>
+    <th colspan="2">Priority-2क्षेत्रमा गरेको परीक्षण संख्या</th>
+    <th colspan="2">Priority-3 क्षेत्रमा गरेको परीक्षण संख्या</th>
+    <th colspan="2">Non-priority क्षेत्रमा गरेको परीक्षण संख्या</th>
+  </tr>
+  <tr>
+    <th>परीक्षण संख्या</th>
+    <th>संक्रमित संख्या</th>
+    <th>परीक्षण संख्या</th>
+    <th>संक्रमित संख्या</th>
+    <th>परीक्षण संख्या</th>
+    <th>संक्रमित संख्या</th>
+    <th>परीक्षण संख्या</th>
+    <th>संक्रमित संख्या</th>
+    <th>परीक्षण संख्या</th>
+    <th>संक्रमित संख्या</th>
+  </tr>
+
+  {% for obj in object.pcr_test_compliance_detail.lines.all  %}
+      <tr>
+        <td>{{ obj.month }}</td>
+        <td>{{ obj.all_area_test_num }}</td>
+        <td>{{ obj.all_area_infected_num }}</td>
+        <td>{{ obj.priority_1_test_num }}</td>
+        <td>{{ obj.priority_1_infected_num }}</td>
+        <td>{{ obj.priority_2_test_num }}</td>
+        <td>{{ obj.priority_2_infected_num }}</td>
+        <td>{{ obj.priority_3_test_num }}</td>
+        <td>{{ obj.priority_3_infected_num }}</td>
+        <td>{{ obj.non_priority_test_num }}</td>
+        <td>{{ obj.non_priority_infected_num }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+----
+
+<h3>8. पिसीआर प्रयोगशाला  सम्बन्धी बिबरण</h3>
+<h5>निकायको नामः {{ object.pcr_lab_detail.body }}</h5>
+<h5>आर्थिक बर्ष: {{ object.pcr_lab_detail.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=pcr_lab_detail">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>पीसीआर ल्यावको नाम र स्थान</th>
+    <th>स्थापना मिति</th>
+    <th>दैनिक परीक्षण क्षमता</th>
+    <th>आषाढ मसान्तसम्म परीक्षण गरेको कुल संख्या</th>
+    <th>परीक्षण मध्ये संक्रमितको संख्या</th>
+    <th>नतिजा दिन लाग्ने औषत समय</th>
+    <th>पीसीआर परीक्षणमा आषाढ समान्त सम्म भएको खर्च</th>
+  </tr>
+
+  {% for obj in object.pcr_lab_detail.lines.all  %}
+      <tr>
+        <td>{{ obj.laboratory }}</td>
+        <td>{{ obj.date_establishment }}</td>
+        <td>{{ obj.capacity_daily_test }}</td>
+        <td>{{ obj.num_tested_fy_end }}</td>
+        <td>{{ obj.num_infected }}</td>
+        <td>{{ obj.time_test_result }}</td>
+        <td>{{ obj.expense_pcr_test }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
 <button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'forms:submit_form' form_pk=object.pk %}">Submit</button>
 
 {% endblock content %}
