@@ -21,3 +21,9 @@ admin.site.register(models.Manpower)
 admin.site.register(models.Institution)
 admin.site.register(models.CovidHospitalManagementChecklistDescription)
 
+admin.site.register(models.ExpenseHeader)
+admin.site.register(models.Product)
+admin.site.register(models.ReliefType)
+
+
+

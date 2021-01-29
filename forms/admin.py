@@ -38,4 +38,12 @@ admin.site.register([
     models.QuarantineManagementDetailLine,
     models.CovidHospitalManagementChecklist,
     models.CovidHospitalManagementChecklistLine,
+    models.FundOperation,
+    models.FundOperationLine,
+    models.WardReliefProcureDistribution,
+    models.WardReliefProcureDistributionLine,
+    models.ReceivedReliefDetail,
+    models.ReceivedReliefDetailLine,
+    models.ReliefDistributionExpense,
+    models.ReliefDistributionExpenseLine,
 ])
