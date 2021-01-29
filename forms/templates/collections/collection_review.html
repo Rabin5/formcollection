@@ -261,6 +261,125 @@
 </table>
 
 <br>
+
+----
+
+<h3>9. आरडीटी परीक्षण सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h3>
+<h5>निकायको नामः {{ object.rdt_test_detail.body }}</h5>
+<h5>आर्थिक बर्ष: {{ object.rdt_test_detail.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=rdt_test_detail">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>ल्यावको नाम र स्थान</th>
+    <th>आषाढ मसान्तसम्म आरडीटी परीक्षण गरेको संख्या</th>
+    <th>परीक्षण मध्ये पिसीआर गरिएको संख्या</th>
+    <th>आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च</th>
+  </tr>
+
+  {% for obj in object.rdt_test_detail.lines.all  %}
+      <tr>
+        <td>{{ obj.laboratory }}</td>
+        <td>{{ obj.num_tested_fy_end }}</td>
+        <td>{{ obj.num_tested_pcr }}</td>
+        <td>{{ obj.expense_rdt_test }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+
+----
+
+<h3>10. पिसीआर किटको उपयोग सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h3>
+<h5>निकायको नामः {{ object.pcr_kit_usage.body }}</h5>
+<h5>आर्थिक बर्ष: {{ object.pcr_kit_usage.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=pcr_kit_usage">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>प्रयोगशालाको नाम</th>
+    <th>२०७६ चैत्र देखि २०७७ आषाढ सम्म पिसीआर किट प्राप्ती</th>
+    <th>२०७७ आषाढमसान्त सम्म पीसिआर किट खर्च</th>
+    <th>२०७७ आषाढमसान्त मौजदात किट</th>
+    <th>परीक्षण संख्या</th>
+    <th>वेष्टेज गएको किट संख्या</th>
+    <th>वेष्टेज प्रतिशत</th>
+  </tr>
+
+  {% for obj in object.pcr_kit_usage.lines.all  %}
+      <tr>
+        <td>{{ obj.laboratory }}</td>
+        <td>{{ obj.num_kit_received }}</td>
+        <td>{{ obj.num_kit_expensed }}</td>
+        <td>{{ obj.num_kit_available }}</td>
+        <td>{{ obj.num_tests }}</td>
+        <td>{{ obj.num_wasted }}</td>
+        <td><!-- percentage to be added --></td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+----
+
+<h3>11. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण </h3>
+<h5>कोभिड डेडिकेटेड अस्पातालको नाम: {{ object.covid_hos_mainpower }}</h5>
+<h5>स्थान: {{ object.covid_hos_mainpower.address }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=covid_hos_mainpower">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>स्वास्थ्य जनशक्ति</th>
+    <th>दरबन्दी संख्या</th>
+    <th>पदपूर्ति संख्या</th>
+    <th>रिक्त संख्या</th>
+    <th>पदपूर्ति मध्ये करार संख्या</th>
+  </tr>
+
+  <!-- to be tested -->
+  {% for obj in object.covid_hos_mainpower.lines.all  %}
+      <tr>
+        <td>{{ obj.num_required }}</td>
+        <td>{{ obj.num_hired }}</td>
+        <td>{{ obj.num_vacant }}</td>
+        <td>{{ obj.num_vacant }}</td>
+        <td>{{ obj.num_contract }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+----
+
+<h3>12. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण </h3>
+<h5>कोभिड डेडिकेटेड अस्पातालको नाम: Hospital Name</h5>
+<h5>स्थान: {{ object.cov_hos_equipment.address }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=cov_hos_equipment">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th rowspan="2">स्वास्थ्य उपकरण</th>
+    <th colspan="3">संख्या</th>
+  </tr>
+
+  <tr>
+    <th>आबश्यक</th>
+    <th>उपलब्ध</th>
+    <th>नपुग</th>
+  </tr>
+
+  {% for obj in object.cov_hos_equipment.lines.all  %}
+      <tr>
+        <td>{{ obj.product }}</td>
+        <td>{{ obj.num_required }}</td>
+        <td>{{ obj.available }}</td>
+        <td>{{ obj.num_still_required }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
 <button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'forms:submit_form' form_pk=object.pk %}">Submit</button>
 
 {% endblock content %}
