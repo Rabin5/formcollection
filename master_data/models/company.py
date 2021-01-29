@@ -8,6 +8,12 @@ class Location(Address):
 
     class Meta:
         abstract = True
+    
+    def __str__(self):
+        if self.local_level and self.district:
+            return f"{self.name}, {self.local_level.name}, {self.district.name}"
+        else:
+            return self.name
 
 
 class QuanrantineCenter(Location):
@@ -15,8 +21,7 @@ class QuanrantineCenter(Location):
 
 
 class IsolationCenter(Location):
-    def __str__(self):
-        return self.name
+    pass
 
 
 class Company(Address):
@@ -24,7 +29,10 @@ class Company(Address):
     date_establishment = models.DateField(null=True, blank=False)
 
     def __str__(self):
-        return self.name
+        if self.local_level and self.district:
+            return f"{self.name}, {self.local_level.name}, {self.district.name}"
+        else:
+            return self.name
     
     class Meta:
         abstract = True
@@ -35,7 +43,7 @@ class Importer(Company):
 
 
 class Laboratory(Company):
-    capacity_daily_test = models.IntegerField()
+    capacity_daily_test = models.IntegerField(default=0)
 
 
 class Institution(Company):

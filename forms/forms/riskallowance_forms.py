@@ -6,10 +6,14 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
+from forms.fields import ModelChoiceFieldWithCreate
+from master_data.models import OfficeBearer, AllowanceType
 from forms.models.risk_allowance import RiskAllowanceLine, RiskAllowance
 
 
 class RiskAllowanceLineForm(forms.ModelForm):
+    office_bearer = ModelChoiceFieldWithCreate(queryset=OfficeBearer.objects.all(), label='जोखिम भत्ता पाउने पदाधिकारी', blank=False, save_to_field='title')
+    allowance_type = ModelChoiceFieldWithCreate(queryset=AllowanceType.objects.all(), label='भत्ताको प्रकार', blank=False, save_to_field='name')
 
     class Meta:
         model = RiskAllowanceLine
@@ -20,8 +24,10 @@ class RiskAllowanceLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            # if field.widget.input_type != 'select':
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type == 'select':
+                field.widget.attrs.update({'class': 'select_class'})
+            else:
+                field.widget.attrs['class'] = 'form-control'
 
 
 RiskAllowanceLineFormSet = inlineformset_factory(

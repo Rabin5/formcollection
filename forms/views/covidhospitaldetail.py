@@ -69,8 +69,13 @@ class CovidHospitalDetailUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
-            return super().form_valid(form)
+        return super().form_valid(form)
+
+    def form_invalid(self, form, lines=None):
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('covid_hos_detail:update', kwargs={'pk': self.object.pk})
