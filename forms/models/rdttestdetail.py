@@ -26,6 +26,5 @@ class RdtTestDetailLine(FormLineBaseModel):
         verbose_name='परीक्षण मध्ये पिसीआर गरिएको संख्या')
     expense_rdt_test = models.IntegerField(
         verbose_name='आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च')
-
     rdt_test_detail = models.ForeignKey(
-        RdtTestDetail, on_delete=models.PROTECT)
+        RdtTestDetail, on_delete=models.PROTECT, related_name='lines')

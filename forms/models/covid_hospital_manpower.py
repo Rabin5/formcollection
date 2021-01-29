@@ -25,4 +25,4 @@ class CovidHospitalManpowerLine(FormLineBaseModel):
     num_contract = models.IntegerField(
         verbose_name='पदपूर्ति मध्ये करार संख्या')
     covidhospital_manpower_line = models.ForeignKey(
-        CovidHospitalManpower, on_delete=models.PROTECT)
+        CovidHospitalManpower, on_delete=models.PROTECT, related_name='lines')
