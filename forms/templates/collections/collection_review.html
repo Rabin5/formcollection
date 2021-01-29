@@ -353,7 +353,7 @@
 ----
 
 <h3>12. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण </h3>
-<h5>कोभिड डेडिकेटेड अस्पातालको नाम: Hospital Name</h5>
+<h5>कोभिड डेडिकेटेड अस्पातालको नाम: {{ object.cov_hos_equipment }}</h5>
 <h5>स्थान: {{ object.cov_hos_equipment.address }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=cov_hos_equipment">Edit</a></h5>
 <table class="table-review">
@@ -376,6 +376,91 @@
         <td>{{ obj.num_still_required }}</td>
       </tr>
   {% endfor %}
+</table>
+
+<br>
+
+----
+
+<h3>13. कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h3>
+<h5>निकाय । अस्पतालको नामः {{ object.covid_hospital_detail.body }}</h5>
+<h5>स्थान:आर्थिक बर्ष: {{ object.covid_hospital_detail.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=covid_hospital_detail">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th rowspan="2">डेडिकेटेड अस्पतालको नाम र स्थान</th>
+    <th rowspan="2">कोभिड अस्पताल घोषणा भएको मिति</th>
+    <th rowspan="2">कोभिड अस्पतालको प्रकार</th>
+    <th colspan="4">कोभिड अस्पताल घोषणा हुँदाको अवस्थामा रहेको संख्या</th>
+    <th colspan="4">२०७७ असार मसान्तसम्म थप भएको संख्या</th>
+  </tr>
+
+  <tr>
+    <th>स्वास्थ्यकर्मीको संख्या</th>
+    <th>बेड संख्या</th>
+    <th>आई सी यु संख्या</th>
+    <th>भेन्टिलेटर संख्या</th>
+    <th>स्वास्थ्यकर्मीको संख्या</th>
+    <th>बेड संख्या</th>
+    <th>आई सी यु संख्या</th>
+    <th>भेन्टिलेटर संख्या</th>
+    <th>२०७७ असार मसान्तसम्म उपचार गरेको कोभिड विरामी संख्या</th>
+    <th>२०७७ असार मसान्तसम्म उपचारमा भएको खर्च</th>
+  </tr>
+
+  {% for obj in object.covid_hospital_detail.lines.all  %}
+      <tr>
+        <td>{{ obj.covidhospital }}</td>
+        <td>{{ obj.covidhospital.date_announcement }}</td>
+        <td>{{ obj.covidhospital.type }}</td>
+        <td>{{ obj.announce_time_health_workers }}</td>
+        <td>{{ obj.announce_time_beds }}</td>
+        <td>{{ obj.announce_time_icu }}</td>
+        <td>{{ obj.announce_time_ventilators }}</td>
+        <td>{{ obj.added_health_workers }}</td>
+        <td>{{ obj.added_beds }}</td>
+        <td>{{ obj.added_icu }}</td>
+        <td>{{ obj.added_ventilators }}</td>
+        <td>{{ obj.num_treated_patients }}</td>
+        <td>{{ obj.expense_treatment }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+----
+
+<h3>14. क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित क्वारेन्टिनको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h3>
+<h5>निकाय अस्पतालको नामः {{ object.quarantine_management_detail.body }}</h5>
+<h5>स्थान:आर्थिक बर्ष: {{ object.quarantine_management_detail.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=quarantine_management_detail">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम</th>
+    <th rowspan="2">निर्माण खर्च</th>
+    <th rowspan="2">बेड संख्या</th>
+    <th colspan="2">क्वारेन्टिनमा बस्नेहरुको संख्या</th>
+    <th rowspan="2">सञ्चालन ब्यबस्थापन प्रयोजनको खर्च</th>
+  </tr>
+  <tr>
+    <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+    <th>आषाढ मसान्त सम्म क्वारेन्टिनमा बसेकाहरुको कुल संख्या</th>
+  </tr>
+
+  {% for obj in object.quarantine_management_detail.lines.all  %}
+      <tr>
+        <td>{{ obj.isolation_center }}</td>
+        <td>{{ obj.cost_construction }}</td>
+        <td>{{ obj.num_bed }}</td>
+        <td>{{ obj.max_num_daily_stay }}</td>
+        <td>{{ obj.num_stayed_till_fy_end }}</td>
+        <td>{{ obj.expense_operations }}</td>
+      </tr>
+  {% endfor %}
+  <tr>
+    <td>जम्मा</td>
+  </tr>
 </table>
 
 <br>
