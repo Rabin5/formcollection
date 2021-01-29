@@ -538,6 +538,72 @@
 
 ----
 
+
+<h3>17. आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h3>
+<h5>निकाय । अस्पतालको नामः {{ object.isolation_construction_expenditure.body }}</h5>
+<h5>स्थान:आर्थिक बर्ष: {{ object.isolation_construction_expenditure.fiscal_year }}</h5>
+<h5><a href="{% url 'forms:update' object.pk %}?form=isolation_construction_expenditure">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>खरिद भएका सामग्री</th>
+    <th>इकाई</th>
+    <th>संख्या</th>
+    <th>प्रति ईकाइ दर</th>
+    <th>खर्च रकम</th>
+    <th>खरिद विधि</th>
+    <th>कैफियत</th>
+  </tr>
+
+  {% for obj in object.isolation_construction_expenditure.lines.all  %}
+      <tr>
+        <td>{{ obj.product }}</td>
+        <td>{{ obj.uom }}</td>
+        <td>{{ obj.number }}</td>
+        <td>{{ obj.unit_cost }}</td>
+        <td>{{ obj.amt_expense }}</td>
+        <td>{{ obj.procure_method }}</td>
+        <td>{{ obj.remarks }}</td>
+      </tr>
+  {% endfor %}
+  <tr>
+    <td>जम्मा</td>
+  </tr>
+</table>
+
+<br>
+
+----
+
+
+<h3>कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट</h3>
+<h4>आषाढमसान्तको अबस्था</h4>
+<h5><a href="{% url 'forms:update' object.pk %}?form=cov_hos_management_checklist">Edit</a></h5>
+<table class="table-review">
+  <tr class="tr-review-head">
+    <th>बिबरण</th>
+    <th>छ</th>
+    <th>छैन</th>
+    <th>कैफियत</th>
+  </tr>
+
+  {% for obj in object.cov_hos_management_checklist.lines.all  %}
+      <tr>
+        <td>{{ obj.description }}</td>
+        <td>{{ obj.is_yes }}</td>
+        {% if obj.is_yes %}
+          <td>False</td>
+        {% else %}
+          <td>True</td>
+        {% endif %}
+        <td>{{ obj.remarks }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+----
+
 <button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'forms:submit_form' form_pk=object.pk %}">Submit</button>
 
 {% endblock content %}
