@@ -16,6 +16,14 @@ admin.site.register(models.GovernmentBody)
 admin.site.register(models.OfficeBearer)
 admin.site.register(models.AllowanceType)
 admin.site.register(models.Laboratory)
+admin.site.register(models.ActionPlanActivity)
 admin.site.register(models.Manpower)
 admin.site.register(models.Institution)
 admin.site.register(models.CovidHospitalManagementChecklistDescription)
+
+admin.site.register(models.ExpenseHeader)
+admin.site.register(models.Product)
+admin.site.register(models.ReliefType)
+
+
+

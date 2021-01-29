@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'master_data.apps.MasterDataConfig',
     'users.apps.UsersConfig',
     'forms.apps.FormsConfig',
+    'collection.apps.CollectionConfig',
 
     'reports.apps.ReportsConfig',
 ]

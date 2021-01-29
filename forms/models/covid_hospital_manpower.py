@@ -1,7 +1,7 @@
 from master_data.models import FiscalYear
 from django.db import models
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES, BS_MONTHS
+from collection.utils import STATES, BS_MONTHS
 from master_data.models.hospital import CovidHospital
 from master_data.models.company import Location
 from master_data.models.government import GovernmentBody, Manpower
@@ -12,7 +12,7 @@ class CovidHospitalManpower(FormBaseModel):
         CovidHospital, on_delete=models.PROTECT, verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम:: ', null=True, blank=True)
 
     def __str__(self):
-        return self.covidhospital
+        return self.covidhospital.name
 
 
 class CovidHospitalManpowerLine(FormLineBaseModel):

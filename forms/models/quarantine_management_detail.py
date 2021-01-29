@@ -1,8 +1,8 @@
 from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES
-from master_data.models import IsolationCenter, FiscalYear, GovernmentBody
+from collection.utils import STATES
+from master_data.models import QuanrantineCenter, FiscalYear, GovernmentBody
 
 
 class QuarantineManagementDetail(FormBaseModel):
@@ -20,7 +20,7 @@ class QuarantineManagementDetail(FormBaseModel):
 
 class QuarantineManagementDetailLine(FormLineBaseModel):
     quarantine_management = models.ForeignKey(QuarantineManagementDetail, on_delete=models.CASCADE, related_name='lines')
-    isolation_center = models.ForeignKey(IsolationCenter, on_delete=models.CASCADE, related_name='isolation_center', verbose_name='यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम')
+    quarantine_center = models.ForeignKey(QuanrantineCenter, on_delete=models.CASCADE, related_name='quarantine_center', verbose_name='यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम', null=True, blank=False)
     cost_construction = models.FloatField( verbose_name='निर्माण खर्च')
     num_bed = models.IntegerField(verbose_name='बेड संख्या')
     max_num_daily_stay = models.IntegerField(verbose_name='दैनिकरुपमा बसेको अधिकतम  संख्या')

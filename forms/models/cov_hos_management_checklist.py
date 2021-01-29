@@ -1,7 +1,7 @@
 from django.db import models
 
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES
+from collection.utils import STATES
 from master_data.models import CovidHospital, CovidHospitalManagementChecklistDescription
 
 
@@ -13,7 +13,7 @@ class CovidHospitalManagementChecklist(FormBaseModel):
     state = models.CharField(max_length=25, choices=STATES, default='draft', blank=True)
 
     def __str__(self):
-        return f'{self.hospital}'
+        return f'{self.hospital.name}'
 
 
 class CovidHospitalManagementChecklistLine(FormLineBaseModel):
