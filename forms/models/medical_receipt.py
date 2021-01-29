@@ -17,7 +17,7 @@ class MedicalReceipt(FormBaseModel):
         return self.body.name
 
 
-class MedicalReceiptLine(FormBaseModel):
+class MedicalReceiptLine(FormLineBaseModel):
     product = models.ForeignKey(
         Product, on_delete=models.PROTECT, verbose_name='स्वास्थ्य सामाग्री उपकरणको विवरण')
     provider_institution = models.ForeignKey(

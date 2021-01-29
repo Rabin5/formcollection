@@ -1,7 +1,4 @@
-"""
-All forms are based on the UML (https://gitlab.com/ai-python-django/covid-reporting-uml)
-based on the Business Requirement Documents provided.
-"""
+
 
 from .medical_expense import *
 from .risk_allowance import *
@@ -31,4 +28,6 @@ from .ward_relief_procure_distribution import *
 from .received_relief_detail import *
 from .relief_distribution_expense import *
 from .districtcovidmanagement import *
-
+from .case_inve_trac_operations import *
+from .reliefprocuredistribution import *
+from .reliefprocurementdetail import *
