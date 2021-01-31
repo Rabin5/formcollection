@@ -15,6 +15,12 @@ def num_to_devanagari_temp(value):
 
 
 @register.simple_tag
+def calculate_percentage(numerator, denominator):
+    percentage = numerator / denominator * 100
+    return percentage
+
+
+@register.simple_tag
 def calculate_total(value, otm_field_name, rel_name, field_to_total):
     sum_query = otm_field_name + "__" + rel_name + "__" + field_to_total
     total = (

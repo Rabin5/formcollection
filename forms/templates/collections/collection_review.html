@@ -364,7 +364,7 @@
         <td>{{ obj.num_kit_available }}</td>
         <td>{{ obj.num_tests }}</td>
         <td>{{ obj.num_wasted }}</td>
-        <td><!-- percentage to be added --></td>
+        <td>{% calculate_percentage obj.num_wasted obj.num_kit_received %} </td>
       </tr>
   {% endfor %}
   {% endwith %}
