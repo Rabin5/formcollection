@@ -1,24 +1,90 @@
 {% load crispy_forms_tags %}
 
 <div class="modal-header">
-  <h6 class="modal-title" id="exampleModalLabel">Add Group</h6>
+  <h6 class="modal-title" id="exampleModalLabel">प्रयोगकर्ता समूह थप्नुहोस</h6>
   <a class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </a>
 </div>
 <div class="modal-body pt-2">
 {{form.errors}}
-  <form id="user_create" method="post" action="{% url 'md-users:create_group' %}">
+  <form id="user_create" method="post" action="{% url 'users:create_group' %}">
     {% csrf_token %}
     {{ form|crispy  }}
-    {% comment %} <input type="text" name="name" placeholder="Group name"><br> {% endcomment %}
-    {% comment %} {% for permission in permissions %}
-        <input type="checkbox" id="{{permission.pk}}" value="{{permission.pk}}" name="permissions">
-        <label for="{{permission.pk}}">{{permission.name}}</label><br>
-    {% endfor %} {% endcomment %}
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
   <button id="btn_user_create" form="user_create" type="submit" class="btn btn-success">Save</button>
 </div>
+
+
+
+
+
+{% comment %} <div class="container-fluid p-3">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-between mb-4">
+      </div>
+      <div class="d-flex justify-content-between mb-4">
+        <h5 class="heading">समूह विवरण</h5>
+        <a class="align-vertical text-info" href="{{request.META.HTTP_REFERER}}">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="mr-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M5.854 4.646a.5.5 0 010 .708L3.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z"
+                    clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M2.5 8a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <span>पछाडी जानुहोस् </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="card_structured card_equal">
+        <div class="head bg-primary">प्रयोगकर्ता समूह थप्नुहोस</div>
+        <div class="scrolable p-3">
+          <form method="post" action="{% url 'users:create_group' %}">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col-sm-12">
+                <div class="form-group"><label for="domain">समूह नाम</label><input type="text" class="form-control"
+                    name="name" value="{{form.name.value|default_if_none:''}}" required>
+                </div>
+                  {% if form.name.errors %}<span class="error">{{form.name.errors|striptags}}</span>{% endif %}
+              </div>
+              <div class="col-sm-12" >
+                  <label>अनुमतिहरू</label>
+                  <select class="form-control js-example-reporters" name="permissions" multiple="multiple" id="id-categories" required>
+                  {% for permission in permissions %}
+                      <option value="{{permission.pk}}">{{permission.name}}</option>
+                      {% endfor %}
+                  </select>
+
+              </div>
+
+              <div class="col-sm-12">
+                  <label>प्रयोगकर्ताहरू</label>
+                  <select class="form-control js-example-tokenizer" name="users" multiple="multiple">
+                      {% for user in users %}
+                      <option value="{{user.pk}}">{{user.email}}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-info" > थप्नुहोस</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ {% endcomment %}
