@@ -34,11 +34,11 @@
   {% endfor %}
   <tr>
     <th>जम्मा</th>
-    <th>sum</th>
-    <th>sum</th>
+    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
+    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
     <th>जम्मा</th>
-    <th>sum</th>
-    <th>sum</th>
+    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
+    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
   </tr>
 </table>
 <i>द्रष्ट्रव्यः माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।</i>
