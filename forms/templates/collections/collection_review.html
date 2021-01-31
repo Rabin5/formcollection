@@ -292,8 +292,8 @@
       <tr>
         <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.laboratory }}</td>
-        <td>{{ obj.date_establishment }}</td>
-        <td>{{ obj.capacity_daily_test }}</td>
+        <td>{{ obj.laboratory.date_establishment }}</td>
+        <td>{{ obj.laboratory.capacity_daily_test }}</td>
         <td>{{ obj.num_tested_fy_end }}</td>
         <td>{{ obj.num_infected }}</td>
         <td>{{ obj.time_test_result }}</td>
