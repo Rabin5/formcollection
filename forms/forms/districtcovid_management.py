@@ -3,7 +3,7 @@ from crispy_forms.layout import Column, Div, Fieldset, Hidden, ButtonHolder, Sub
 from django import forms
 from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
-from forms.custom_layout_object import Formsett
+from forms.custom_layout_object import Formset as Formsett
 from forms.models.districtcovidmanagement import DistrictCovidManagement, DisctrictQuarantineManagementLine, DistrictIsolationManagementLine, DistrictLabTestLine
 
 
@@ -54,14 +54,14 @@ DistrictCovidQuaManagementFormSet = inlineformset_factory(
     fields=['district', 'num_prepared_quarantine', 'num_quarantined_person',
             'num_home_quarantined_person', 'num_insufficient_bed', ],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 DistrictCovidIsolManagementFormSet = inlineformset_factory(
     DistrictCovidManagement, DistrictIsolationManagementLine, form=DistrictIsolationManagementLineForm,
     fields=['district', 'num_prepared_icu', 'num_prepared_bed',
             'num_infected_person', 'num_isolated_person', 'num_home_isolated_person'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 DistrictCovidLabtTestManagementFormSet = inlineformset_factory(
@@ -72,7 +72,7 @@ DistrictCovidLabtTestManagementFormSet = inlineformset_factory(
             'num_covid_recovered_patients', 'num_isolation_treatments', 'num_icu_treatments',
             'num_covid_deaths'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

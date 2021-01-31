@@ -39,7 +39,7 @@ MedExpLineFormSet = inlineformset_factory(
         'date_imported': NepaliDateInput(),
     },
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

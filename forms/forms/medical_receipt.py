@@ -33,7 +33,7 @@ MedicalReceiptFormSet = inlineformset_factory(
     fields=['product', 'provider_institution', 'provider_body',
             'quantity', 'cost_received_items', 'usage_situation'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

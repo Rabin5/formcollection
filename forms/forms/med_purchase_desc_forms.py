@@ -30,7 +30,7 @@ MedPurchaseDescLineFormSet = inlineformset_factory(
         'date_received': NepaliDateInput(),
     },
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

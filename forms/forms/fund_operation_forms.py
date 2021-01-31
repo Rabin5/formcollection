@@ -27,7 +27,7 @@ FundOperationFormSet = inlineformset_factory(
     fields=['body', 'amt_received', 'expense_header',
             'amt_expensed'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

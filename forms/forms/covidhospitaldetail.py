@@ -45,7 +45,7 @@ CovidHospitaldetatilFormSet = inlineformset_factory(
     fields=['covidhospital', 'date_announcement', 'announce_time_health_workers', 'announce_time_beds',
             'announce_time_icu', 'announce_time_ventilators', 'added_health_workers', 'added_beds', 'added_icu', 'added_ventilators', 'num_treated_patients', 'expense_treatment'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

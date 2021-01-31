@@ -20,7 +20,7 @@ class EpidemicOutbreakPreparatoryWorkLineForm(forms.ModelForm):
 
 
 EpidemicWorkLineFormSet = inlineformset_factory(EpidemicOutbreakPreparatoryWork, EpidemicOutbreakPreparatoryWorkLine, form=EpidemicOutbreakPreparatoryWorkLineForm, fields=[
-                                                'preparation_work_to_do', 'major_activities', 'amt_expense'], extra=1, can_delete=False)
+                                                'preparation_work_to_do', 'major_activities', 'amt_expense'], extra=1, can_delete=True)
 
 
 class EpidemicOutbreakPreparatoryWorkForm(forms.ModelForm):

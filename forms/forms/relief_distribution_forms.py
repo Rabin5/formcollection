@@ -27,7 +27,7 @@ ReliefDistributionExpenseFormSet = inlineformset_factory(
     fields=['amt_expense', 'relief_type', 'num_relif_beneficiary', 'remarks',
             'relief_distribution'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

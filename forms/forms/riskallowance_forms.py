@@ -34,7 +34,7 @@ RiskAllowanceLineFormSet = inlineformset_factory(
     RiskAllowance, RiskAllowanceLine, form=RiskAllowanceLineForm,
     fields=['risk_allowance', 'gov_body', 'office_bearer', 'bearer_num', 'allowance_type', 'expense_amount', 'remarks'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

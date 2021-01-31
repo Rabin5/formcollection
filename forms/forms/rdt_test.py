@@ -31,7 +31,7 @@ RdtTestFormSet = inlineformset_factory(
     fields=['laboratory', 'num_tested_fy_end', 'num_tested_pcr',
             'expense_rdt_test', ],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 
