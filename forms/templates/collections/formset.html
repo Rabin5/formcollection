@@ -21,7 +21,6 @@
             {% for form in formset.forms %}
                 <tr class="{% cycle 'row1' 'row2' %} formset_row-{{ formset.prefix }}">
                     {% for field in form.visible_fields %}
-                        {% if 'DELETE' not in field.name %}
                             <td>
                                 {# Include the hidden fields in the form #}
                                 {% if forloop.first %}
@@ -33,12 +32,7 @@
                                 {{ field|as_crispy_field }}
                                 
                             </td>
-                        {% endif %}
                     {% endfor %}
-                    {% if formset.can_delete %}
-                        <td class="action">
-                        </td>
-                    {% endif %}
                 </tr>
             {% endfor %}
 
