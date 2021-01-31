@@ -19,6 +19,7 @@ class CovidHospitalManagementChecklistLineForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
+        self.fields['description'].widget.attrs['readonly'] = True
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
     
@@ -28,6 +29,7 @@ CovidHospitalManagementChecklistLineFormSet = inlineformset_factory(
     CovidHospitalManagementChecklist, CovidHospitalManagementChecklistLine, form=CovidHospitalManagementChecklistLineForm,
     fields=['cov_hos_management', 'description', 'is_yes', 'remarks'],
     widgets = {
+        'description': forms.TextInput()
         # 'is_yes': forms.CheckboxSelectMultiple(choices=((0, True),(1, False)))
     },
     extra=1,
