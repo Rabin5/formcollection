@@ -4,11 +4,13 @@
 <link src="{% static 'styles/style.css' %}">
 {% load crispy_forms_tags %}
 <h2>कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा प्रदेश अस्पताल र प्रयोगशालाले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h2>
-
+<h4> (यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो बर्षको मात्र उपलव्ध गराउनु हुने छ । प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ ।)</h4>
 <h3>1. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h3>
 <h5>निकायको नामः {{ object.fund_receipt_expense.body }}</h5>
 आर्थिक बर्ष २०७६।७७ र २०७७।७८ को आश्विन मसान्तसम्म
 <h5><a href="{% url 'forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></h5>
+<p align='right'>रु हजारमा</p>
+
 <table class="table-review">
   <tr class="tr-review-head">
     <th>बजेट/आम्दानीको स्रोत</th>
@@ -29,22 +31,32 @@
         <td>{{ obj.fy_end_expense_amt }}</td>
       </tr>
   {% endfor %}
+  <tr>
+    <th>जम्मा</th>
+    <th>sum</th>
+    <th>sum</th>
+    <th>जम्मा</th>
+    <th>sum</th>
+    <th>sum</th>
+  </tr>
 </table>
+<i>द्रष्ट्रव्यः माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।</i>
 
 ----
 
-<h3>2. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा प्राप्त रकम र खर्च सम्बन्धी बिबरण</h3>
+<h3>2. जोखिम भत्ता सम्बन्धी बिबरण (अस्पतालले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)</h3>
 <h5>निकायको नामः {{ object.fund_receipt_expense.body }}</h5>
 <h5>आर्थिक बर्ष २०७६।७७ र २०७७।७८ को आश्विन मसान्तसम्म</h5>
-<h5>length of lines: {{ object.fund_receipet.lines.all }}</h5>
 
 
 <h5>निकायको नामः {{ object.risk_allowance.body }}</h5>
 <h5>जोखिम भत्ता सम्बन्धी बिबरण</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=risk_allowance">Edit</a></h5>
 
-<table class="table-review">
+<table class="table-review auto-index">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>खर्च गर्ने निकायको नाम</th>
     <th>जोखिम भत्ता पाउने पदाधिकारी</th>
     <th>कर्मचारी वा पदाधिकारी संख्या</th>
@@ -55,6 +67,7 @@
 
   {% for obj in object.risk_allowance.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.gov_body }}</td>
         <td>{{ obj.office_bearer }}</td>
         <td>{{ obj.bearer_num }}</td>
@@ -63,17 +76,29 @@
         <td>{{ obj.remarks }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
+  <tr>
+    <th></th>
+    <th></th>
+    <th>जम्मा</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 </table>
+<i>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</i>
 
 ----
 
-<h3>3. औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद</h3>
+<h3>3. औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.medical_expense.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_expense.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=medical_expense">Edit</a></h5>
 
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
     <th>सम्झौता रकम</th>
     <th>आपूर्ति गर्नुपर्ने मिति</th>
@@ -85,6 +110,7 @@
 
   {% for obj in object.medical_expense.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.amt_agreement }}</td>
         <td>{{ obj.date_to_import }}</td>
@@ -94,17 +120,21 @@
         <td>{{ obj.remarks }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
+<i>नोट: सामाग्री उपकरण प्राप्त हुन नसकेको भए कारण खुलाउनु होला ।</i>
 
 ----
 
-<h3>4. औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति</h3>
+<h3>4. औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.medical_receipt.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_receipt.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=medical_receipt">Edit</a></h5>
 
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
     <th>प्रदान गर्ने निकाय वा संस्था</th>
     <th>परिमाण</th>
@@ -113,6 +143,7 @@
   </tr>
   {% for obj in object.medical_receipt.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.provider_institution }}</td>
         <!-- if na then provider_body -->
@@ -121,6 +152,7 @@
         <td>{{ obj.usage_situation }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 ----
@@ -130,7 +162,9 @@
 <h5>आर्थिक बर्ष: {{ object.medical_use.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=medical_use">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम</th>
     <th>खरिद वा प्राप्ती </th>
     <th>सामानको मुल्य</th>
@@ -141,14 +175,17 @@
 
   {% for obj in object.medical_use.medical_use_lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.is_purchased }}</td>
         <!-- if na then product_price -->
+        <td>{{ obj.product_price }}</td>
         <td>{{ obj.unused_qty }}</td>
         <td>{{ obj.unused_reason }}</td>
         <td>{{ obj.remarks }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 ----
@@ -182,6 +219,7 @@
       </tr>
   {% endfor %}
 </table>
+<i>नोटः स्वास्थ्य सामाग्री खरिद गर्ने सबै निकायले भर्नु होला । सामानको नामसंगै स्पेशीफिकेशन छोटकरीमा उल्लेख गरिदिनु होला ।</i>
 
 ----
 
@@ -227,17 +265,19 @@
       </tr>
   {% endfor %}
 </table>
-
+<i>नोटः अस्पतालको प्रयोगशालाबाट भएको परीक्षणको आधारमा तयार गर्नुपर्नेछ ।</i>
 <br>
 
 ----
 
-<h3>8. पिसीआर प्रयोगशाला  सम्बन्धी बिबरण</h3>
+<h3>8. पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.pcr_lab_detail.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.pcr_lab_detail.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=pcr_lab_detail">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>पीसीआर ल्यावको नाम र स्थान</th>
     <th>स्थापना मिति</th>
     <th>दैनिक परीक्षण क्षमता</th>
@@ -249,6 +289,7 @@
 
   {% for obj in object.pcr_lab_detail.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.laboratory }}</td>
         <td>{{ obj.date_establishment }}</td>
         <td>{{ obj.capacity_daily_test }}</td>
@@ -258,6 +299,7 @@
         <td>{{ obj.expense_pcr_test }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 <br>
@@ -269,7 +311,9 @@
 <h5>आर्थिक बर्ष: {{ object.rdt_test_detail.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=rdt_test_detail">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>ल्यावको नाम र स्थान</th>
     <th>आषाढ मसान्तसम्म आरडीटी परीक्षण गरेको संख्या</th>
     <th>परीक्षण मध्ये पिसीआर गरिएको संख्या</th>
@@ -278,12 +322,14 @@
 
   {% for obj in object.rdt_test_detail.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.laboratory }}</td>
         <td>{{ obj.num_tested_fy_end }}</td>
         <td>{{ obj.num_tested_pcr }}</td>
         <td>{{ obj.expense_rdt_test }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 <br>
@@ -296,7 +342,9 @@
 <h5>आर्थिक बर्ष: {{ object.pcr_kit_usage.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=pcr_kit_usage">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>सि नं</th>
     <th>प्रयोगशालाको नाम</th>
     <th>२०७६ चैत्र देखि २०७७ आषाढ सम्म पिसीआर किट प्राप्ती</th>
     <th>२०७७ आषाढमसान्त सम्म पीसिआर किट खर्च</th>
@@ -308,6 +356,7 @@
 
   {% for obj in object.pcr_kit_usage.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.laboratory }}</td>
         <td>{{ obj.num_kit_received }}</td>
         <td>{{ obj.num_kit_expensed }}</td>
@@ -317,6 +366,7 @@
         <td><!-- percentage to be added --></td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 <br>
@@ -328,7 +378,9 @@
 <h5>स्थान: {{ object.covid_hos_mainpower.address }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=covid_hos_mainpower">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>स्वास्थ्य जनशक्ति</th>
     <th>दरबन्दी संख्या</th>
     <th>पदपूर्ति संख्या</th>
@@ -339,6 +391,7 @@
   <!-- to be tested -->
   {% for obj in object.covid_hos_mainpower.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.num_required }}</td>
         <td>{{ obj.num_hired }}</td>
         <td>{{ obj.num_vacant }}</td>
@@ -346,6 +399,7 @@
         <td>{{ obj.num_contract }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 <br>
@@ -357,7 +411,9 @@
 <h5>स्थान: {{ object.cov_hos_equipment.address }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=cov_hos_equipment">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th rowspan="2">क्रस</th>
     <th rowspan="2">स्वास्थ्य उपकरण</th>
     <th colspan="3">संख्या</th>
   </tr>
@@ -370,12 +426,14 @@
 
   {% for obj in object.cov_hos_equipment.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.num_required }}</td>
         <td>{{ obj.available }}</td>
         <td>{{ obj.num_still_required }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 <br>
@@ -387,7 +445,9 @@
 <h5>स्थान:आर्थिक बर्ष: {{ object.covid_hospital_detail.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=covid_hospital_detail">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th rowspan="2">क्रस</th>
     <th rowspan="2">डेडिकेटेड अस्पतालको नाम र स्थान</th>
     <th rowspan="2">कोभिड अस्पताल घोषणा भएको मिति</th>
     <th rowspan="2">कोभिड अस्पतालको प्रकार</th>
@@ -410,6 +470,7 @@
 
   {% for obj in object.covid_hospital_detail.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.covidhospital }}</td>
         <td>{{ obj.covidhospital.date_announcement }}</td>
         <td>{{ obj.covidhospital.type }}</td>
@@ -425,6 +486,7 @@
         <td>{{ obj.expense_treatment }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
 </table>
 
 <br>
@@ -436,7 +498,9 @@
 <h5>स्थान:आर्थिक बर्ष: {{ object.quarantine_management_detail.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=quarantine_management_detail">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th rowspan="2">क्रस</th>
     <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम</th>
     <th rowspan="2">निर्माण खर्च</th>
     <th rowspan="2">बेड संख्या</th>
@@ -450,6 +514,7 @@
 
   {% for obj in object.quarantine_management_detail.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.isolation_center }}</td>
         <td>{{ obj.cost_construction }}</td>
         <td>{{ obj.num_bed }}</td>
@@ -458,10 +523,18 @@
         <td>{{ obj.expense_operations }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
   <tr>
+    <td></td>
     <td>जम्मा</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
   </tr>
 </table>
+<i>नोट अस्पतालले क्वारेन्टीन निर्माण ब्यबस्थापनमा खर्च गरेको भए यो फारममा उल्लेख गर्नुहोला ।</i>
 
 <br>
 
@@ -472,7 +545,9 @@
 <h5>स्थान:आर्थिक बर्ष: {{ object.isolation_management_detail.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=isolation_management_detail">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th rowspan="2">क्रस</th>
     <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको आईसोलेशन केन्द्रको नाम</th>
     <th rowspan="2">निर्माण खर्च</th>
     <th rowspan="2">बेड संख्या</th>
@@ -486,6 +561,7 @@
 
   {% for obj in object.isolation_management_detail.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.isolationcenter }}</td>
         <td>{{ obj.cost_construction }}</td>
         <td>{{ obj.num_bed }}</td>
@@ -494,10 +570,18 @@
         <td>{{ obj.expense_operations }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
   <tr>
+    <td></td>
     <td>जम्मा</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
   </tr>
 </table>
+<i>नोट अस्पतालले क्वारेन्टीन निर्माण ब्यबस्थापनमा खर्च गरेको भए उल्लेख गरिदिनुहोला।</i>
 
 <br>
 
@@ -508,7 +592,9 @@
 <h5>स्थान:आर्थिक बर्ष: {{ object.quarantine_contruction_expenditure.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>खरिद भएका सामग्री</th>
     <th>इकाई</th>
     <th>संख्या</th>
@@ -520,6 +606,7 @@
 
   {% for obj in object.quarantine_contruction_expenditure.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.uom }}</td>
         <td>{{ obj.number }}</td>
@@ -529,11 +616,19 @@
         <td>{{ obj.remarks }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
   <tr>
+    <td></td>
     <td>जम्मा</td>
+    <td></td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
-
+<i>नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।</i>
 <br>
 
 ----
@@ -544,7 +639,9 @@
 <h5>स्थान:आर्थिक बर्ष: {{ object.isolation_construction_expenditure.fiscal_year }}</h5>
 <h5><a href="{% url 'forms:update' object.pk %}?form=isolation_construction_expenditure">Edit</a></h5>
 <table class="table-review">
+  {% with start_index=1 %}
   <tr class="tr-review-head">
+    <th>क्रस</th>
     <th>खरिद भएका सामग्री</th>
     <th>इकाई</th>
     <th>संख्या</th>
@@ -556,6 +653,7 @@
 
   {% for obj in object.isolation_construction_expenditure.lines.all  %}
       <tr>
+        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.uom }}</td>
         <td>{{ obj.number }}</td>
@@ -565,10 +663,19 @@
         <td>{{ obj.remarks }}</td>
       </tr>
   {% endfor %}
+  {% endwith %}
   <tr>
+    <td></td>
     <td>जम्मा</td>
+    <td></td>
+    <td>sum</td>
+    <td>sum</td>
+    <td>sum</td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
+<i>नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।</i>
 
 <br>
 
@@ -609,6 +716,8 @@
 {% endblock content %}
 
 {% block extrascripts %}
+    <!-- <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="jquery.tableTotal.js"></script> -->
     <script>
         $( '#submit' ).on('click', function(event){
           var pk = $(this).attr("data-pk");
@@ -627,5 +736,19 @@
             }
           })
         });
+
+        // var addSerialNumber = function () {
+        //     $('table tr').each(function(index) {
+        //         $(this).find('td:nth-child(1)').html(index+1);
+        //     });
+        // };
+        
+        // $('#totalMe').tableTotal();
+
+        // addSerialNumber();
+
+        // $('.auto-index tr td:first-child').each(function(i){
+        //   $(this).before('<td>'+(i+1)+'</td>');
+        // });
     </script>
 {% endblock extrascripts %}
