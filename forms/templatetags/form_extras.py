@@ -17,7 +17,7 @@ def num_to_devanagari_temp(value):
 @register.simple_tag
 def calculate_percentage(numerator, denominator):
     percentage = numerator / denominator * 100
-    return percentage
+    return round(percentage, 2)
 
 
 @register.simple_tag
