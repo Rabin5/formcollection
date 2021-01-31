@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load form_extras %}
 {% block content %}
 <link src="{% static 'styles/style.css' %}">
 {% load crispy_forms_tags %}
@@ -67,7 +68,7 @@
 
   {% for obj in object.risk_allowance.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.gov_body }}</td>
         <td>{{ obj.office_bearer }}</td>
         <td>{{ obj.bearer_num }}</td>
@@ -110,7 +111,7 @@
 
   {% for obj in object.medical_expense.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.amt_agreement }}</td>
         <td>{{ obj.date_to_import }}</td>
@@ -143,7 +144,7 @@
   </tr>
   {% for obj in object.medical_receipt.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.provider_institution }}</td>
         <!-- if na then provider_body -->
@@ -175,7 +176,7 @@
 
   {% for obj in object.medical_use.medical_use_lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.is_purchased }}</td>
         <!-- if na then product_price -->
@@ -289,7 +290,7 @@
 
   {% for obj in object.pcr_lab_detail.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.laboratory }}</td>
         <td>{{ obj.date_establishment }}</td>
         <td>{{ obj.capacity_daily_test }}</td>
@@ -322,7 +323,7 @@
 
   {% for obj in object.rdt_test_detail.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.laboratory }}</td>
         <td>{{ obj.num_tested_fy_end }}</td>
         <td>{{ obj.num_tested_pcr }}</td>
@@ -356,7 +357,7 @@
 
   {% for obj in object.pcr_kit_usage.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.laboratory }}</td>
         <td>{{ obj.num_kit_received }}</td>
         <td>{{ obj.num_kit_expensed }}</td>
@@ -391,7 +392,7 @@
   <!-- to be tested -->
   {% for obj in object.covid_hos_mainpower.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.num_required }}</td>
         <td>{{ obj.num_hired }}</td>
         <td>{{ obj.num_vacant }}</td>
@@ -426,7 +427,7 @@
 
   {% for obj in object.cov_hos_equipment.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.num_required }}</td>
         <td>{{ obj.available }}</td>
@@ -470,7 +471,7 @@
 
   {% for obj in object.covid_hospital_detail.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.covidhospital }}</td>
         <td>{{ obj.covidhospital.date_announcement }}</td>
         <td>{{ obj.covidhospital.type }}</td>
@@ -514,7 +515,7 @@
 
   {% for obj in object.quarantine_management_detail.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.isolation_center }}</td>
         <td>{{ obj.cost_construction }}</td>
         <td>{{ obj.num_bed }}</td>
@@ -561,7 +562,7 @@
 
   {% for obj in object.isolation_management_detail.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.isolationcenter }}</td>
         <td>{{ obj.cost_construction }}</td>
         <td>{{ obj.num_bed }}</td>
@@ -606,7 +607,7 @@
 
   {% for obj in object.quarantine_contruction_expenditure.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.uom }}</td>
         <td>{{ obj.number }}</td>
@@ -653,7 +654,7 @@
 
   {% for obj in object.isolation_construction_expenditure.lines.all  %}
       <tr>
-        <td class="cell-num">{{ forloop.counter0|add:start_index }}</td>
+        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
         <td>{{ obj.product }}</td>
         <td>{{ obj.uom }}</td>
         <td>{{ obj.number }}</td>
