@@ -28,7 +28,7 @@ ReceivedReliefDetailFormSet = inlineformset_factory(
     'ward_relief'
             ],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

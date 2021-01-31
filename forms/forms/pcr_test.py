@@ -37,7 +37,7 @@ PcrTestFormSet = inlineformset_factory(
             'all_area_infected_num', 'priority_1_test_num', 'priority_1_infected_num', 'priority_2_test_num', 'priority_2_infected_num',
             'priority_3_test_num', 'priority_3_infected_num', 'non_priority_test_num', 'non_priority_infected_num'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

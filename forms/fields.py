@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 
 import nepali_datetime
 
+from forms.widgets import ModelChoiceFieldSelect
 from master_data.widgets import NepaliDateInput
 
 
@@ -10,6 +11,7 @@ class ModelChoiceFieldWithCreate(forms.ModelChoiceField):
     """
     Works if new instance is to be created and only value of single field is provided for new instance
     """
+    widget = ModelChoiceFieldSelect
 
     def __init__(self, queryset, *, empty_label="---------",
                  required=True, widget=None, label=None, initial=None,

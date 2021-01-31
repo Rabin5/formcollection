@@ -20,7 +20,7 @@ class ActionPlanImplementationLineForm(forms.ModelForm):
 
 
 ActionPlanImplementationFormSet = inlineformset_factory(ActionPlanImplementation, ActionPlanImplementationLine, form=ActionPlanImplementationLineForm, fields=[
-                                                        'activity', 'work_done', 'work_expense'], extra=1, can_delete=False)
+                                                        'activity', 'work_done', 'work_expense'], extra=1, can_delete=True)
 
 
 class ActionPlanImplementationForm(forms.ModelForm):

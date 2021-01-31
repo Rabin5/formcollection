@@ -41,7 +41,7 @@ PcrLaboratoryDetailLineFormSet = inlineformset_factory(
         # 'laboratory': forms.ChoiceField(choices=get_lab_val()),
     },
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

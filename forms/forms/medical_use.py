@@ -32,7 +32,7 @@ MedicalUseFormSet = inlineformset_factory(
     fields=['product', 'is_purchased', 'product_price',
             'unused_qty', 'unused_reason', 'remarks'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

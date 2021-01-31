@@ -30,7 +30,7 @@ ReliefProcureDistributionFormSet = inlineformset_factory(
             'rate', 'amt_total', 'qty_distributed', 'qty_remaining', 'has_quality_complaint',
             'reliefprocuredistribution_line'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

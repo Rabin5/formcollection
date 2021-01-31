@@ -92,7 +92,6 @@
                         del.val('on');
                         row.hide();
                         forms = $('.' + options.formCssClass).not(':hidden');
-                        totalForms.val(forms.length);
                     } else {
                         row.remove();
                         // Update the TOTAL_FORMS count:
@@ -205,14 +204,22 @@
             if (hideAddButton) addButton.hide();
 
             addButton.click(function() {
+                // $(options.formTemplate).find(".select_class").select2("destroy");
                 var formCount = parseInt(totalForms.val()),
                     row = options.formTemplate.clone(true).removeClass('formset-custom-template'),
                     buttonRow = $($(this).parents('tr.' + options.formCssClass + '-add').get(0) || this),
                     delCssSelector = $.trim(options.deleteCssClass).replace(/\s+/g, '.');
                 applyExtraClasses(row, formCount);
+        
                 row.insertBefore(buttonRow).show();
                 row.find(childElementSelector).each(function() {
                     updateElementIndex($(this), options.prefix, formCount);
+                    if ($(this).is('select') && $(this).hasClass('select_class')) {
+                        $(this).select2({
+                            tags: true,
+                            width: 'resolve'
+                        })
+                    }
                 });
                 totalForms.val(formCount + 1);
                 // Check if we're above the minimum allowed number of forms -> show all delete link(s)

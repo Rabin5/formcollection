@@ -27,7 +27,7 @@ ReliefProcurementDetailFormSet = inlineformset_factory(
     ReliefProcurementDetail, ReliefProcurementDetailLine, form=ReliefProcurementDetailLineForm,
     fields=['procure_method', 'amt_purchase', 'reason_procure_method', 'reliefprocurementdetail_line'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 
