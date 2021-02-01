@@ -49,15 +49,15 @@ urlpatterns = [
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
     # for allowence and OfficeBearer
-    path('office_bearer/', include('master_data.urls.officebearer')),
-    path('source_budget/', include('master_data.urls.source_budget')),
-    path('allowance_type/', include('master_data.urls.allowance_type')),
-    path('expense_header/', include('master_data.urls.expense_header')),
-    path('cov_hos_managament/',
+    path('master-data/government/office_bearer/', include('master_data.urls.officebearer')),
+    path('master-data/government/source_budget/', include('master_data.urls.source_budget')),
+    path('master-data/government/allowance_type/', include('master_data.urls.allowance_type')),
+    path('master-data/government/expense_header/', include('master_data.urls.expense_header')),
+    path('master-data/government/cov_hos_managament/',
          include('master_data.urls.covid_hospital_management_desc')),
-    path('committee/', include('master_data.urls.committee')),
-    path('relief_type/', include('master_data.urls.relief_type')),
-    path('action_plan/', include('master_data.urls.action_plan')),
+    path('master-data/government/committee/', include('master_data.urls.committee')),
+    path('master-data/government/relief_type/', include('master_data.urls.relief_type')),
+    path('master-data/government/action_plan/', include('master_data.urls.action_plan')),
 
     # Forms
     path('forms/', include('forms.urls.form_collection_urls')),

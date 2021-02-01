@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <aside class="sidebar">
   <div class="sidebar-brand">
     <img src="{% static 'images/nepal-emblem.png' %}" alt="Nepal Emblem">
@@ -49,8 +50,11 @@
                 </li>
                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-offbearer:list'%}" class="pl-4">कार्यालय वाहक
-                  </a>
+                  </a> 
                 </li>
+               
+               
+        
                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
                 </li>
@@ -146,7 +150,6 @@
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
           </li>
-          {% comment %}
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'medical-forms:medical_receipt-create'%}" class="pl-4">Medical Receipt</a>
           </li>
@@ -167,7 +170,7 @@
           </li>
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'iso_mgt_detail:create'%}" class="pl-4">isolation detail management</a>
-          </li>{% endcomment %}
+          </li>
         </ul>
       </div>
     </li>
