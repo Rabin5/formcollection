@@ -1,7 +1,7 @@
 from django import template
 from django.db.models import Sum
-from forms.models import FormCollection
-from forms.utils import num_to_devanagari
+from collection.models import CovHosFormCollection
+from collection.utils import num_to_devanagari
 
 register = template.Library()
 
@@ -24,7 +24,7 @@ def calculate_percentage(numerator, denominator):
 def calculate_total(value, otm_field_name, rel_name, field_to_total):
     sum_query = otm_field_name + "__" + rel_name + "__" + field_to_total
     total = (
-        FormCollection.objects.filter(id=value.id)
+        CovHosFormCollection.objects.filter(id=value.id)
         .aggregate(Sum(sum_query))
         .get(f"{sum_query}__sum")
     )

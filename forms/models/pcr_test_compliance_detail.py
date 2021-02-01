@@ -1,9 +1,9 @@
 from django.db import models
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from forms.utils import STATES, BS_MONTHS
+from collection.utils import STATES, BS_MONTHS
 from master_data.models import FiscalYear, Product
 from master_data.models.government import GovernmentBody
-from forms.utils import BS_MONTHS
+from collection.utils import BS_MONTHS
 
 
 class PcrTestComplianceDetail(FormBaseModel):

@@ -8477,3 +8477,7 @@ a.text-dark:hover, a.text-dark:focus {
 .tr-review-head {
   font-weight: bold;
 }
+
+input[type='number'] {
+  text-align: right;
+}

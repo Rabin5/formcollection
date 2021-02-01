@@ -73,7 +73,15 @@
         {% include 'core/_scripts.html' %}
 
         {% block extrascripts %}
-          {% comment %} use this {% endcomment %}
+          <!-- {% comment %} use this {% endcomment %} -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+            $("textarea").attr({"rows": "2",
+                                "cols": "30",'class':'textarea_id'
+            });
+        });
+        </script>
+<!-- use for textareafield -->
         {% endblock extrascripts %}
 
       {% endblock scripts %}

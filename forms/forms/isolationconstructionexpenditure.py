@@ -4,10 +4,14 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 from forms.custom_layout_object import Formset
-from forms.models import IsolationConstructionExependiture, IsolationConstructionExependitureLine
+from forms.fields import ModelChoiceFieldWithCreate
+from forms.models import IsolationConstructionExependiture, IsolationConstructionExependitureLine, Product, UnitOfMeasure, ProcurementMethod
 
 
 class IsolationConstructionExependitureLineForm(forms.ModelForm):
+    product = ModelChoiceFieldWithCreate(queryset=Product.objects.all(), label='खरिद भएका सामग्री', blank=False, save_to_field='name')
+    uom = ModelChoiceFieldWithCreate(queryset=UnitOfMeasure.objects.all(), label='इकाई', blank=False, save_to_field='name')
+    procure_method = ModelChoiceFieldWithCreate(queryset=ProcurementMethod.objects.all(), label='खरिद विधि', blank=False, save_to_field='name')
 
     class Meta:
         model = IsolationConstructionExependitureLine
@@ -18,18 +22,21 @@ class IsolationConstructionExependitureLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type == 'select':
+                field.widget.attrs.update({'class': 'select_class'})
+            else:
+                field.widget.attrs['class'] = 'form-control'
 
 
 IsolationConstructionExependitureFormSet = inlineformset_factory(
     IsolationConstructionExependiture, IsolationConstructionExependitureLine, form=IsolationConstructionExependitureLineForm,
-    fields=['product', 'oum', 'number',
+    fields=['product', 'uom', 'number',
             'unit_cost', 'amt_expense', 'procure_method', 'remarks'],
     widgets={
 
     },
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

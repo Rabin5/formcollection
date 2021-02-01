@@ -39,7 +39,7 @@ class RdtTestCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('medical-forms:fre-create')
+        return reverse_lazy('rdt_test-forms:create')
 
 
 class RdtTestUpdateView(UpdateView):
@@ -75,4 +75,4 @@ class RdtTestUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('medical-forms:medical_receipt-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('rdt_test-forms:update', kwargs={'pk': self.object.pk})

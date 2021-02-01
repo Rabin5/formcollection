@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम  परिचालन - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम  परिचालन
+{% endblock page_title %}
+
+{% block page_actions %}
+<div class="align-vertical">
+    <div class="fiscal-year">
+        <span class="text-secondary des">आर्थिक वर्ष</span>
+        <span>२०७७/७८</span>
+        <a href="" class="ic-settings">
+        </a>
+    </div>
+    <a href="" class="btn btn-success text-white ml-3">Save</a>
+</div>
+{% endblock page_actions %}
+
+{% block content %}
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम  परिचालन (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म टीम परिचालन गरेको विवरण खुलाउने)</h6>
+
+    {% crispy form %}
+
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
+{% endblock content %}

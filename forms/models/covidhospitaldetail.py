@@ -18,6 +18,7 @@ class CovidHospitalDetail(FormBaseModel):
 class CovidHospitalDetailLine(FormLineBaseModel):
     covidhospital = models.ForeignKey(
         CovidHospital, on_delete=models.PROTECT, verbose_name='डेडिकेटेड अस्पतालको नाम र स्थान')
+    date_announcement = models.DateField(null=True, blank=False)
     announce_time_health_workers = models.IntegerField(
         verbose_name='कोभिड अस्पताल घोषणा हुँदाको अवस्थामा रहेको स्वास्थ्यकर्मीको संख्या')
     announce_time_beds = models.IntegerField(

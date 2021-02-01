@@ -1,8 +1,9 @@
 from django.db import models
 
+from .address import Address
 
-class Hospital(models.Model):
-    # TODO: Inheritance location
+
+class Hospital(Address):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=255, blank=False,
                             null=False, verbose_name='नाम')
@@ -15,7 +16,6 @@ class Hospital(models.Model):
 
 
 class CovidHospital(Hospital):
-    # TODO: Address Inheritance
     ordering = ['start_date']
     data_created = models.DateTimeField(auto_now_add=True)
     # date_end = models.DateTimeField(null=False, auto_now=True)
