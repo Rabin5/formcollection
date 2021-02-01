@@ -1,7 +1,7 @@
 from django.urls import path
 
 from collection.views.cov_hos_form_collection_views import CovHosFormCollectionCreateView, CovHosFormCollectionListView, \
-    CovHosFormCollectionDeleteView, CovHosFormCollectionUpdateView
+    CovHosFormCollectionDeleteView, CovHosFormCollectionUpdateView, ApproveView
 
 app_name = 'cov_hos_forms'
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/update', CovHosFormCollectionUpdateView.as_view(), name='update'),
     path('<int:pk>/delete', CovHosFormCollectionDeleteView.as_view(), name='delete'),
     path('list', CovHosFormCollectionListView.as_view(), name='list'),
+    path('approve/', ApproveView    .as_view(), name='approve_list'),
 ]
