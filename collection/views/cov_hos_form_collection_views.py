@@ -236,7 +236,7 @@ class CovHosFormCollectionDeleteView(DeleteView):
     pass
 
 
-class FormCollectionReview(DetailView):
+class CovHosFormCollectionReview(DetailView):
     model = CovHosFormCollection
     template_name = "collections/collection_review.html"
 
