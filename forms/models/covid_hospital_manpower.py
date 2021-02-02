@@ -12,7 +12,9 @@ class CovidHospitalManpower(FormBaseModel):
         CovidHospital, on_delete=models.PROTECT, verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम:: ', null=True, blank=True)
 
     def __str__(self):
-        return self.covidhospital.name
+        if self.covidhospital:
+            return self.covidhospital.name
+        return ""
 
 
 class CovidHospitalManpowerLine(FormLineBaseModel):
