@@ -192,51 +192,6 @@
 
     <div>
         <div>
-            <h4>4. औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (मन्त्रालयले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h4>
-            <p>
-                <b>निकायको नामः </b>{{ object.medical_expense.body }}
-            </p>
-            <p>
-                <b>आर्थिक बर्ष </b> {{ object.medical_expense.fiscal_year }}
-            </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_expense">Edit</a></p>
-        </div>
-
-        <div>
-            <table class="table-review auto-index">
-                {% with start_index=1 %}
-                <tr class="tr-review-head">
-                    <th>क्रस</th>
-                    <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
-                    <th>सम्झौता रकम</th>
-                    <th>आपूर्ति गर्नुपर्ने मिति</th>
-                    <th>आपूर्ति गरेको मिति</th>
-                    <th>आपूर्ति भएको सामानको मुल्य</th>
-                    <th>खरिद विधि</th>
-                    <th>कैफियत</th>
-                </tr>
-
-                {% for obj in object.medical_expense.lines.all  %}
-                    <tr>
-                        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
-                        <td>{{ obj.product }}</td>
-                        <td>{{ obj.amt_agreement }}</td>
-                        <td>{{ obj.date_to_import }}</td>
-                        <td>{{ obj.date_imported }}</td>
-                        <td>{{ obj.amt_imported }}</td>
-                        <td>खरिद विधि</td>
-                        <td>{{ obj.remarks }}</td>
-                    </tr>
-                {% endfor %}
-                {% endwith %}
-            </table>
-            <i>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</i>
-        </div>
-    </div>
-    <br>
-
-    <div>
-        <div>
             <h4>5. औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (मन्त्रालयले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h4>
             <p>
                 <b>निकायको नामः </b>{{ object.medical_receipt.body }}
