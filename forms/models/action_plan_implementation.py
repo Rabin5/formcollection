@@ -16,7 +16,7 @@ class ActionPlanImplementation(FormBaseModel):
 
 class ActionPlanImplementationLine(FormLineBaseModel):
     action_plan_implementation = models.ForeignKey(
-        ActionPlanImplementation, on_delete=models.PROTECT, verbose_name='कार्य योजना कार्यान्वयन')
+        ActionPlanImplementation, on_delete=models.PROTECT, verbose_name='कार्य योजना कार्यान्वयन', related_name='lines')
     activity = models.ForeignKey(
         ActionPlanActivity, on_delete=models.PROTECT, verbose_name='क्रियाकलाप')
     work_done = models.CharField(max_length=500, verbose_name='प्रदेश सरकारबाट भएको कार्य')
