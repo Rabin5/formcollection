@@ -8481,3 +8481,12 @@ a.text-dark:hover, a.text-dark:focus {
 input[type='number'] {
   text-align: right;
 }
+
+.table-review, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+.tr-review-head {
+  font-weight: bold;
+}
