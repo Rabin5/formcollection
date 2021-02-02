@@ -36,7 +36,7 @@ class ChiefMinisterOfficeFormCollectionCreateView(View):
         col_update_params = {}
         fiscal_year = FiscalYear.objects.get_current_fy()
         for form in LIST_CHIEF_MINISTER_STATE:
-            if ROUTE_LINK[form]['form_field'] == 'province_institute_management':
+            if ROUTE_LINK[form]['form_field'] in ['province_institute_management', 'action_plan_implementation']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
                     body=self.request.user.body,
                     create_user=self.request.user,

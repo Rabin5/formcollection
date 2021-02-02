@@ -10,13 +10,42 @@
 {{form.errors}}
   <form id="user_create" method="post" action="{% url 'users:create_group' %}">
     {% csrf_token %}
-    {{ form|crispy  }}
+    {% comment %} {{ form|crispy  }} {% endcomment %}
+    <div class="form-row">
+      <div class="col-sm-12">
+        <div class="form-group"><label for="domain">समूह नाम</label><input type="text" class="form-control"
+            name="name" value="{{form.name.value|default_if_none:''}}" required>
+        </div>
+        {% if form.name.errors %}<span class="error">{{form.name.errors|striptags}}</span>{% endif %}
+      </div>
+      <div class="col-sm-12">
+        <label>अनुमतिहरू</label>
+        <select class="form-control js-example-reporters" name="permissions" multiple="multiple"
+          id="id-categories" required>
+          {% for permission in permissions %}
+          <option value="{{permission.pk}}">{{permission.name}}</option>
+          {% endfor %}
+        </select>
+
+      </div>
+
+      <div class="col-sm-12">
+        <label>प्रयोगकर्ताहरू</label>
+        <select class="form-control js-example-tokenizer" name="users" multiple="multiple">
+        {{users}}
+          {% for user in users %}
+          <option value="{{user.pk}}">{{user.username}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-info"> थप्नुहोस</button>
+    </div>
+
   </form>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-  <button id="btn_user_create" form="user_create" type="submit" class="btn btn-success">Save</button>
-</div>
+
 
 
 

@@ -33,10 +33,9 @@ User Groups
         <td>{{ forloop.counter }}</td>
         <td>{{ group.name }}</td>
         <td class="action">
-          <a data-remote="{% url 'users:update_group' group.pk %}"
-            href="{% url 'users:update_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupUpdate">
-            <i class="ic-edit mr-2"></i>
-          </a>
+          
+          <a href="{% url 'users:group_detail' group.pk %}">
+          <i class="ic-visible"></i>
           
           <a data-remote="{% url 'users:delete_group' group.pk %}"
             href="{% url 'users:delete_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupDelete">
