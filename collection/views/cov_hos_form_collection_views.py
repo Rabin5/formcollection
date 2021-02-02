@@ -238,9 +238,10 @@ class CovHosFormCollectionDeleteView(DeleteView):
 
 class CovHosFormCollectionReview(DetailView):
     model = CovHosFormCollection
-    template_name = "collections/collection_review.html"
+    template_name = "cov_hos_form_collection/review.html"
 
-def submit_form(request, form_pk):
+
+def cov_hos_submit_form(request, form_pk):
     form_obj = CovHosFormCollection.objects.get(id=form_pk)
     form_obj.status = 'submitted'
     form_obj.save()

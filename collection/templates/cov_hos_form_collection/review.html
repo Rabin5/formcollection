@@ -716,8 +716,6 @@
 {% endblock content %}
 
 {% block extrascripts %}
-    <!-- <script src="//code.jquery.com/jquery.min.js"></script>
-    <script src="jquery.tableTotal.js"></script> -->
     <script>
         $( '#submit' ).on('click', function(event){
           var pk = $(this).attr("data-pk");
@@ -736,19 +734,5 @@
             }
           })
         });
-
-        // var addSerialNumber = function () {
-        //     $('table tr').each(function(index) {
-        //         $(this).find('td:nth-child(1)').html(index+1);
-        //     });
-        // };
-        
-        // $('#totalMe').tableTotal();
-
-        // addSerialNumber();
-
-        // $('.auto-index tr td:first-child').each(function(i){
-        //   $(this).before('<td>'+(i+1)+'</td>');
-        // });
     </script>
 {% endblock extrascripts %}
