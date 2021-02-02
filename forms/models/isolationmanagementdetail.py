@@ -30,4 +30,4 @@ class IsolationManagementDetailLine(FormLineBaseModel):
         verbose_name='ब्यबस्थापन प्रयोजनको खर्च')
 
     isolation_management_detail_line = models.ForeignKey(
-        IsolationManagementDetail, on_delete=models.PROTECT)
+        IsolationManagementDetail, on_delete=models.PROTECT, related_name='lines')

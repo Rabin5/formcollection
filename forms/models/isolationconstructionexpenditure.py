@@ -31,4 +31,4 @@ class IsolationConstructionExependitureLine(FormLineBaseModel):
         ProcurementMethod, on_delete=models.PROTECT, verbose_name='खरिद विधि')
     remarks = models.CharField(max_length=300, verbose_name='कैफियत')
     isolation_cons_expentiture_line = models.ForeignKey(
-        IsolationConstructionExependiture, on_delete=models.PROTECT)
+        IsolationConstructionExependiture, on_delete=models.PROTECT, related_name='lines')

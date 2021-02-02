@@ -28,4 +28,4 @@ class RdtTestDetailLine(FormLineBaseModel):
         verbose_name='आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च', default=0)
 
     rdt_test_detail = models.ForeignKey(
-        RdtTestDetail, on_delete=models.PROTECT)
+        RdtTestDetail, on_delete=models.PROTECT, related_name='lines')

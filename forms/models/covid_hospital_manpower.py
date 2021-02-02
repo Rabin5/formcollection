@@ -12,7 +12,9 @@ class CovidHospitalManpower(FormBaseModel):
         CovidHospital, on_delete=models.PROTECT, verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम:: ', null=True, blank=True)
 
     def __str__(self):
-        return self.covidhospital.name
+        if self.covidhospital:
+            return self.covidhospital.name
+        return ""
 
 
 class CovidHospitalManpowerLine(FormLineBaseModel):
@@ -25,4 +27,4 @@ class CovidHospitalManpowerLine(FormLineBaseModel):
     num_contract = models.IntegerField(
         verbose_name='पदपूर्ति मध्ये करार संख्या')
     covidhospital_manpower_line = models.ForeignKey(
-        CovidHospitalManpower, on_delete=models.PROTECT)
+        CovidHospitalManpower, on_delete=models.PROTECT, related_name='lines')

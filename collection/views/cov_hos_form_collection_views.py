@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from forms import models
 
@@ -200,6 +201,9 @@ class CovHosFormCollectionUpdateView(UpdateView):
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
+            if self.next_state == 'review':
+                return HttpResponseRedirect(reverse('cov_hos_forms:review', kwargs={
+                                   'pk': self.object.pk}))
             return HttpResponseRedirect(next_url)
         else:
             return form_response
@@ -230,3 +234,15 @@ class CovHosFormCollectionListView(ListView):
 
 class CovHosFormCollectionDeleteView(DeleteView):
     pass
+
+
+class CovHosFormCollectionReview(DetailView):
+    model = CovHosFormCollection
+    template_name = "cov_hos_form_collection/review.html"
+
+
+def cov_hos_submit_form(request, form_pk):
+    form_obj = CovHosFormCollection.objects.get(id=form_pk)
+    form_obj.status = 'submitted'
+    form_obj.save()
+    return JsonResponse({'success': '200'}, status=200)

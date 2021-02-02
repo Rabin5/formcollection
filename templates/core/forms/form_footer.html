@@ -6,7 +6,7 @@
     {% endif %}
 
     {% if metadata.is_last_form %}
-        <button class="btn btn-warning ml-2" form="form_to_submit" id="review">Submit</button>
+        <button class="btn btn-warning ml-2" form="form_to_submit" id="review">Review</button>
     {% else %}
         <button type="submit" form="form_to_submit" class="btn btn-info ml-2" id="next">Next</a>
     {% endif %}
@@ -19,7 +19,7 @@
         });
 
         $( '#review' ).on('click', function(event){
-            $( "input[name='next_state']" ).val('submit');
+            $( "input[name='next_state']" ).val('review');
         });
     </script>
 {% endblock extrascripts %}
