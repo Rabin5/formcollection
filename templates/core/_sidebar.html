@@ -143,8 +143,10 @@
       </div>
     </li>
     <li>
+    
       <a href="#form-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
         aria-controls="collapseExample">Forms</a>
+        {% comment %}
       <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
         <ul class="menu py-0">
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
@@ -173,6 +175,7 @@
           </li>
         </ul>
       </div>
+      {% endcomment %}
     </li>
   </ul>
 </aside>
