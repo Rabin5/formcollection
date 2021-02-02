@@ -1,4 +1,6 @@
 from django.db import models
+
+from .address import Address
 from master_data.models.hospital import CovidHospital
 
 
@@ -13,8 +15,7 @@ class GovernmentBodyType(models.Model):
         return self.name
 
 
-class GovernmentBody(models.Model):
-    # TODO: Address Inheritance
+class GovernmentBody(Address):
     ordering = ['start_date']
     created = models.DateTimeField(auto_now_add=True)
     # date_end = models.DateTimeField(null=False, auto_now=True)
@@ -60,8 +61,11 @@ class ExpenseHeader(models.Model):
 
 
 class Manpower(models.Model):
-    # TODO: UI integration for manpower
-    pass
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=30, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class AllowanceType(models.Model):

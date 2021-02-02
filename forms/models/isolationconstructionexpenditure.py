@@ -19,7 +19,7 @@ class IsolationConstructionExependiture(FormBaseModel):
 class IsolationConstructionExependitureLine(FormLineBaseModel):
     product = models.ForeignKey(
         Product, on_delete=models.PROTECT, verbose_name='खरिद भएका सामग्री')
-    oum = models.ForeignKey(UnitOfMeasure, on_delete=models.PROTECT,
+    uom = models.ForeignKey(UnitOfMeasure, on_delete=models.PROTECT,
                             verbose_name='इकाई')
     number = models.FloatField(
         verbose_name='संख्या')

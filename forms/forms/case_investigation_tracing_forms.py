@@ -12,7 +12,6 @@ class CaseInvestigationLineForm(forms.ModelForm):
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
@@ -25,6 +24,7 @@ CaseInvestigationTracingFormSet = inlineformset_factory(CaseInvestigationTracing
                                                         'description', 'num_team_members', 'amount_expense', 'num_searched_cases', 'num_identified_infection', 'remarks'], extra=1, can_delete=False)
 
 
+
 class CaseInvestigationTracingForm(forms.ModelForm):
     class Meta:
         model = CaseInvestigationTracing
@@ -34,9 +34,14 @@ class CaseInvestigationTracingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
+
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-md-3 create-label'
         self.helper.field_class = 'col-md-9'
+        self.helper.form_id = 'form_to_submit'
+        # self.helper.form_class = 'form-horizontal'
+        # self.helper.label_class = 'col-md-3 create-label'
+        # self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(Column('body', css_class='col-md-6 mb-0'),

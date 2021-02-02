@@ -27,7 +27,7 @@ FundReceiptExpenseLineFormset = inlineformset_factory(
     FundReceiptExpense, FundReceiptExpenseLine, form=FundReceiptExpenseLineForm,
     fields=['budget_source', 'fy_start_received_amt', 'fy_end_received_amt', 'expense_header', 'fy_start_expense_amt', 'fy_end_expense_amt'],
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

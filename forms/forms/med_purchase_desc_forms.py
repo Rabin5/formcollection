@@ -24,13 +24,13 @@ class MedPurchaseDescLineForm(forms.ModelForm):
 
 MedPurchaseDescLineFormSet = inlineformset_factory(
     MedicalPurchaseDescription, MedicalPurchaseDescriptionLine, form=MedPurchaseDescLineForm,
-    fields=['medical_purchase', 'product', 'uom', 'product_specificaiton', 'date_procure_agreement', 'date_received', 'qty', 'rate', 'total_amt'],
+    fields=['medical_purchase', 'product','product_specificaiton', 'date_procure_agreement', 'date_received', 'uom', 'qty', 'rate', 'total_amt'],
     widgets = {
         'date_procure_agreement': NepaliDateInput(),
         'date_received': NepaliDateInput(),
     },
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

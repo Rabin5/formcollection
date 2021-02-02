@@ -5,11 +5,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
-from forms.models import CovidHospitalManpower, CovidHospitalManpowerLine
+from forms.fields import ModelChoiceFieldWithCreate
+from forms.models import CovidHospitalManpower, CovidHospitalManpowerLine, Manpower
 
 
 class CovidHospitalManpowerLineForm(forms.ModelForm):
-
+    manpower = ModelChoiceFieldWithCreate(queryset=Manpower.objects.all(), label='स्वास्थ्य जनशक्ति', blank=False, save_to_field='title')
     class Meta:
         model = CovidHospitalManpowerLine
         exclude = ()
@@ -19,7 +20,10 @@ class CovidHospitalManpowerLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field.widget.input_type == 'select':
+                field.widget.attrs.update({'class': 'select_class'})
+            else:
+                field.widget.attrs['class'] = 'form-control'
 
 
 CovidHospitalmainpowerFormSet = inlineformset_factory(
@@ -30,7 +34,7 @@ CovidHospitalmainpowerFormSet = inlineformset_factory(
 
     },
     extra=1,
-    can_delete=False
+    can_delete=True
 )
 
 

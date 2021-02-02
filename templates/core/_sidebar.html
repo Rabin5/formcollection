@@ -49,11 +49,10 @@
                   <a href="{% url 'md-gov:gov_type_list'%}" class="pl-4">सरकारी निकायको प्रकार</a>
                 </li>
                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+
                   <a href="{% url 'md-offbearer:list'%}" class="pl-4">कार्यालय वाहक
                   </a> 
                 </li>
-               
-               
         
                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
@@ -166,13 +165,27 @@
           </li>
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'covid_hos_mainpower:create'%}" class="pl-4">covid hopistal manpower</a>
+
+          <li {% if '/cov-hos/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'cov_hos_forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
+
           </li>
-          <li {% if 'forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'covid_hos_detail:create'%}" class="pl-4">covid hospital detail</a>
+          <li {% if '/province/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'province_forms:list'%}" class="pl-4">प्रदेश</a>
           </li>
+
           <li {% if 'forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'iso_mgt_detail:create'%}" class="pl-4">isolation detail management</a>
           </li>
+     <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
+          </li> 
+          <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'chief_minister_forms:list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
+          </li> 
+          <li {% if '/local-level/forms' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'local_level_forms:list'%}" class="pl-4">स्थानीय स्तर</a>
+          </li>           
         </ul>
       </div>
       {% endcomment %}
