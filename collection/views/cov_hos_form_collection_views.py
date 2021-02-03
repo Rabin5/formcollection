@@ -260,3 +260,5 @@ class ApproveView(View):
             data[index].update({'user':user})
         print(data)
         return render(request, self.template_name, context={'data': data})
+
+    # def post

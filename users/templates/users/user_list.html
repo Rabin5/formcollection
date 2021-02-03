@@ -23,10 +23,10 @@ User
   <thead>
     <tr>
       <th>#.</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Username</th>
+      <th>इ-मेल ठेगाना</th>
+      <th>प्रयोगकर्ता नाम</th>
+      <th>मोबाइल नम्बर</th>
+      <th>भूमिका</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
@@ -35,19 +35,20 @@ User
     {% for user in users %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.username }}</td>
-        <td class="action">
-          <a data-remote="{% url 'users:update' user.pk %}"
-            href="{% url 'users:update' user.pk %}" data-toggle="modal" data-target="#modalUserUpdate">
-            <i class="ic-edit mr-2"></i>
-          </a>
-          {% comment %} <a data-remote="{% url 'users:delete' user.pk %}"
-            href="{% url 'users:delete' user.pk %}" data-toggle="modal" data-target="#modalUserDelete">
-            <i class="ic-delete"></i>
-          </a> {% endcomment %}
+        <td>{{ user.mobile_number }}</td>
+        <td>{% for group in user.groups.all %}{{group.name}}{% if not forloop.last %},{% endif %}{% endfor %}</td>
+        <td>
+          <div class="dropup">
+            <button class="btn" type="button" id="user-actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="ic-more"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="user-actions">
+              <a class="dropdown-item reset-password" href="{% url 'users:reset-password' user.username user.pk %}">पासवर्ड रिसेट</a>
+              <a class="dropdown-item reset-password" href="{% url 'users:update_user' user.pk %}">सम्पादन गर्नुहोस्</a>
+            </div>
+          </div>
         </td>
       </tr>
     {% endfor %}

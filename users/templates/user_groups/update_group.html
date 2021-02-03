@@ -9,10 +9,38 @@
 <div class="modal-body pt-2">
   <form id="group_update" method="post" action="{% url 'users:update_group' group.pk %}">
     {% csrf_token %}
-    {{ form|crispy  }}
+    <div class="modal-body">
+        <div class ="form-row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="name">समूह नाम</label><input type="text"
+                    class="form-control" name="name" id="name" value="{{ group.name }}">
+                </div>
+            </div>
+            <div class="col-sm-6" >
+                <label>अनुमतिहरू</label>
+                <select class="form-control js-example-reporters" name="permissions" multiple="multiple" id="id-categories" required>
+                    {% with group_permissions=group.permissions.all %}
+                        {% for permission in permissions %}
+                            <option value="{{permission.pk}}" {% if permission in group_permissions %}selected{% endif %}>{{permission.name}}</option>
+                        {% endfor %}
+                    {% endwith %}
+                </select>
+            </div>
+
+            <div class="col-sm-6">
+                <label>प्रयोगकर्ताहरू</label>
+                <select class="form-control js-example-tokenizer" name="users" multiple="multiple">
+                {% for user in users %}
+                    <option value="{{user.pk}}" {% if group in user.groups.all %}selected{% endif %}>{{user.email}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning mr-2" data-dismiss="modal">रद्द गर्नुहोस</button>
+        <button class="btn btn-success" type="submit">सेभ गर्नुहोस</button>
+    </div>
   </form>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-  <button id="btn_group_update" form="group_update" type="submit" class="btn btn-success">Save</button>
-</div>
+

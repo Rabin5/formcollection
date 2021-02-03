@@ -25,7 +25,6 @@ User Permission
       <th>#.</th>
       <th>Name</th>
       <th>Codename</th>
-      <th>Content Type</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
@@ -35,17 +34,11 @@ User Permission
         <td>{{ forloop.counter }}</td>
         <td>{{ permission.name }}</td>
         <td>{{ permission.codename }}</td>
-        <td>{{ permission.content_type }}</td>
         <td class="action">
           <a data-remote="{% url 'users:edit_permission' permission.pk %}"
             href="{% url 'users:edit_permission' permission.pk %}" data-toggle="modal" data-target="#modalUserPermissionUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          
-          <a data-remote="{% url 'users:delete_permission' permission.pk %}"
-            href="{% url 'users:delete_permission' permission.pk %}" data-toggle="modal" data-target="#modalUserPermissionDelete">
-            <i class="ic-delete"></i>
-          </a> 
         </td>
       </tr>
     {% endfor %}

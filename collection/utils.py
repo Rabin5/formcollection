@@ -36,6 +36,8 @@ STATUS = [
     ('incomplete', 'INCOMPLETE'),
     ('submitted', 'SUBMITTED'),
     ('completed', 'COMPLETED'),
+    ('approved', 'APPROVED'),
+    ('rejected', 'REJECTED'),
 ]
 
 CH_STATE = [
@@ -94,6 +96,7 @@ CHIEF_MINISTER_STATE = [
     (1, 'fund_receipt_expense'),
     (2, 'risk_allowance'),
     (3, 'province_institute_management'),
+    (4, 'action_plan_implementation'),
 ]
 
 LOCAL_LEVEL_STATE = [

@@ -168,7 +168,7 @@
         aria-controls="collapseExample">Users</a>
       <div class="collapse{% if 'users' in request.resolver_match.view_name %} show {% endif %}" id="user-data">
         <ul class="menu py-0">
-          <li {% if 'users/list' in request.path %}class="active" {% endif %}>
+          <li {% if 'users/list' in request.path %}class="active" {% elif 'users/reset-password' in request.path %}class="active" {% elif 'users:update_user' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'users:list'%}" class="pl-4">Users List</a>
           </li>
           <li {% if '/users/user_groups' in request.path %}class="active" {% endif %}>
