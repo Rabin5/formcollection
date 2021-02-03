@@ -4,12 +4,14 @@ from django.contrib.auth.mixins import UserPassesTestMixin, PermissionRequiredMi
 from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
 
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic.edit import UpdateView
 
-from users.forms.user_group_forms import UserGroupForm
+from users.forms.user_group_forms import UserGroupForm, UserPermissionUpdateForm
 from users.models.user_group import GlobalPermission
 from users.models.user import User
 
@@ -17,38 +19,71 @@ class CreateGroup(PermissionRequiredMixin, generic.CreateView, SuccessMessageMix
     model = Group
     form_class = UserGroupForm
     template_name = 'user_groups/add_group.html'
-    success_message = 'Successfully created.'
-    # permission_required = 'user_groups.roles_mgmt_permission'
+    # success_message = 'Successfully created.'
     permission_required = ''
+    
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['permissions'] = GlobalPermission.objects.filter(content_type__model='global permission').order_by(
             'name')
+        context['users'] = User.objects.all().order_by('username')
         return context
 
+    def form_valid(self, form):
+        group = form.save()
+        users = form.cleaned_data.get('users')
+        group.user_set.add(*users)
+        return super(CreateGroup, self).form_valid(form)
+
+
     def get_success_url(self) -> str:
-        return reverse_lazy('md-users:groups_list')
+        return reverse_lazy('users:groups_list')
 
 
 class ListGroup(PermissionRequiredMixin, generic.ListView):
     model = Group
     context_object_name = 'groups'
     template_name = 'user_groups/list_groups.html'
-    # permission_required = 'user_groups.roles_mgmt_permission'
     permission_required = ''
 
+    def get(self, request, **kwargs):
+        context = {}
+        context['query'] = request.GET.get('query', '')
+        context['permissions'] = GlobalPermission.objects.filter(content_type__model='global permission').order_by(
+            'name')
+        
+        # users = User.objects.for_user(request.user).order_by('email')
+        # if context['query']:
+        #     users = users.filter(username__contains=context['query'])
+        
+        # user_paginator = Paginator(users, 20)
+        # user_page_num = request.GET.get('page')
+        # context['users'] = user_paginator.get_page(user_page_num)
 
-# class GroupDetail(PermissionRequiredMixin, generic.DetailView):
-#     model = Group
-#     template_name = 'user_groups/group_detail.html'
-#     context_object_name = 'group'
-#     permission_required = 'user_groups.roles_mgmt_permission'
+        context['groups'] = Group.objects.all().order_by('name')
+        return render(request, self.template_name, context=context)
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['users'] = User.objects.filter(is_active=True).order_by('profile__full_name')[:10]
-#         return context
+    
+
+
+class GroupDetail(PermissionRequiredMixin, generic.DetailView):
+    model = Group
+    template_name = 'user_groups/group_detail.html'
+    context_object_name = 'group'
+    permission_required = ''
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = User.objects.filter(is_active=True)
+        # context['users'] = User.objects.filter(is_active=True)
+        # context['users'] = User.objects.filter(self.request.user,
+        #     is_active=True).exclude(groups=self.object)
+        context['group_permissions'] = self.object.permissions.all()
+        context['permissions'] = GlobalPermission.objects.filter(
+            content_type__model='global permission').exclude(id__in=context['group_permissions'])
+
+        return context
 
 
 # @permission_required('user_groups.roles_mgmt_permission', raise_exception=True)
@@ -73,28 +108,98 @@ class ListGroup(PermissionRequiredMixin, generic.ListView):
 #                 group.user_set.remove(user)
 #             group.user_set.add(user)
 #         messages.success(request, 'Successfully done.')
-#         return redirect('user_groups:group_detail', group.pk)
+#         return redirect('users:group_detail', group.pk)
 
 
-# @permission_required('user_groups.roles_mgmt_permission', raise_exception=True)
-# def remove_users_from_group(request, pk):
-#     group = get_object_or_404(Group, pk=pk)
-#     users = request.POST.getlist('assigned_users')
-#     if users:
-#         for user in users:
-#             group.user_set.remove(user)
-#         messages.success(request, 'Successfully done.')
-#         return redirect('user_groups:group_detail', group.pk)
+class RemoveUserFromGroup(PermissionRequiredMixin, View):
+    # permission_required = 'user_management.perm_user_management'
+    permission_required = ''
+
+    def post(self, request, **kwargs):
+        group = get_object_or_404(Group, pk=kwargs['pk'])
+        user = get_object_or_404(User, pk=kwargs['user_pk'])
+        group.user_set.remove(user)
+        if group.name == 'ROLE_MODERATOR':
+            user.is_moderator = False
+            user.save()
+        # UserActivity.objects.create(user=request.user.username,
+        #                             change_message='Users removed from group "{}"'.format(group.name))
+        messages.success(request, 'Successfully done.')
+        return redirect('users:group_detail', group.pk)
+
+class RemovePermissionFromGroup(PermissionRequiredMixin, View):
+    # permission_required = 'user_management.perm_user_management'
+    permission_required = ''
+
+    def post(self, request, **kwargs):
+        group = get_object_or_404(Group, pk=kwargs['pk'])
+        permission = get_object_or_404(GlobalPermission, pk=kwargs['perm_pk'])
+        group.permissions.remove(permission)
+        # UserActivity.objects.create(user=request.user.username,
+        #                             change_message='Permissions removed from group "{}"'.format(group.name))
+        messages.success(request, 'Successfully done.')
+        return redirect('users:group_detail', group.pk)
+
+class AssignUserInGroup(PermissionRequiredMixin, View):
+    # permission_required = 'user_management.perm_user_management'
+    permission_required = ''
+
+    def post(self, request, *args, **kwargs):
+        group = get_object_or_404(Group, pk=kwargs['pk'])
+        users = request.POST.getlist('users')
+        pks = [User.objects.get(pk=user) for user in users]
+        users = User.objects.filter(pk__in=users)
+        if pks:
+            group.user_set.add(*pks)
+            if group.name == 'ROLE_MODERATOR':
+                users.update(is_moderator=True)
+            # UserActivity.objects.create(
+            #     user=request.user.username, change_message='Users assigned in group "{}"'.format(group.name))
+            messages.success(request, 'Successfully done.')
+            return redirect('users:group_detail', group.pk)
+        else:
+            return redirect('users:group_detail', group.pk)
+
+class AssignPermissionInGroup(PermissionRequiredMixin, View):
+    # permission_required = 'user_management.perm_user_management'
+    permission_required = ''
+
+    def post(self, request, *args, **kwargs):
+        group = get_object_or_404(Group, pk=kwargs['pk'])
+        permissions = request.POST.getlist('permissions')
+        print(permissions)
+        pks = [GlobalPermission.objects.get(
+            pk=permission) for permission in permissions]
+        if pks:
+            group.permissions.add(*pks)
+            # UserActivity.objects.create(
+            #     user=request.user.email, change_message='Permissions assigned in group "{}"'.format(group.name))
+            return redirect('users:group_detail', group.pk)
+        else:
+            return redirect('users:group_detail', group.pk)
+
+class ChangeGroupName(PermissionRequiredMixin, View):
+    # permission_required = 'user_management.perm_user_management_stray'
+    permission_required = ''
+
+    def post(self, request, **kwargs):
+        group = get_object_or_404(Group, pk=kwargs['pk'])
+        name = request.POST.get('name')
+        Group.objects.filter(pk=group.pk).update(name=name)
+        # UserActivity.objects.create(
+        #     user=request.user.username, change_message='Group name changed to "{}"'.format(group.name))
+        return redirect('users:group_detail', group.pk)
+
 
 
 class UpdateGroup(PermissionRequiredMixin, generic.UpdateView, SuccessMessageMixin):
     model = Group
     form_class = UserGroupForm
     template_name = 'user_groups/update_group.html'
-    success_message = 'Successfully updated.'
+    # success_message = 'Successfully updated.'
     context_object_name = 'group'
-    # permission_required = 'user_groups.roles_mgmt_permission'
-    permission_required = ''
+    permission_required = 'user_groups.roles_mgmt_permission'
+    
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -103,17 +208,17 @@ class UpdateGroup(PermissionRequiredMixin, generic.UpdateView, SuccessMessageMix
         return context
 
     def get_success_url(self) -> str:
-        return reverse_lazy('md-users:groups_list')
+        return reverse_lazy('users:groups_list')
 
 
 class DeleteGroup(PermissionRequiredMixin, generic.DeleteView):
     model = Group
     template_name = 'user_groups/delete_group.html'
     context_object_name = 'group'
-    permission_required = ''
+    permission_required = 'user_groups.roles_mgmt_permission'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('md-users:groups_list')
+        return reverse_lazy('users:groups_list')
 
 # # @permission_required('user_groups.roles_mgmt_permission', raise_exception=True)
 # def delete_group(request, pk):
@@ -121,6 +226,43 @@ class DeleteGroup(PermissionRequiredMixin, generic.DeleteView):
 #     if request.method == 'POST':
 #         group.delete()
 #         messages.success(request, 'Successfully deleted.')
-#         return redirect('user_groups:list_groups')
+#         return redirect('users:list_groups')
 
+class CreatePermissionView(UserPassesTestMixin, generic.CreateView):
+    model = GlobalPermission
+    fields = ['name', 'codename']
+    template_name = 'user_groups/create_permission.html'
+    success_url = reverse_lazy('users:list_permissions')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+
+class ListPermissionView(PermissionRequiredMixin, generic.ListView):
+    model = GlobalPermission
+    context_object_name = 'permissions'
+    template_name = 'user_groups/list_permissions.html'
+    permission_required = 'user_management.perm_user_management'
+
+    def get_queryset(self):
+        return GlobalPermission.objects.filter(content_type__model='global permission').order_by('name')
+
+
+class EditPermissionView(PermissionRequiredMixin, UpdateView):
+    permission_required = ''
+    model = GlobalPermission
+    template_name = "user_groups/permission_update.html"
+    form_class = UserPermissionUpdateForm
+    success_url = reverse_lazy('users:list_permissions')
+    context_object_name = 'permission'
+
+class DeletePermission(UserPassesTestMixin, generic.DeleteView):
+    model = GlobalPermission
+    context_object_name = 'permission'
+    # success_url = reverse_lazy('user_management.perm_user_management')
+    template_name = 'user_groups/delete_permissions.html'
+
+    def test_func(self) -> None:
+        return self.request.user.is_superuser
 

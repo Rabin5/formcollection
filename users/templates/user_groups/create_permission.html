@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-header">
+  <h6 class="modal-title" id="exampleModalLabel">Permission</h6>
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body pt-2">
+{{form.errors}}
+  <form id="user_permission" method="post" action="{% url 'users:create_permission' %}">
+    {% csrf_token %}
+    {{ form|crispy  }}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+  <button id="btn_user_permission" form="user_permission" type="submit" class="btn btn-success">Save</button>
+</div>

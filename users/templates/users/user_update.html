@@ -1,18 +1,126 @@
+{% extends 'core/base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 
-<div class="modal-header">
-  <h6 class="modal-title" id="exampleModalLabel">User Update</h6>
-  <a class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </a>
-</div>
-<div class="modal-body pt-2">
-  <form id="user_update" method="post" action="{% url 'md-users:update' user.pk %}">
-    {% csrf_token %}
-    {{ form|crispy  }}
-  </form>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-  <button id="btn_user_update" form="user_update" type="submit" class="btn btn-success">Save</button>
-</div>
+{% block title %}
+  Update User - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+प्रयोगकर्ता विवरण अपडेट गर्नुहोस्।
+{% endblock page_title %}
+
+
+{% block content %}
+
+    <form name="user_registration" action="{% url 'users:update_user' user.pk %}" onsubmit="return validateForm()" method="POST">
+      {% csrf_token %}
+      <div class="py-4">
+          <section class="row">
+              <div class="col-lg-4 mb-4">
+                <p class="text-muted">मोबाइल नम्बर, ईमेल ठेगाना जस्ता प्रयोगकर्ता विवरणहरू अपडेट गर्नुहोस्।</p>
+              </div>
+              <div class="col-lg-8">
+                <div class="form-row">
+                  <div class="col-lg-6">
+                    {% for message in messages %}
+                      <div style="text-align: center" class="alert alert-dismissible alert-danger">  
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+
+                    <div class="form-group">
+                      <label for="" class="text-primary">प्रयोगकर्ताको भूमिका</label>
+                      
+                      <select class="form-control user_groups" name="groups" required autocomplete="false" multiple="multiple">
+                        <option value="">-- Select User Group --</option>
+                        {% for group in groups %}
+                          <option value="{{group.id}}" {% if group in user.groups.all %}selected{% endif %}>{{ group }}</option>
+                        {% endfor %}
+                      </select>
+
+                      {% for error in form.mobile_number.errors %}
+                        <small class="text-danger">
+                          {{ error|escape }}
+                        </small>
+                      {% endfor %}
+
+                    </div>
+
+                    <div class="form-group"><label for="" class="text-primary">मोबाइल नम्बर</label><input type="text"
+                      name="mobile_number" value="{{ form.mobile_number.value }}" class="form-control" required>
+                    
+                      {% for error in form.mobile_number.errors %}
+                        <small class="text-danger">
+                          {{ error|escape }}
+                        </small>
+                      {% endfor %}
+
+                    </div>
+                        
+                    <div class="form-group"><label for="" class="text-primary">प्रयोगकर्ता नाम (युसरनेम)</label><input type="text"
+                      name="username" value="{{ form.username.value }}" class="form-control" required>
+                    
+                      {% for error in form.username.errors %}
+                        <small class="text-danger">
+                          {{ error|escape }}
+                        </small>
+                      {% endfor %}
+                    </div>
+
+                    
+                      
+                    <div class="form-group"><label for="" class="text-primary">प्रयोगकर्ता ईमेल</label><input type="email"
+                      name="email" value="{{ form.email.value }}" class="form-control" required>
+                    
+                      {% for error in form.email.errors %}
+                        <small class="text-danger">
+                          {{ error|escape }}
+                        </small>
+                      {% endfor %}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </section>
+        <div class="border-top border-light mb-4"></div>
+        <section class="d-flex justify-content-end"><a class="btn btn-default mr-2 text-primary" href="{% url 'users:list' %}">रद्द
+            गर्नुहोस्</a><button class="btn btn-primary">बुझाउनुहोस्</a></section>
+      </div>
+    </form>
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+  function validateForm() {
+    var form = document.forms["user_registration"];
+    var mobile_number = form["mobile_number"].value;
+
+    if (isNaN(mobile_number) || isNaN(empcode)) {
+      var warning_box = bootbox.alert({
+        size: "small",
+        title: "सावधान !",
+        message: "मोबाइल नम्बर अंकमा हुनुपर्दछ।",  
+      });
+        
+      warning_box.find('.modal-header').addClass('bg-danger text-white p-3');
+      warning_box.find('.modal-body').addClass('bg-white text-dark p-3');
+      warning_box.find('.bootbox-close-button').addClass('bg-danger text-white p-3');
+      return false;
+    };
+    return true;
+  }
+
+  $(".user_groups").select2({
+    tags: true,
+    width: '390',
+    tokenSeparators: [',']
+  })
+
+</script>
+{% endblock extrascripts %}
+

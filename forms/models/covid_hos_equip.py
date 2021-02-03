@@ -15,7 +15,9 @@ class CovidHospitalEquipment(FormBaseModel):
 
 
     def __str__(self):
-        return self.cov_hospital.name
+        if self.cov_hospital:
+            return self.cov_hospital.name
+        return ""
 
 
 class CovidHospitalEquipmentLine(FormLineBaseModel):

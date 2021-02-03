@@ -51,7 +51,7 @@ class DistrictLabTestLineForm(forms.ModelForm):
 
 DistrictCovidQuaManagementFormSet = inlineformset_factory(
     DistrictCovidManagement, DisctrictQuarantineManagementLine, form=DistrictQuarantineManagementLineForm,
-    fields=['district', 'num_prepared_quarantine', 'num_quarantined_person',
+    fields=['district', 'num_prepared_quarantine', 'num_prepared_quarantine_beds', 'num_quarantined_person',
             'num_home_quarantined_person', 'num_insufficient_bed', ],
     extra=1,
     can_delete=True

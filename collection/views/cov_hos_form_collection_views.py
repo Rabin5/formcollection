@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from forms import models
 
@@ -17,6 +18,8 @@ from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import CH_STATE, num_to_devanagari
 from master_data.models import FiscalYear
+
+from users.models.user import User
 
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key: value for key, value in CH_STATE}
@@ -200,6 +203,9 @@ class CovHosFormCollectionUpdateView(UpdateView):
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
+            if self.next_state == 'review':
+                return HttpResponseRedirect(reverse('cov_hos_forms:review', kwargs={
+                                   'pk': self.object.pk}))
             return HttpResponseRedirect(next_url)
         else:
             return form_response
@@ -230,3 +236,29 @@ class CovHosFormCollectionListView(ListView):
 
 class CovHosFormCollectionDeleteView(DeleteView):
     pass
+
+
+class CovHosFormCollectionReview(DetailView):
+    model = CovHosFormCollection
+    template_name = "cov_hos_form_collection/review.html"
+
+
+def cov_hos_submit_form(request, form_pk):
+    form_obj = CovHosFormCollection.objects.get(id=form_pk)
+    form_obj.status = 'submitted'
+    form_obj.save()
+    return JsonResponse({'success': '200'}, status=200)
+
+class ApproveView(View):
+    template_name = 'cov_hos_form_collection/approve.html'
+
+    def get(self, request, *args, **kwargs):
+        params = {'user': self.request.user, 'status': 'submitted'}
+        data = list(CovHosFormCollection.objects.select_related().filter(**params).values('id', 'user', 'state'))
+        for index, val in enumerate(data):
+            user = User.objects.get(pk=val.get('user')).username
+            data[index].update({'user':user})
+        print(data)
+        return render(request, self.template_name, context={'data': data})
+
+    # def post

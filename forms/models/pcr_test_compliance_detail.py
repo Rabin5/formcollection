@@ -44,4 +44,4 @@ class PcrTestComplianceDetailLine(FormLineBaseModel):
     non_priority_infected_num = models.IntegerField(
         verbose_name='Non-priority  क्षेत्रमा गरेको संक्रमित संख्या')
     pcrtest_compliance_detail = models.ForeignKey(
-        PcrTestComplianceDetail, on_delete=models.PROTECT)
+        PcrTestComplianceDetail, on_delete=models.PROTECT, related_name='lines')

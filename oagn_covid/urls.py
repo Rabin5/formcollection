@@ -121,6 +121,9 @@ urlpatterns = [
      path('forms/case_invs_tracing/',
           include('forms.urls.case_investigation_tracing_urls')),
 
+     # Approve
+     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
+
 
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
