@@ -19,17 +19,27 @@
   <thead>
     <tr>
       <th>#.</th>
-      <th>User</th>
+      <th>प्रयोगकर्ता</th>
       <th>state</th>
-      <th class="text-right">कार्य</th>
+      <th>status</th>
+      <th>कार्य</th>
     </tr>
   </thead>
   <tbody>
   
-    {% for approve in data %}
+    {% for val in data %}
       <tr>
-      {{approve.state}}
         <td>{{ forloop.counter }}</td>
+        <td>{{ val.user }}</td>
+        <td>{{ val.state }}</td>
+        <td>{{ val.status }}</td>
+        {% if val.status not in 'APPROVED, REJECTED' %}
+          <td>
+            <a href="{% url 'cov_hos_forms:review' val.id 'approve' %}">
+              समीक्षा गर्नुहोस्
+            </a>
+          </td>
+        {% endif %}
         
       </tr>
     {% endfor %}
@@ -37,24 +47,3 @@
 </table>
 
 {% endblock content %}
-
-{% block extrascripts %}
-<script>
-    $(document).ready(function(){
-    $('#create_collection').on('click', function(){
-      fetch("{% url 'cov_hos_forms:create' %}", {
-        method: 'POST',
-        dataType: "json",
-        headers: { "X-CSRFToken": '{{csrf_token}}' },
-      })
-      .then(response => response.json())
-      .then(data => {
-        window.location.href = data.url
-      })
-      .catch(function(err){
-          console.log(err);
-      });
-    })
-})
-</script>
-{% endblock extrascripts %}

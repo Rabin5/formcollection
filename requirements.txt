@@ -1,6 +1,16 @@
-Django==3.1.4
-psycopg2-binary==2.8.6
-django-crispy-forms==1.10.0
-nepali-datetime==1.0.4
-psycopg2-binary==2.8.6
-python-decouple
+Package             Version
+------------------- -------
+asgiref             3.3.1
+Django              3.1.4
+django-braces       1.14.0
+django-crispy-forms 1.10.0
+nepali-datetime     1.0.4
+pip                 20.3.3
+psycopg2-binary     2.8.6
+python-decouple     3.3
+pytz                2020.5
+resumeparsernew     1.2
+setuptools          51.1.1
+six                 1.15.0
+sqlparse            0.4.1
+wheel               0.36.2
