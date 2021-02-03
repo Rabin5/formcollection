@@ -19,7 +19,7 @@ class CovidHospitalForm(HospitalForm):
     class Meta(HospitalForm.Meta):
         model = CovidHospital
         # fields = ['type', 'date_announcement']
-        fields = HospitalForm.Meta.fields + ['type', 'date_announcement']
+        fields = HospitalForm.Meta.fields + ['type', 'date_announcement', 'province', 'district', 'local_level']
         widgets = {
             'date_announcement': NepaliDateInput(),
         }

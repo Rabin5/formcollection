@@ -20,13 +20,22 @@ from forms.models.quarantine_construct_expenditure import QuarantineConstruction
 from forms.models.cov_hos_management_checklist import CovidHospitalManagementChecklist
 from forms.models.isolationconstructionexpenditure import IsolationConstructionExependiture
 
+from master_data.models import Province, District, LocalLevel, CovidHospital, GovernmentBody, FiscalYear
+
 from users.models.user import User
 from collection.utils import CH_STATE, STATUS
 
 class CovHosFormCollection(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    province = models.ForeignKey(Province, on_delete=models.PROTECT, null=True, blank=False)
+    district = models.ForeignKey(District, on_delete=models.PROTECT, null=True, blank=False)
+    local_level = models.ForeignKey(LocalLevel, on_delete=models.PROTECT, null=True, blank=False)
+    hospital = models.ForeignKey(CovidHospital, on_delete=models.PROTECT, null=True, blank=False)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     state = models.IntegerField(choices=CH_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
+    body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
+    
     medical_expense = models.OneToOneField(
         MedicalExpense, on_delete=models.CASCADE, null=True)
     risk_allowance = models.OneToOneField(
@@ -66,5 +75,7 @@ class CovHosFormCollection(models.Model):
 
 
     def __str__(self):
-        display_name = f"{self.user.body} ({self.get_state_display()})"
-        return display_name
+        if self.user:
+            display_name = f"{self.user.body} ({self.get_state_display()})"
+            return display_name
+        return ''

@@ -1,0 +1,26 @@
+[
+    {
+        "model": "master_data.GovernmentBodyType",
+        "pk": "1",
+        "fields": {
+            "name": "कोभिड अस्पताल",
+            "created": "2020-02-02 00:00:00"
+        }
+    },
+    {
+        "model": "master_data.GovernmentBodyType",
+        "pk": "2",
+        "fields": {
+            "name": "स्थानीय निकाय",
+            "created": "2020-02-02 00:00:00"
+        }
+    },
+    {
+        "model": "master_data.GovernmentBodyType",
+        "pk": "3",
+        "fields": {
+            "name": "प्रदेश",
+            "created": "2020-02-02 00:00:00"
+        }
+    }
+]

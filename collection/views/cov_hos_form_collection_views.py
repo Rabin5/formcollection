@@ -1,5 +1,5 @@
 from django.db import transaction
-from django.db.models import query
+from django.db.models import query, F
 from django.forms import inlineformset_factory
 from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -12,12 +12,11 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from forms import models
 
-from django.apps import apps
-
+from collection.forms.form_collection_forms import CovHosFormCollectionForm
 from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import CH_STATE, num_to_devanagari
-from master_data.models import FiscalYear
+from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key: value for key, value in CH_STATE}
@@ -28,6 +27,8 @@ class CovHosFormCollectionCreateView(View):
     """
     Creates form collection and initializes all forms in the collection
     """
+    template_name = 'cov_hos_form_collection/create.html'
+    form_class = CovHosFormCollectionForm
 
     def init_forms(self):
         """
@@ -35,7 +36,7 @@ class CovHosFormCollectionCreateView(View):
         """
 
         col_update_params = {}
-        fiscal_year = FiscalYear.objects.get_current_fy()
+        fiscal_year = self.object.fiscal_year
         for form in LIST_CH_STATE:
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower', 'cov_hos_management_checklist']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
@@ -43,7 +44,7 @@ class CovHosFormCollectionCreateView(View):
                 )
             else:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     fiscal_year=fiscal_year,
                     create_user=self.request.user,
                 )
@@ -52,19 +53,32 @@ class CovHosFormCollectionCreateView(View):
         CovHosFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
+    
+    def get(self, request, *args, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = {}
+        context['districts'] = list(District.objects.all().values('id', 'province_id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', 'district_id', text=F('name')))
+        context['hospitals'] = list(CovidHospital.objects.all().values('id', 'local_level_id', text=F('name')))
+        context['form'] = self.form_class()
+        return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = CovHosFormCollection(
-            user=request.user, status='started', state=0)
-        form_collect.save()
-        self.object = form_collect
+        form_collect = self.form_class(request.POST)
+        instance = form_collect.save()
+        instance.user = request.user
+        instance.status = 'started'
+        instance.state = 0
+        instance.save()
+        self.object = instance
         self.init_forms()
-        form_url = f"{reverse('cov_hos_forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_CH_STATE.get(0)}"
-        context = {'url': form_url}
-        return JsonResponse(context, content_type='application/json')
+        form_url = f"{reverse('cov_hos_forms:update', kwargs={'pk': instance.pk})}?form={DICT_CH_STATE.get(0)}"
+        return HttpResponseRedirect(form_url)
 
 
 class CovHosFormCollectionUpdateView(UpdateView):

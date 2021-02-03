@@ -27,11 +27,6 @@ class CovidHospitalDetailLineForm(forms.ModelForm):
                 field.widget.attrs.update({'class': 'select_class'})
             else:
                 field.widget.attrs['class'] = 'form-control'
-        
-        # Convert date to Nepali datetime before displaying
-        date_announcement = self.initial.get('date_announcement')
-        if date_announcement:
-            self.initial['date_announcement'] = nepali_datetime.date.from_datetime_date(date_announcement).strftime('%d/%m/%Y')
     
     def save(self, commit=True):
         instance = super().save()
