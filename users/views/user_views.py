@@ -16,7 +16,7 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ''
     form_class = UserCreateForm
     template_name = 'users/user_create.html'
-    success_url = reverse_lazy('md-users:list')
+    success_url = reverse_lazy('users:list')
 
 
 class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -31,14 +31,14 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ''
     template_name = "users/user_update.html"
     form_class = UserUpdateForm
-    success_url = reverse_lazy('md-users:list')
+    success_url = reverse_lazy('users:list')
     context_object_name = 'user'
 
 
 class ResetPasswordView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
     form_class = ResetPasswordForm
     permission_required = ''
-    success_url = reverse_lazy('md-users:list')
+    success_url = reverse_lazy('users:list')
     template_name = 'users/reset_password.html'
 
     def get_form_kwargs(self):
@@ -61,4 +61,4 @@ class ResetPasswordView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
 
 class ChangePasswordView(PasswordChangeView):
     template_name = 'users/change_password.html'
-    success_url = reverse_lazy('md-users:list')
+    success_url = reverse_lazy('users:list')

@@ -7,7 +7,7 @@
   </a>
 </div>
 <div class="modal-body pt-2">
-  <form id="group_update" method="post" action="{% url 'md-users:update_group' group.pk %}">
+  <form id="group_update" method="post" action="{% url 'users:update_group' group.pk %}">
     {% csrf_token %}
     {{ form|crispy  }}
   </form>

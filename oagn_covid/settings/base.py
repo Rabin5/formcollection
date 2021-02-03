@@ -149,5 +149,5 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 # TODO: change LOGIN_REDIRECT_URL to appropriate homepage url
-LOGIN_REDIRECT_URL = 'md-users:list'
+LOGIN_REDIRECT_URL = 'users:list'
 LOGOUT_REDIRECT_URL = 'login'

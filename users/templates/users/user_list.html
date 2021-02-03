@@ -11,8 +11,8 @@ User
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-users:create' %}"
-    href="{% url 'md-users:create' %}" data-toggle="modal" data-target="#modalUserCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'users:create' %}"
+    href="{% url 'users:create' %}" data-toggle="modal" data-target="#modalUserCreate">
     <i class="ic-add"></i>
     User थप्नुहोस्
   </a>
@@ -34,19 +34,18 @@ User
   
     {% for user in users %}
       <tr>
-      {{user}}
         <td>{{ forloop.counter }}</td>
         <td>{{ user.first_name }}</td>
         <td>{{ user.last_name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.username }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-users:update' user.pk %}"
-            href="{% url 'md-users:update' user.pk %}" data-toggle="modal" data-target="#modalUserUpdate">
+          <a data-remote="{% url 'users:update' user.pk %}"
+            href="{% url 'users:update' user.pk %}" data-toggle="modal" data-target="#modalUserUpdate">
             <i class="ic-edit mr-2"></i>
           </a>
-          {% comment %} <a data-remote="{% url 'md-users:delete' user.pk %}"
-            href="{% url 'md-users:delete' user.pk %}" data-toggle="modal" data-target="#modalUserDelete">
+          {% comment %} <a data-remote="{% url 'users:delete' user.pk %}"
+            href="{% url 'users:delete' user.pk %}" data-toggle="modal" data-target="#modalUserDelete">
             <i class="ic-delete"></i>
           </a> {% endcomment %}
         </td>
