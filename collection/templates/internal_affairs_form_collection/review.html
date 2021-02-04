@@ -24,7 +24,9 @@
                 <b>आर्थिक बर्ष </b> {{ object.epidemic_outbreak_prep.fiscal_year }}
             </p>
 
-            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -56,7 +58,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.fund_receipt_expense.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -105,7 +109,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.risk_allowance.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=risk_allowance">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=risk_allowance">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -150,7 +156,9 @@
     <div>
         <div>
             <h4>4. कार्ययोजना कार्यान्वयन- कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा स्वदेश आउनैपर्ने अवस्थामा रहेका नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्वन्धी आदेश, २०७७ को लागि तयार पारिएको नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै प्रदेश सरकारको समेत जिम्मेवारी हुने सहयोग गर्नुपर्ने गरी तोकेको छ । यस सम्बन्धमा प्रदेश सरकारबाट भएका क्रियाकलाप र यसमा भएको खर्च खुलाउनु होस् ।</h4>
-            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=action_plan_implementation">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=action_plan_implementation">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -178,28 +186,83 @@
     <br>
 </section>
 
-<button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'internal_affairs_forms:submit_form' form_pk=object.pk %}">Submit</button>
+<div class='row'>
+  {% if action == 'submit' %}
+    <button class="btn btn-success ml-2" form="form_to_submit" id="submit">Submit</button>
+  {% elif action == 'approve' %}
+    <button class="btn btn-success" id="approve">Approve</button>
+    <button class="btn btn-warning" data-toggle="modal" data-target="#rejectMessageModal">Reject</button>
+  {% endif %}
+</div>
 
 {% endblock content %}
 
+{% block modal %}
+
+<div class="modal fade" id="rejectMessageModal" tabindex="-1" role="dialog" aria-labelledby="rejectMessageModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body pt-2">
+      <textarea class="form-control" rows="3" id='rejectMessage'></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button id="submit_reject" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock modal %}
+
 {% block extrascripts %}
     <script>
+        var status = 'rejected';
+        var success_url = ''
+        {% if action == 'submit' %}
+            success_url = "{% url 'internal_affairs_forms:internal_affairs_list' %}"
+        {% else %}
+            success_url = "{% url 'internal_affairs_forms:review_approve_list' %}"
+        {% endif %}
+        $( '#approve' ).on('click', function(event){
+            status = 'approved';
+            approve_reject()
+        });
+
         $( '#submit' ).on('click', function(event){
-          var pk = $(this).attr("data-pk");
-          var dataurl = $(this).attr("dataurl");
-          $.ajax({
-            url: dataurl,
+            status = 'submitted';
+            approve_reject()
+        });
+
+        $( '#submit_reject' ).on('click', function(event){
+            approve_reject(rejectMessage=$('#rejectMessage').val())
+        });
+
+        function approve_reject(rejectMessage=''){
+            var data = {
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+                'pk': '{{ object.pk }}',
+                'status': status
+            }
+            if (rejectMessage){
+            data['reject_msg'] = rejectMessage;
+            }
+            $.ajax({
+            url: "{% url 'internal_affairs_forms:submit_form' form_pk=object.pk %}",
             method: 'POST',
-            data: {
-              'csrfmiddlewaretoken': '{{ csrf_token }}',
-              'pk': pk,
-            },
+            data: data,
             dataType: 'json',
 
             success: function(response){
-              window.location.href = "{% url 'internal_affairs_forms:list' %}"
+                window.location.href = success_url;
             }
-          })
-        });
+            })
+        }
     </script>
 {% endblock extrascripts %}

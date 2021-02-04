@@ -151,8 +151,8 @@
           <li {% if '/province/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'province_forms:list'%}" class="pl-4">प्रदेश</a>
           </li>
-          <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
+          <li {% if 'internal_affairs_forms:internal_affairs_list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'internal_affairs_forms:internal_affairs_list'%}" class="pl-4">आन्तरिक मामिला</a>
           </li> 
           <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'chief_minister_forms:list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
@@ -188,7 +188,9 @@
           <li {% if 'cov_hos_forms:approve_list' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'cov_hos_forms:approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
           </li>
-          
+          <li {% if 'internal_affairs_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+              <a href="{% url 'internal_affairs_forms:review_approve_list'%}" class="pl-4">Internal Affairs Approve List</a>
+            </li>
         </ul>
       </div>
     </li>
