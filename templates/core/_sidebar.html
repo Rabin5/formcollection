@@ -135,6 +135,9 @@
                 <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-isolation:list'%}" class="pl-4">आइसोलेशन सेन्टर</a>
                 </li>
+                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                  <a href="{% url 'md-importer:list' %}" class="pl-4">आपूर्तिकर्ता</a>
+                </li>
               </ul>
             </div>
           </li>

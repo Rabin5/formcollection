@@ -22,4 +22,4 @@ class ReliefProcurementDetailLine(FormLineBaseModel):
     reason_procure_method = models.CharField(
         max_length=300, verbose_name='उक्त खरिद विधि प्रयोग गर्नाको कारण')
     reliefprocurementdetail_line = models.ForeignKey(
-        ReliefProcurementDetail, on_delete=models.CASCADE)
+        ReliefProcurementDetail, on_delete=models.CASCADE, related_name='lines')
