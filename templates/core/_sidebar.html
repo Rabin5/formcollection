@@ -159,9 +159,9 @@
           <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'chief_minister_forms:list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
           </li> 
-          <li {% if '/local-level/forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'local_level_forms:list'%}" class="pl-4">स्थानीय स्तर</a>
-          </li>           
+          <li {% if 'local_level_forms:local_level' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'local_level_forms:local_level_list'%}" class="pl-4">स्थानीय स्तर</a>
+          </li>
         </ul>
       </div>
     </li>
@@ -192,7 +192,9 @@
             <li {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
               <a href="{% url 'cov_hos_forms:review_approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
             </li>
-            
+            <li {% if 'local_level_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+              <a href="{% url 'local_level_forms:review_approve_list'%}" class="pl-4">Local Leve Approve List</a>
+            </li>
           </ul>
         </div>
       </li>
