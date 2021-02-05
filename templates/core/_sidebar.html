@@ -152,9 +152,8 @@
           <li {% if 'province_forms:province' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'province_forms:province_list'%}" class="pl-4">प्रदेश</a>
           </li>
-
-     <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
-            <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
+          <li {% if 'internal_affairs_forms:internal_affairs' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'internal_affairs_forms:internal_affairs_list'%}" class="pl-4">आन्तरिक मामिला</a>
           </li> 
           <li {% if 'chief_minister_forms:chief_minister' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'chief_minister_forms:chief_minister_list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
@@ -194,6 +193,9 @@
             </li>
             <li {% if 'province_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
               <a href="{% url 'province_forms:review_approve_list'%}" class="pl-4">Province Approve List</a>
+            </li>
+            <li {% if 'internal_affairs_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+              <a href="{% url 'internal_affairs_forms:review_approve_list'%}" class="pl-4">Internal Affairs Approve List</a>
             </li>
             <li {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
                 <a href="{% url 'chief_minister_forms:review_approve_list'%}" class="pl-4">Chief Minister Approve List</a>
