@@ -3,6 +3,7 @@ from master_data.forms.quaranrine_form import QuanrantineCenterForm
 from master_data.models.company import QuanrantineCenter
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class QuanrantineCenterCreateView(CreateView):
@@ -16,6 +17,7 @@ class QuanrantineCenterListView(ListView):
     model = QuanrantineCenter
     template_name = "master_data/company/quarantine_list.html"
     context_object_name = 'quarantine_list'
+    paginate_by = PAGINATED_BY
 
 
 class QuanrantineCenterUpdateView(UpdateView):

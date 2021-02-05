@@ -54,6 +54,10 @@
   </tbody>
 </table>
 
+  {% block pagination %}
+    {% include 'master_data/partials/pagination.html' %}
+  {% endblock pagination %}
+
 {% endblock content %}
 
 {% block modal %}
