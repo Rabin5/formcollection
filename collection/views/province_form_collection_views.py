@@ -10,6 +10,9 @@ from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
+from django.contrib.auth.models import Group
+
+from braces.views import GroupRequiredMixin
 
 from django.apps import apps
 
@@ -61,7 +64,7 @@ class ProvinceFormCollectionCreateView(View):
         form_collect.save()
         self.object = form_collect
         self.init_forms()
-        form_url = f"{reverse('province_forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_PROVINCE_STATE.get(0)}"
+        form_url = f"{reverse('province_forms:province_update', kwargs={'pk': form_collect.pk})}?form={DICT_PROVINCE_STATE.get(0)}"
         context = {'url': form_url}
         return JsonResponse(context, content_type='application/json')
 
@@ -81,7 +84,7 @@ class ProvinceFormCollectionUpdateView(UpdateView):
         next_form: form to return and render next; determined by next_state
     """
     model = ProvinceFormCollection
-    success_url = 'province_forms:list'
+    success_url = 'province_forms:province_list'
     form_class = ''
     route_link = ''
     form_field = None
@@ -150,7 +153,7 @@ class ProvinceFormCollectionUpdateView(UpdateView):
         """
         self.object = ProvinceFormCollection.objects.get(pk=pk)
         if not request.GET.get('form'):
-            return HttpResponseRedirect(reverse('province_forms:update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
+            return HttpResponseRedirect(reverse('province_forms:province_update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
         self.get_form_class(pk)
         context = {
             'metadata': self._get_metadata(),
@@ -195,14 +198,14 @@ class ProvinceFormCollectionUpdateView(UpdateView):
         if form_response.status_code == 302:
             self._update()
             if self.next_form:
-                next_url = reverse('province_forms:update', kwargs={
+                next_url = reverse('province_forms:province_update', kwargs={
                                    'pk': self.object.pk})+f'?form={self.next_form}'
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
             if self.next_state == 'review':
                 return HttpResponseRedirect(reverse('province_forms:review', kwargs={
-                                    'pk': self.object.pk}))
+                                    'pk': self.object.pk, 'action': 'submit'}))
 
             return HttpResponseRedirect(next_url)
         else:
@@ -233,16 +236,40 @@ class ProvinceFormCollectionListView(ListView):
 
 
 class ProvinceFormCollectionDeleteView(DeleteView):
-    pass
+    model = ProvinceFormCollection
+    template_name = "province_form_collection/delete.html"
+    success_url = reverse_lazy('province_forms:province_list')
+    context_object_name = 'form_collections'
 
 
 class ProvinceFormCollectionReviewView(DetailView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/review.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['action'] = self.kwargs['action']
+        return context
+
 
 def province_submit_form(request, form_pk):
     form_obj = ProvinceFormCollection.objects.get(id=form_pk)
-    form_obj.status = 'submitted'
+    status = request.POST.get('status')
+    form_obj.status = status
+    form_obj.approver = request.user
+    if 'reject_msg' in request.POST:
+        form_obj.reject_msg = request.POST.get('reject_msg')
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
+
+class ApproveView(GroupRequiredMixin, View):
+    template_name = 'province_form_collection/approve.html'
+    group_required = ['ALL PERMISSION', 'APPROVAL']
+
+    def get(self, request, *args, **kwargs):
+        context = []
+        data = list(ProvinceFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
+        print(data)
+        for index, val in enumerate(data):
+            context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
+        return render(request, self.template_name, context={'data': context})

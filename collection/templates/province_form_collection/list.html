@@ -24,7 +24,7 @@
       <th>#.</th>
       <th>State</th>
       <th>Status</th>
-      <th class="text-right">कार्य</th>
+      <th>कार्य</th>
     </tr>
   </thead>
   <tbody>
@@ -33,15 +33,23 @@
         <td>{{ forloop.counter }}</td>
         <td>{{ form_collection }}</td>
         <td>{{ form_collection.get_status_display }}</td>
-        <td class="action">
-          <a href="{% url 'province_forms:update' form_collection.pk %}">
-            <i class="ic-edit mr-2"></i>
-          </a>
-          <a data-remote="{% url 'province_forms:delete' form_collection.pk %}"
-            href="{% url 'province_forms:delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
-            <i class="ic-delete"></i>
-          </a>
-        </td>
+        {% if form_collection.get_status_display == 'SUBMITTED' %}
+          <td>
+            <a href="{% url 'province_forms:review' form_collection.pk 'submitted' %}">
+              Review
+            </a>
+          </td>
+        {% elif form_collection.get_status_display not in 'APPROVED, REJECTED' %}
+          <td class="action">
+            <a href="{% url 'province_forms:province_update' form_collection.pk %}">
+              <i class="ic-edit mr-2"></i>
+            </a>
+            <a data-remote="{% url 'province_forms:province_delete' form_collection.pk %}"
+              href="{% url 'province_forms:province_delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
+              <i class="ic-delete"></i>
+            </a>
+          </td>
+        {% endif %}
       </tr>
     {% endfor %}
   </tbody>
@@ -49,23 +57,40 @@
 
 {% endblock content %}
 
+{% block modal %}
+
+<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block extrascripts %}
 <script>
     $(document).ready(function(){
     $('#create_collection').on('click', function(){
-      fetch("{% url 'province_forms:create' %}", {
-        method: 'POST',
-        dataType: "json",
-        headers: { "X-CSRFToken": '{{csrf_token}}' },
-      })
-      .then(response => response.json())
-      .then(data => {
-        window.location.href = data.url
-      })
-      .catch(function(err){
-          console.log(err);
-      });
-    })
+        fetch("{% url 'province_forms:province_create' %}", {
+          method: 'POST',
+          dataType: "json",
+          headers: { "X-CSRFToken": '{{csrf_token}}' },
+        })
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = data.url
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    });
+
+    $('#modalProdDelete').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
 })
 </script>
 {% endblock extrascripts %}

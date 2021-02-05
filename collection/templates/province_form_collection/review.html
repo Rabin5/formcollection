@@ -24,7 +24,9 @@
                 <b>आर्थिक बर्ष </b> {{ object.epidemic_outbreak_prep.fiscal_year }}
             </p>
 
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -56,7 +58,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.fund_receipt_expense.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -103,7 +107,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.risk_allowance.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=risk_allowance">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=risk_allowance">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -154,7 +160,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.medical_expense.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_expense">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=medical_expense">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -199,7 +207,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.medical_receipt.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_receipt">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=medical_receipt">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -238,7 +248,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.medical_use.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_use">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=medical_use">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -280,7 +292,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.med_purchase_desc.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=med_purchase_desc">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=med_purchase_desc">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -323,7 +337,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.pcr_test_compliance_detail.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -379,7 +395,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.pcr_lab_detail.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=pcr_lab_detail">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=pcr_lab_detail">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -423,7 +441,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.rdt_test_detail.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=rdt_test_detail">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=rdt_test_detail">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -461,7 +481,9 @@
             <p>
                 <b>आर्थिक बर्ष </b> {{ object.pcr_kit_usage.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=pcr_kit_usage">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=pcr_kit_usage">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -505,7 +527,9 @@
             <p>
                 <b>स्थान: </b> {{ object.covid_hos_mainpower.address }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=covid_hos_mainpower">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=covid_hos_mainpower">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -546,7 +570,9 @@
             <p>
                 <b>स्थान: </b> {{ object.cov_hos_equipment.address }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=cov_hos_equipment">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=cov_hos_equipment">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -589,7 +615,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.covid_hospital_detail.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=covid_hospital_detail">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=covid_hospital_detail">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -650,7 +678,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.quarantine_management_detail.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=quarantine_management_detail">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=quarantine_management_detail">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -705,7 +735,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.isolation_management_detail.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=isolation_management_detail">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=isolation_management_detail">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -760,7 +792,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.quarantine_contruction_expenditure.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -815,7 +849,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.isolation_construction_expenditure.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=isolation_construction_expenditure">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=isolation_construction_expenditure">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -870,7 +906,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.district_covid_management.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=district_covid_management">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=district_covid_management">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -1025,7 +1063,9 @@
             <p>
                 <b>आर्थिक बर्ष: </b> {{ object.fund_operation.fiscal_year }}
             </p>
-            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=fund_operation">Edit</a></p>
+            {% if action == 'submit' %}
+            <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=fund_operation">Edit</a></p>
+            {% endif %}
         </div>
 
         <div>
@@ -1063,29 +1103,83 @@
     <br>
 </section>
 
-<button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'province_forms:submit_form' form_pk=object.pk %}">Submit</button>
-
+<div class='row'>
+  {% if action == 'submit' %}
+    <button class="btn btn-success ml-2" form="form_to_submit" id="submit">Submit</button>
+  {% elif action == 'approve' %}
+    <button class="btn btn-success" id="approve">Approve</button>
+    <button class="btn btn-warning" data-toggle="modal" data-target="#rejectMessageModal">Reject</button>
+  {% endif %}
+</div>
 {% endblock %}
 
+{% block modal %}
+
+<div class="modal fade" id="rejectMessageModal" tabindex="-1" role="dialog" aria-labelledby="rejectMessageModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body pt-2">
+      <textarea class="form-control" rows="3" id='rejectMessage'></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button id="submit_reject" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock modal %}
 
 {% block extrascripts %}
     <script>
+        var status = 'rejected';
+        var success_url = ''
+        {% if action == 'submit' %}
+            success_url = "{% url 'province_forms:province_list' %}"
+        {% else %}
+            success_url = "{% url 'province_forms:review_approve_list' %}"
+        {% endif %}
+        $( '#approve' ).on('click', function(event){
+            status = 'approved';
+            approve_reject()
+        });
+
         $( '#submit' ).on('click', function(event){
-          var pk = $(this).attr("data-pk");
-          var dataurl = $(this).attr("dataurl");
-          $.ajax({
-            url: dataurl,
+            status = 'submitted';
+            approve_reject()
+        });
+
+        $( '#submit_reject' ).on('click', function(event){
+            approve_reject(rejectMessage=$('#rejectMessage').val())
+        });
+
+        function approve_reject(rejectMessage=''){
+            var data = {
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+                'pk': '{{ object.pk }}',
+                'status': status
+            }
+            if (rejectMessage){
+            data['reject_msg'] = rejectMessage;
+            }
+            $.ajax({
+            url: "{% url 'province_forms:submit_form' form_pk=object.pk %}",
             method: 'POST',
-            data: {
-              'csrfmiddlewaretoken': '{{ csrf_token }}',
-              'pk': pk,
-            },
+            data: data,
             dataType: 'json',
 
             success: function(response){
-              window.location.href = "{% url 'province_forms:list' %}"
+                window.location.href = success_url;
             }
-          })
-        });
+            })
+        }
+
     </script>
 {% endblock extrascripts %}
