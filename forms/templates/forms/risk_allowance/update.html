@@ -28,7 +28,12 @@
         <h6 class="heading-01 mb-3">जोखिम भत्ता सम्बन्धी बिबरण</h6>
 
         {% crispy form %}
-        
+        <div class="card-warning mt-3">
+            <div class="align-vertical justify-content-between">
+                <h6>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</h6>
+                <a href="javascript:void(0)" class="ic-close close-card"></a>
+            </div>
+        </div>
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

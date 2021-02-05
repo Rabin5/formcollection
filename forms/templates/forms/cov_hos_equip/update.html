@@ -25,9 +25,18 @@
 {% block content %}
     {% include 'core/forms/progress_bar.html' %}
     <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण</h6>
+        <h6 class="heading-01 mb-3">कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण (प्रदेश भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h6>
 
         {% crispy form %}
+
+        <div class="card-warning mt-3">
+            <div class="align-vertical justify-content-between">
+                <h6>नोटः यो बिबरणमा प्रदेश अन्तरगतका सबै कोभिड अस्पतालबाट संकलन गर्री बिबरण उपलब्ध गराउनुहोला । </h6>
+                <a href="javascript:void(0)" class="ic-close close-card"></a>
+            </div>
+
+        </div>
+
       </div>
     {% include 'core/forms/form_footer.html' %}
 {% endblock content %}

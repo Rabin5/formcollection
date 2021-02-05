@@ -28,7 +28,15 @@
         <h6 class="heading-01 mb-3">पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण</h6>
 
         {% crispy form %}
-        
+
+        <div class="card-warning mt-3">
+            <div class="align-vertical justify-content-between">
+                <h6>नोटः प्रदेशको सामाजिक बिकास मन्त्रालय र अन्तरगतका सबै प्रयोगशालाबाट लिनुपर्नेछ।</h6>
+                <a href="javascript:void(0)" class="ic-close close-card"></a>
+            </div>
+
+        </div>
+
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
