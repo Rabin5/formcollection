@@ -21,7 +21,7 @@ class CaseInvestigationLineForm(forms.ModelForm):
 
 
 CaseInvestigationTracingFormSet = inlineformset_factory(CaseInvestigationTracing, CaseInvestigationTracingLine, form=CaseInvestigationLineForm, fields=[
-                                                        'description', 'num_team_members', 'amount_expense', 'num_searched_cases', 'num_identified_infection', 'remarks'], extra=1, can_delete=False)
+                                                        'description', 'num_team_members', 'amount_expense', 'num_searched_cases', 'num_identified_infection', 'remarks'], extra=1, can_delete=True)
 
 
 
