@@ -19,7 +19,7 @@
         "model": "master_data.GovernmentBodyType",
         "pk": "3",
         "fields": {
-            "name": "प्रदेश",
+            "name": "प्रदेश सरकार",
             "created": "2020-02-02 00:00:00"
         }
     }

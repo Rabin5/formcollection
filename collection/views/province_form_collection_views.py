@@ -13,6 +13,7 @@ from forms import models
 
 from django.apps import apps
 
+from collection.forms.province_forms import ProvinceFormCollectionForm
 from collection.models import ProvinceFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import PROVINCE_STATE, num_to_devanagari
@@ -27,6 +28,8 @@ class ProvinceFormCollectionCreateView(View):
     """
     Creates form collection and initializes all forms in the collection
     """
+    form_class = ProvinceFormCollectionForm
+    template_name = 'province_form_collection/create.html'
 
     def init_forms(self):
         """
@@ -34,7 +37,7 @@ class ProvinceFormCollectionCreateView(View):
         """
 
         col_update_params = {}
-        fiscal_year = FiscalYear.objects.get_current_fy()
+        fiscal_year = self.object.fiscal_year
         for form in LIST_PROVINCE_STATE:
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
@@ -42,7 +45,7 @@ class ProvinceFormCollectionCreateView(View):
                 )
             else:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     fiscal_year=fiscal_year,
                     create_user=self.request.user,
                 )
@@ -51,19 +54,30 @@ class ProvinceFormCollectionCreateView(View):
         ProvinceFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
+    
+    def get(self, request, *args, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, fiscal year
+        """
+        context = {}
+        context['form'] = self.form_class()
+        return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = ProvinceFormCollection(
-            user=request.user, status='started', state=0)
-        form_collect.save()
-        self.object = form_collect
+        form_collect = self.form_class(request.POST)
+        instance = form_collect.save()
+        instance.user = request.user
+        instance.status = 'started'
+        instance.state = 0
+        instance.save()
+        
+        self.object = instance
         self.init_forms()
-        form_url = f"{reverse('province_forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_PROVINCE_STATE.get(0)}"
-        context = {'url': form_url}
-        return JsonResponse(context, content_type='application/json')
+        form_url = f"{reverse('province_forms:update', kwargs={'pk': self.object.pk})}?form={DICT_PROVINCE_STATE.get(0)}"
+        return HttpResponseRedirect(form_url)
 
 
 class ProvinceFormCollectionUpdateView(UpdateView):
