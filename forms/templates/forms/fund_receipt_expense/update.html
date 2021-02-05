@@ -29,6 +29,20 @@
 
         {% crispy form %}
         
-      </div>
+        <div class="card-warning mt-3">
+            <div class="align-vertical justify-content-between">
+                <h6>द्रष्ट्रव्यः</h6>
+                <a href="javascript:void(0)" class="ic-close close-card"></a>
+            </div>
+
+            <ul class="list mt-2">
+                <li>
+                    १ = माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।
+                </li>
+            </ul>
+        </div>
+    </div>
+    
     {% include 'core/forms/form_footer.html' with pk=pk %}
+    
 {% endblock content %}

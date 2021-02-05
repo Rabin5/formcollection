@@ -36,7 +36,7 @@ class DistrictIsolationManagementLine(FormLineBaseModel):
     district = models.ForeignKey(
         District, on_delete=models.PROTECT, related_name='dist_isolation_mgt', verbose_name='जिल्ला', null=True, blank=False)
     num_prepared_icu = models.IntegerField(
-        verbose_name='तयारी अवस्थामा रहेको icu  संख्या', null=True, blank=False)
+        verbose_name='तयारी अवस्थामा रहेको आई सी यु संख्या', null=True, blank=False)
     num_prepared_bed = models.IntegerField(
         verbose_name='तयारी अवस्थामा रहेको बेड संख्या', null=True, blank=False)
     num_infected_person = models.IntegerField(
