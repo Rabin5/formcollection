@@ -4,6 +4,7 @@ from master_data.models.address import District
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.db import transaction
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class DistrictCreateView(CreateView):
@@ -40,6 +41,7 @@ class DistrictListView(ListView):
     model = District
     template_name = "master_data/address/district_list.html"
     context_object_name = 'district_list'
+    paginate_by = PAGINATED_BY
 
 
 class DistrictUpdateView(UpdateView):

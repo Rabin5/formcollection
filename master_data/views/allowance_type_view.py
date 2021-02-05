@@ -3,6 +3,7 @@ from master_data.forms.allowance_type_form import AllowanceTypeForm
 from master_data.models.government import AllowanceType
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class AllowanceTypeCreateView(CreateView):
@@ -16,6 +17,7 @@ class AllowanceTypeListView(ListView):
     model = AllowanceType
     template_name = "master_data/allonace/allowance_type_list.html"
     context_object_name = 'allowance_type_list'
+    paginate_by = PAGINATED_BY
 
 
 class AllowanceTypeUpdateView(UpdateView):

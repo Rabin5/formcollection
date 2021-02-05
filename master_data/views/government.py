@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from master_data.forms.government import GovernmentBodyForm, GovernmentBodyTypeForm
 from master_data.models.government import GovernmentBody, GovernmentBodyType
+from oagn_covid.settings.base import PAGINATED_BY
 
 class GovernmentBodyTypeCreateView(CreateView):
     model = GovernmentBodyType
@@ -16,6 +17,7 @@ class GovernmentBodyTypeListView(ListView):
     model = GovernmentBodyType
     template_name = "master_data/gov_body/gov_body_type_list.html"
     context_object_name = 'gov_body_typies'
+    paginate_by = PAGINATED_BY
 
 
 class GovernmentBodyTypeUpdateView(UpdateView):
@@ -42,6 +44,7 @@ class GovernmentBodyListView(ListView):
     model = GovernmentBody
     template_name = "master_data/gov_body/gov_body_list.html"
     context_object_name = 'gov_bodies'
+    paginate_by = PAGINATED_BY
 
 
 class GovernmentBodyUpdateView(UpdateView):

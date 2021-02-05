@@ -120,6 +120,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# paginate by
+PAGINATED_BY = 25
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

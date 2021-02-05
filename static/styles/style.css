@@ -8490,3 +8490,10 @@ input[type='number'] {
 .tr-review-head {
   font-weight: bold;
 }
+
+.page-item.active-link .page-link {
+  z-index: 3;
+  color: #ffffff;
+  background-color: #42bc38;
+  border-color: #42bc38;
+}

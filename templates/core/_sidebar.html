@@ -96,9 +96,6 @@
               aria-controls="collapseExample4">ठेगाना</a>
             <div class="collapse{% if 'master-data/address' in request.path %} show {% endif %}" id="collapseExample4">
               <ul class="menu py-0">
-                <li {% if 'md-address:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-address:list'%}" class="pl-4">वडा न</a>
-                </li>
                 <li {% if 'md-locallevel:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-locallevel:list'%}" class="pl-4">स्थानीय निकाय </a>
                 </li>
@@ -119,9 +116,6 @@
               aria-controls="collapseExample5">कम्पनि</a>
             <div class="collapse{% if 'master-data/company' in request.path %} show {% endif %}" id="collapseExample5">
               <ul class="menu py-0">
-                <li {% if 'md-company:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-company:list'%}" class="pl-4">Company</a>
-                </li>
                 <li {% if 'md-laboratory:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-laboratory:list'%}" class="pl-4">Laboratory</a>
                 </li>
