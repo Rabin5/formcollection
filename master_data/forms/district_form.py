@@ -9,6 +9,8 @@ from master_data.custom_layout_object import Formset
 
 
 class LocalLevelForm(forms.ModelForm):
+    name = forms.CharField(label='', required=False)
+
     class Meta:
         model = LocalLevel
         exclude = ()
@@ -33,17 +35,17 @@ class LocalLevelLine(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
+        # self.helper.form_class = 'form-horizontal'
+        self.helper.form_class='form-inline'
         self.helper.label_class = 'col-md-3 create-label'
         self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Div(
                 Field('name'),
                 Field('province'),
-                Fieldset('Add LocalLevel. . .',
+                Fieldset('स्थानीयस्तरको नाम',
                          Formset('lines')
                          ),
-                HTML('<br>'),
 
             )
         )

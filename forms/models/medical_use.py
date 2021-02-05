@@ -27,4 +27,4 @@ class MedicalUseLine(FormLineBaseModel):
         max_length=300, verbose_name='प्रयोगमा नआएको कारण')
     remarks = models.CharField(max_length=300, verbose_name='कैफियत')
     medical_use_line = models.ForeignKey(
-        MedicalUse, related_name='medical_use_lines', null=True, blank=True, on_delete=models.PROTECT)
+        MedicalUse, null=True, blank=True, on_delete=models.PROTECT, related_name='lines')

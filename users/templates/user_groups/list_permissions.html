@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Groups - Nepal Audit Management System
+  Permission - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-User Groups
+User Permission
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'users:create_group' %}"
-    href="{% url 'users:create_group' %}" data-toggle="modal" data-target="#modalUserGroupCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'users:create_permission' %}"
+    href="{% url 'users:create_permission' %}" data-toggle="modal" data-target="#modalUserPermissionCreate">
     <i class="ic-add"></i>
-    User Group थप्नुहोस्
+    User Permission थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -24,23 +24,21 @@ User Groups
     <tr>
       <th>#.</th>
       <th>Name</th>
+      <th>Codename</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
   <tbody>
-    {% for group in groups %}
+    {% for permission in permissions %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{ group.name }}</td>
+        <td>{{ permission.name }}</td>
+        <td>{{ permission.codename }}</td>
         <td class="action">
-          
-          <a href="{% url 'users:group_detail' group.pk %}">
-          <i class="ic-visible"></i>
-          
-          <a data-remote="{% url 'users:delete_group' group.pk %}"
-            href="{% url 'users:delete_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupDelete">
-            <i class="ic-delete"></i>
-          </a> 
+          <a data-remote="{% url 'users:edit_permission' permission.pk %}"
+            href="{% url 'users:edit_permission' permission.pk %}" data-toggle="modal" data-target="#modalUserPermissionUpdate">
+            <i class="ic-edit mr-2"></i>
+          </a>
         </td>
       </tr>
     {% endfor %}
@@ -50,21 +48,21 @@ User Groups
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalUserGroupCreate" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupCreate" aria-hidden="true">
+<div class="modal fade" id="modalUserPermissionCreate" tabindex="-1" role="dialog" aria-labelledby="modalUserPermissionCreate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalUserGroupUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupUpdate" aria-hidden="true">
+<div class="modal fade" id="modalUserPermissionUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUserPermissionUpdate" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalUserGroupDelete" tabindex="-1" role="dialog" aria-labelledby="modalUserGroupDelete" aria-hidden="true">
+<div class="modal fade" id="modalUserPermissionDelete" tabindex="-1" role="dialog" aria-labelledby="modalUserPermissionDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -78,19 +76,19 @@ User Groups
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalUserGroupCreate').on('shown.bs.modal', function (e) {
+    $('#modalUserPermissionCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
     
-    $('#modalUserGroupUpdate').on('shown.bs.modal', function (e) {
+    $('#modalUserPermissionUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalUserGroupDelete').on('shown.bs.modal', function (e) {
+    $('#modalUserPermissionDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
@@ -98,12 +96,12 @@ User Groups
 
   });
 
-  $( "#modalUserGroupCreate").on('submit', 'form', function(e) {
+  $( "#modalUserPermissionCreate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });
 
-  $( "#modalUserGroupUpdate").on('submit', 'form', function(e) {
+  $( "#modalUserPermissionUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
     saveData($(this)) 
   });

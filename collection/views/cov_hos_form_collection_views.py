@@ -18,6 +18,8 @@ from collection.metadata import ROUTE_LINK
 from collection.utils import CH_STATE, num_to_devanagari
 from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 
+from users.models.user import User
+
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key: value for key, value in CH_STATE}
 LIST_CH_STATE = [value for key, value in CH_STATE]
@@ -260,3 +262,17 @@ def cov_hos_submit_form(request, form_pk):
     form_obj.status = 'submitted'
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
+
+class ApproveView(View):
+    template_name = 'cov_hos_form_collection/approve.html'
+
+    def get(self, request, *args, **kwargs):
+        params = {'user': self.request.user, 'status': 'submitted'}
+        data = list(CovHosFormCollection.objects.select_related().filter(**params).values('id', 'user', 'state'))
+        for index, val in enumerate(data):
+            user = User.objects.get(pk=val.get('user')).username
+            data[index].update({'user':user})
+        print(data)
+        return render(request, self.template_name, context={'data': data})
+
+    # def post

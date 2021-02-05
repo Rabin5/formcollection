@@ -1,0 +1,205 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load form_extras %}
+{% block content %}
+<link src="{% static 'styles/style.css' %}">
+{% load crispy_forms_tags %}
+<section>
+    <div>
+        <p>
+            <h3>कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा आन्तरिक मामिला तथा कानून मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h2>
+            <b> (यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो बर्षको मात्र उपलव्ध गराउनु हुने छ । प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ ।)</b>
+        </p>
+    </div>
+    <br>
+    <br>
+
+    <div>
+        <div>
+            <h4>1. महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य </h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.epidemic_outbreak_prep.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.epidemic_outbreak_prep.fiscal_year }}
+            </p>
+
+            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                <tr class="tr-review-head">
+                <th>पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य</th>
+                <th>सम्पादन भएका प्रमुख क्रियाकलापहरु</th>
+                <th>खर्च रकम</th>
+                </tr>
+
+                {% for obj in object.epidemic_outbreak_prep.lines.all  %}
+                    <tr>
+                    <td>{{ obj.preparation_work_to_do }}</td>
+                    <td>{{ obj.major_activities }}</td>
+                    <td>{{ obj.amt_expense }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>2. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण </h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.fund_receipt_expense.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.fund_receipt_expense.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+        </div>
+
+        <div>
+            <p align="right">रु हजारमा</p>
+            <table class="table-review">
+                <tr class="tr-review-head">
+                    <th>बजेट/आम्दानीको स्रोत</th>
+                    <th>२०७७ असार मसान्तसम्म प्राप्त रकम</th>
+                    <th>२०७७ आश्विन मसान्तसम्म प्राप्त रकम</th>
+                    <th>खर्च शीर्षक</th>
+                    <th>२०७७ असार मसान्तसम्म खर्च रकम</th>
+                    <th>२०७७ आश्विन मसान्तसम्म खर्च रकम</th>
+                </tr>
+
+                {% for obj in object.fund_receipt_expense.lines.all  %}
+                    <tr>
+                        <td>{{ obj.budget_source }}</td>
+                        <td>{{ obj.fy_start_received_amt }}</td>
+                        <td>{{ obj.fy_end_received_amt }}</td>
+                        <td>{{ obj.expense_header }}</td>
+                        <td>{{ obj.fy_start_expense_amt }}</td>
+                        <td>{{ obj.fy_end_expense_amt }}</td>
+                        </tr>
+                {% endfor %}
+                <tr>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_internal_affair object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
+                    <th>{% calculate_total_internal_affair object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_internal_affair object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
+                    <th>{% calculate_total_internal_affair object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
+                </tr>
+            </table>
+            <i>द्रष्ट्रव्यः १= माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।</i>
+            <i>२. मन्त्रालय आफैले खर्च नगरी अन्य निकायलाई निकासा दिएको भएका सो विवरण खुलाउनु होला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>3. जोखिम भत्ता सम्बन्धी बिबरण (मन्त्रालयले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.risk_allowance.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.risk_allowance.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=risk_allowance">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review auto-index">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                    <th>क्रस</th>
+                    <th>खर्च गर्ने निकायको नाम</th>
+                    <th>जोखिम भत्ता पाउने पदाधिकारी</th>
+                    <th>कर्मचारी वा पदाधिकारी संख्या</th>
+                    <th>भत्ताको प्रकार</th>
+                    <th>२०७६।७७ सम्म खर्च रकम</th>
+                    <th>कैफियत</th>
+                </tr>
+
+                {% for obj in object.risk_allowance.lines.all  %}
+                    <tr>
+                        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                        <td>{{ obj.gov_body }}</td>
+                        <td>{{ obj.office_bearer }}</td>
+                        <td>{{ obj.bearer_num }}</td>
+                        <td>{{ obj.allowance_type }}</td>
+                        <td>{{ obj.expense_amount }}</td>
+                        <td>{{ obj.remarks }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_internal_affair object 'risk_allowance' 'lines' 'bearer_num' %}</th>
+                    <th></th>
+                    <th>{% calculate_total_internal_affair object 'risk_allowance' 'lines' 'expense_amount' %}</th>
+                </tr>
+                </table>
+            <i>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>4. कार्ययोजना कार्यान्वयन- कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा स्वदेश आउनैपर्ने अवस्थामा रहेका नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्वन्धी आदेश, २०७७ को लागि तयार पारिएको नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै प्रदेश सरकारको समेत जिम्मेवारी हुने सहयोग गर्नुपर्ने गरी तोकेको छ । यस सम्बन्धमा प्रदेश सरकारबाट भएका क्रियाकलाप र यसमा भएको खर्च खुलाउनु होस् ।</h4>
+            <p align="right"><a href="{% url 'internal_affairs_forms:update' object.pk %}?form=action_plan_implementation">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review auto-index">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                    <th>क्रस</th>
+                    <th>क्रियाकलाप</th>
+                    <th>प्रदेश सरकारबाट भएको कार्य</th>
+                    <th>उक्त कार्यमा भएको खर्च</th>
+                </tr>
+
+                {% for obj in object.action_plan_implementation.lines.all  %}
+                    <tr>
+                        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                        <td>{{ obj.activity }}</td>
+                        <td>{{ obj.work_done }}</td>
+                        <td>{{ obj.work_expense }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+</section>
+
+<button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'internal_affairs_forms:submit_form' form_pk=object.pk %}">Submit</button>
+
+{% endblock content %}
+
+{% block extrascripts %}
+    <script>
+        $( '#submit' ).on('click', function(event){
+          var pk = $(this).attr("data-pk");
+          var dataurl = $(this).attr("dataurl");
+          $.ajax({
+            url: dataurl,
+            method: 'POST',
+            data: {
+              'csrfmiddlewaretoken': '{{ csrf_token }}',
+              'pk': pk,
+            },
+            dataType: 'json',
+
+            success: function(response){
+              window.location.href = "{% url 'internal_affairs_forms:list' %}"
+            }
+          })
+        });
+    </script>
+{% endblock extrascripts %}

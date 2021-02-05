@@ -19,7 +19,7 @@ class UserUpdateForm(forms.ModelForm):
     
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'mobile_number', 'email',)
+        fields = ("username", "email", "mobile_number", "groups")
 
 
 class ResetPasswordForm(SetPasswordForm):

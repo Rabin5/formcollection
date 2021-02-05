@@ -46,7 +46,6 @@ class ProvinceUpdateView(UpdateView):
     model = Province
     template_name = "master_data/address/province_update.html"
     form_class = DistrictFormLine
-    success_url = reverse_lazy('md-province:update')
     context_object_name = 'province_update'
 
     def get_context_data(self, **kwargs):
@@ -71,7 +70,7 @@ class ProvinceUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('md-province:List', kwargs={'pk': self.object.pk})
+        return reverse_lazy('md-province:list')
 
 
 class ProvinceDeleteView(DeleteView):

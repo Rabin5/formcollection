@@ -36,6 +36,8 @@ class CovHosFormCollection(models.Model):
     body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
     fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
     
+    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approver_user')
+    
     medical_expense = models.OneToOneField(
         MedicalExpense, on_delete=models.CASCADE, null=True)
     risk_allowance = models.OneToOneField(

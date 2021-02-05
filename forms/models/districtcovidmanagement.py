@@ -29,7 +29,7 @@ class DisctrictQuarantineManagementLine(FormLineBaseModel):
     num_insufficient_bed = models.IntegerField(
         verbose_name='नपुग वेड संख्या', null=True, blank=False)
     quarantine_mgmgt_lines = models.ForeignKey(
-        DistrictCovidManagement, on_delete=models.PROTECT)
+        DistrictCovidManagement, on_delete=models.PROTECT, related_name='dist_quarantine_lines')
 
 
 class DistrictIsolationManagementLine(FormLineBaseModel):
@@ -46,7 +46,7 @@ class DistrictIsolationManagementLine(FormLineBaseModel):
     num_home_isolated_person = models.IntegerField(
         verbose_name='होम आईसोलेशनमा बस्नेको संख्या', null=True, blank=False)
     isolation_mgmt_lines = models.ForeignKey(
-        DistrictCovidManagement, on_delete=models.PROTECT)
+        DistrictCovidManagement, on_delete=models.PROTECT, related_name='dist_isolation_lines')
 
 
 class DistrictLabTestLine(FormLineBaseModel):
@@ -77,4 +77,4 @@ class DistrictLabTestLine(FormLineBaseModel):
     num_covid_deaths = models.IntegerField(
         verbose_name='मृत्यु हुनेको संख्या', null=True, blank=False)
     lab_test_lines = models.ForeignKey(
-        DistrictCovidManagement, on_delete=models.PROTECT)
+        DistrictCovidManagement, on_delete=models.PROTECT, related_name='dist_lab_lines')

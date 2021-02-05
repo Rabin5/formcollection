@@ -3,18 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Province - Nepal Audit Management System
+प्रदेश - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-province
+प्रदेश
 {% endblock page_title %}
 
 {% block page_actions %}
 <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-province:create' %}"
     href="{% url 'md-province:create' %}" data-toggle="modal" data-target="#modalProCreate">
     <i class="ic-add"></i>
-    province थप्नुहोस्
+    प्रदेश थप्नुहोस्
 </a>
 {% endblock page_actions %}
 
@@ -24,8 +24,7 @@ province
         <tr>
             <th>#.</th>
             <th>province Name</th>
-            <th>Disctrict Name</th>
-            <th>Local level</th>
+            
             <th class="text-right">कार्य</th>
         </tr>
     </thead>
@@ -34,9 +33,6 @@ province
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ province.name }}</td>
-            <td>{{ province.district }}</td>
-            <td>{{ province.district.local_level }}</td>
-
             <td class="action">
                 <a data-remote="{% url 'md-province:update' province.pk %}"
                     href="{% url 'md-province:update' province.pk %}" data-toggle="modal" data-target="#modalProUpdate">

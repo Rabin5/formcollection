@@ -5,6 +5,7 @@ from forms.models.risk_allowance import RiskAllowance
 from forms.models.fund_receipt_expense import FundReceiptExpense
 from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
 from forms.models.province_institution_management import ProvinceInstitutionManagement
+from forms.models.action_plan_implementation import ActionPlanImplementation
 
 from users.models.user import User
 from collection.utils import CHIEF_MINISTER_STATE, STATUS
@@ -22,7 +23,8 @@ class ChiefMinisterOfficeFormCollection(models.Model):
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)
     province_institute_management = models.OneToOneField(
         ProvinceInstitutionManagement, on_delete=models.CASCADE, null=True)
-    
+    action_plan_implementation = models.OneToOneField(
+        ActionPlanImplementation, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):

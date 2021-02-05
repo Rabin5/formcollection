@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <aside class="sidebar">
   <div class="sidebar-brand">
     <img src="{% static 'images/nepal-emblem.png' %}" alt="Nepal Emblem">
@@ -50,9 +51,9 @@
                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
 
                   <a href="{% url 'md-offbearer:list'%}" class="pl-4">कार्यालय वाहक
-                  </a>
-
+                  </a> 
                 </li>
+        
                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
                 </li>
@@ -141,17 +142,21 @@
       </div>
     </li>
     <li>
+    
       <a href="#form-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
         aria-controls="collapseExample">Forms</a>
+    
       <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
         <ul class="menu py-0">
-          <li {% if '/cov-hos/forms' in request.path %}class="active" {% endif %}>
+          <li {% if 'cov_hos_forms:list' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'cov_hos_forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
+
           </li>
           <li {% if '/province/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'province_forms:list'%}" class="pl-4">प्रदेश</a>
           </li>
-          <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
+
+     <li {% if '/internal-affairs/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'internal_affairs_forms:list'%}" class="pl-4">आन्तरिक मामिला</a>
           </li> 
           <li {% if '/chief-minister-office/forms' in request.path %}class="active" {% endif %}>
@@ -160,6 +165,35 @@
           <li {% if '/local-level/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'local_level_forms:list'%}" class="pl-4">स्थानीय स्तर</a>
           </li>           
+        </ul>
+      </div>
+    </li>
+    <li>
+      <a href="#user-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
+        aria-controls="collapseExample">Users</a>
+      <div class="collapse{% if 'users' in request.resolver_match.view_name %} show {% endif %}" id="user-data">
+        <ul class="menu py-0">
+          <li {% if 'users/list' in request.path %}class="active" {% elif 'users/reset-password' in request.path %}class="active" {% elif 'users:update_user' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'users:list'%}" class="pl-4">Users List</a>
+          </li>
+          <li {% if '/users/user_groups' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'users:groups_list'%}" class="pl-4">Users Groups</a>
+          </li>
+           <li {% if '/users/user_permission' in request.path %}class="active" {% endif %}>
+            <a href="{% url 'users:list_permissions'%}" class="pl-4">Users Permission</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <a href="#approve-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
+        aria-controls="collapseExample">Approve</a>
+      <div class="collapse{% if '_forms' in request.resolver_match.view_name %} show {% endif %}" id="approve-data">
+        <ul class="menu py-0">
+          <li {% if 'cov_hos_forms:approve_list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'cov_hos_forms:approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
+          </li>
+          
         </ul>
       </div>
     </li>

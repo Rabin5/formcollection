@@ -34,11 +34,11 @@
   {% endfor %}
   <tr>
     <th>जम्मा</th>
-    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
-    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
+    <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
+    <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
     <th>जम्मा</th>
-    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
-    <th>{% calculate_total object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
+    <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
+    <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
   </tr>
 </table>
 <i>द्रष्ट्रव्यः माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।</i>
@@ -82,9 +82,9 @@
     <th></th>
     <th></th>
     <th>जम्मा</th>
-    <th>{% calculate_total object 'risk_allowance' 'lines' 'bearer_num' %}</th>
+    <th>{% calculate_total_covid_hospital object 'risk_allowance' 'lines' 'bearer_num' %}</th>
     <th></th>
-    <th>{% calculate_total object 'risk_allowance' 'lines' 'expense_amount' %}</th>
+    <th>{% calculate_total_covid_hospital object 'risk_allowance' 'lines' 'expense_amount' %}</th>
   </tr>
 </table>
 <i>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</i>
@@ -527,11 +527,11 @@
   <tr>
     <td></td>
     <td>जम्मा</td>
-    <th>{% calculate_total object 'quarantine_management_detail' 'lines' 'cost_construction' %}</th>
-    <th>{% calculate_total object 'quarantine_management_detail' 'lines' 'num_bed' %}</th>
-    <th>{% calculate_total object 'quarantine_management_detail' 'lines' 'max_num_daily_stay' %}</th>
-    <th>{% calculate_total object 'quarantine_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
-    <th>{% calculate_total object 'quarantine_management_detail' 'lines' 'expense_operations' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'cost_construction' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'num_bed' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'expense_operations' %}</th>
   </tr>
 </table>
 <i>नोट अस्पतालले क्वारेन्टीन निर्माण ब्यबस्थापनमा खर्च गरेको भए यो फारममा उल्लेख गर्नुहोला ।</i>
@@ -574,11 +574,11 @@
   <tr>
     <td></td>
     <td>जम्मा</td>
-    <th>{% calculate_total object 'isolation_management_detail' 'lines' 'cost_construction' %}</th>
-    <th>{% calculate_total object 'isolation_management_detail' 'lines' 'num_bed' %}</th>
-    <th>{% calculate_total object 'isolation_management_detail' 'lines' 'max_num_daily_stay' %}</th>
-    <th>{% calculate_total object 'isolation_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
-    <th>{% calculate_total object 'isolation_management_detail' 'lines' 'expense_operations' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'cost_construction' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'num_bed' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'expense_operations' %}</th>
   </tr>
 </table>
 <i>नोट अस्पतालले क्वारेन्टीन निर्माण ब्यबस्थापनमा खर्च गरेको भए उल्लेख गरिदिनुहोला।</i>
@@ -621,9 +621,9 @@
     <td></td>
     <td>जम्मा</td>
     <td></td>
-    <th>{% calculate_total object 'quarantine_contruction_expenditure' 'lines' 'number' %}</th>
-    <th>{% calculate_total object 'quarantine_contruction_expenditure' 'lines' 'unit_cost' %}</th>
-    <th>{% calculate_total object 'quarantine_contruction_expenditure' 'lines' 'amt_expense' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_contruction_expenditure' 'lines' 'number' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_contruction_expenditure' 'lines' 'unit_cost' %}</th>
+    <th>{% calculate_total_covid_hospital object 'quarantine_contruction_expenditure' 'lines' 'amt_expense' %}</th>
     <td></td>
     <td></td>
   </tr>
@@ -668,9 +668,9 @@
     <td></td>
     <td>जम्मा</td>
     <td></td>
-    <th>{% calculate_total object 'isolation_construction_expenditure' 'lines' 'number' %}</th>
-    <th>{% calculate_total object 'isolation_construction_expenditure' 'lines' 'unit_cost' %}</th>
-    <th>{% calculate_total object 'isolation_construction_expenditure' 'lines' 'amt_expense' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_construction_expenditure' 'lines' 'number' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_construction_expenditure' 'lines' 'unit_cost' %}</th>
+    <th>{% calculate_total_covid_hospital object 'isolation_construction_expenditure' 'lines' 'amt_expense' %}</th>
     <td></td>
     <td></td>
   </tr>

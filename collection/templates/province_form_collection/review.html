@@ -1,0 +1,1091 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load form_extras %}
+{% block content %}
+<link src="{% static 'styles/style.css' %}">
+{% load crispy_forms_tags %}
+<section>
+    <div>
+        <p>
+            <h3>कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा प्रदेश मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h2>
+            <b>(यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो बर्षको मात्र उपलव्ध गराउनु हुने छ । प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ ।)</b>
+        </p>
+    </div>
+    <br>
+    <br>
+
+    <div>
+        <div>
+            <h4>1. महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य </h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.epidemic_outbreak_prep.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.epidemic_outbreak_prep.fiscal_year }}
+            </p>
+
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                <tr class="tr-review-head">
+                <th>पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य</th>
+                <th>सम्पादन भएका प्रमुख क्रियाकलापहरु</th>
+                <th>खर्च रकम</th>
+                </tr>
+
+                {% for obj in object.epidemic_outbreak_prep.lines.all  %}
+                    <tr>
+                    <td>{{ obj.preparation_work_to_do }}</td>
+                    <td>{{ obj.major_activities }}</td>
+                    <td>{{ obj.amt_expense }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>2. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण </h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.fund_receipt_expense.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.fund_receipt_expense.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                <tr class="tr-review-head">
+                    <th>बजेट/आम्दानीको स्रोत</th>
+                    <th>२०७७ असार मसान्तसम्म प्राप्त रकम</th>
+                    <th>२०७७ आश्विन मसान्तसम्म प्राप्त रकम</th>
+                    <th>खर्च शीर्षक</th>
+                    <th>२०७७ असार मसान्तसम्म खर्च रकम</th>
+                    <th>२०७७ आश्विन मसान्तसम्म खर्च रकम</th>
+                </tr>
+
+                {% for obj in object.fund_receipt_expense.lines.all  %}
+                    <tr>
+                        <td>{{ obj.budget_source }}</td>
+                        <td>{{ obj.fy_start_received_amt }}</td>
+                        <td>{{ obj.fy_end_received_amt }}</td>
+                        <td>{{ obj.expense_header }}</td>
+                        <td>{{ obj.fy_start_expense_amt }}</td>
+                        <td>{{ obj.fy_end_expense_amt }}</td>
+                        </tr>
+                {% endfor %}
+                <tr>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_province object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
+                    <th>{% calculate_total_province object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_province object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
+                    <th>{% calculate_total_province object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
+                </tr>
+            </table>
+            <i>द्रष्ट्रव्यः १= माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला । </i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>3. जोखिम भत्ता सम्बन्धी बिबरण (मन्त्रालयले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.risk_allowance.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.risk_allowance.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=risk_allowance">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review auto-index">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                    <th>क्रस</th>
+                    <th>खर्च गर्ने निकायको नाम</th>
+                    <th>जोखिम भत्ता पाउने पदाधिकारी</th>
+                    <th>कर्मचारी वा पदाधिकारी संख्या</th>
+                    <th>भत्ताको प्रकार</th>
+                    <th>२०७६।७७ सम्म खर्च रकम</th>
+                    <th>कैफियत</th>
+                </tr>
+
+                {% for obj in object.risk_allowance.lines.all  %}
+                    <tr>
+                        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                        <td>{{ obj.gov_body }}</td>
+                        <td>{{ obj.office_bearer }}</td>
+                        <td>{{ obj.bearer_num }}</td>
+                        <td>{{ obj.allowance_type }}</td>
+                        <td>{{ obj.expense_amount }}</td>
+                        <td>{{ obj.remarks }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_province object 'risk_allowance' 'lines' 'bearer_num' %}</th>
+                    <th></th>
+                    <th>{% calculate_total_province object 'risk_allowance' 'lines' 'expense_amount' %}</th>
+                </tr>
+                </table>
+            <i>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>4. औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (मन्त्रालयले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.medical_expense.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.medical_expense.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_expense">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review auto-index">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                    <th>क्रस</th>
+                    <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
+                    <th>सम्झौता रकम</th>
+                    <th>आपूर्ति गर्नुपर्ने मिति</th>
+                    <th>आपूर्ति गरेको मिति</th>
+                    <th>आपूर्ति भएको सामानको मुल्य</th>
+                    <th>खरिद विधि</th>
+                    <th>कैफियत</th>
+                </tr>
+
+                {% for obj in object.medical_expense.lines.all  %}
+                    <tr>
+                        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                        <td>{{ obj.product }}</td>
+                        <td>{{ obj.amt_agreement }}</td>
+                        <td>{{ obj.date_to_import }}</td>
+                        <td>{{ obj.date_imported }}</td>
+                        <td>{{ obj.amt_imported }}</td>
+                        <td>खरिद विधि</td>
+                        <td>{{ obj.remarks }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+            <i>नोट: सामाग्री उपकरण प्राप्त हुन नसकेको भए कारण खुलाउनु होला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>5. औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (मन्त्रालयले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.medical_receipt.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.medical_receipt.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_receipt">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
+                  <th>प्रदान गर्ने निकाय वा संस्था</th>
+                  <th>परिमाण</th>
+                  <th>प्राप्त औषधी स्वास्थ्य सामग्री उपकरणको मूल्य</th>
+                  <th>प्रयोगको अवस्था</th>
+                </tr>
+                {% for obj in object.medical_receipt.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.product }}</td>
+                      <td>{{ obj.provider_institution }}</td>
+                      <td>{{ obj.quantity }}</td>
+                      <td>{{ obj.cost_received_items }}</td>
+                      <td>{{ obj.usage_situation }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>6. औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.medical_use.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.medical_use.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=medical_use">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम</th>
+                  <th>खरिद वा प्राप्ती </th>
+                  <th>सामानको मुल्य</th>
+                  <th>प्रयोगमा नआएको परिमाण</th>
+                  <th>प्रयोगमा नआएको कारण</th>
+                  <th>कैफियत</th>
+                </tr>
+              
+                {% for obj in object.medical_use.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.product }}</td>
+                      <td>{{ obj.is_purchased }}</td>
+                      <td>{{ obj.product_price }}</td>
+                      <td>{{ obj.unused_qty }}</td>
+                      <td>{{ obj.unused_reason }}</td>
+                      <td>{{ obj.remarks }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>7. केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.med_purchase_desc.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.med_purchase_desc.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=med_purchase_desc">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                <tr class="tr-review-head">
+                  <th>सामानको नाम</th>
+                  <th>सामानको छोटो स्पेशिफिकेशन</th>
+                  <th>खरिद सम्झौता मिति</th>
+                  <th>सामान प्राप्त मिति</th>
+                  <th>इकाई</th>
+                  <th>परीमाण</th>
+                  <th>दर</th>
+                  <th>कुल रकम</th>
+                </tr>
+              
+                {% for obj in object.med_purchase_desc.lines.all  %}
+                    <tr>
+                      <td>{{ obj.product }}</td>
+                      <td>{{ obj.product_specificaiton }}</td>
+                      <td>{{ obj.date_procure_agreement }}</td>
+                      <td>{{ obj.date_received }}</td>
+                      <td>{{ obj.uom }}</td>
+                      <td>{{ obj.qty }}</td>
+                      <td>{{ obj.rate }}</td>
+                      <td>{{ obj.total_amt }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <i>नोटः स्वास्थ्य सामाग्री खरिद गर्ने सबै निकायले भर्नु होला । सामानको नामसंगै स्पेशीफिकेशन छोटकरीमा उल्लेख गरिदिनु होला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>8. पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.pcr_test_compliance_detail.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.pcr_test_compliance_detail.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                <tr class="tr-review-head">
+                  <th rowspan="2">महिना</th>
+                  <th colspan="2">सबै क्षेत्रमा गरेको कुल परीक्षण संख्या</th>
+                  <th colspan="2">Priority-1क्षेत्रमा गरेको परीक्षण संख्या</th>
+                  <th colspan="2">Priority-2क्षेत्रमा गरेको परीक्षण संख्या</th>
+                  <th colspan="2">Priority-3 क्षेत्रमा गरेको परीक्षण संख्या</th>
+                  <th colspan="2">Non-priority क्षेत्रमा गरेको परीक्षण संख्या</th>
+                </tr>
+                <tr>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                </tr>
+              
+                {% for obj in object.pcr_test_compliance_detail.lines.all  %}
+                    <tr>
+                      <td>{{ obj.month }}</td>
+                      <td>{{ obj.all_area_test_num }}</td>
+                      <td>{{ obj.all_area_infected_num }}</td>
+                      <td>{{ obj.priority_1_test_num }}</td>
+                      <td>{{ obj.priority_1_infected_num }}</td>
+                      <td>{{ obj.priority_2_test_num }}</td>
+                      <td>{{ obj.priority_2_infected_num }}</td>
+                      <td>{{ obj.priority_3_test_num }}</td>
+                      <td>{{ obj.priority_3_infected_num }}</td>
+                      <td>{{ obj.non_priority_test_num }}</td>
+                      <td>{{ obj.non_priority_infected_num }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <i>नोटः प्रदेशको सामाजिक बिकास मन्त्रालय र अन्तरगतका सबै प्रयोगशालाबाट लिनुपर्नेछ ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>9. पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (प्रदेश अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.pcr_lab_detail.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.pcr_lab_detail.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=pcr_lab_detail">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>पीसीआर ल्यावको नाम र स्थान</th>
+                  <th>स्थापना मिति</th>
+                  <th>दैनिक परीक्षण क्षमता</th>
+                  <th>आषाढ मसान्तसम्म परीक्षण गरेको कुल संख्या</th>
+                  <th>परीक्षण मध्ये संक्रमितको संख्या</th>
+                  <th>नतिजा दिन लाग्ने औषत समय</th>
+                  <th>पीसीआर परीक्षणमा आषाढ समान्त सम्म भएको खर्च</th>
+                </tr>
+              
+                {% for obj in object.pcr_lab_detail.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.laboratory }}</td>
+                      <td>{{ obj.laboratory.date_establishment }}</td>
+                      <td>{{ obj.laboratory.capacity_daily_test }}</td>
+                      <td>{{ obj.num_tested_fy_end }}</td>
+                      <td>{{ obj.num_infected }}</td>
+                      <td>{{ obj.time_test_result }}</td>
+                      <td>{{ obj.expense_pcr_test }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>10. आरडीटी परीक्षण सम्बन्धी बिबरण (प्रदेश अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.rdt_test_detail.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.rdt_test_detail.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=rdt_test_detail">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                    <th>क्रस</th>
+                    <th>ल्यावको नाम र स्थान</th>
+                    <th>आषाढ मसान्तसम्म आरडीटी परीक्षण गरेको संख्या</th>
+                    <th>परीक्षण मध्ये पिसीआर गरिएको संख्या</th>
+                    <th>आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च</th>
+                </tr>
+              
+                {% for obj in object.rdt_test_detail.lines.all  %}
+                    <tr>
+                        <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                        <td>{{ obj.laboratory }}</td>
+                        <td>{{ obj.num_tested_fy_end }}</td>
+                        <td>{{ obj.num_tested_pcr }}</td>
+                        <td>{{ obj.expense_rdt_test }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>11. पिसीआर किटको उपयोग सम्बन्धी बिबरण (प्रदेश अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.pcr_kit_usage.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष </b> {{ object.pcr_kit_usage.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=pcr_kit_usage">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>सि नं</th>
+                  <th>प्रयोगशालाको नाम</th>
+                  <th>२०७६ चैत्र देखि २०७७ आषाढ सम्म पिसीआर किट प्राप्ती</th>
+                  <th>२०७७ आषाढमसान्त सम्म पीसिआर किट खर्च</th>
+                  <th>२०७७ आषाढमसान्त मौजदात किट</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>वेष्टेज गएको किट संख्या</th>
+                  <th>वेष्टेज प्रतिशत</th>
+                </tr>
+              
+                {% for obj in object.pcr_kit_usage.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.laboratory }}</td>
+                      <td>{{ obj.num_kit_received }}</td>
+                      <td>{{ obj.num_kit_expensed }}</td>
+                      <td>{{ obj.num_kit_available }}</td>
+                      <td>{{ obj.num_tests }}</td>
+                      <td>{{ obj.num_wasted }}</td>
+                      <td>{% calculate_percentage obj.num_wasted obj.num_kit_received %} </td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>12. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण (प्रदेश भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h4>
+            <p>
+                <b>कोभिड डेडिकेटेड अस्पातालको नाम: </b>{{ object.covid_hos_mainpower }}
+            </p>
+            <p>
+                <b>स्थान: </b> {{ object.covid_hos_mainpower.address }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=covid_hos_mainpower">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>स्वास्थ्य जनशक्ति</th>
+                  <th>दरबन्दी संख्या</th>
+                  <th>पदपूर्ति संख्या</th>
+                  <th>रिक्त संख्या</th>
+                  <th>पदपूर्ति मध्ये करार संख्या</th>
+                </tr>
+
+                {% for obj in object.covid_hos_mainpower.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.num_required }}</td>
+                      <td>{{ obj.num_hired }}</td>
+                      <td>{{ obj.num_vacant }}</td>
+                      <td>{{ obj.num_vacant }}</td>
+                      <td>{{ obj.num_contract }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+            <i>नोटः यो बिबरणमा प्रदेश अन्तरगतका सबै कोभिड अस्पतालबाट संकलन गर्री बिबरण उपलब्ध गराउनुहोला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>13. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण (प्रदेश भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h4>
+            <p>
+                <b>कोभिड डेडिकेटेड अस्पातालको नाम: </b>{{ object.cov_hos_equipment }}
+            </p>
+            <p>
+                <b>स्थान: </b> {{ object.cov_hos_equipment.address }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=cov_hos_equipment">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">स्वास्थ्य उपकरण</th>
+                  <th colspan="3">संख्या</th>
+                </tr>
+              
+                <tr>
+                  <th>आबश्यक</th>
+                  <th>उपलब्ध</th>
+                  <th>नपुग</th>
+                </tr>
+              
+                {% for obj in object.cov_hos_equipment.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.product }}</td>
+                      <td>{{ obj.num_required }}</td>
+                      <td>{{ obj.available }}</td>
+                      <td>{{ obj.num_still_required }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+            <i>नोटः यो बिबरणमा प्रदेश अन्तरगतका सबै कोभिड अस्पतालबाट संकलन गर्री बिबरण उपलब्ध गराउनुहोला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>14. प्रदेशमा रहेका कोभिड अस्पताल सम्बन्धी बिबरण (प्रदेश भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h4>
+            <p>
+                <b>अस्पतालको नामः </b>{{ object.covid_hospital_detail.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.covid_hospital_detail.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=covid_hospital_detail">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">डेडिकेटेड अस्पतालको नाम र स्थान</th>
+                  <th rowspan="2">कोभिड अस्पताल घोषणा भएको मिति</th>
+                  <th rowspan="2">कोभिड अस्पतालको प्रकार</th>
+                  <th colspan="4">कोभिड अस्पताल घोषणा हुँदाको अवस्थामा रहेको संख्या</th>
+                  <th colspan="4">२०७७ असार मसान्तसम्म थप भएको संख्या</th>
+                </tr>
+
+                <tr>
+                  <th>स्वास्थ्यकर्मीको संख्या</th>
+                  <th>बेड संख्या</th>
+                  <th>आई सी यु संख्या</th>
+                  <th>भेन्टिलेटर संख्या</th>
+                  <th>स्वास्थ्यकर्मीको संख्या</th>
+                  <th>बेड संख्या</th>
+                  <th>आई सी यु संख्या</th>
+                  <th>भेन्टिलेटर संख्या</th>
+                  <th>२०७७ असार मसान्तसम्म उपचार गरेको कोभिड विरामी संख्या</th>
+                  <th>२०७७ असार मसान्तसम्म उपचारमा भएको खर्च</th>
+                </tr>
+              
+                {% for obj in object.covid_hospital_detail.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.covidhospital }}</td>
+                      <td>{{ obj.covidhospital.date_announcement }}</td>
+                      <td>{{ obj.covidhospital.type }}</td>
+                      <td>{{ obj.announce_time_health_workers }}</td>
+                      <td>{{ obj.announce_time_beds }}</td>
+                      <td>{{ obj.announce_time_icu }}</td>
+                      <td>{{ obj.announce_time_ventilators }}</td>
+                      <td>{{ obj.added_health_workers }}</td>
+                      <td>{{ obj.added_beds }}</td>
+                      <td>{{ obj.added_icu }}</td>
+                      <td>{{ obj.added_ventilators }}</td>
+                      <td>{{ obj.num_treated_patients }}</td>
+                      <td>{{ obj.expense_treatment }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>15. क्वारेन्टीन/होल्डिङ सेन्टर व्यवस्थापन सम्बन्धी बिबरण (प्रदेश सरकारबाट सञ्चालित क्वारेन्टिन र होल्डिङ सेन्टरको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.quarantine_management_detail.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.quarantine_management_detail.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=quarantine_management_detail">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम</th>
+                  <th rowspan="2">निर्माण खर्च</th>
+                  <th rowspan="2">बेड संख्या</th>
+                  <th colspan="2">क्वारेन्टिनमा बस्नेहरुको संख्या</th>
+                  <th rowspan="2">सञ्चालन ब्यबस्थापन प्रयोजनको खर्च</th>
+                </tr>
+                <tr>
+                  <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+                  <th>आषाढ मसान्त सम्म क्वारेन्टिनमा बसेकाहरुको कुल संख्या</th>
+                </tr>
+              
+                {% for obj in object.quarantine_management_detail.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.quarantine_center }}</td>
+                      <td>{{ obj.cost_construction }}</td>
+                      <td>{{ obj.num_bed }}</td>
+                      <td>{{ obj.max_num_daily_stay }}</td>
+                      <td>{{ obj.num_stayed_till_fy_end }}</td>
+                      <td>{{ obj.expense_operations }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <th>जम्मा</th>
+                  <th>{% calculate_total_province object 'quarantine_management_detail' 'lines' 'cost_construction' %}</th>
+                  <th>{% calculate_total_province object 'quarantine_management_detail' 'lines' 'num_bed' %}</th>
+                  <th>{% calculate_total_province object 'quarantine_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+                  <th>{% calculate_total_province object 'quarantine_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+                  <th>{% calculate_total_province object 'quarantine_management_detail' 'lines' 'expense_operations' %}</th>
+                </tr>
+              </table>
+              <i>नोट प्रदेशबाट क्वारेन्टीन निर्माण ब्यबस्थापन भएकोमा सो सम्बन्धी सुचना उपलब्ध गराईदिनुहोला।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>16. आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (प्रदेश सरकारबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने) </h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.isolation_management_detail.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.isolation_management_detail.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=isolation_management_detail">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको आईसोलेशन केन्द्रको नाम</th>
+                  <th rowspan="2">निर्माण खर्च</th>
+                  <th rowspan="2">बेड संख्या</th>
+                  <th colspan="2">आईसोलेशन केन्द्रमा बस्नेहरुको संख्या</th>
+                  <th rowspan="2">ब्यबस्थापन प्रयोजनको खर्च</th>
+                </tr>
+                <tr>
+                  <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+                  <th>आषाढ मसान्त सम्म आईसोलेशन केन्द्रमा बसेकाहरुको कुल संख्या</th>
+                </tr>
+              
+                {% for obj in object.isolation_management_detail.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.isolationcenter }}</td>
+                      <td>{{ obj.cost_construction }}</td>
+                      <td>{{ obj.num_bed }}</td>
+                      <td>{{ obj.max_num_daily_stay }}</td>
+                      <td>{{ obj.num_stayed_till_fy_end }}</td>
+                      <td>{{ obj.expense_operations }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <th>जम्मा</th>
+                  <th>{% calculate_total_province object 'isolation_management_detail' 'lines' 'cost_construction' %}</th>
+                  <th>{% calculate_total_province object 'isolation_management_detail' 'lines' 'num_bed' %}</th>
+                  <th>{% calculate_total_province object 'isolation_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+                  <th>{% calculate_total_province object 'isolation_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+                  <th>{% calculate_total_province object 'isolation_management_detail' 'lines' 'expense_operations' %}</th>
+                </tr>
+              </table>
+              <i>नोट प्रदेशबाट आईशोलेशन केन्द्र निर्माण ब्यबस्थापन भएकोमा यो बिबरण उपलब्ध गराउनुहोला ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>17. क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (प्रदेश सकारबाट सञ्चालित क्वारेन्टिन र होल्डिङ सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.quarantine_contruction_expenditure.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.quarantine_contruction_expenditure.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>खरिद भएका सामग्री</th>
+                  <th>इकाई</th>
+                  <th>संख्या</th>
+                  <th>प्रति ईकाइ दर</th>
+                  <th>खर्च रकम</th>
+                  <th>खरिद विधि</th>
+                  <th>कैफियत</th>
+                </tr>
+              
+                {% for obj in object.quarantine_contruction_expenditure.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.product }}</td>
+                      <td>{{ obj.uom }}</td>
+                      <td>{{ obj.number }}</td>
+                      <td>{{ obj.unit_cost }}</td>
+                      <td>{{ obj.amt_expense }}</td>
+                      <td>{{ obj.procure_method }}</td>
+                      <td>{{ obj.remarks }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <th>जम्मा</th>
+                  <td></td>
+                  <th>{% calculate_total_province object 'quarantine_contruction_expenditure' 'lines' 'number' %}</th>
+                  <th>{% calculate_total_province object 'quarantine_contruction_expenditure' 'lines' 'unit_cost' %}</th>
+                  <th>{% calculate_total_province object 'quarantine_contruction_expenditure' 'lines' 'amt_expense' %}</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+              <i>नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>18. आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (प्रदेश सरकारबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.isolation_construction_expenditure.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.isolation_construction_expenditure.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=isolation_construction_expenditure">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>खरिद भएका सामग्री</th>
+                  <th>इकाई</th>
+                  <th>संख्या</th>
+                  <th>प्रति ईकाइ दर</th>
+                  <th>खर्च रकम</th>
+                  <th>खरिद विधि</th>
+                  <th>कैफियत</th>
+                </tr>
+              
+                {% for obj in object.isolation_construction_expenditure.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.product }}</td>
+                      <td>{{ obj.uom }}</td>
+                      <td>{{ obj.number }}</td>
+                      <td>{{ obj.unit_cost }}</td>
+                      <td>{{ obj.amt_expense }}</td>
+                      <td>{{ obj.procure_method }}</td>
+                      <td>{{ obj.remarks }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <th>जम्मा</th>
+                  <td></td>
+                  <th>{% calculate_total_province object 'isolation_construction_expenditure' 'lines' 'number' %}</th>
+                  <th>{% calculate_total_province object 'isolation_construction_expenditure' 'lines' 'unit_cost' %}</th>
+                  <th>{% calculate_total_province object 'isolation_construction_expenditure' 'lines' 'amt_expense' %}</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+            </table>
+            <i>नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।</i>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>19. प्रदेश अन्तर्गत कोभिड-१९ को पहिचान, परीक्षण र उपचार एवं पूर्वाधार सम्बन्धी जिल्लागत विवरण (२०७७ आषाढ मसान्त सम्म)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.district_covid_management.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.district_covid_management.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=district_covid_management">Edit</a></p>
+        </div>
+
+        <div>
+            <div>
+                १. क्वारेन्टीन व्यवस्थापन
+                <table class="table-review">
+                    {% with start_index=1 %}
+                    <tr class="tr-review-head">
+                      <th>क्रस</th>
+                      <th>जिल्ला</th>
+                      <th>तयार गरेको क्वारेन्टीन संख्या</th>
+                      <th>तयार गरेको क्वारेन्टीन बेड संख्या</th>
+                      <th>क्वारेन्टीन बसेका व्यक्तिको संख्या</th>
+                      <th>होम क्वारेन्टिनमा बसेका व्यक्तिको संख्या</th>
+                      <th>नपुग वेड संख्या</th>
+                    </tr>
+                  
+                    {% for obj in object.district_covid_management.dist_quarantine_lines.all  %}
+                        <tr>
+                          <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                          <td>{{ obj.district }}</td>
+                          <td>{{ obj.num_prepared_quarantine }}</td>
+                          <td>{{ obj.num_prepared_quarantine_beds }}</td>
+                          <td>{{ obj.num_quarantined_person }}</td>
+                          <td>{{ obj.num_home_quarantined_person }}</td>
+                          <td>{{ obj.num_insufficient_bed }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% endwith %}
+                    <tr>
+                      <td></td>
+                      <th>जम्मा</th>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_quarantine_lines' 'num_prepared_quarantine' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_quarantine_lines' 'num_prepared_quarantine_beds' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_quarantine_lines' 'num_quarantined_person' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_quarantine_lines' 'num_home_quarantined_person' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_quarantine_lines' 'num_insufficient_bed' %}</td>
+                    </tr>
+                  </table>
+            </div>
+            <br>
+
+            <div>
+                <b>२. आइसोलेसन व्यवस्थापन</b>
+                <table class="table-review">
+                    {% with start_index=1 %}
+                    <tr class="tr-review-head">
+                      <th>क्रस</th>
+                      <th>जिल्ला</th>
+                      <th>तयारी अवस्थामा रहेको बेड संख्या</th>
+                      <th>संक्रमित संख्या</th>
+                      <th>आईसोलेशनमा बस्नेको संख्या</th>
+                      <th>होम आईसोलेशनमा बस्नेको संख्या</th>
+                      <th>तयारी अवस्थामा रहेको आई सी यु संख्या</th>
+                    </tr>
+                  
+                    {% for obj in object.district_covid_management.dist_isolation_lines.all  %}
+                        <tr>
+                          <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                          <td>{{ obj.district }}</td>
+                          <td>{{ obj.num_prepared_bed }}</td>
+                          <td>{{ obj.num_infected_person }}</td>
+                          <td>{{ obj.num_isolated_person }}</td>
+                          <td>{{ obj.num_home_isolated_person }}</td>
+                          <td>{{ obj.num_prepared_icu }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% endwith %}
+                    <tr>
+                      <td></td>
+                      <th>जम्मा</th>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_isolation_lines' 'num_prepared_bed' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_isolation_lines' 'num_infected_person' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_isolation_lines' 'num_isolated_person' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_isolation_lines' 'num_home_isolated_person' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_isolation_lines' 'num_prepared_icu' %}</td>
+                    </tr>
+                  </table>
+            </div>
+
+            <br>
+
+            <div>
+                <b>३. ल्याव परीक्षण</b>
+                <table class="table-review">
+                    {% with start_index=1 %}
+                    <tr class="tr-review-head">
+                      <th>क्रस</th>
+                      <th>जिल्ला</th>
+                      <th>आरडीटी परीक्षण</th>
+                      <th>नतिजा प्राप्त</th>
+                      <th>पोजेटिभ नतिजा</th>
+                      <th>पीसीआर परीक्षण</th>
+                      <th>नतिजा प्राप्त</th>
+                      <th>पोजेटिभ नतिजा</th>
+                      <th>पीसीआर परीक्षण मध्ये कन्ट्रयाक ट्रेसिङ्गको आधारमा गरेको परीक्षण</th>
+                      <th>उपचार गराएका कोरोना विरामी संख्या</th>
+                      <th>उपचार पछि निको भई घर गएको संख्या</th>
+                      <th>आइसोलेसनमा उपचार गराउने संख्या</th>
+                      <th>आई सी यु मा उपचार गराउने संख्या</th>
+                      <th>मृत्यु हुनेको संख्या</th>
+                    </tr>
+
+                    {% for obj in object.district_covid_management.dist_lab_lines.all  %}
+                        <tr>
+                          <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                          <td>{{ obj.district }}</td>
+                          <td>{{ obj.num_rdt_tests }}</td>
+                          <td>{{ obj.num_rdt_results_received }}</td>
+                          <td>{{ obj.num_rdt_positive_results }}</td>
+                          <td>{{ obj.num_pcr_tests }}</td>
+                          <td>{{ obj.num_pcr_results_received }}</td>
+                          <td>{{ obj.num_pcr_positive_results }}</td>
+                          <td>{{ obj.num_pcr_contract_trace }}</td>
+                          <td>{{ obj.num_covid_treated_patients }}</td>
+                          <td>{{ obj.num_covid_recovered_patients }}</td>
+                          <td>{{ obj.num_isolation_treatments }}</td>
+                          <td>{{ obj.num_icu_treatments }}</td>
+                          <td>{{ obj.num_covid_deaths }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% endwith %}
+                    <tr>
+                      <td></td>
+                      <th>जम्मा</th>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_rdt_tests' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_rdt_results_received' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_rdt_positive_results' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_pcr_tests' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_pcr_results_received' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_pcr_positive_results' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_pcr_contract_trace' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_covid_treated_patients' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_covid_recovered_patients' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_isolation_treatments' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_icu_treatments' %}</td>
+                      <td>{% calculate_total_province object 'district_covid_management' 'dist_lab_lines' 'num_covid_deaths' %}</td>
+                    </tr>
+                </table>
+                <i>नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।</i>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>
+            <h4>20. कोष सञ्चालन- (प्रदेश सरकारले  कोभिड-१९ संक्रमण व्यवस्थापनको लागि बेग्लै कोष स्थापना गरेको भए  स्थानीय तहबाट २०७७ अषाढ मसान्तसम्मको आय व्यय विवरण खुलाउने)</h4>
+            <p>
+                <b>निकायको नामः </b>{{ object.fund_operation.body }}
+            </p>
+            <p>
+                <b>आर्थिक बर्ष: </b> {{ object.fund_operation.fiscal_year }}
+            </p>
+            <p align="right"><a href="{% url 'province_forms:update' object.pk %}?form=fund_operation">Edit</a></p>
+        </div>
+
+        <div>
+            <table class="table-review">
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>सि.नं.</th>
+                  <th>उपलब्ध गराउने निकाय</th>
+                  <th>प्राप्त रकम</th>
+                  <th>खर्चको शीर्षक</th>
+                  <th>खर्च रकम</th>
+                </tr>
+              
+                {% for obj in object.fund_operation.lines.all  %}
+                    <tr>
+                      <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                      <td>{{ obj.body }}</td>
+                      <td>{{ obj.amt_received }}</td>
+                      <td>{{ obj.expense_header }}</td>
+                      <td>{{ obj.amt_expensed }}</td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                    <td></td>
+                    <th>जम्मा प्राप्ती रकम</th>
+                    <td>{% calculate_total_province object 'fund_operation' 'lines' 'amt_received' %}</td>
+                    <td></td>
+                    <td>{% calculate_total_province object 'fund_operation' 'lines' 'amt_expensed' %}</td>
+                  </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+</section>
+
+<button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'province_forms:submit_form' form_pk=object.pk %}">Submit</button>
+
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        $( '#submit' ).on('click', function(event){
+          var pk = $(this).attr("data-pk");
+          var dataurl = $(this).attr("dataurl");
+          $.ajax({
+            url: dataurl,
+            method: 'POST',
+            data: {
+              'csrfmiddlewaretoken': '{{ csrf_token }}',
+              'pk': pk,
+            },
+            dataType: 'json',
+
+            success: function(response){
+              window.location.href = "{% url 'province_forms:list' %}"
+            }
+          })
+        });
+    </script>
+{% endblock extrascripts %}
