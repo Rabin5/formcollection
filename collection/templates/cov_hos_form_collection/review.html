@@ -9,7 +9,9 @@
 <h3>1. कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h3>
 <h5>निकायको नामः {{ object.fund_receipt_expense.body }}</h5>
 आर्थिक बर्ष २०७६।७७ र २०७७।७८ को आश्विन मसान्तसम्म
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=fund_receipt_expense">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=fund_receipt_expense">Edit</a></h5>
+{% endif %}
 <p align='right'>रु हजारमा</p>
 
 <table class="table-review">
@@ -52,7 +54,9 @@
 
 <h5>निकायको नामः {{ object.risk_allowance.body }}</h5>
 <h5>जोखिम भत्ता सम्बन्धी बिबरण</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=risk_allowance">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=risk_allowance">Edit</a></h5>
+{% endif %}
 
 <table class="table-review auto-index">
   {% with start_index=1 %}
@@ -94,7 +98,9 @@
 <h3>3. औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.medical_expense.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_expense.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=medical_expense">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=medical_expense">Edit</a></h5>
+{% endif %}
 
 <table class="table-review">
   {% with start_index=1 %}
@@ -130,7 +136,9 @@
 <h3>4. औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.medical_receipt.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_receipt.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=medical_receipt">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=medical_receipt">Edit</a></h5>
+{% endif %}
 
 <table class="table-review">
   {% with start_index=1 %}
@@ -161,7 +169,9 @@
 <h3>5. औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h3>
 <h5>निकायको नामः {{ object.medical_use.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.medical_use.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=medical_use">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=medical_use">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -194,7 +204,9 @@
 <h3>6. केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h3>
 <h5>निकायको नामः {{ object.med_purchase_desc.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.med_purchase_desc.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=med_purchase_desc">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=med_purchase_desc">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   <tr class="tr-review-head">
     <th>सामानको नाम</th>
@@ -227,7 +239,9 @@
 <h3>7. पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण</h3>
 <h5>निकायको नामः {{ object.pcr_test_compliance_detail.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.pcr_test_compliance_detail.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   <tr class="tr-review-head">
     <th rowspan="2">महिना</th>
@@ -274,7 +288,9 @@
 <h3>8. पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.pcr_lab_detail.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.pcr_lab_detail.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=pcr_lab_detail">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=pcr_lab_detail">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -310,7 +326,9 @@
 <h3>9. आरडीटी परीक्षण सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.rdt_test_detail.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.rdt_test_detail.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=rdt_test_detail">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=rdt_test_detail">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -341,7 +359,9 @@
 <h3>10. पिसीआर किटको उपयोग सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h3>
 <h5>निकायको नामः {{ object.pcr_kit_usage.body }}</h5>
 <h5>आर्थिक बर्ष: {{ object.pcr_kit_usage.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=pcr_kit_usage">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=pcr_kit_usage">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -377,7 +397,9 @@
 <h3>11. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण </h3>
 <h5>कोभिड डेडिकेटेड अस्पातालको नाम: {{ object.covid_hos_mainpower }}</h5>
 <h5>स्थान: {{ object.covid_hos_mainpower.address }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=covid_hos_mainpower">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=covid_hos_mainpower">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -409,7 +431,9 @@
 <h3>12. कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण </h3>
 <h5>कोभिड डेडिकेटेड अस्पातालको नाम: {{ object.cov_hos_equipment }}</h5>
 <h5>स्थान: {{ object.cov_hos_equipment.address }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=cov_hos_equipment">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=cov_hos_equipment">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -443,7 +467,9 @@
 <h3>13. कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h3>
 <h5>निकाय । अस्पतालको नामः {{ object.covid_hospital_detail.body }}</h5>
 <h5>स्थान:आर्थिक बर्ष: {{ object.covid_hospital_detail.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=covid_hospital_detail">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=covid_hospital_detail">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -496,7 +522,9 @@
 <h3>14. क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित क्वारेन्टिनको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h3>
 <h5>निकाय अस्पतालको नामः {{ object.quarantine_management_detail.body }}</h5>
 <h5>स्थान:आर्थिक बर्ष: {{ object.quarantine_management_detail.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=quarantine_management_detail">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=quarantine_management_detail">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -543,7 +571,9 @@
 <h3>15. आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने) </h3>
 <h5>निकाय अस्पतालको नामः {{ object.isolation_management_detail.body }}</h5>
 <h5>स्थान:आर्थिक बर्ष: {{ object.isolation_management_detail.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=isolation_management_detail">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=isolation_management_detail">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -590,7 +620,9 @@
 <h3>16. क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट सञ्चालित क्वारेन्टिन निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h3>
 <h5>निकाय । अस्पतालको नामः {{ object.quarantine_contruction_expenditure.body }}</h5>
 <h5>स्थान:आर्थिक बर्ष: {{ object.quarantine_contruction_expenditure.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -637,7 +669,9 @@
 <h3>17. आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h3>
 <h5>निकाय । अस्पतालको नामः {{ object.isolation_construction_expenditure.body }}</h5>
 <h5>स्थान:आर्थिक बर्ष: {{ object.isolation_construction_expenditure.fiscal_year }}</h5>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=isolation_construction_expenditure">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=isolation_construction_expenditure">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   {% with start_index=1 %}
   <tr class="tr-review-head">
@@ -684,7 +718,9 @@
 
 <h3>कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट</h3>
 <h4>आषाढमसान्तको अबस्था</h4>
-<h5><a href="{% url 'cov_hos_forms:update' object.pk %}?form=cov_hos_management_checklist">Edit</a></h5>
+{% if action == 'submit' %}
+<h5><a href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=cov_hos_management_checklist">Edit</a></h5>
+{% endif %}
 <table class="table-review">
   <tr class="tr-review-head">
     <th>बिबरण</th>
@@ -710,13 +746,91 @@
 <br>
 
 ----
-
-<button class="btn btn-warning ml-2" form="form_to_submit" id="submit" data-pk={{ object.pk }} dataurl="{% url 'cov_hos_forms:submit_form' form_pk=object.pk %}">Submit</button>
+<div class='row'>
+  {% if action == 'submit' %}
+    <button class="btn btn-success ml-2" form="form_to_submit" id="submit">Submit</button>
+  {% elif action == 'approve' %}
+    <button class="btn btn-success" id="approve">Approve</button>
+    <button class="btn btn-warning" data-toggle="modal" data-target="#rejectMessageModal">Reject</button>
+  {% endif %}
+</div>
 
 {% endblock content %}
 
+
+{% block modal %}
+
+<div class="modal fade" id="rejectMessageModal" tabindex="-1" role="dialog" aria-labelledby="rejectMessageModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body pt-2">
+      <textarea class="form-control" rows="3" id='rejectMessage'></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button id="submit_reject" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock modal %}
+
+
 {% block extrascripts %}
     <script>
+      var status = 'rejected';
+      var success_url = ''
+      {% if action == 'submit' %}
+        success_url = "{% url 'cov_hos_forms:cov_hos_list' %}"
+      {% else %}
+        success_url = "{% url 'cov_hos_forms:review_approve_list' %}"
+      {% endif %}
+      $( '#approve' ).on('click', function(event){
+        status = 'approved';
+        approve_reject()
+      });
+
+      $( '#submit' ).on('click', function(event){
+        status = 'submitted';
+        approve_reject()
+      });
+
+      $( '#submit_reject' ).on('click', function(event){
+        approve_reject(rejectMessage=$('#rejectMessage').val())
+      });
+
+      function approve_reject(rejectMessage=''){
+        var data = {
+            'csrfmiddlewaretoken': '{{ csrf_token }}',
+            'pk': '{{ object.pk }}',
+            'status': status
+        }
+        if (rejectMessage){
+          data['reject_msg'] = rejectMessage;
+        }
+        $.ajax({
+          url: "{% url 'cov_hos_forms:submit_form' form_pk=object.pk %}",
+          method: 'POST',
+          data: data,
+          dataType: 'json',
+
+          success: function(response){
+            window.location.href = success_url;
+          }
+        })
+      }
+
+
+
+
+/*
         $( '#submit' ).on('click', function(event){
           var pk = $(this).attr("data-pk");
           var dataurl = $(this).attr("dataurl");
@@ -730,9 +844,10 @@
             dataType: 'json',
 
             success: function(response){
-              window.location.href = "{% url 'cov_hos_forms:list' %}"
+              window.location.href = "{% url 'cov_hos_forms:cov_hos_list' %}"
             }
           })
         });
+        */
     </script>
 {% endblock extrascripts %}

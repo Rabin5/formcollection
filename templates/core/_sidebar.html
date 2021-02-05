@@ -1,4 +1,5 @@
 {% load static %}
+{% load auth_extras %}
 
 
 <aside class="sidebar">
@@ -151,9 +152,8 @@
     
       <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
         <ul class="menu py-0">
-          <li {% if 'cov_hos_forms:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-            <a href="{% url 'cov_hos_forms:list'%}" class="pl-4">कोभिड अस्पताल</a>
-
+          <li {% if 'cov_hos_forms:cov_hos' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'cov_hos_forms:cov_hos_list'%}" class="pl-4">कोभिड अस्पताल</a>
           </li>
           <li {% if '/province/forms' in request.path %}class="active" {% endif %}>
             <a href="{% url 'province_forms:list'%}" class="pl-4">प्रदेश</a>
@@ -188,17 +188,20 @@
         </ul>
       </div>
     </li>
-    <li>
-      <a href="#approve-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
-        aria-controls="collapseExample">Approve</a>
-      <div class="collapse{% if '_forms' in request.resolver_match.view_name %} show {% endif %}" id="approve-data">
-        <ul class="menu py-0">
-          <li {% if 'cov_hos_forms:approve_list' in request.resolver_match.view_name %}class="active" {% endif %}>
-            <a href="{% url 'cov_hos_forms:approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
-          </li>
-          
-        </ul>
-      </div>
-    </li>
+    {% if request.user|has_group:"APPROVAL, ALL PERMISSION" %} 
+    {% comment %} {% if request.user|has_group:"APPROVAL" %}  {% endcomment %}
+      <li>
+        <a href="#approve-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
+          aria-controls="collapseExample">Approve</a>
+        <div class="collapse{% if 'approve' in request.resolver_match.view_name %} show {% endif %}" id="approve-data">
+          <ul class="menu py-0">
+            <li {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+              <a href="{% url 'cov_hos_forms:review_approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
+            </li>
+            
+          </ul>
+        </div>
+      </li>
+    {% endif %}
   </ul>
 </aside>

@@ -55,7 +55,7 @@
                 </button>
             </div>
 
-            <div class="scrollable" style="height: 400px;">
+            <div class="pre-scrollable" style="height: 400px;">
               <ul class="list list-links">
                 {% for user in group.user_set.all %}
                 <li>
@@ -75,7 +75,7 @@
                 <button class="btn btn-primary" data-toggle="modal" data-target="#searchPermission">अनुमति
                     थप्नुहोस्</button>
             </div>
-            <div class="scrollable" style="height: 400px;">
+            <div class="pre-scrollable" style="height: 400px;">
               <ul class="list list-links">
                 {% for permission in group.permissions.all %}
                 <li>
