@@ -30,3 +30,6 @@ OAGN COVID Reporting
     SQL_PASSWORD=admin
     SQL_PORT=5432
     ```
+
+- Install fixtures
+    python manage.py loaddata master_data

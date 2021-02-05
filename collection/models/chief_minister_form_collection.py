@@ -25,7 +25,6 @@ class ChiefMinisterOfficeFormCollection(models.Model):
         ProvinceInstitutionManagement, on_delete=models.CASCADE, null=True)
     action_plan_implementation = models.OneToOneField(
         ActionPlanImplementation, on_delete=models.CASCADE, null=True)
-    
 
 
     def __str__(self):

@@ -13,9 +13,10 @@ class AddressCreateView(CreateView):
 
 
 class AddressListView(ListView):
-    model = Address
+    model=Address
     template_name = "master_data/address/address_list.html"
     context_object_name = 'address_list'
+
 
 
 class AddressUpdateView(UpdateView):

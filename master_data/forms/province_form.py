@@ -9,6 +9,8 @@ from master_data.custom_layout_object import Formset
 
 
 class DistrictForm(forms.ModelForm):
+    name = forms.CharField(label='', required=False)
+
     class Meta:
         model = District
         exclude = ()
@@ -31,17 +33,16 @@ class DistrictFormLine(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
+        self.helper.form_class = 'form-inline'
         self.helper.label_class = 'col-md-3 create-label'
         self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Div(
                 Field('name'),
-                Fieldset('Add district. . .',
+                Fieldset('जिल्लाहरुको नाम',
                          Formset('lines')
                          ),
-                HTML('<br>'),
-                ButtonHolder(Submit('submit', 'save')),
+
 
             )
         )

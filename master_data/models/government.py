@@ -26,7 +26,7 @@ class GovernmentBody(Address):
     parent = models.ForeignKey(
         "self", on_delete=models.CASCADE, blank=True, null=True)
     covid_hospital = models.ForeignKey(
-        CovidHospital, on_delete=models.CASCADE, blank=False, verbose_name="अस्पताल")
+        CovidHospital, on_delete=models.CASCADE, blank=True, null=True, verbose_name="अस्पताल")
 
     def __str__(self) -> str:
         if self.name == None:

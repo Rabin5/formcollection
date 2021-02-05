@@ -11,7 +11,7 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" id='create_collection'>
+  <a class="btn btn-success btn-with-icon" href='{% url "cov_hos_forms:create" %}'>
     <i class="ic-add"></i>
     प्रश्नावलीहरू भर्नुहोस्
   </a>
@@ -71,22 +71,6 @@
 
 {% block extrascripts %}
 <script>
-    $(document).ready(function(){
-      $('#create_collection').on('click', function(){
-        fetch("{% url 'cov_hos_forms:cov_hos_create' %}", {
-          method: 'POST',
-          dataType: "json",
-          headers: { "X-CSRFToken": '{{csrf_token}}' },
-        })
-        .then(response => response.json())
-        .then(data => {
-          window.location.href = data.url
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    })
-
     $('#modalProdDelete').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);

@@ -6,7 +6,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect, JsonRespons
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.urls.base import reverse
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
@@ -201,6 +201,10 @@ class ChiefMinisterOfficeFormCollectionUpdateView(UpdateView):
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
+            if self.next_state == 'review':
+                return HttpResponseRedirect(reverse('chief_minister_forms:review', kwargs={
+                                    'pk': self.object.pk}))
+
             return HttpResponseRedirect(next_url)
         else:
             return form_response
@@ -231,3 +235,14 @@ class ChiefMinisterOfficeFormCollectionListView(ListView):
 
 class ChiefMinisterOfficeFormCollectionDeleteView(DeleteView):
     pass
+
+
+class ChiefMinisterOfficeFormCollectionReviewView(DetailView):
+    model = ChiefMinisterOfficeFormCollection
+    template_name = "chief_minister_form_collection/review.html"
+
+def chief_minister_submit_form(request, form_pk):
+    form_obj = ChiefMinisterOfficeFormCollection.objects.get(id=form_pk)
+    form_obj.status = 'submitted'
+    form_obj.save()
+    return JsonResponse({'success': '200'}, status=200)

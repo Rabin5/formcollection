@@ -258,7 +258,13 @@
                     <tr>
                       <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
                       <td>{{ obj.product }}</td>
-                      <td>{{ obj.is_purchased }}</td>
+                      <td>
+                        {% if obj.is_purchased %}
+                            {{ 'खरिद' }} 
+                        {% else %}
+                            {{ 'प्राप्ती' }}
+                        {% endif %}
+                      </td>
                       <td>{{ obj.product_price }}</td>
                       <td>{{ obj.unused_qty }}</td>
                       <td>{{ obj.unused_reason }}</td>

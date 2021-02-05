@@ -1,6 +1,8 @@
 from collection.models import (CovHosFormCollection,
                                InternalAffairFormCollection,
-                               ProvinceFormCollection)
+                               ProvinceFormCollection,
+                               ChiefMinisterOfficeFormCollection,
+                               LocalLevelFormCollection)
 from collection.utils import num_to_devanagari
 from django import template
 from django.db.models import Sum
@@ -47,6 +49,26 @@ def calculate_total_internal_affair(value, otm_field_name, rel_name, field_to_to
     sum_query = otm_field_name + "__" + rel_name + "__" + field_to_total
     total = (
         InternalAffairFormCollection.objects.filter(id=value.id)
+        .aggregate(Sum(sum_query))
+        .get(f"{sum_query}__sum")
+    )
+    return total
+
+@register.simple_tag
+def calculate_total_chief_minister(value, otm_field_name, rel_name, field_to_total):
+    sum_query = otm_field_name + "__" + rel_name + "__" + field_to_total
+    total = (
+        ChiefMinisterOfficeFormCollection.objects.filter(id=value.id)
+        .aggregate(Sum(sum_query))
+        .get(f"{sum_query}__sum")
+    )
+    return total
+
+@register.simple_tag
+def calculate_total_local_level(value, otm_field_name, rel_name, field_to_total):
+    sum_query = otm_field_name + "__" + rel_name + "__" + field_to_total
+    total = (
+        LocalLevelFormCollection.objects.filter(id=value.id)
         .aggregate(Sum(sum_query))
         .get(f"{sum_query}__sum")
     )

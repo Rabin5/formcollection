@@ -11,8 +11,7 @@ class CaseInvestigationLineForm(forms.ModelForm):
         model = CaseInvestigationTracingLine
         exclude = ()
 
-    def __init__(self, attrs=None, *args, **kwargs):
-
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
@@ -22,7 +21,8 @@ class CaseInvestigationLineForm(forms.ModelForm):
 
 
 CaseInvestigationTracingFormSet = inlineformset_factory(CaseInvestigationTracing, CaseInvestigationTracingLine, form=CaseInvestigationLineForm, fields=[
-                                                        'case_investigation_tracing','description', 'num_team_members', 'amount_expense', 'num_searched_cases', 'num_identified_infection', 'remarks'], extra=1, can_delete=True)
+                                                        'description', 'num_team_members', 'amount_expense', 'num_searched_cases', 'num_identified_infection', 'remarks'], extra=1, can_delete=True)
+
 
 
 class CaseInvestigationTracingForm(forms.ModelForm):
@@ -34,6 +34,10 @@ class CaseInvestigationTracingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
+
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3 create-label'
+        self.helper.field_class = 'col-md-9'
         self.helper.form_id = 'form_to_submit'
         # self.helper.form_class = 'form-horizontal'
         # self.helper.label_class = 'col-md-3 create-label'
