@@ -34,4 +34,4 @@ class ReliefProcureDistributionLine(FormLineBaseModel):
     has_quality_complaint = models.BooleanField(
         verbose_name='गुणस्तरमा सिकायत छ । छैन')
     reliefprocuredistribution_line = models.ForeignKey(
-        ReliefProcureDistribution, on_delete=models.CASCADE)
+        ReliefProcureDistribution, on_delete=models.CASCADE, related_name='lines')
