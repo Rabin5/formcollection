@@ -20,6 +20,7 @@ from collection.models import ChiefMinisterOfficeFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import CHIEF_MINISTER_STATE, num_to_devanagari
 from master_data.models import FiscalYear
+from oagn_covid.settings import PAGINATED_BY
 
 # Convert utils CHIEF_MINISTER_STATE to dict
 DICT_CHIEF_MINISTER_STATE = {key: value for key, value in CHIEF_MINISTER_STATE}
@@ -234,6 +235,8 @@ class ChiefMinisterOfficeFormCollectionListView(ListView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
+
 
 
 class ChiefMinisterOfficeFormCollectionDeleteView(DeleteView):
