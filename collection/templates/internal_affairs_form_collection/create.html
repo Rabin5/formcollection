@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा आन्तरिक मामिला तथा कानून मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा आन्तरिक मामिला तथा कानून मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण
+{% endblock page_title %}
+
+{% block content %}
+<div class="card card-body mt-3">
+  <h6 class="heading-01 mb-3">कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा आन्तरिक मामिला तथा कानून मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h6>
+
+  {% crispy form %}
+
+</div>
+
+<div class="text-right mt-3">
+  <button type="submit" form="create_form" class="btn btn-info ml-2" id="next">Start</a>
+</div>
+{% endblock content %}
