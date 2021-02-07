@@ -10,10 +10,10 @@ class AllowanceTypeForm(ModelForm):
         model = AllowanceType
         fields = '__all__'
 
-    def clean_name(self):
-        name = self.cleaned_data['name']
-        print(name)
-        name_check = AllowanceType.objects.filter(name=name)
-        if name_check.exists():
-            raise forms.ValidationError("Title already exists")
-        return name
+    # def clean_name(self):
+    #     name = self.cleaned_data['name']
+    #     print(name)
+    #     name_check = AllowanceType.objects.filter(name=name)
+    #     if name_check.exists():
+    #         raise forms.ValidationError("Title already exists")
+    #     return name
