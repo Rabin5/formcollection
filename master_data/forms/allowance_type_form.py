@@ -15,6 +15,5 @@ class AllowanceTypeForm(ModelForm):
         print(name)
         name_check = AllowanceType.objects.filter(name=name)
         if name_check.exists():
-            print('helo')
             raise forms.ValidationError("Title already exists")
         return name
