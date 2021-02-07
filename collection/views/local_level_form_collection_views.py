@@ -20,6 +20,7 @@ from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari
 from master_data.models import FiscalYear
+from oagn_covid.settings import PAGINATED_BY
 
 # Convert utils LOCAL_LEVEL_STATE to dict
 DICT_LOCAL_LEVEL_STATE = {key: value for key, value in LOCAL_LEVEL_STATE}
@@ -238,6 +239,7 @@ class LocalLevelFormCollectionListView(ListView):
     model = LocalLevelFormCollection
     template_name = "local_level_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
 
 
 class LocalLevelFormCollectionDeleteView(DeleteView):

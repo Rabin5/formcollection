@@ -11,6 +11,7 @@ from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from oagn_covid.settings import PAGINATED_BY
 
 
 from braces.views import GroupRequiredMixin
@@ -252,6 +253,7 @@ class CovHosFormCollectionListView(ListView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
 
 
 class CovHosFormCollectionDeleteView(DeleteView):

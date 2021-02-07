@@ -20,6 +20,7 @@ from collection.models import ProvinceFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import PROVINCE_STATE, num_to_devanagari
 from master_data.models import FiscalYear
+from oagn_covid.settings import PAGINATED_BY
 
 # Convert utils PROVINCE_STATE to dict
 DICT_PROVINCE_STATE = {key: value for key, value in PROVINCE_STATE}
@@ -233,6 +234,7 @@ class ProvinceFormCollectionListView(ListView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
 
 
 class ProvinceFormCollectionDeleteView(DeleteView):

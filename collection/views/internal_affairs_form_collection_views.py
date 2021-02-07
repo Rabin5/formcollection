@@ -20,6 +20,7 @@ from collection.models import InternalAffairFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import INTERNAL_AFFAIRS_STATE, num_to_devanagari
 from master_data.models import FiscalYear
+from oagn_covid.settings import PAGINATED_BY
 
 # Convert utils INTERNAL_AFFAIRS_STATE to dict
 DICT_INTERNAL_AFFAIRS_STATE = {key: value for key, value in INTERNAL_AFFAIRS_STATE}
@@ -234,6 +235,7 @@ class InternalAffairFormCollectionListView(ListView):
     model = InternalAffairFormCollection
     template_name = "internal_affairs_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
 
 
 class InternalAffairFormCollectionDeleteView(DeleteView):
