@@ -106,13 +106,13 @@ Product - Nepal Audit Management System
 
   $( "#modalProdCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this));
+    saveData($(this),"#modalProdCreate");
     
   });
 
   $( "#modalProdUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this));
+    saveData($(this),"#modalProdUpdate");
     
   });
 </script>

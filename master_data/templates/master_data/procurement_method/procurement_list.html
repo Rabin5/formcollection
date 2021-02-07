@@ -102,16 +102,15 @@ Procurement - Nepal Audit Management System
   });
 
   $("#modalProcurementCreate").on('submit', 'form', function (e) {
-    {% comment %} var $prod_modal = $(this); {% endcomment %}
+    var $prod_modal = $(this);
     e.preventDefault();
-    saveData($(this))
+    saveData($(this),"#modalProcurementCreate")
   });
 
   $("#modalProcurementUpdate").on('submit', 'form', function (e) {
-    {% comment %} var $prod_modal = $(this); {% endcomment %}
-    console.log($prod_modal)
+    var $prod_modal = $(this);
     e.preventDefault();
-    saveData($(this))
+    saveData($(this),"#modalProcurementUpdate")
   });
 </script>
 {% endblock extrascripts %}

@@ -7,3 +7,5 @@ class AllowanceTypeForm(ModelForm):
     class Meta:
         model = AllowanceType
         fields = '__all__'
+
+  

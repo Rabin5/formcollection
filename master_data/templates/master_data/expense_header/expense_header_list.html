@@ -101,12 +101,12 @@
 
   $( "#modalExpenseHeaderCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalExpenseHeaderCreate") 
   });
 
   $( "#modalExpenseHeaderUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalExpenseHeaderUpdate") 
   });
 </script>
 {% endblock extrascripts %}

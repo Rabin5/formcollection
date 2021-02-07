@@ -99,12 +99,12 @@
 
   $( "#modalCovHosManagementTypeCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalCovHosManagementTypeCreate") 
   });
 
   $( "#modalCovHosManagementTypeUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalCovHosManagementTypeUpdate") 
   });
 </script>
 {% endblock extrascripts %}

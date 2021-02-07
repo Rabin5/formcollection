@@ -16,6 +16,7 @@ function saveData(form,modal_id, win_reload){
         else{
             if (response.redirected == false) {
                 response.text().then(function(data){
+                    console.log(data)
                     $(modal_id).find('.modal-content').html(data)
                 });
             } else{

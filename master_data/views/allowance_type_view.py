@@ -11,6 +11,8 @@ class AllowanceTypeCreateView(CreateView):
     form_class = AllowanceTypeForm
     success_url = reverse_lazy('md-allowance_type:list')
 
+   
+
 
 class AllowanceTypeListView(ListView):
     model = AllowanceType
@@ -24,6 +26,7 @@ class AllowanceTypeUpdateView(UpdateView):
     form_class = AllowanceTypeForm
     success_url = reverse_lazy('md-allowance_type:list')
     context_object_name = 'allowance_type'
+
 
 class AllowanceTypeDeleteView(DeleteView):
     model = AllowanceType

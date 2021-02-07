@@ -104,14 +104,13 @@
     $("#modalProCreate").on('submit', 'form', function (e) {
         var $prod_modal = $(this);
         e.preventDefault();
-        saveData($(this))
+        saveData($(this),"#modalProCreate")
     });
 
     $("#modalProUpdate").on('submit', 'form', function (e) {
         var $prod_modal = $(this);
-        console.log($prod_modal)
         e.preventDefault();
-        saveData($(this))
+        saveData($(this),'#modalProUpdate')
     });
 </script>
 {% endblock extrascripts %}

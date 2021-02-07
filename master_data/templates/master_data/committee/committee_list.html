@@ -100,12 +100,12 @@
 
   $( "#modalCommitteeCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalCommitteeCreate") 
   });
 
   $( "#modalCommitteeUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalCommitteeUpdate") 
   });
 </script>
 {% endblock extrascripts %}

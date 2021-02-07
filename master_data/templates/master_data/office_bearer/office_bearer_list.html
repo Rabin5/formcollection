@@ -80,7 +80,7 @@
     $('#modalOffBearerCreate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
       var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
+     (modal.find('.modal-content').load(button.data("remote")));
     });
 
     $('#modalOffBearerUpdate').on('shown.bs.modal', function (e) {
@@ -98,12 +98,12 @@
 
   $( "#modalOffBearerCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalOffBearerCreate") 
   });
 
   $( "#modalOffBearerUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalOffBearerUpdate") 
   });
 </script>
 {% endblock extrascripts %}
