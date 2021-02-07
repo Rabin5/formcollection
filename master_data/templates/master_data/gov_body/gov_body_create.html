@@ -1,3 +1,5 @@
+
+
 {% load crispy_forms_tags %}
 
 <div class="modal-header">
@@ -9,20 +11,12 @@
 <div class="modal-body pt-2">
   <form id="prod_create" method="post" action="{% url 'md-gov:create' %}">
     {% csrf_token %}
-<<<<<<< Updated upstream
     {{ form.name|as_crispy_field }}
     {{ form.type|as_crispy_field }}
     {{ form.covid_hospital|as_crispy_field }}
-=======
-    {{ form|crispy }}
-
->>>>>>> Stashed changes
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
   <button id="btn_prod_create" form="prod_create" type="submit" class="btn btn-success">Save</button>
 </div>
-<script>
-
-</script>
