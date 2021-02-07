@@ -85,7 +85,7 @@ class CovHosFormCollectionCreateView(View):
         instance.save()
         self.object = instance
         self.init_forms()
-        form_url = f"{reverse('cov_hos_forms:update', kwargs={'pk': instance.pk})}?form={DICT_CH_STATE.get(0)}"
+        form_url = f"{reverse('cov_hos_forms:cov_hos_update', kwargs={'pk': instance.pk})}?form={DICT_CH_STATE.get(0)}"
         return HttpResponseRedirect(form_url)
 
 
