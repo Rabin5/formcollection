@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from master_data.forms.officebearer_form import OfficeBearerForm
 from master_data.models.government import OfficeBearer
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class OfficeBearerCreateView(CreateView):
@@ -17,6 +18,7 @@ class OfficeBearerListView(ListView):
     model = OfficeBearer
     template_name = "master_data/office_bearer/office_bearer_list.html"
     context_object_name = 'office_bearer_typies'
+    paginate_by = PAGINATED_BY
 
 
 class OfficeBearerUpdateView(UpdateView):

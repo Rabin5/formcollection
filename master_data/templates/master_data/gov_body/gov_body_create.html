@@ -1,3 +1,5 @@
+
+
 {% load crispy_forms_tags %}
 
 <div class="modal-header">
@@ -9,7 +11,9 @@
 <div class="modal-body pt-2">
   <form id="prod_create" method="post" action="{% url 'md-gov:create' %}">
     {% csrf_token %}
-    {{ form|crispy  }}
+    {{ form.name|as_crispy_field }}
+    {{ form.type|as_crispy_field }}
+    {{ form.covid_hospital|as_crispy_field }}
   </form>
 </div>
 <div class="modal-footer">

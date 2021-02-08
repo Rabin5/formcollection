@@ -3,26 +3,26 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  Allowance Type - Nepal Audit Management System
+Allowance Type - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-भत्ता प्रकार 
+भत्ता प्रकार
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-allowance_type:create' %}"
-    href="{% url 'md-allowance_type:create' %}" data-toggle="modal" data-target="#modalAllowanceCreate">
-    <i class="ic-add"></i>
-भत्ता प्रकार थप्नुहोस्
-  </a>
+<a class="btn btn-success btn-with-icon" data-remote="{% url 'md-allowance_type:create' %}"
+  href="{% url 'md-allowance_type:create' %}" data-toggle="modal" data-target="#modalAllowanceCreate">
+  <i class="ic-add"></i>
+  भत्ता प्रकार थप्नुहोस्
+</a>
 {% endblock page_actions %}
 
 {% block content %}
 <table class="table table-striped table-borderless">
   <thead>
     <tr>
-      <th>#.</th>
+      <th>क्रम सङ्ख्या</th>
       <th> नाम</th>
       <th>वर्णन</th>
 
@@ -31,43 +31,52 @@
   </thead>
   <tbody>
     {% for allowance in allowance_type_list %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ allowance.name }}</td>
-        <td>{{ allowance.description }}</td>
-        <td class="action">
-          <a data-remote="{% url 'md-allowance_type:update' allowance.pk %}"
-            href="{% url 'md-allowance_type:update' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceUpdate">
-            <i class="ic-edit mr-2"></i>
-          </a>
-          <a data-remote="{% url 'md-allowance_type:delete' allowance.pk %}"
-            href="{% url 'md-allowance_type:delete' allowance.pk %}" data-toggle="modal" data-target="#modalAllowanceDelete">
-            <i class="ic-delete"></i>
-          </a>
-        </td>
-      </tr>
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ allowance.name }}</td>
+      <td>{{ allowance.description }}</td>
+      <td class="action">
+        <a data-remote="{% url 'md-allowance_type:update' allowance.pk %}"
+          href="{% url 'md-allowance_type:update' allowance.pk %}" data-toggle="modal"
+          data-target="#modalAllowanceUpdate">
+          <i class="ic-edit mr-2"></i>
+        </a>
+        <a data-remote="{% url 'md-allowance_type:delete' allowance.pk %}"
+          href="{% url 'md-allowance_type:delete' allowance.pk %}" data-toggle="modal"
+          data-target="#modalAllowanceDelete">
+          <i class="ic-delete"></i>
+        </a>
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
 
+  {% block pagination %}
+    {% include 'master_data/partials/pagination.html' %}
+  {% endblock pagination %}
+
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalAllowanceCreate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceCreate" aria-hidden="true">
+<div class="modal fade" id="modalAllowanceCreate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceCreate"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceUpdate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceUpdate" aria-hidden="true">
+<div class="modal fade" id="modalAllowanceUpdate" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceUpdate"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="modalAllowanceDelete" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceDelete" aria-hidden="true">
+<div class="modal fade" id="modalAllowanceDelete" tabindex="-1" role="dialog" aria-labelledby="modalAllowanceDelete"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -99,12 +108,13 @@
     });
   });
 
-  $( "#modalAllowanceCreate").on('submit', 'form', function(e) {
+  $("#modalAllowanceCreate").on('submit', 'form', function (e) {
     e.preventDefault();
     saveData($(this),'#modalAllowanceCreate') 
   });
 
-  $( "#modalAllowanceUpdate").on('submit', 'form', function(e) {
+
+  $("#modalAllowanceUpdate").on('submit', 'form', function (e) {
     e.preventDefault();
     saveData($(this),'#modalAllowanceUpdate')
   });

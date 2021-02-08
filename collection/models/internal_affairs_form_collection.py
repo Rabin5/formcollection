@@ -6,13 +6,19 @@ from forms.models.fund_receipt_expense import FundReceiptExpense
 from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
 from forms.models.action_plan_implementation import ActionPlanImplementation
 
+from master_data.models import Province, GovernmentBody, FiscalYear
 from users.models.user import User
 from collection.utils import INTERNAL_AFFAIRS_STATE, STATUS
 
 class InternalAffairFormCollection(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.PROTECT, null=True, blank=False)
+    body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=INTERNAL_AFFAIRS_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
+    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='internal_affairs_approver')
+    reject_msg = models.CharField(null=True, blank=True, max_length=250)
     
     risk_allowance = models.OneToOneField(
         RiskAllowance, on_delete=models.CASCADE, null=True)

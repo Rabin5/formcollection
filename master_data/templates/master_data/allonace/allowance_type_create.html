@@ -2,15 +2,16 @@
 
 <div class="modal-header">
   <h6 class="modal-title" id="exampleModalLabel">
-भत्ता प्रकार</h6>
+    भत्ता प्रकार</h6>
   <a class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </a>
 </div>
 <div class="modal-body pt-2">
+
   <form id="allowance_create" method="post" action="{% url 'md-allowance_type:create' %}">
     {% csrf_token %}
-    {{ form|crispy  }}
+    {{ form|crispy }}
   </form>
 </div>
 <div class="modal-footer">

@@ -26,8 +26,8 @@ class MedicalExpenseLine(FormLineBaseModel):
     importer = models.ForeignKey(Importer, on_delete=models.PROTECT, related_name='expenses', null=True, verbose_name='आपूर्तिकर्ताको नाम')
     procure_method = models.ForeignKey(ProcurementMethod, on_delete=models.PROTECT, related_name='expenses', null=True, verbose_name='खरिद विधि')
     amt_agreement = models.DecimalField(max_digits=19, decimal_places=2, verbose_name="सम्झौता रकम ")
-    date_to_import = models.CharField(max_length=15, blank=False, null=False, verbose_name='आपूर्ति गर्नुपर्ने मिति', default='01/01/2000')
-    date_imported = models.CharField(max_length=15, blank=False, null=False, verbose_name='आपूर्ति गरेको मिति', default='01/01/2000')
+    date_to_import = models.CharField(max_length=15, blank=False, null=False, verbose_name='आपूर्ति गर्नुपर्ने मिति', default='01/01/2077')
+    date_imported = models.CharField(max_length=15, blank=False, null=False, verbose_name='आपूर्ति गरेको मिति', default='01/01/2077')
     amt_imported = models.DecimalField(max_digits=19, decimal_places=2, verbose_name='आपूर्ति भएको सामानको मुल्य')
     remarks = models.CharField(max_length=50, blank=True, null=True, verbose_name='कैफियत')
     

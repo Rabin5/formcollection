@@ -23,14 +23,22 @@ from forms.models.case_inve_trac_operations import CaseInvestigationTracingOpera
 from forms.models.reliefprocuredistribution import ReliefProcureDistribution
 from forms.models.reliefprocurementdetail import ReliefProcurementDetail
 
+from master_data.models import FiscalYear, District, LocalLevel, Province, GovernmentBody
 
 from users.models.user import User
 from collection.utils import LOCAL_LEVEL_STATE, STATUS
 
 class LocalLevelFormCollection(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.PROTECT, null=True, blank=False)
+    district = models.ForeignKey(District, on_delete=models.PROTECT, null=True, blank=False)
+    local_level = models.ForeignKey(LocalLevel, on_delete=models.PROTECT, null=True, blank=False)
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
+    body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=LOCAL_LEVEL_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
+    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='local_level_approver')
+    reject_msg = models.CharField(null=True, blank=True, max_length=250)
     
     epidemic_outbreak_prep = models.OneToOneField(
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)

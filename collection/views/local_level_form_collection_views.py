@@ -1,22 +1,28 @@
 from django.db import transaction
-from django.db.models import query
+from django.db.models import query, F
 from django.forms import inlineformset_factory
 from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.urls.base import reverse
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
+from django.contrib.auth.models import Group
+
+from braces.views import GroupRequiredMixin
 
 from django.apps import apps
 
+from collection.forms.local_level_forms import LocalLevelFormCollectionForm
 from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari
-from master_data.models import FiscalYear
+
+from master_data.models import FiscalYear, District, LocalLevel
+from oagn_covid.settings import PAGINATED_BY
 
 # Convert utils LOCAL_LEVEL_STATE to dict
 DICT_LOCAL_LEVEL_STATE = {key: value for key, value in LOCAL_LEVEL_STATE}
@@ -27,6 +33,8 @@ class LocalLevelFormCollectionCreateView(View):
     """
     Creates form collection and initializes all forms in the collection
     """
+    form_class = LocalLevelFormCollectionForm
+    template_name = 'local_level_form_collection/create.html'
 
     def init_forms(self):
         """
@@ -34,7 +42,7 @@ class LocalLevelFormCollectionCreateView(View):
         """
 
         col_update_params = {}
-        fiscal_year = FiscalYear.objects.get_current_fy()
+        fiscal_year = self.object.fiscal_year
         for form in LIST_LOCAL_LEVEL_STATE:
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
@@ -42,12 +50,12 @@ class LocalLevelFormCollectionCreateView(View):
                 )
             elif ROUTE_LINK[form]['form_field'] in ['action_plan_implementation']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     create_user=self.request.user,
                 )
             else:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     fiscal_year=fiscal_year,
                     create_user=self.request.user,
                 )
@@ -56,19 +64,31 @@ class LocalLevelFormCollectionCreateView(View):
         LocalLevelFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
+    
+    def get(self, request, *args, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = {}
+        context['districts'] = list(District.objects.all().values('id', 'province_id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', 'district_id', text=F('name')))
+        context['form'] = self.form_class()
+        return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = LocalLevelFormCollection(
-            user=request.user, status='started', state=0)
-        form_collect.save()
-        self.object = form_collect
+        form_collect = self.form_class(request.POST)
+        instance = form_collect.save()
+        instance.user = request.user
+        instance.status = 'started'
+        instance.state = 0
+        instance.save()
+        self.object = instance
         self.init_forms()
-        form_url = f"{reverse('local_level_forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_LOCAL_LEVEL_STATE.get(0)}"
-        context = {'url': form_url}
-        return JsonResponse(context, content_type='application/json')
+        form_url = f"{reverse('local_level_forms:local_level_update', kwargs={'pk': self.object.pk})}?form={DICT_LOCAL_LEVEL_STATE.get(0)}"
+        return HttpResponseRedirect(form_url)
 
 
 class LocalLevelFormCollectionUpdateView(UpdateView):
@@ -86,7 +106,7 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
         next_form: form to return and render next; determined by next_state
     """
     model = LocalLevelFormCollection
-    success_url = 'local_level_forms:list'
+    success_url = 'local_level_forms:local_level_list'
     form_class = ''
     route_link = ''
     form_field = None
@@ -155,7 +175,7 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
         """
         self.object = LocalLevelFormCollection.objects.get(pk=pk)
         if not request.GET.get('form'):
-            return HttpResponseRedirect(reverse('local_level_forms:update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
+            return HttpResponseRedirect(reverse('local_level_forms:local_level_update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
         self.get_form_class(pk)
         context = {
             'metadata': self._get_metadata(),
@@ -200,10 +220,14 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
         if form_response.status_code == 302:
             self._update()
             if self.next_form:
-                next_url = reverse('local_level_forms:update', kwargs={
+                next_url = reverse('local_level_forms:local_level_update', kwargs={
                                    'pk': self.object.pk})+f'?form={self.next_form}'
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
+
+            if self.next_state == 'review':
+                return HttpResponseRedirect(reverse('local_level_forms:review', kwargs={
+                                    'pk': self.object.pk, 'action': 'submit'}))
 
             return HttpResponseRedirect(next_url)
         else:
@@ -231,7 +255,43 @@ class LocalLevelFormCollectionListView(ListView):
     model = LocalLevelFormCollection
     template_name = "local_level_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
 
 
 class LocalLevelFormCollectionDeleteView(DeleteView):
-    pass
+    model = LocalLevelFormCollection
+    template_name = "local_level_form_collection/delete.html"
+    success_url = reverse_lazy('local_level_forms:local_level_list')
+    context_object_name = 'form_collections'
+
+
+class LocalLevelFormCollectionReviewView(DetailView):
+    model = LocalLevelFormCollection
+    template_name = "local_level_form_collection/review.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['action'] = self.kwargs['action']
+        return context
+
+def local_level_submit_form(request, form_pk):
+    form_obj = LocalLevelFormCollection.objects.get(id=form_pk)
+    status = request.POST.get('status')
+    form_obj.status = status
+    form_obj.approver = request.user
+    if 'reject_msg' in request.POST:
+        form_obj.reject_msg = request.POST.get('reject_msg')
+    form_obj.save()
+    return JsonResponse({'success': '200'}, status=200)
+
+class ApproveView(GroupRequiredMixin, View):
+    template_name = 'local_level_form_collection/approve.html'
+    group_required = ['ALL PERMISSION', 'APPROVAL']
+
+    def get(self, request, *args, **kwargs):
+        context = []
+        data = list(LocalLevelFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
+        print(data)
+        for index, val in enumerate(data):
+            context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
+        return render(request, self.template_name, context={'data': context})

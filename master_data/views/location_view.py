@@ -3,6 +3,7 @@ from master_data.forms.location_form import LocationForm
 from master_data.models.company import Location
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class LocationCreateView(CreateView):
@@ -16,6 +17,7 @@ class LocationListView(ListView):
     model = Location
     template_name = "master_data/company/location_list.html"
     context_object_name = 'location_list'
+    paginate_by = PAGINATED_BY
 
 
 class LocationUpdateView(UpdateView):

@@ -1,5 +1,5 @@
 from django.db import transaction
-from django.db.models import query
+from django.db.models import query, F
 from django.forms import inlineformset_factory
 from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -10,16 +10,22 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from oagn_covid.settings import PAGINATED_BY
+
+
+from braces.views import GroupRequiredMixin
+
 from forms import models
 
-from django.apps import apps
-
+from collection.forms.covid_hospital_forms import CovHosFormCollectionForm
 from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import CH_STATE, num_to_devanagari
-from master_data.models import FiscalYear
+from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 
 from users.models.user import User
+from django.contrib.auth.models import Group
 
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key: value for key, value in CH_STATE}
@@ -30,6 +36,8 @@ class CovHosFormCollectionCreateView(View):
     """
     Creates form collection and initializes all forms in the collection
     """
+    template_name = 'cov_hos_form_collection/create.html'
+    form_class = CovHosFormCollectionForm
 
     def init_forms(self):
         """
@@ -37,7 +45,7 @@ class CovHosFormCollectionCreateView(View):
         """
 
         col_update_params = {}
-        fiscal_year = FiscalYear.objects.get_current_fy()
+        fiscal_year = self.object.fiscal_year
         for form in LIST_CH_STATE:
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower', 'cov_hos_management_checklist']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
@@ -45,7 +53,7 @@ class CovHosFormCollectionCreateView(View):
                 )
             else:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     fiscal_year=fiscal_year,
                     create_user=self.request.user,
                 )
@@ -54,19 +62,32 @@ class CovHosFormCollectionCreateView(View):
         CovHosFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
+    
+    def get(self, request, *args, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = {}
+        context['districts'] = list(District.objects.all().values('id', 'province_id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', 'district_id', text=F('name')))
+        context['hospitals'] = list(CovidHospital.objects.all().values('id', 'local_level_id', text=F('name')))
+        context['form'] = self.form_class()
+        return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = CovHosFormCollection(
-            user=request.user, status='started', state=0)
-        form_collect.save()
-        self.object = form_collect
+        form_collect = self.form_class(request.POST)
+        instance = form_collect.save()
+        instance.user = request.user
+        instance.status = 'started'
+        instance.state = 0
+        instance.save()
+        self.object = instance
         self.init_forms()
-        form_url = f"{reverse('cov_hos_forms:update', kwargs={'pk': form_collect.pk})}?form={DICT_CH_STATE.get(0)}"
-        context = {'url': form_url}
-        return JsonResponse(context, content_type='application/json')
+        form_url = f"{reverse('cov_hos_forms:cov_hos_update', kwargs={'pk': instance.pk})}?form={DICT_CH_STATE.get(0)}"
+        return HttpResponseRedirect(form_url)
 
 
 class CovHosFormCollectionUpdateView(UpdateView):
@@ -84,7 +105,7 @@ class CovHosFormCollectionUpdateView(UpdateView):
         next_form: form to return and render next; determined by next_state
     """
     model = CovHosFormCollection
-    success_url = 'cov_hos_forms:list'
+    success_url = 'cov_hos_forms:cov_hos_list'
     form_class = ''
     route_link = ''
     form_field = None
@@ -153,7 +174,7 @@ class CovHosFormCollectionUpdateView(UpdateView):
         """
         self.object = CovHosFormCollection.objects.get(pk=pk)
         if not request.GET.get('form'):
-            return HttpResponseRedirect(reverse('cov_hos_forms:update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
+            return HttpResponseRedirect(reverse('cov_hos_forms:cov_hos_update', kwargs={'pk': pk}) + f'?form={self.object.get_state_display()}')
         self.get_form_class(pk)
         context = {
             'metadata': self._get_metadata(),
@@ -198,14 +219,14 @@ class CovHosFormCollectionUpdateView(UpdateView):
         if form_response.status_code == 302:
             self._update()
             if self.next_form:
-                next_url = reverse('cov_hos_forms:update', kwargs={
+                next_url = reverse('cov_hos_forms:cov_hos_update', kwargs={
                                    'pk': self.object.pk})+f'?form={self.next_form}'
             if self.is_last_form and self.next_state == 'submit':
                 return HttpResponseRedirect(reverse_lazy(self.success_url))
 
             if self.next_state == 'review':
                 return HttpResponseRedirect(reverse('cov_hos_forms:review', kwargs={
-                                   'pk': self.object.pk}))
+                                   'pk': self.object.pk, 'action': 'submit'}))
             return HttpResponseRedirect(next_url)
         else:
             return form_response
@@ -232,33 +253,53 @@ class CovHosFormCollectionListView(ListView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/list.html"
     context_object_name = 'form_collections'
+    paginate_by = PAGINATED_BY
 
 
 class CovHosFormCollectionDeleteView(DeleteView):
-    pass
+    model = CovHosFormCollection
+    template_name = "cov_hos_form_collection/delete.html"
+    success_url = reverse_lazy('cov_hos_forms:cov_hos_list')
+    context_object_name = 'form_collections'
 
 
 class CovHosFormCollectionReview(DetailView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/review.html"
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['action'] = self.kwargs['action']
+        return context
+    
 
 def cov_hos_submit_form(request, form_pk):
     form_obj = CovHosFormCollection.objects.get(id=form_pk)
-    form_obj.status = 'submitted'
+    status = request.POST.get('status')
+    form_obj.status = status
+    form_obj.approver = request.user
+    if 'reject_msg' in request.POST:
+        form_obj.reject_msg = request.POST.get('reject_msg')
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
 
-class ApproveView(View):
+
+class ApproveView(GroupRequiredMixin, View):
     template_name = 'cov_hos_form_collection/approve.html'
+    group_required = ['ALL PERMISSION', 'APPROVAL']
 
     def get(self, request, *args, **kwargs):
-        params = {'user': self.request.user, 'status': 'submitted'}
-        data = list(CovHosFormCollection.objects.select_related().filter(**params).values('id', 'user', 'state'))
-        for index, val in enumerate(data):
-            user = User.objects.get(pk=val.get('user')).username
-            data[index].update({'user':user})
+        context = []
+        # params = {'body': request.user.body, 'status': 'submitted'}
+        # params = {'status': ['submitted', 'approved', 'rejected']}
+        # data = list(CovHosFormCollection.objects.select_related().filter(**params))
+        data = list(CovHosFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
         print(data)
-        return render(request, self.template_name, context={'data': data})
+        for index, val in enumerate(data):
+            context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
+        # for index, val in enumerate(data):
+        #     user = User.objects.get(pk=val.get('user')).username
+        #     data[index].update({'user':user, 'state': val.get_state_display()})
+        return render(request, self.template_name, context={'data': context})
 
     # def post

@@ -3,6 +3,7 @@ from master_data.forms.company_form import CompanyForm
 from master_data.models.company import Company
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class CompanyCreateView(CreateView):
@@ -16,6 +17,7 @@ class CompanyListView(ListView):
     model = Company
     template_name = "master_data/company/company_list.html"
     context_object_name = 'company_list'
+    paginate_by = PAGINATED_BY
 
 
 class CompanyUpdateView(UpdateView):
