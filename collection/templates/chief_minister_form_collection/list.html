@@ -3,18 +3,19 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा - Nepal Audit Management System
+कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा मुख्यमन्त्री तथा मन्त्रीपरिषदको कार्यालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण 
+कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा मुख्यमन्त्री तथा मन्त्रीपरिषदको कार्यालयले माग गरेको सूचना एवं जानकारी उपलव्ध
+गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" id='create_collection'>
-    <i class="ic-add"></i>
-    प्रश्नावलीहरू भर्नुहोस्
-  </a>
+<a class="btn btn-success btn-with-icon" id='create_collection'>
+  <i class="ic-add"></i>
+  प्रश्नावलीहरू भर्नुहोस्
+</a>
 {% endblock page_actions %}
 
 {% block content %}
@@ -29,28 +30,29 @@
   </thead>
   <tbody>
     {% for form_collection in form_collections %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ form_collection }}</td>
-        <td>{{ form_collection.get_status_display }}</td>
-        {% if form_collection.get_status_display == 'SUBMITTED' %}
-          <td>
-            <a href="{% url 'chief_minister_forms:review' form_collection.pk 'submitted' %}">
-              Review
-            </a>
-          </td>
-        {% elif form_collection.get_status_display not in 'APPROVED, REJECTED' %}
-          <td class="action">
-            <a href="{% url 'chief_minister_forms:chief_minister_update' form_collection.pk %}">
-              <i class="ic-edit mr-2"></i>
-            </a>
-            <a data-remote="{% url 'chief_minister_forms:chief_minister_delete' form_collection.pk %}"
-              href="{% url 'chief_minister_forms:chief_minister_delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
-              <i class="ic-delete"></i>
-            </a>
-          </td>
-        {% endif %}
-      </tr>
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ form_collection }}</td>
+      <td>{{ form_collection.get_status_display }}</td>
+      {% if form_collection.get_status_display == 'SUBMITTED' %}
+      <td>
+        <a href="{% url 'chief_minister_forms:review' form_collection.pk 'submitted' %}">
+          Review
+        </a>
+      </td>
+      {% elif form_collection.get_status_display not in 'APPROVED, REJECTED' %}
+      <td class="action">
+        <a href="{% url 'chief_minister_forms:chief_minister_update' form_collection.pk %}">
+          <i class="ic-edit mr-2"></i>
+        </a>
+        <a data-remote="{% url 'chief_minister_forms:chief_minister_delete' form_collection.pk %}"
+          href="{% url 'chief_minister_forms:chief_minister_delete' form_collection.pk %}" data-toggle="modal"
+          data-target="#modalProdDelete">
+          <i class="ic-delete"></i>
+        </a>
+      </td>
+      {% endif %}
+    </tr>
     {% endfor %}
   </tbody>
 </table>
@@ -63,7 +65,8 @@
 
 {% block modal %}
 
-<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete" aria-hidden="true">
+<div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -74,19 +77,19 @@
 
 {% block extrascripts %}
 <script>
-$(document).ready(function(){
-    $('#create_collection').on('click', function(){
-        fetch("{% url 'chief_minister_forms:chief_minister_create' %}", {
-          method: 'POST',
-          dataType: "json",
-          headers: { "X-CSRFToken": '{{csrf_token}}' },
-        })
+  $(document).ready(function () {
+    $('#create_collection').on('click', function () {
+      fetch("{% url 'chief_minister_forms:chief_minister_create' %}", {
+        method: 'POST',
+        dataType: "json",
+        headers: { "X-CSRFToken": '{{csrf_token}}' },
+      })
         .then(response => response.json())
         .then(data => {
           window.location.href = data.url
         })
-        .catch(function(err){
-            console.log(err);
+        .catch(function (err) {
+          console.log(err);
         });
     });
 
@@ -95,6 +98,6 @@ $(document).ready(function(){
       var modal = $(this);
       modal.find('.modal-content').load(button.data("remote"));
     });
-})
+  })
 </script>
 {% endblock extrascripts %}

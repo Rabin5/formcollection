@@ -27,6 +27,7 @@ class AllowanceTypeUpdateView(UpdateView):
     success_url = reverse_lazy('md-allowance_type:list')
     context_object_name = 'allowance_type'
 
+
 class AllowanceTypeDeleteView(DeleteView):
     model = AllowanceType
     template_name = "master_data/allonace/allowance_type_delete.html"
