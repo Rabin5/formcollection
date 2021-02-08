@@ -106,13 +106,11 @@
     });
 
     $("#modalProCreate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
         e.preventDefault();
         saveData($(this),"#modalProCreate")
     });
 
     $("#modalProUpdate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
         e.preventDefault();
         saveData($(this),'#modalProUpdate')
     });

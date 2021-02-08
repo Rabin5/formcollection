@@ -112,13 +112,11 @@ Address
     });
 
     $("#modalAddCreate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
         e.preventDefault();
         saveData($(this),"#modalAddCreate")
     });
 
     $("#modalAddUpdate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
         e.preventDefault();
         saveData($(this),'#modalAddUpdate')
     });

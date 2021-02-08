@@ -101,15 +101,11 @@
   });
 
   $( "#modalUomCreate").on('submit', 'form', function(e) {
-
-    var $prod_modal = $(this); 
     e.preventDefault();
     saveData($(this),"#modalUomCreate") 
   });
 
   $( "#modalUomUpdate").on('submit', 'form', function(e) {
-
-    var $prod_modal = $(this);
     e.preventDefault();
     saveData($(this),"#modalUomUpdate") 
   });
