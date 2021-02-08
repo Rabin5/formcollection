@@ -30,11 +30,11 @@
               <p>निकाय नाम: <span>{{ object.epidemic_outbreak_prep.body }}</span></p>
               <p>आर्थिक बर्ष : <span>{{ object.epidemic_outbreak_prep.fiscal_year }}</span></p>
               {% if action == 'submit' %}
-                <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+                <p align="right"><a class="text-info" href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=epidemic_outbreak_prep"><i class="ic-edit"></i></a></p>
               {% endif %}
             </div>
 
-            <div class="table-scrollable">
+            <div class="table-responsive">
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -77,11 +77,11 @@
                 <p>निकाय नाम: <span>{{ object.fund_receipt_expense.body }}</span></p>
                 <p>आर्थिक बर्ष : <span>{{ object.fund_receipt_expense.fiscal_year }}</span></p>
                 {% if action == 'submit' %}
-                  <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+                  <p align="right"><a class="text-info" href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=fund_receipt_expense"><i class="ic-edit"></i></a></p>
                 {% endif %}
               </div>
   
-              <div class="table-scrollable">
+              <div class="table-responsive">
                 <p align="right">रु हजारमा</p>
                 <table class="table table-bordered">
                   <thead>
@@ -134,11 +134,11 @@
                 <p>निकाय नाम: <span>{{ object.risk_allowance.body }}</span></p>
                 <p>आर्थिक बर्ष : <span>{{ object.risk_allowance.fiscal_year }}</span></p>
                 {% if action == 'submit' %}
-                  <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=risk_allowance">Edit</a></p>
+                  <p align="right"><a class="text-info" href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=risk_allowance"><i class="ic-edit"></i></a></p>
                 {% endif %}
               </div>
   
-              <div class="table-scrollable">
+              <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
                     {% with start_index=1 %}
@@ -187,11 +187,11 @@
               4) कार्ययोजना कार्यान्वयन- कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा स्वदेश आउनैपर्ने अवस्थामा रहेका नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्वन्धी आदेश, २०७७ को लागि तयार पारिएको नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै प्रदेश सरकारको समेत जिम्मेवारी हुने सहयोग गर्नुपर्ने गरी तोकेको छ । यस सम्बन्धमा प्रदेश सरकारबाट भएका क्रियाकलाप र यसमा भएको खर्च खुलाउनु होस् ।
             </a>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=action_plan_implementation">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'internal_affairs_forms:internal_affairs_update' object.pk %}?form=action_plan_implementation"><i class="ic-edit"></i></a></p>
             {% endif %}
   
             <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="table-scrollable">
+              <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
                     {% with start_index=1 %}

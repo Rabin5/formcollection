@@ -30,11 +30,11 @@
 						<p>स्थानीय तहको नामः <span>{{ object.epidemic_outbreak_prep.body }}</span></p>
 						<p>आर्थिक बर्ष : <span>{{ object.epidemic_outbreak_prep.fiscal_year }}</span></p>
 						{% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=epidemic_outbreak_prep"><i class="ic-edit"></i></a></p>
 						{% endif %}
 					</div>
 
-					<div class="table-scrollable">
+					<div class="table-responsive">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -74,11 +74,11 @@
 							<p>स्थानीय तहको नामः <span>{{ object.fund_receipt_expense.body }}</span></p>
 							<p>आर्थिक बर्ष : <span>{{ object.fund_receipt_expense.fiscal_year }}</span></p>
 							{% if action == 'submit' %}
-								<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+								<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=fund_receipt_expense"><i class="ic-edit"></i></a></p>
 							{% endif %}
 						</div>
 
-						<div class="table-scrollable">
+						<div class="table-responsive">
 							<p align="right">रु हजारमा</p>
 							<table class="table table-bordered">
 								<thead>
@@ -132,11 +132,11 @@
 							<p>निकाय नाम: <span>{{ object.risk_allowance.body }}</span></p>
 							<p>आर्थिक बर्ष : <span>{{ object.risk_allowance.fiscal_year }}</span></p>
 							{% if action == 'submit' %}
-								<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=risk_allowance">Edit</a></p>
+								<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=risk_allowance"><i class="ic-edit"></i></a></p>
 							{% endif %}
 						</div>
 
-						<div class="table-scrollable">
+						<div class="table-responsive">
 							<table class="table table-bordered">
 								<thead>
 									{% with start_index=1 %}
@@ -189,11 +189,11 @@
 							<p>स्थानीय तहको नामः <span>{{ object.medical_expense.body }}</span></p>
 							<p>आर्थिक बर्ष : <span>{{ object.medical_expense.fiscal_year }}</span></p>
 							{% if action == 'submit' %}
-								<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_expense">Edit</a></p>
+								<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_expense"><i class="ic-edit"></i></a></p>
 							{% endif %}
 						</div>
 
-						<div class="table-scrollable">
+						<div class="table-responsive">
 							<table class="table table-bordered">
 								<thead>
 									{% with start_index=1 %}
@@ -241,11 +241,11 @@
 						<p>स्थानीय तहको नामः <span>{{ object.medical_receipt.body }}</span></p>
 						<p>आर्थिक बर्ष : <span>{{ object.medical_receipt.fiscal_year }}</span></p>
 						{% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_receipt">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_receipt"><i class="ic-edit"></i></a></p>
 						{% endif %}
 					</div>
 
-					<div class="table-scrollable">
+					<div class="table-responsive">
 						<table class="table table-bordered">
 							<thead>
 								{% with start_index=1 %}
@@ -287,11 +287,11 @@
             <p>स्थानीय तहको नामः <span>{{ object.medical_use.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.medical_use.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_use">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_use"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -341,11 +341,11 @@
             <p>स्थानीय तहको नामः <span>{{ object.med_purchase_desc.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.med_purchase_desc.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=med_purchase_desc">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=med_purchase_desc"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -392,11 +392,11 @@
             <p>स्थानीय तहको नामः <span>{{ object.case_investigation_tracing.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.case_investigation_tracing.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=case_investigation_tracing">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=case_investigation_tracing"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -449,11 +449,11 @@
             <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.covid_hos_mainpower }}</span></p>
             <p>स्थान: <span>{{ object.covid_hos_mainpower.address }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=covid_hos_mainpower">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=covid_hos_mainpower"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -498,11 +498,11 @@
             <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.cov_hos_equipment }}</span></p>
             <p>स्थान: <span>{{ object.cov_hos_equipment.address }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=cov_hos_equipment">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=cov_hos_equipment"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -549,11 +549,11 @@
             <p>स्थानीय तहको नामः <span>{{ object.quarantine_management_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.quarantine_management_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=quarantine_management_detail">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=quarantine_management_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -609,11 +609,11 @@
             <p>स्थानीय तहको नामः <span>{{ object.isolation_management_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.isolation_management_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=isolation_management_detail">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=isolation_management_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -669,11 +669,11 @@
             <p>स्थानीय तहको नामः <span>{{ object.quarantine_contruction_expenditure.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.quarantine_contruction_expenditure.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=quarantine_contruction_expenditure"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -732,11 +732,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.isolation_construction_expenditure.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.isolation_construction_expenditure.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-            	<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=isolation_construction_expenditure">Edit</a></p>
+            	<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=isolation_construction_expenditure"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -795,11 +795,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.case_investigation_tracing_operation.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.case_investigation_tracing_operation.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-						<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=case_investigation_tracing_operation">Edit</a></p>
+						<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=case_investigation_tracing_operation"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -846,11 +846,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.relief_procurement_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.relief_procurement_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_procurement_detail">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_procurement_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -889,11 +889,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.relief_procurement_distribution.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.relief_procurement_distribution.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_procurement_distribution">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_procurement_distribution"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -951,11 +951,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.ward_relief_procurement_dist.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.ward_relief_procurement_dist.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=ward_relief_procurement_dist">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=ward_relief_procurement_dist"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -1003,11 +1003,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.received_relief_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.received_relief_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=received_relief_detail">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=received_relief_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -1055,11 +1055,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.relief_distribution_expense.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.relief_distribution_expense.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_distribution_expense">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_distribution_expense"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -1101,11 +1101,11 @@
             <p>स्थानीय तहको नामः<span>{{ object.action_plan_implementation.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.action_plan_implementation.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-							<p align="right"><a href="{% url 'local_level_forms:local_level_update' object.pk %}?form=action_plan_implementation">Edit</a></p>
+							<p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=action_plan_implementation"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}

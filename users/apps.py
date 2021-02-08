@@ -11,7 +11,7 @@ class UsersConfig(AppConfig):
 
     def ready(self):
         check = connection.introspection.table_names()
-        if 'ContentType' in  check:
+        if 'django_content_type' in  check:
             from django.contrib.contenttypes.models import ContentType
             from .models import GlobalPermission
 

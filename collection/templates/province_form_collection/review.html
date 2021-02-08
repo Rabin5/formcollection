@@ -31,11 +31,11 @@
               <p>निकाय नाम: <span>{{ object.epidemic_outbreak_prep.body }}</span></p>
               <p>आर्थिक बर्ष : <span>{{ object.epidemic_outbreak_prep.fiscal_year }}</span></p>
               {% if action == 'submit' %}
-                <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=epidemic_outbreak_prep">Edit</a></p>
+                <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=epidemic_outbreak_prep"><i class="ic-edit"></i></a></p>
               {% endif %}
             </div>
 
-            <div class="table-scrollable">
+            <div class="table-responsive">
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -75,12 +75,12 @@
                 <p>निकाय नाम: <span>{{ object.fund_receipt_expense.body }}</span></p>
                 <p>आर्थिक बर्ष : <span>{{ object.fund_receipt_expense.fiscal_year }}</span></p>
                 {% if action == 'submit' %}
-                  <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=fund_receipt_expense">Edit</a></p>
+                  <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=fund_receipt_expense"><i class="ic-edit"></i></a></p>
                 {% endif %}
 
               </div>
 
-              <div class="table-scrollable">
+              <div class="table-responsive">
                 <p align="right">रु हजारमा</p>
                 <table class="table table-bordered">
                   <thead>
@@ -128,17 +128,14 @@
               class="hasSub">
               3) जोखिम भत्ता सम्बन्धी बिबरण (मन्त्रालयले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)
             </a>
-
-            <div id="collapseThree" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="mt-2 mb-3">
-                <p>निकाय नाम: <span>{{ object.risk_allowance.body }}</span></p>
+<p align="right"><a class="text-info" ance.body }}</span></p>
                 <p>आर्थिक बर्ष : <span>{{ object.risk_allowance.fiscal_year }}</span></p>
                 {% if action == 'submit' %}
-                  <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=risk_allowance">Edit</a></p>
+                  <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=risk_allowance"><i class="ic-edit"></i></a></p>
                 {% endif %}
               </div>
 
-              <div class="table-scrollable">
+              <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
                     {% with start_index=1 %}
@@ -191,10 +188,10 @@
                   <p>निकाय नाम: <span>{{ object.medical_expense.body }}</span></p>
                   <p>आर्थिक बर्ष : <span>{{ object.medical_expense.fiscal_year }}</span></p>
                   {% if action == 'submit' %}
-                    <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=medical_expense">Edit</a></p>
+                    <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=medical_expense"><i class="ic-edit"></i></a></p>
                   {% endif %}
               </div>
-            <div class="table-scrollable">
+            <div class="table-responsive">
               <table class="table table-bordered">
                 <thead>
                   {% with start_index=1 %}
@@ -240,11 +237,11 @@
             <p>निकाय नाम: <span>{{ object.medical_receipt.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.medical_receipt.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=medical_receipt">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=medical_receipt"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -286,11 +283,11 @@
             <p>निकाय नाम: <span>{{ object.medical_use.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.medical_use.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=medical_use">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=medical_use"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -334,11 +331,11 @@
             <p>निकाय नाम: <span>{{ object.med_purchase_desc.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.med_purchase_desc.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=med_purchase_desc">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=med_purchase_desc"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -382,11 +379,11 @@
             <p>निकाय नाम: <span>{{ object.pcr_test_compliance_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.pcr_test_compliance_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=pcr_test_compliance_detail">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=pcr_test_compliance_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr class="tr-review-head">
@@ -443,11 +440,11 @@
             <p>निकाय नाम: <span>{{ object.pcr_lab_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.pcr_lab_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=pcr_lab_detail">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=pcr_lab_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -493,11 +490,11 @@
             <p>निकाय नाम: <span>{{ object.rdt_test_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.rdt_test_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=rdt_test_detail">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=rdt_test_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -537,11 +534,11 @@
             <p>निकाय नाम: <span>{{ object.pcr_kit_usage.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.pcr_kit_usage.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=pcr_kit_usage">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=pcr_kit_usage"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -587,11 +584,11 @@
             <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.covid_hos_mainpower }}</span></p>
             <p>स्थान: <span>{{ object.covid_hos_mainpower.address }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=covid_hos_mainpower">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=covid_hos_mainpower"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -633,11 +630,11 @@
             <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.cov_hos_equipment }}</span></p>
             <p>स्थान: <span>{{ object.cov_hos_equipment.address }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=cov_hos_equipment">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=cov_hos_equipment"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -681,11 +678,11 @@
             <p>निकाय नाम: <span>{{ object.covid_hospital_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.covid_hospital_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=covid_hospital_detail">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=covid_hospital_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -749,11 +746,11 @@
             <p>निकाय नाम: <span>{{ object.quarantine_management_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.quarantine_management_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=quarantine_management_detail">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=quarantine_management_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -809,11 +806,11 @@
             <p>निकाय नाम: <span>{{ object.isolation_management_detail.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.isolation_management_detail.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=isolation_management_detail">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=isolation_management_detail"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -869,11 +866,11 @@
             <p>निकाय नाम: <span>{{ object.quarantine_contruction_expenditure.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.quarantine_contruction_expenditure.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=quarantine_contruction_expenditure">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=quarantine_contruction_expenditure"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -929,11 +926,11 @@
             <p>निकाय नाम: <span>{{ object.isolation_construction_expenditure.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.isolation_construction_expenditure.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=isolation_construction_expenditure">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=isolation_construction_expenditure"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}
@@ -989,11 +986,11 @@
             <p>निकाय नाम: <span>{{ object.district_covid_management.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.district_covid_management.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=district_covid_management">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=district_covid_management"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             १. क्वारेन्टीन व्यवस्थापन
             <table class="table table-bordered">
               <thead>
@@ -1146,11 +1143,11 @@
             <p>निकाय नाम: <span>{{ object.fund_operation.body }}</span></p>
             <p>आर्थिक बर्ष : <span>{{ object.fund_operation.fiscal_year }}</span></p>
             {% if action == 'submit' %}
-              <p align="right"><a href="{% url 'province_forms:province_update' object.pk %}?form=fund_operation">Edit</a></p>
+              <p align="right"><a class="text-info" href="{% url 'province_forms:province_update' object.pk %}?form=fund_operation"><i class="ic-edit"></i></a></p>
             {% endif %}
           </div>
 
-          <div class="table-scrollable">
+          <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 {% with start_index=1 %}

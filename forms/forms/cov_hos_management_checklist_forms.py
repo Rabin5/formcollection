@@ -32,7 +32,7 @@ CovidHospitalManagementChecklistLineFormSet = inlineformset_factory(
         'description': forms.TextInput()
         # 'is_yes': forms.CheckboxSelectMultiple(choices=((0, True),(1, False)))
     },
-    extra=1,
+    extra=0,
     can_delete=False
 )
 
