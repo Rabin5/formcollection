@@ -18,7 +18,7 @@ from braces.views import GroupRequiredMixin
 
 from forms import models
 
-from collection.forms.form_collection_forms import CovHosFormCollectionForm
+from collection.forms.covid_hospital_forms import CovHosFormCollectionForm
 from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import CH_STATE, num_to_devanagari

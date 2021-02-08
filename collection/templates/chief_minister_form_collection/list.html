@@ -12,10 +12,10 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-<a class="btn btn-success btn-with-icon" id='create_collection'>
-  <i class="ic-add"></i>
-  प्रश्नावलीहरू भर्नुहोस्
-</a>
+  <a class="btn btn-success btn-with-icon" href='{% url "chief_minister_forms:chief_minister_create" %}'>
+    <i class="ic-add"></i>
+    प्रश्नावलीहरू भर्नुहोस्
+  </a>
 {% endblock page_actions %}
 
 {% block content %}
@@ -77,27 +77,10 @@
 
 {% block extrascripts %}
 <script>
-  $(document).ready(function () {
-    $('#create_collection').on('click', function () {
-      fetch("{% url 'chief_minister_forms:chief_minister_create' %}", {
-        method: 'POST',
-        dataType: "json",
-        headers: { "X-CSRFToken": '{{csrf_token}}' },
-      })
-        .then(response => response.json())
-        .then(data => {
-          window.location.href = data.url
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    });
-
-    $('#modalProdDelete').on('shown.bs.modal', function (e) {
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
-    });
-  })
+  $('#modalProdDelete').on('shown.bs.modal', function (e) {
+    var button = $(e.relatedTarget);
+    var modal = $(this);
+    modal.find('.modal-content').load(button.data("remote"));
+  });
 </script>
 {% endblock extrascripts %}

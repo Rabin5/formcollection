@@ -7,10 +7,15 @@ from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPrep
 from forms.models.province_institution_management import ProvinceInstitutionManagement
 from forms.models.action_plan_implementation import ActionPlanImplementation
 
+from master_data.models import FiscalYear, Province, GovernmentBody
+
 from users.models.user import User
 from collection.utils import CHIEF_MINISTER_STATE, STATUS
 
 class ChiefMinisterOfficeFormCollection(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.PROTECT, null=True, blank=False)
+    body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=CHIEF_MINISTER_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)

@@ -1,5 +1,5 @@
 from django.db import transaction
-from django.db.models import query
+from django.db.models import query, F
 from django.forms import inlineformset_factory
 from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -16,10 +16,12 @@ from braces.views import GroupRequiredMixin
 
 from django.apps import apps
 
+from collection.forms.local_level_forms import LocalLevelFormCollectionForm
 from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
 from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari
-from master_data.models import FiscalYear
+
+from master_data.models import FiscalYear, District, LocalLevel
 from oagn_covid.settings import PAGINATED_BY
 
 # Convert utils LOCAL_LEVEL_STATE to dict
@@ -31,6 +33,8 @@ class LocalLevelFormCollectionCreateView(View):
     """
     Creates form collection and initializes all forms in the collection
     """
+    form_class = LocalLevelFormCollectionForm
+    template_name = 'local_level_form_collection/create.html'
 
     def init_forms(self):
         """
@@ -38,7 +42,7 @@ class LocalLevelFormCollectionCreateView(View):
         """
 
         col_update_params = {}
-        fiscal_year = FiscalYear.objects.get_current_fy()
+        fiscal_year = self.object.fiscal_year
         for form in LIST_LOCAL_LEVEL_STATE:
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
@@ -46,12 +50,12 @@ class LocalLevelFormCollectionCreateView(View):
                 )
             elif ROUTE_LINK[form]['form_field'] in ['action_plan_implementation']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     create_user=self.request.user,
                 )
             else:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.request.user.body,
+                    body=self.object.body,
                     fiscal_year=fiscal_year,
                     create_user=self.request.user,
                 )
@@ -60,19 +64,31 @@ class LocalLevelFormCollectionCreateView(View):
         LocalLevelFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
+    
+    def get(self, request, *args, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = {}
+        context['districts'] = list(District.objects.all().values('id', 'province_id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', 'district_id', text=F('name')))
+        context['form'] = self.form_class()
+        return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
         """
         Creates form collection and redirects to its update page
         """
-        form_collect = LocalLevelFormCollection(
-            user=request.user, status='started', state=0)
-        form_collect.save()
-        self.object = form_collect
+        form_collect = self.form_class(request.POST)
+        instance = form_collect.save()
+        instance.user = request.user
+        instance.status = 'started'
+        instance.state = 0
+        instance.save()
+        self.object = instance
         self.init_forms()
-        form_url = f"{reverse('local_level_forms:local_level_update', kwargs={'pk': form_collect.pk})}?form={DICT_LOCAL_LEVEL_STATE.get(0)}"
-        context = {'url': form_url}
-        return JsonResponse(context, content_type='application/json')
+        form_url = f"{reverse('local_level_forms:local_level_update', kwargs={'pk': self.object.pk})}?form={DICT_LOCAL_LEVEL_STATE.get(0)}"
+        return HttpResponseRedirect(form_url)
 
 
 class LocalLevelFormCollectionUpdateView(UpdateView):

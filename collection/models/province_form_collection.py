@@ -22,10 +22,14 @@ from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPrep
 from forms.models.districtcovidmanagement import DistrictCovidManagement
 from forms.models.fund_operation import FundOperation
 
+from master_data.models import Province, CovidHospital, GovernmentBody, FiscalYear
 from users.models.user import User
 from collection.utils import PROVINCE_STATE, STATUS
 
 class ProvinceFormCollection(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.PROTECT, null=True, blank=False)
+    body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
+    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=PROVINCE_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
@@ -75,5 +79,7 @@ class ProvinceFormCollection(models.Model):
 
 
     def __str__(self):
-        display_name = f"{self.user.body} ({self.get_state_display()})"
-        return display_name
+        if self.user:
+            display_name = f"{self.user.body} ({self.get_state_display()})"
+            return display_name
+        return ''

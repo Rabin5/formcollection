@@ -19,7 +19,31 @@
         "model": "master_data.GovernmentBodyType",
         "pk": "3",
         "fields": {
-            "name": "प्रदेश",
+            "name": "प्रदेश सरकार",
+            "created": "2020-02-02 00:00:00"
+        }
+    },
+    {
+        "model": "master_data.GovernmentBodyType",
+        "pk": "4",
+        "fields": {
+            "name": "आन्तरिक मामिला तथा कानून मन्त्रालय",
+            "created": "2020-02-02 00:00:00"
+        }
+    },
+    {
+        "model": "master_data.GovernmentBodyType",
+        "pk": "5",
+        "fields": {
+            "name": "मुख्यमन्त्री तथा मन्त्रीपरिषदको कार्यालय",
+            "created": "2020-02-02 00:00:00"
+        }
+    },
+    {
+        "model": "master_data.GovernmentBodyType",
+        "pk": "6",
+        "fields": {
+            "name": "स्थानीय तह",
             "created": "2020-02-02 00:00:00"
         }
     }
