@@ -6964,6 +6964,9 @@ label {
 .textbox h6 {
   font-size: 0.833rem; }
 
+.font-weight-normal {
+  font-weight: 400; }
+
 .mt--2 {
   margin-top: 2em; }
 
@@ -7575,9 +7578,48 @@ a.text-dark:hover, a.text-dark:focus {
       max-width: 100%;
       object-fit: contain; }
   .card__stats {
-    transition: ease-in .2s; }
+    transition: ease-in .2s;
+    position: relative;
+    display: block;
+    border-radius: 4px; }
+    .card__stats .count {
+      font-size: 1.4375rem;
+      font-weight: 800; }
+      @media (max-width: 1920px) {
+        .card__stats .count {
+          font-size: calc(1.40625rem + 0.02604vw) ; } }
+    .card__stats i {
+      font-size: 1.5rem; }
+      @media (max-width: 1920px) {
+        .card__stats i {
+          font-size: calc(1.45833rem + 0.03472vw) ; } }
+    .card__stats .bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      border-radius: 4px; }
+    .card__stats .title {
+      color: #053559;
+      font-size: 0.8125rem;
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem; }
+      .card__stats .title i {
+        font-size: 1rem;
+        margin-right: 0.5rem;
+        line-height: 1; }
     .card__stats:hover {
+      background-color: #206DBF;
       transform: translateY(-8px); }
+      .card__stats:hover h6,
+      .card__stats:hover i {
+        color: white !important; }
+      .card__stats:hover .bar {
+        opacity: 0; }
+      .card__stats:hover .favorite {
+        display: block; }
   .card__table .table {
     margin-top: 1rem; }
   .card__login {
@@ -8182,6 +8224,11 @@ a.text-dark:hover, a.text-dark:focus {
       .list--checkbox li .custom-control-label {
         font-size: 0.833rem;
         color: #E8E8E8; }
+  .list-summary {
+    font-size: 0.875rem;
+    margin: 1rem 0; }
+    .list-summary h6 {
+      font-size: 0.875rem; }
 
 .breadcrumb {
   font-size: 0.875rem; }
@@ -8197,6 +8244,29 @@ a.text-dark:hover, a.text-dark:focus {
     font-family: "icomoon";
     display: inline;
     font-size: 0.5rem; }
+  .hasSub[aria-expanded="true"]:after {
+    content: "\e959"; }
+
+.accordion-item {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #E8E8E8; }
+  .accordion-item a {
+    font-size: 0.875rem;
+    width: 100%;
+    font-weight: 600; }
+    .accordion-item a.hasSub {
+      display: inline-flex;
+      align-items: flex-start;
+      justify-content: space-between; }
+      .accordion-item a.hasSub::after {
+        margin-top: 0.35rem; }
+  .accordion-item p, .accordion-item span {
+    font-size: 0.875rem;
+    font-weight: 400; }
+    .accordion-item p.note, .accordion-item span.note {
+      color: #8A8A8A;
+      font-size: 0.75rem;
+      margin-top: 0.5rem; }
 
 .modal-header, .modal-footer {
   border: none; }
@@ -8469,84 +8539,3 @@ a.text-dark:hover, a.text-dark:focus {
   align-items: center;
   margin-bottom: .5rem; }
 
-.table-review, th, td {
-  border: 2px solid black;
-  border-collapse: collapse;
-}
-
-.tr-review-head {
-  font-weight: bold;
-}
-
-input[type='number'] {
-  text-align: right;
-}
-
-.table-review, th, td {
-  border: 2px solid black;
-  border-collapse: collapse;
-}
-
-.tr-review-head {
-  font-weight: bold;
-}
-
-.page-item.active-link .page-link {
-  z-index: 3;
-  color: #ffffff;
-  background-color: #42bc38;
-  border-color: #42bc38;
-}
-
-.font-weight-normal {
-  font-weight: 400;
-}
-
-.list-summary {
-  font-size: 0.875rem;
-  margin: 1rem 0;
-}
-
-.list-summary h6 {
-  font-size: 0.875rem;
-}
-
-.hasSub[aria-expanded="true"]:after {
-  content: "\e959";
-}
-
-.accordion-item {
-  padding: 0.75rem 1rem;
-  border-top: 1px solid #E8E8E8;
-}
-
-.accordion-item a {
-  font-size: 0.875rem;
-  width: 100%;
-  font-weight: 600;
-}
-
-.accordion-item a.hasSub {
-  display: inline-flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.accordion-item a.hasSub::after {
-  margin-top: 0.35rem;
-}
-
-.accordion-item p, .accordion-item span {
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.accordion-item p.note, .accordion-item span.note {
-  color: #8A8A8A;
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-}
-
-th {
-  text-align:center
-}
