@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from master_data.forms.source_budget_form import SourceBudgetForm
 from master_data.models.government import SourceBudget
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class SourceBudgetCreateView(CreateView):
@@ -17,6 +18,7 @@ class SourceBudgetListView(ListView):
     model = SourceBudget
     template_name = "master_data/source_budget/source_budget_list.html"
     context_object_name = 'source_budget_typies'
+    paginate_by = PAGINATED_BY
 
 
 class SourceBudgetUpdateView(UpdateView):

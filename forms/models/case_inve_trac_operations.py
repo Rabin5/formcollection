@@ -31,4 +31,4 @@ class CaseInvestigationTracingOperationsLine(FormLineBaseModel):
     num_sample_collect_test = models.IntegerField(
         blank=True, null=True, verbose_name='नमूना संकलन वा द्रुत परिक्षण संख्या')
     caseinvestigationtracingoperations_line = models.ForeignKey(
-        CaseInvestigationTracingOperations, on_delete=models.CASCADE)
+        CaseInvestigationTracingOperations, on_delete=models.CASCADE, related_name='lines')

@@ -51,15 +51,15 @@ class DistrictLabTestLineForm(forms.ModelForm):
 
 DistrictCovidQuaManagementFormSet = inlineformset_factory(
     DistrictCovidManagement, DisctrictQuarantineManagementLine, form=DistrictQuarantineManagementLineForm,
-    fields=['district', 'num_prepared_quarantine', 'num_quarantined_person',
+    fields=['district', 'num_prepared_quarantine', 'num_prepared_quarantine_beds', 'num_quarantined_person',
             'num_home_quarantined_person', 'num_insufficient_bed', ],
     extra=1,
     can_delete=True
 )
 DistrictCovidIsolManagementFormSet = inlineformset_factory(
     DistrictCovidManagement, DistrictIsolationManagementLine, form=DistrictIsolationManagementLineForm,
-    fields=['district', 'num_prepared_icu', 'num_prepared_bed',
-            'num_infected_person', 'num_isolated_person', 'num_home_isolated_person'],
+    fields=['district', 'num_prepared_bed',
+            'num_infected_person', 'num_isolated_person', 'num_home_isolated_person', 'num_prepared_icu'],
     extra=1,
     can_delete=True
 )
@@ -96,11 +96,11 @@ class DistrictCovidManagementForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                Fieldset('आईसोलेशनमा व्यवस्थापन', Formsett(
-                    'isolationlines'), id='first_fieldset'),
                 Fieldset('क्वारेन्टीन व्यवस्थापन', Formsett('quarentinelines'),
-                         id='second_fieldset'),
-                Fieldset('ल्याब व्यवस्थापन', Formsett(
+                         id='first_fieldset'),
+                Fieldset('आईसोलेशनमा व्यवस्थापन', Formsett(
+                    'isolationlines'), id='second_fieldset'),
+                Fieldset('ल्याव परीक्षण', Formsett(
                     'labtestlines'), id='third_fieldset'),
             )
 

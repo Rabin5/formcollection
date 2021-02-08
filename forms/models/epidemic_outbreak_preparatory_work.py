@@ -19,7 +19,7 @@ class EpidemicOutbreakPreparatoryWork(FormBaseModel):
 
 class EpidemicOutbreakPreparatoryWorkLine(FormLineBaseModel):
     epidemic_outbreak_preparatory_work = models.ForeignKey(
-        EpidemicOutbreakPreparatoryWork, on_delete=models.PROTECT, verbose_name='महामारीको प्रकोप तयारी कार्य')
+        EpidemicOutbreakPreparatoryWork, on_delete=models.PROTECT, verbose_name='महामारीको प्रकोप तयारी कार्य', related_name='lines')
     preparation_work_to_do = models.CharField(
         max_length=500, verbose_name='पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य')
     major_activities = models.CharField(

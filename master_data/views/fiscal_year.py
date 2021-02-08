@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from master_data.forms.fiscal_year import FyForm
 from master_data.models import FiscalYear
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class FyCreateView(CreateView):
@@ -20,6 +21,7 @@ class FyListView(ListView):
     model = FiscalYear
     template_name = "master_data/fy_list.html"
     context_object_name = 'fys'
+    paginate_by = PAGINATED_BY
 
 
 class FyUpdateView(UpdateView):

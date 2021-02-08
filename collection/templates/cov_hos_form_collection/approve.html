@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  कोभिड अस्पतालका लागि प्रश्नावलीहरू Approve - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+कोभिड अस्पतालका लागि प्रश्नावलीहरू Approve
+{% endblock page_title %}
+
+{% block page_actions %}
+
+{% endblock page_actions %}
+
+{% block content %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>प्रयोगकर्ता</th>
+      <th>state</th>
+      <th>status</th>
+      <th>कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    {% for val in data %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ val.user }}</td>
+        <td>{{ val.state }}</td>
+        <td>{{ val.status }}</td>
+        {% if val.status not in 'APPROVED, REJECTED' %}
+          <td>
+            <a href="{% url 'cov_hos_forms:review' val.id 'approve' %}">
+              समीक्षा गर्नुहोस्
+            </a>
+          </td>
+        {% endif %}
+        
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}

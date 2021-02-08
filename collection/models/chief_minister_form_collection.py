@@ -5,6 +5,7 @@ from forms.models.risk_allowance import RiskAllowance
 from forms.models.fund_receipt_expense import FundReceiptExpense
 from forms.models.epidemic_outbreak_preparatory_work import EpidemicOutbreakPreparatoryWork
 from forms.models.province_institution_management import ProvinceInstitutionManagement
+from forms.models.action_plan_implementation import ActionPlanImplementation
 
 from master_data.models import FiscalYear, Province, GovernmentBody
 
@@ -18,6 +19,8 @@ class ChiefMinisterOfficeFormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=CHIEF_MINISTER_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
+    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='chief_minister_approver')
+    reject_msg = models.CharField(null=True, blank=True, max_length=250)
     
     risk_allowance = models.OneToOneField(
         RiskAllowance, on_delete=models.CASCADE, null=True)
@@ -27,7 +30,8 @@ class ChiefMinisterOfficeFormCollection(models.Model):
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)
     province_institute_management = models.OneToOneField(
         ProvinceInstitutionManagement, on_delete=models.CASCADE, null=True)
-    
+    action_plan_implementation = models.OneToOneField(
+        ActionPlanImplementation, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):

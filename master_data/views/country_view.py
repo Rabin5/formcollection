@@ -3,6 +3,7 @@ from master_data.forms.country_form import CountryForm
 from master_data.models.address import Country
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class CountryCreateView(CreateView):
@@ -16,6 +17,7 @@ class CountryListView(ListView):
     model = Country
     template_name = "master_data/address/country_list.html"
     context_object_name = 'country_list'
+    paginate_by = PAGINATED_BY
 
 
 class CountryUpdateView(UpdateView):

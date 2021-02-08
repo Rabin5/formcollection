@@ -28,7 +28,15 @@
         <h6 class="heading-01 mb-3">औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद</h6>
 
         {% crispy form %}
-        
+
+        <div class="card-warning mt-3">
+            <div class="align-vertical justify-content-between">
+                <h6>नोटः सामाग्री उपकरण प्राप्त हुन नसकेको भए कारण खुलाउनु होला । </h6>
+                <a href="javascript:void(0)" class="ic-close close-card"></a>
+            </div>
+
+        </div>
+
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

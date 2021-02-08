@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from master_data.forms.hospital import CovidHospitalForm, HospitalForm
 from master_data.models.hospital import CovidHospital, Hospital
+from oagn_covid.settings.base import PAGINATED_BY
 
 class HospitalCreateView(CreateView):
     model = Hospital
@@ -16,6 +17,7 @@ class HospitalListView(ListView):
     model = Hospital
     template_name = "master_data/hospital/hos_list.html"
     context_object_name = 'hospitals'
+    paginate_by = PAGINATED_BY
 
 
 class HospitalUpdateView(UpdateView):
@@ -43,6 +45,7 @@ class CovidHospitalListView(ListView):
     model = CovidHospital
     template_name = "master_data/hospital/cov_hos_list.html"
     context_object_name = 'cov_hospitals'
+    paginate_by = PAGINATED_BY
 
 
 class CovidHospitalUpdateView(UpdateView):

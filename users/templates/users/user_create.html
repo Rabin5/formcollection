@@ -7,7 +7,7 @@
   </a>
 </div>
 <div class="modal-body pt-2">
-  <form id="user_create" method="post" action="{% url 'md-users:create' %}">
+  <form id="user_create" method="post" action="{% url 'users:create' %}">
     {% csrf_token %}
     {{ form|crispy  }}
   </form>

@@ -11,8 +11,8 @@ User Groups
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-users:create_group' %}"
-    href="{% url 'md-users:create_group' %}" data-toggle="modal" data-target="#modalUserGroupCreate">
+  <a class="btn btn-success btn-with-icon" data-remote="{% url 'users:create_group' %}"
+    href="{% url 'users:create_group' %}" data-toggle="modal" data-target="#modalUserGroupCreate">
     <i class="ic-add"></i>
     User Group थप्नुहोस्
   </a>
@@ -33,13 +33,12 @@ User Groups
         <td>{{ forloop.counter }}</td>
         <td>{{ group.name }}</td>
         <td class="action">
-          <a data-remote="{% url 'md-users:update_group' group.pk %}"
-            href="{% url 'md-users:update_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupUpdate">
-            <i class="ic-edit mr-2"></i>
-          </a>
           
-          <a data-remote="{% url 'md-users:delete_group' group.pk %}"
-            href="{% url 'md-users:delete_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupDelete">
+          <a href="{% url 'users:group_detail' group.pk %}">
+          <i class="ic-visible"></i>
+          
+          <a data-remote="{% url 'users:delete_group' group.pk %}"
+            href="{% url 'users:delete_group' group.pk %}" data-toggle="modal" data-target="#modalUserGroupDelete">
             <i class="ic-delete"></i>
           </a> 
         </td>

@@ -6,6 +6,7 @@ from django.http.response import HttpResponseRedirect
 from master_data.forms.covidhospital_management_desc_form import CovidHospitalManagementChecklistDescriptionForm
 from master_data.models.government import CovidHospitalManagementChecklistDescription
 from forms.models.cov_hos_management_checklist import CovidHospitalManagementChecklistLine
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class CovidHospitalManagementChecklistDescriptionCreateView(CreateView):
@@ -27,6 +28,7 @@ class CovidHospitalManagementChecklistDescriptionListView(ListView):
     model = CovidHospitalManagementChecklistDescription
     template_name = "master_data/cov_hos_managament/cov_hos_managament_list.html"
     context_object_name = 'cov_hos_managament_typies'
+    paginate_by = PAGINATED_BY
 
 
 class CovidHospitalManagementChecklistDescriptionUpdateView(UpdateView):

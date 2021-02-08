@@ -33,7 +33,9 @@ class ProvinceFormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=PROVINCE_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
-    
+    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='province_approver')
+    reject_msg = models.CharField(null=True, blank=True, max_length=250)
+
     medical_expense = models.OneToOneField(
         MedicalExpense, on_delete=models.CASCADE, null=True)
     risk_allowance = models.OneToOneField(

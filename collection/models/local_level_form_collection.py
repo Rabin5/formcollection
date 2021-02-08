@@ -37,6 +37,8 @@ class LocalLevelFormCollection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     state = models.IntegerField(choices=LOCAL_LEVEL_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
+    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='local_level_approver')
+    reject_msg = models.CharField(null=True, blank=True, max_length=250)
     
     epidemic_outbreak_prep = models.OneToOneField(
         EpidemicOutbreakPreparatoryWork, on_delete=models.CASCADE, null=True)

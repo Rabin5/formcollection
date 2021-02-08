@@ -19,7 +19,7 @@ class CaseInvestigationTracing(FormBaseModel):
 
 class CaseInvestigationTracingLine(FormLineBaseModel):
     case_investigation_tracing = models.ForeignKey(
-        CaseInvestigationTracing, on_delete=models.PROTECT, verbose_name='केस अनुसन्धान ट्रेसिंग')
+        CaseInvestigationTracing, on_delete=models.PROTECT, verbose_name='केस अनुसन्धान ट्रेसिंग', related_name='lines')
     description = models.TextField(verbose_name='बिबरण')
     num_team_members = models.PositiveIntegerField(
         verbose_name='टिम गठन संख्या ')

@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from master_data.forms.committee_form import CommitteeForm
 from master_data.models.government import Committee
+from oagn_covid.settings.base import PAGINATED_BY
 
 
 class CommitteeCreateView(CreateView):
@@ -17,6 +18,7 @@ class CommitteeListView(ListView):
     model = Committee
     template_name = "master_data/committee/committee_list.html"
     context_object_name = 'committee_typies'
+    paginate_by = PAGINATED_BY
 
 
 class CommitteeUpdateView(UpdateView):

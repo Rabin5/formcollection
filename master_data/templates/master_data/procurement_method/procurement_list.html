@@ -22,7 +22,7 @@ Procurement - Nepal Audit Management System
 <table class="table table-striped table-borderless">
   <thead>
     <tr>
-      <th>#.</th>
+      <th>क्रम सङ्ख्या</th>
       <th>खरीद विधि थप्नुहोस्</th>
       <th class="text-right">कार्य</th>
     </tr>
@@ -48,6 +48,10 @@ Procurement - Nepal Audit Management System
     {% endfor %}
   </tbody>
 </table>
+
+  {% block pagination %}
+    {% include 'master_data/partials/pagination.html' %}
+  {% endblock pagination %}
 
 {% endblock content %}
 

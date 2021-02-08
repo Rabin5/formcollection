@@ -2,12 +2,16 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
 {% block title %}
-Address - Nepal Audit Management System
+isolation center - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-Address
+isolation center
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -22,7 +26,7 @@ Address
 <table class="table table-striped table-borderless">
     <thead>
         <tr>
-            <th>#.</th>
+            <th>क्रम सङ्ख्या</th>
             <th>Isolation Center</th>
             <th class="text-right">कार्य</th>
         </tr>
@@ -48,6 +52,10 @@ Address
         {% endfor %}
     </tbody>
 </table>
+
+    {% block pagination %}
+        {% include 'master_data/partials/pagination.html' %}
+    {% endblock pagination %}
 
 {% endblock content %}
 
