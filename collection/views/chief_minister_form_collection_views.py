@@ -158,7 +158,8 @@ class ChiefMinisterOfficeFormCollectionUpdateView(UpdateView):
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('chief_minister_forms:chief_minister_list'),
         }
 
         return metadata
