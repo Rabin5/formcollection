@@ -155,10 +155,12 @@
           <li {% if 'province_forms:province' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'province_forms:province_list'%}" class="pl-4">प्रदेश</a>
           </li>
-          <li {% if 'internal_affairs_forms:internal_affairs' in request.resolver_match.view_name %}class="active" {% endif %}>
+          <li {% if 'internal_affairs_forms:internal_affairs' in request.resolver_match.view_name %}class="active" 
+          {% endif %}>
             <a href="{% url 'internal_affairs_forms:internal_affairs_list'%}" class="pl-4">आन्तरिक मामिला</a>
           </li>
-          <li {% if 'chief_minister_forms:chief_minister' in request.resolver_match.view_name %}class="active" {% endif %}>
+          <li {% if 'chief_minister_forms:chief_minister' in request.resolver_match.view_name %}class="active"
+          {% endif %}>
             <a href="{% url 'chief_minister_forms:chief_minister_list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
           </li>
           <li {% if 'local_level_forms:local_level' in request.resolver_match.view_name %}class="active" {% endif %}>

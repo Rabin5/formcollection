@@ -220,6 +220,13 @@
                             width: 'resolve'
                         })
                     }
+                    if ($(this).is('input') && $(this).hasClass('nepalidateinput')) {
+                        $(this).calendarsPicker({
+                            calendar: $.calendars.instance('nepali'),
+                            firstDay: 0,
+                            dateFormat: 'dd/mm/yyyy'
+                        });
+                    }
                 });
                 totalForms.val(formCount + 1);
                 // Check if we're above the minimum allowed number of forms -> show all delete link(s)

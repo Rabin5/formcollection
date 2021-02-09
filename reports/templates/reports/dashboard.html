@@ -1,5 +1,76 @@
 {% extends 'core/base.html' %}
 
+{% block page_title %}
+Dashboard
+{% endblock page_title %}
 {% block content %}
-    <h3>Beautiful Dashboard</h3>
+
+<div class="row">
+  <div class="col-sm-6 col-lg-3">
+    <div class="card card-body card__stats">
+      <span class="bar" style="background-color: #FA8418;"></span>
+      <h6 class="des mb-4 font-weight-semibold">Count</h6>
+      <div class="align-vertical justify-content-between">
+        <h6 class="count" style="color: #FA8418;">
+          1000
+        </h6>
+        <i class="ic-question" style="color: #FA8418;"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3 mt-3 mt-sm-0">
+    <div class="card card-body card__stats">
+      <span class="bar" style="background-color: #206DBF;"></span>
+      <h6 class="des mb-4">Count</h6>
+      <div class="align-vertical justify-content-between">
+        <h6 class="count" style="color: #206DBF;">
+          1000
+        </h6>
+        <i class="ic-question" style="color: #206DBF;"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3 mt-3 mt-lg-0">
+    <div class="card card-body card__stats">
+      <span class="bar" style="background-color: #206DBF;"></span>
+      <h6 class="des mb-4">Count</h6>
+      <div class="align-vertical justify-content-between">
+        <h6 class="count" style="color:#206DBF">
+          1000
+        </h6>
+        <i class="ic-question" style="color:#206DBF"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3 mt-3 mt-lg-0">
+    <div class="card card-body card__stats">
+      <span class="bar" style="background-color: #FA8418;"></span>
+      <h6 class="des mb-4">Count</h6>
+      <div class="align-vertical justify-content-between">
+        <h6 class="count" style="color: #FA8418 ;">
+          1000
+        </h6>
+        <i class="ic-question" style="color: #FA8418"></i>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row mt-5">
+  <div class="col-lg-6">
+    <div class="card card-body h-100">
+      <h6 class="font-semibold">Audit Extent Summary</h6>
+      <p class="font-semibold text-secondary mt-1 mb-4">2077/78</p>
+      <canvas id="chart1" height="300"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-6 mt-4 mt-lg-0">
+    <div class="card card-body h-100">
+      <h6 class="font-semibold">Audit Extent Summary</h6>
+      <p class="font-semibold text-secondary mt-1 mb-4">2077/78</p>
+      <canvas id="chart2" height="300"></canvas>
+    </div>
+  </div>
+</div>
 {% endblock content %}

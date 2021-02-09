@@ -158,7 +158,8 @@ class InternalAffairFormCollectionUpdateView(UpdateView):
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('internal_affairs_forms:internal_affairs_list'),
         }
 
         return metadata
