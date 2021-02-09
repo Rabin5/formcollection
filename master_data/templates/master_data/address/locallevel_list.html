@@ -105,16 +105,13 @@ LocalLevels
     });
 
     $("#modalLocalCreate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
         e.preventDefault();
-        saveData($(this))
+        saveData($(this),"#modalLocalCreate")
     });
 
     $("#modalLocalUpdate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
-        console.log($prod_modal)
         e.preventDefault();
-        saveData($(this))
+        saveData($(this),"#modalLocalUpdate")
     });
 </script>
 {% endblock extrascripts %}

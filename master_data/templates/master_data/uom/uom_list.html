@@ -101,16 +101,13 @@
   });
 
   $( "#modalUomCreate").on('submit', 'form', function(e) {
-    {% comment %} var $prod_modal = $(this); {% endcomment %}
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalUomCreate") 
   });
 
   $( "#modalUomUpdate").on('submit', 'form', function(e) {
-    {% comment %} var $prod_modal = $(this); {% endcomment %}
-    console.log($prod_modal)
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalUomUpdate") 
   });
 </script>
 {% endblock extrascripts %}
