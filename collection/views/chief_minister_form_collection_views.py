@@ -19,7 +19,7 @@ from django.apps import apps
 from collection.forms.chief_minister_forms import ChiefMinisterOfficeFormCollectionForm
 from collection.models import ChiefMinisterOfficeFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import CHIEF_MINISTER_STATE, num_to_devanagari
+from collection.utils import CHIEF_MINISTER_STATE, num_to_devanagari, find_empty_fields
 from master_data.models import FiscalYear
 from oagn_covid.settings import PAGINATED_BY
 
@@ -268,6 +268,7 @@ class ChiefMinisterOfficeFormCollectionReviewView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'chief_minister_forms', 'chief_minister_update', ROUTE_LINK, CHIEF_MINISTER_STATE)
         return context
 
 

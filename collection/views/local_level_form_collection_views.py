@@ -19,7 +19,7 @@ from django.apps import apps
 from collection.forms.local_level_forms import LocalLevelFormCollectionForm
 from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari
+from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari, find_empty_fields
 
 from master_data.models import FiscalYear, District, LocalLevel
 from oagn_covid.settings import PAGINATED_BY
@@ -273,6 +273,7 @@ class LocalLevelFormCollectionReviewView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'local_level_forms', 'local_level_update', ROUTE_LINK, LOCAL_LEVEL_STATE)
         return context
 
 def local_level_submit_form(request, form_pk):
