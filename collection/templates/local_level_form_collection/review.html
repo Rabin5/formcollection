@@ -16,7 +16,21 @@
 			<div class="col-lg-9 text-center mx-auto">
 				<h6 class="font-weight-normal">कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा सम्बन्धित स्थानीय तहले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h6>
 			</div>
-		</div>
+    </div>
+    
+    {% if empty_fields %}
+      <div id="accordion" class="accordion mt-5 mx-n3 alert alert-danger" role="alert">
+        निम्न फारमहरु भरिएका छैनन्
+        {% for val in empty_fields %}
+          <p>
+            {{ val.order_no }} ) {{ val.title }}
+            {% if action == 'submit' %}
+              <a class="text-info" href={{ val.url }}><i class="ic-edit"></i></a>
+            {% endif %}
+          </p>
+        {% endfor %}
+      </div>
+    {% endif %}
 
 		<div id="accordion" class="accordion mt-5 mx-n3">
 			<div class="accordion-item">

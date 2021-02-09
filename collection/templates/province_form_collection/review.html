@@ -19,6 +19,20 @@
         </div>
       </div>
 
+      {% if empty_fields %}
+        <div id="accordion" class="accordion mt-5 mx-n3 alert alert-danger" role="alert">
+          निम्न फारमहरु भरिएका छैनन्
+          {% for val in empty_fields %}
+            <p>
+              {{ val.order_no }} ) {{ val.title }}
+              {% if action == 'submit' %}
+                <a class="text-info" href={{ val.url }}><i class="ic-edit"></i></a>
+              {% endif %}
+            </p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <div id="accordion" class="accordion mt-5 mx-n3">
         <div class="accordion-item">
           <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
