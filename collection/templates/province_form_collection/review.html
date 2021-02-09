@@ -8,6 +8,9 @@
 <div class="content">
     <div class="section-title">
       <h6 class="text-dark font-weight-bold">Review</h6>
+      {% if object.reject_msg %}
+        <button class="btn btn-warning" data-toggle="modal" data-target="#reject_msg">View Reject Message</button>
+      {% endif %}
 
     </div>
     <div class="card card-body">
@@ -1200,6 +1203,29 @@
 
 {% block modal %}
 
+{% if object.reject_msg %}
+  <div class="modal fade" id="reject_msg" tabindex="-1" role="dialog" aria-labelledby="reject_msg" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+          <a class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+        <div class="modal-body pt-2">
+        <textarea class="form-control" rows="3" readonly>{{object.reject_msg}}</textarea>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
 <div class="modal fade" id="rejectMessageModal" tabindex="-1" role="dialog" aria-labelledby="rejectMessageModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -1265,6 +1291,13 @@
             }
             })
         }
+
+        {% if object.reject_msg %}
+          $(window).on('load', function() {
+            $('#reject_msg').modal('show');
+          });
+        {% endif %}
+
 
     </script>
 {% endblock extrascripts %}

@@ -210,6 +210,9 @@ class CovHosFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
         """
         self.object.status = 'submitted' if self.next_state == 'submit' else 'incomplete'
         self.object.state = self._get_state()
+        if self.object.reject_msg:
+            self.object.reject_msg = ''
+            self.object.approver = None
         self.object.save()
 
     def _response(self, form_response):
