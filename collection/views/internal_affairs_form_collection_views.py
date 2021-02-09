@@ -208,6 +208,9 @@ class InternalAffairFormCollectionUpdateView(PermissionRequiredMixin, UpdateView
         """
         self.object.status = 'submitted' if self.next_state == 'submit' else 'incomplete'
         self.object.state = self._get_state()
+        if self.object.reject_msg:
+            self.object.reject_msg = ''
+            self.object.approver = None
         self.object.save()
 
     def _response(self, form_response):
@@ -284,6 +287,7 @@ def internal_affair_submit_form(request, form_pk):
         form_obj.reject_msg = request.POST.get('reject_msg')
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
+
 
 class ApproveView(PermissionRequiredMixin, View):
     template_name = 'internal_affairs_form_collection/approve.html'

@@ -11,7 +11,7 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" href='{% url "local_level_forms:create" %}'>
+  <a class="btn btn-success btn-with-icon" href='{% url "local_level_forms:local_level_create" %}'>
     <i class="ic-add"></i>
     प्रश्नावलीहरू भर्नुहोस्
   </a>
@@ -33,13 +33,13 @@
         <td>{{ forloop.counter }}</td>
         <td>{{ form_collection }}</td>
         <td>{{ form_collection.get_status_display }}</td>
-        {% if form_collection.get_status_display == 'SUBMITTED' %}
+        {% if form_collection.get_status_display in 'SUBMITTED, APPROVED' %}
           <td>
             <a href="{% url 'local_level_forms:review' form_collection.pk 'submitted' %}">
-              Review
+              <i class="ic-visible"></i>
             </a>
           </td>
-        {% elif form_collection.get_status_display not in 'APPROVED, REJECTED' %}
+        {% elif form_collection.get_status_display not in 'REJECTED' %}
           <td class="action">
             <a href="{% url 'local_level_forms:local_level_update' form_collection.pk %}">
               <i class="ic-edit mr-2"></i>
