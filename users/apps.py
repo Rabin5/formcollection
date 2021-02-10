@@ -3,7 +3,6 @@ import logging
 from django.apps import AppConfig
 from django.db import connection
 
-
 logger = logging.getLogger(__name__)
 
 class UsersConfig(AppConfig):
@@ -14,6 +13,7 @@ class UsersConfig(AppConfig):
         if 'django_content_type' in  check:
             from django.contrib.contenttypes.models import ContentType
             from .models import GlobalPermission
+            from django.contrib.auth.models import Group
 
             content_type, created = ContentType.objects.get_or_create(
                     model="global permission", app_label="users",
@@ -75,12 +75,32 @@ class UsersConfig(AppConfig):
                     'content_type': content_type,
                     'codename': 'perm_master_data',
                 },
+                {
+                    'name': 'User Management Permission',
+                    'content_type': content_type,
+                    'codename': 'perm_user_management',
+                },
             ]
-            
+    
             for param in params:
+                if 'Approve' in param['name']:
+                    grp_name = param['name'].replace('Permission', '')
+                else:
+                    grp_name = param['name'].replace('Permission', 'Operator')
+                new_group, created = Group.objects.get_or_create(name=grp_name)
+                admin_grp, is_created = Group.objects.get_or_create(name='ADMIN')
+                if not created:
+                    new_group.save()
+                if not is_created:
+                    admin_grp.save()
                 try:
-                    gp = GlobalPermission.objects.get(codename=param['codename'])
+                    perm = GlobalPermission.objects.get(codename=param['codename'])
+                    new_group.permissions.add(perm)
+                    admin_grp.permissions.add(perm)
                 except:
-                    new_gp = GlobalPermission.objects.create(**param)
-                    logger.info(f"Creating permission: { new_gp }")
-                    new_gp.save()
+                    new_perm = GlobalPermission.objects.create(**param)
+                    logger.info(f"Creating permission: { new_perm }")
+                    new_perm.save()
+                    new_group.permissions.add(new_perm)
+                    admin_grp.permissions.add(new_perm)
+            

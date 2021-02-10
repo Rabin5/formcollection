@@ -16,3 +16,15 @@
   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
   <button id="btn_user_create" form="user_create" type="submit" class="btn btn-success">Save</button>
 </div>
+
+{% block extrascripts %}
+<script>
+
+  $("#id_groups").select2({
+    tags: true,
+    width: '390',
+    tokenSeparators: [',']
+  })
+
+</script>
+{% endblock extrascripts %}

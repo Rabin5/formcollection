@@ -9,7 +9,7 @@ class UserCreateForm(forms.ModelForm):
     
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'mobile_number', 'email', 'password',)
+        fields = ('first_name', 'last_name', 'username', 'mobile_number', 'email', 'password', "groups")
         widgets = {
             'password': forms.PasswordInput(),
         }

@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -11,8 +13,6 @@ from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
 from django.contrib.auth.models import Group
-
-from braces.views import GroupRequiredMixin
 
 from django.apps import apps
 
@@ -28,12 +28,13 @@ DICT_CHIEF_MINISTER_STATE = {key: value for key, value in CHIEF_MINISTER_STATE}
 LIST_CHIEF_MINISTER_STATE = [value for key, value in CHIEF_MINISTER_STATE]
 
 
-class ChiefMinisterOfficeFormCollectionCreateView(View):
+class ChiefMinisterOfficeFormCollectionCreateView(PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
     form_class = ChiefMinisterOfficeFormCollectionForm
     template_name = 'chief_minister_form_collection/create.html'
+    permission_required = 'users.perm_chief_minister_form'
 
     def init_forms(self):
         """
@@ -85,7 +86,7 @@ class ChiefMinisterOfficeFormCollectionCreateView(View):
         return HttpResponseRedirect(form_url)
 
 
-class ChiefMinisterOfficeFormCollectionUpdateView(UpdateView):
+class ChiefMinisterOfficeFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -109,6 +110,7 @@ class ChiefMinisterOfficeFormCollectionUpdateView(UpdateView):
     current_form_instance = None
     next_state = 'next'
     next_form = None
+    permission_required = 'users.perm_chief_minister_form'
 
     def _get_cur_form_instance(self, pk):
         """
@@ -206,6 +208,9 @@ class ChiefMinisterOfficeFormCollectionUpdateView(UpdateView):
         """
         self.object.status = 'submitted' if self.next_state == 'submit' else 'incomplete'
         self.object.state = self._get_state()
+        if self.object.reject_msg:
+            self.object.reject_msg = ''
+            self.object.approver = None
         self.object.save()
 
     def _response(self, form_response):
@@ -246,24 +251,27 @@ class ChiefMinisterOfficeFormCollectionUpdateView(UpdateView):
         return self._response(form_response)
 
 
-class ChiefMinisterOfficeFormCollectionListView(ListView):
+class ChiefMinisterOfficeFormCollectionListView(PermissionRequiredMixin, ListView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/list.html"
+    permission_required = 'users.perm_chief_minister_form'
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
 
 
-class ChiefMinisterOfficeFormCollectionDeleteView(DeleteView):
+class ChiefMinisterOfficeFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/delete.html"
+    permission_required = 'users.perm_chief_minister_form'
     success_url = reverse_lazy('chief_minister_forms:chief_minister_list')
     context_object_name = 'form_collections'
 
 
-class ChiefMinisterOfficeFormCollectionReviewView(DetailView):
+class ChiefMinisterOfficeFormCollectionReviewView(PermissionRequiredMixin, DetailView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/review.html"
+    permission_required = 'users.perm_chief_minister_form'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -271,7 +279,7 @@ class ChiefMinisterOfficeFormCollectionReviewView(DetailView):
         context['empty_fields'] = find_empty_fields(self.object, 'chief_minister_forms', 'chief_minister_update', ROUTE_LINK, CHIEF_MINISTER_STATE)
         return context
 
-
+@permission_required('users.perm_chief_minister_form')
 def chief_minister_submit_form(request, form_pk):
     form_obj = ChiefMinisterOfficeFormCollection.objects.get(id=form_pk)
     status = request.POST.get('status')
@@ -282,14 +290,13 @@ def chief_minister_submit_form(request, form_pk):
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
 
-class ApproveView(GroupRequiredMixin, View):
+class ApproveView(PermissionRequiredMixin, View):
     template_name = 'chief_minister_form_collection/approve.html'
-    group_required = ['ALL PERMISSION', 'APPROVAL']
+    permission_required = 'users.perm_chief_minister_form_approve'
 
     def get(self, request, *args, **kwargs):
         context = []
         data = list(ChiefMinisterOfficeFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
-        print(data)
         for index, val in enumerate(data):
             context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
         return render(request, self.template_name, context={'data': context})

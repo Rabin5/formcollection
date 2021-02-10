@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -11,8 +13,6 @@ from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
 from django.contrib.auth.models import Group
-
-from braces.views import GroupRequiredMixin
 
 from django.apps import apps
 
@@ -28,12 +28,13 @@ DICT_PROVINCE_STATE = {key: value for key, value in PROVINCE_STATE}
 LIST_PROVINCE_STATE = [value for key, value in PROVINCE_STATE]
 
 
-class ProvinceFormCollectionCreateView(View):
+class ProvinceFormCollectionCreateView(PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
     form_class = ProvinceFormCollectionForm
     template_name = 'province_form_collection/create.html'
+    permission_required = 'users.perm_province_form'
 
     def init_forms(self):
         """
@@ -84,7 +85,7 @@ class ProvinceFormCollectionCreateView(View):
         return HttpResponseRedirect(form_url)
 
 
-class ProvinceFormCollectionUpdateView(UpdateView):
+class ProvinceFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -108,6 +109,7 @@ class ProvinceFormCollectionUpdateView(UpdateView):
     current_form_instance = None
     next_state = 'next'
     next_form = None
+    permission_required = 'users.perm_province_form'
 
     def _get_cur_form_instance(self, pk):
         """
@@ -205,6 +207,9 @@ class ProvinceFormCollectionUpdateView(UpdateView):
         """
         self.object.status = 'submitted' if self.next_state == 'submit' else 'incomplete'
         self.object.state = self._get_state()
+        if self.object.reject_msg:
+            self.object.reject_msg = ''
+            self.object.approver = None
         self.object.save()
 
     def _response(self, form_response):
@@ -245,23 +250,26 @@ class ProvinceFormCollectionUpdateView(UpdateView):
         return self._response(form_response)
 
 
-class ProvinceFormCollectionListView(ListView):
+class ProvinceFormCollectionListView(PermissionRequiredMixin, ListView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/list.html"
+    permission_required = 'users.perm_province_form'
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
 
-class ProvinceFormCollectionDeleteView(DeleteView):
+class ProvinceFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/delete.html"
+    permission_required = 'users.perm_province_form'
     success_url = reverse_lazy('province_forms:province_list')
     context_object_name = 'form_collections'
 
 
-class ProvinceFormCollectionReviewView(DetailView):
+class ProvinceFormCollectionReviewView(PermissionRequiredMixin, DetailView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/review.html"
+    permission_required = 'users.perm_province_form'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -269,7 +277,7 @@ class ProvinceFormCollectionReviewView(DetailView):
         context['empty_fields'] = find_empty_fields(self.object, 'province_forms', 'province_update', ROUTE_LINK, PROVINCE_STATE)
         return context
 
-
+@permission_required('users.perm_province_form')
 def province_submit_form(request, form_pk):
     form_obj = ProvinceFormCollection.objects.get(id=form_pk)
     status = request.POST.get('status')
@@ -280,9 +288,9 @@ def province_submit_form(request, form_pk):
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
 
-class ApproveView(GroupRequiredMixin, View):
+class ApproveView(PermissionRequiredMixin, View):
     template_name = 'province_form_collection/approve.html'
-    group_required = ['ALL PERMISSION', 'APPROVAL']
+    permission_required = 'users.perm_province_form_approve'
 
     def get(self, request, *args, **kwargs):
         context = []
