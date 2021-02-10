@@ -288,6 +288,24 @@ if (cardClose) {
 //             },
 // });
 
+
+var viewPassword = document.querySelector(".viewPassword");
+
+if (viewPassword) {
+  viewPassword.addEventListener("click", function () {
+    var input = viewPassword.parentNode.querySelector("input");
+
+    if (input.type == "password") {
+      input.type = "text";
+      viewPassword.classList.remove("ic-visible");
+      viewPassword.classList.add("ic-hidden");
+    } else {
+      input.type = "password";
+      viewPassword.classList.add("ic-visible");
+    }
+  });
+}
+
 /***/ }),
 
 /***/ "./src/scss/main.scss":
