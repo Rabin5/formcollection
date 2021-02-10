@@ -337,7 +337,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --blue: (100: #2044a8, 200: #206DBF);
+  --blue: (100: #2044a8, 200: #206DBF, 300: #2460b9);
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -1654,7 +1654,7 @@ pre {
     outline: 0;
     box-shadow: none; }
   .form-control::placeholder {
-    color: #ffc35b;
+    color: #686868;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #D0D0D0;
@@ -3745,14 +3745,14 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #053559;
+  color: #454545;
   background-color: #ffffff;
-  border: 1px solid #B9B9B9; }
+  border: 1px solid #D0D0D0; }
   .page-link:hover {
     z-index: 2;
     color: #010a11;
     text-decoration: none;
-    background-color: #D0D0D0;
+    background-color: #E8E8E8;
     border-color: #B9B9B9; }
   .page-link:focus {
     z-index: 3;
@@ -3771,8 +3771,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #ffffff;
-  background-color: #2b91fe;
-  border-color: #2b91fe; }
+  background-color: #206DBF;
+  border-color: #206DBF; }
 
 .page-item.disabled .page-link {
   color: #686868;
@@ -3806,6 +3806,114 @@ input[type="button"].btn-block {
 .pagination-sm .page-item:last-child .page-link {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem; }
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.4em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+  @media (prefers-reduced-motion: reduce) {
+    .badge {
+      transition: none; } }
+  a.badge:hover, a.badge:focus {
+    text-decoration: none; }
+  .badge:empty {
+    display: none; }
+
+.btn .badge {
+  position: relative;
+  top: -1px; }
+
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem; }
+
+.badge-primary {
+  color: #ffffff;
+  background-color: #053559; }
+  a.badge-primary:hover, a.badge-primary:focus {
+    color: #ffffff;
+    background-color: #021829; }
+  a.badge-primary:focus, a.badge-primary.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(5, 53, 89, 0.5); }
+
+.badge-secondary {
+  color: #ffffff;
+  background-color: #686868; }
+  a.badge-secondary:hover, a.badge-secondary:focus {
+    color: #ffffff;
+    background-color: #4f4f4f; }
+  a.badge-secondary:focus, a.badge-secondary.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(104, 104, 104, 0.5); }
+
+.badge-success {
+  color: #ffffff;
+  background-color: #42bc38; }
+  a.badge-success:hover, a.badge-success:focus {
+    color: #ffffff;
+    background-color: #34952c; }
+  a.badge-success:focus, a.badge-success.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(66, 188, 56, 0.5); }
+
+.badge-info {
+  color: #ffffff;
+  background-color: #2b91fe; }
+  a.badge-info:hover, a.badge-info:focus {
+    color: #ffffff;
+    background-color: #0177f5; }
+  a.badge-info:focus, a.badge-info.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(43, 145, 254, 0.5); }
+
+.badge-warning {
+  color: #0E0E0E;
+  background-color: #E5D4B3; }
+  a.badge-warning:hover, a.badge-warning:focus {
+    color: #0E0E0E;
+    background-color: #d8bf8d; }
+  a.badge-warning:focus, a.badge-warning.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(229, 212, 179, 0.5); }
+
+.badge-danger {
+  color: #ffffff;
+  background-color: #eb0026; }
+  a.badge-danger:hover, a.badge-danger:focus {
+    color: #ffffff;
+    background-color: #b8001e; }
+  a.badge-danger:focus, a.badge-danger.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(235, 0, 38, 0.5); }
+
+.badge-light {
+  color: #0E0E0E;
+  background-color: #E8E8E8; }
+  a.badge-light:hover, a.badge-light:focus {
+    color: #0E0E0E;
+    background-color: #cfcfcf; }
+  a.badge-light:focus, a.badge-light.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(232, 232, 232, 0.5); }
+
+.badge-dark {
+  color: #ffffff;
+  background-color: #1A1A1A; }
+  a.badge-dark:hover, a.badge-dark:focus {
+    color: #ffffff;
+    background-color: #010101; }
+  a.badge-dark:focus, a.badge-dark.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(26, 26, 26, 0.5); }
 
 @keyframes progress-bar-stripes {
   from {
@@ -8230,6 +8338,11 @@ a.text-dark:hover, a.text-dark:focus {
     .list-summary h6 {
       font-size: 0.875rem; }
 
+.pagination {
+  justify-content: center; }
+  .pagination li a {
+    font-size: 0.875rem; }
+
 .breadcrumb {
   font-size: 0.875rem; }
   .breadcrumb-item a {
@@ -8538,4 +8651,36 @@ a.text-dark:hover, a.text-dark:focus {
   justify-content: space-between;
   align-items: center;
   margin-bottom: .5rem; }
+
+.login-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(180deg, #f1f6ff 50%, #2460b9 0%, #2460b9 100%); }
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; }
+
+.login-heading {
+  color: #206DBF; }
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+  padding: 1rem; }
+  .login-card img {
+    height: 80px;
+    margin: auto;
+    display: block; }
+  .login-card .viewPassword {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+    color: #808080;
+    cursor: pointer; }
 
