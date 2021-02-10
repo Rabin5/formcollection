@@ -20,7 +20,7 @@ from django.apps import apps
 from collection.forms.internal_affairs_forms import InternalAffairsFormCollectionForm
 from collection.models import InternalAffairFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import INTERNAL_AFFAIRS_STATE, num_to_devanagari
+from collection.utils import INTERNAL_AFFAIRS_STATE, num_to_devanagari, find_empty_fields
 from master_data.models import FiscalYear
 from oagn_covid.settings import PAGINATED_BY
 
@@ -161,7 +161,8 @@ class InternalAffairFormCollectionUpdateView(PermissionRequiredMixin, UpdateView
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('internal_affairs_forms:internal_affairs_list'),
         }
 
         return metadata
@@ -275,6 +276,7 @@ class InternalAffairFormCollectionReviewView(PermissionRequiredMixin, DetailView
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'internal_affairs_forms', 'internal_affairs_update', ROUTE_LINK, INTERNAL_AFFAIRS_STATE)
         return context
 
 @permission_required('users.perm_internal_affairs_form')

@@ -19,7 +19,7 @@ from forms import models
 from collection.forms.covid_hospital_forms import CovHosFormCollectionForm
 from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import CH_STATE, num_to_devanagari
+from collection.utils import CH_STATE, num_to_devanagari, find_empty_fields
 from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 
 from users.models.user import User
@@ -61,7 +61,7 @@ class CovHosFormCollectionCreateView(PermissionRequiredMixin, View):
         CovHosFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
-    
+
     def get(self, request, *args, **kwargs):
         """
         renders forms initial page to fill initial data like province, district
@@ -163,7 +163,8 @@ class CovHosFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('cov_hos_forms:cov_hos_list'),
         }
 
         return metadata
@@ -276,6 +277,7 @@ class CovHosFormCollectionReview(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'cov_hos_forms', 'cov_hos_update', ROUTE_LINK, CH_STATE)
         return context
     
 @permission_required('users.perm_cov_hos_form')

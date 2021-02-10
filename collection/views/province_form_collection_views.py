@@ -19,7 +19,7 @@ from django.apps import apps
 from collection.forms.province_forms import ProvinceFormCollectionForm
 from collection.models import ProvinceFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import PROVINCE_STATE, num_to_devanagari
+from collection.utils import PROVINCE_STATE, num_to_devanagari, find_empty_fields
 from master_data.models import FiscalYear
 from oagn_covid.settings import PAGINATED_BY
 
@@ -159,7 +159,8 @@ class ProvinceFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('province_forms:province_list'),
         }
 
         return metadata
@@ -273,6 +274,7 @@ class ProvinceFormCollectionReviewView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'province_forms', 'province_update', ROUTE_LINK, PROVINCE_STATE)
         return context
 
 @permission_required('users.perm_province_form')

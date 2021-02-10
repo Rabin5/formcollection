@@ -102,12 +102,12 @@
 
   $( "#modalOffBearerCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalOffBearerCreate") 
   });
 
   $( "#modalOffBearerUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalOffBearerUpdate") 
   });
 </script>
 {% endblock extrascripts %}

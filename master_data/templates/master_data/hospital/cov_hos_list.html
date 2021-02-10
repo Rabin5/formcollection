@@ -106,12 +106,12 @@
 
   $( "#modalCovHosCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalCovHosCreate") 
   });
 
   $( "#modalCovHosUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalCovHosUpdate") 
   });
 </script>
 {% endblock extrascripts %}

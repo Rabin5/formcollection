@@ -104,12 +104,12 @@ Action Plan
 
   $( "#modalActionPlanCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalActionPlanCreate") 
   });
 
   $( "#modalActionPlanUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalActionPlanUpdate") 
   });
 </script>
 {% endblock extrascripts %}
