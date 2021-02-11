@@ -10,7 +10,7 @@ class Country(models.Model):
 
 
 class Province(models.Model):
-    name = models.CharField(max_length=300,verbose_name='प्रदेश')
+    name = models.CharField(max_length=300,verbose_name='प्रदेश',unique=True)
 
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Province(models.Model):
 
 
 class District(models.Model):
-    name = models.CharField(max_length=300,verbose_name='जिल्ला')
+    name = models.CharField(max_length=300,verbose_name='जिल्ला',unique=True)
     province = models.ForeignKey(
         Province, related_name='province_to_district', on_delete=models.CASCADE, null=True, blank=True,verbose_name='प्रदेश')
 
@@ -30,7 +30,7 @@ class District(models.Model):
 
 
 class LocalLevel(models.Model):
-    name = models.CharField(max_length=300,verbose_name='स्थानीय स्तर')
+    name = models.CharField(max_length=300,verbose_name='स्थानीय स्तर',unique=True)
     district = models.ForeignKey(
         District, related_name='local_to_district', on_delete=models.CASCADE, null=True, blank=True,verbose_name='जिल्ला')
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.db import transaction
 from django.db.models import query, F
 from django.forms import inlineformset_factory
@@ -13,15 +14,12 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from oagn_covid.settings import PAGINATED_BY
 
-
-from braces.views import GroupRequiredMixin
-
 from forms import models
 
 from collection.forms.covid_hospital_forms import CovHosFormCollectionForm
 from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import CH_STATE, num_to_devanagari
+from collection.utils import CH_STATE, num_to_devanagari, find_empty_fields
 from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 
 from users.models.user import User
@@ -32,12 +30,13 @@ DICT_CH_STATE = {key: value for key, value in CH_STATE}
 LIST_CH_STATE = [value for key, value in CH_STATE]
 
 
-class CovHosFormCollectionCreateView(View):
+class CovHosFormCollectionCreateView(PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
     template_name = 'cov_hos_form_collection/create.html'
     form_class = CovHosFormCollectionForm
+    permission_required = 'users.perm_cov_hos_form'
 
     def init_forms(self):
         """
@@ -62,7 +61,7 @@ class CovHosFormCollectionCreateView(View):
         CovHosFormCollection.objects.filter(
             pk=self.object.pk).update(**col_update_params)
         return True
-    
+
     def get(self, request, *args, **kwargs):
         """
         renders forms initial page to fill initial data like province, district
@@ -90,7 +89,7 @@ class CovHosFormCollectionCreateView(View):
         return HttpResponseRedirect(form_url)
 
 
-class CovHosFormCollectionUpdateView(UpdateView):
+class CovHosFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -114,6 +113,7 @@ class CovHosFormCollectionUpdateView(UpdateView):
     current_form_instance = None
     next_state = 'next'
     next_form = None
+    permission_required = 'users.perm_cov_hos_form'
 
     def _get_cur_form_instance(self, pk):
         """
@@ -163,7 +163,8 @@ class CovHosFormCollectionUpdateView(UpdateView):
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('cov_hos_forms:cov_hos_list'),
         }
 
         return metadata
@@ -210,6 +211,9 @@ class CovHosFormCollectionUpdateView(UpdateView):
         """
         self.object.status = 'submitted' if self.next_state == 'submit' else 'incomplete'
         self.object.state = self._get_state()
+        if self.object.reject_msg:
+            self.object.reject_msg = ''
+            self.object.approver = None
         self.object.save()
 
     def _response(self, form_response):
@@ -249,30 +253,34 @@ class CovHosFormCollectionUpdateView(UpdateView):
         return self._response(form_response)
 
 
-class CovHosFormCollectionListView(ListView):
+class CovHosFormCollectionListView(PermissionRequiredMixin, ListView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/list.html"
+    permission_required = 'users.perm_cov_hos_form'
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
 
-class CovHosFormCollectionDeleteView(DeleteView):
+class CovHosFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/delete.html"
+    permission_required = 'users.perm_cov_hos_form'
     success_url = reverse_lazy('cov_hos_forms:cov_hos_list')
     context_object_name = 'form_collections'
 
 
-class CovHosFormCollectionReview(DetailView):
+class CovHosFormCollectionReview(PermissionRequiredMixin, DetailView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/review.html"
+    permission_required = 'users.perm_cov_hos_form'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'cov_hos_forms', 'cov_hos_update', ROUTE_LINK, CH_STATE)
         return context
     
-
+@permission_required('users.perm_cov_hos_form')
 def cov_hos_submit_form(request, form_pk):
     form_obj = CovHosFormCollection.objects.get(id=form_pk)
     status = request.POST.get('status')
@@ -284,9 +292,9 @@ def cov_hos_submit_form(request, form_pk):
     return JsonResponse({'success': '200'}, status=200)
 
 
-class ApproveView(GroupRequiredMixin, View):
+class ApproveView(PermissionRequiredMixin, View):
     template_name = 'cov_hos_form_collection/approve.html'
-    group_required = ['ALL PERMISSION', 'APPROVAL']
+    permission_required = 'users.perm_cov_hos_form_approve'
 
     def get(self, request, *args, **kwargs):
         context = []
@@ -294,7 +302,6 @@ class ApproveView(GroupRequiredMixin, View):
         # params = {'status': ['submitted', 'approved', 'rejected']}
         # data = list(CovHosFormCollection.objects.select_related().filter(**params))
         data = list(CovHosFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
-        print(data)
         for index, val in enumerate(data):
             context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
         # for index, val in enumerate(data):

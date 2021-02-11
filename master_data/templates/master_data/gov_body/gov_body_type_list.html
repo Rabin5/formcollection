@@ -104,12 +104,12 @@
 
   $( "#modalGovTypeCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalGovTypeCreate") 
   });
 
   $( "#modalGovTypeUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalGovTypeUpdate") 
   });
 </script>
 {% endblock extrascripts %}

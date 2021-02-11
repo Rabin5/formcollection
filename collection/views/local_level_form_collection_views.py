@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db import transaction
 from django.db.models import query, F
 from django.forms import inlineformset_factory
@@ -12,29 +13,30 @@ from django.views.generic.edit import DeleteView
 from forms import models
 from django.contrib.auth.models import Group
 
-from braces.views import GroupRequiredMixin
 
 from django.apps import apps
 
 from collection.forms.local_level_forms import LocalLevelFormCollectionForm
 from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari
+from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari, find_empty_fields
 
 from master_data.models import FiscalYear, District, LocalLevel
 from oagn_covid.settings import PAGINATED_BY
+from django.contrib.auth.decorators import permission_required
 
 # Convert utils LOCAL_LEVEL_STATE to dict
 DICT_LOCAL_LEVEL_STATE = {key: value for key, value in LOCAL_LEVEL_STATE}
 LIST_LOCAL_LEVEL_STATE = [value for key, value in LOCAL_LEVEL_STATE]
 
 
-class LocalLevelFormCollectionCreateView(View):
+class LocalLevelFormCollectionCreateView(PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
     form_class = LocalLevelFormCollectionForm
     template_name = 'local_level_form_collection/create.html'
+    permission_required = 'users.perm_local_level_form'
 
     def init_forms(self):
         """
@@ -91,7 +93,7 @@ class LocalLevelFormCollectionCreateView(View):
         return HttpResponseRedirect(form_url)
 
 
-class LocalLevelFormCollectionUpdateView(UpdateView):
+class LocalLevelFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -115,6 +117,7 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
     current_form_instance = None
     next_state = 'next'
     next_form = None
+    permission_required = 'users.perm_local_level_form'
 
     def _get_cur_form_instance(self, pk):
         """
@@ -164,7 +167,8 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
             'total_forms_nepali': num_to_devanagari(total_forms),
             'current_form_nepali': num_to_devanagari(current_form),
             'percentage_completed': f'{percentage}%',
-            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%'
+            'percentage_completed_nepali': f'{num_to_devanagari(percentage)}%',
+            'list_view_url': reverse('local_level_forms:local_level_list'),
         }
 
         return metadata
@@ -211,6 +215,9 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
         """
         self.object.status = 'submitted' if self.next_state == 'submit' else 'incomplete'
         self.object.state = self._get_state()
+        if self.object.reject_msg:
+            self.object.reject_msg = ''
+            self.object.approver = None
         self.object.save()
 
     def _response(self, form_response):
@@ -251,29 +258,34 @@ class LocalLevelFormCollectionUpdateView(UpdateView):
         return self._response(form_response)
 
 
-class LocalLevelFormCollectionListView(ListView):
+class LocalLevelFormCollectionListView(PermissionRequiredMixin, ListView):
     model = LocalLevelFormCollection
     template_name = "local_level_form_collection/list.html"
+    permission_required = 'users.perm_local_level_form'
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
 
-class LocalLevelFormCollectionDeleteView(DeleteView):
+class LocalLevelFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
     model = LocalLevelFormCollection
     template_name = "local_level_form_collection/delete.html"
+    permission_required = 'users.perm_local_level_form'
     success_url = reverse_lazy('local_level_forms:local_level_list')
     context_object_name = 'form_collections'
 
 
-class LocalLevelFormCollectionReviewView(DetailView):
+class LocalLevelFormCollectionReviewView(PermissionRequiredMixin, DetailView):
     model = LocalLevelFormCollection
     template_name = "local_level_form_collection/review.html"
+    permission_required = 'users.perm_local_level_form'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action'] = self.kwargs['action']
+        context['empty_fields'] = find_empty_fields(self.object, 'local_level_forms', 'local_level_update', ROUTE_LINK, LOCAL_LEVEL_STATE)
         return context
 
+@permission_required('users.perm_local_level_form')
 def local_level_submit_form(request, form_pk):
     form_obj = LocalLevelFormCollection.objects.get(id=form_pk)
     status = request.POST.get('status')
@@ -284,9 +296,9 @@ def local_level_submit_form(request, form_pk):
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
 
-class ApproveView(GroupRequiredMixin, View):
+class ApproveView(PermissionRequiredMixin, View):
     template_name = 'local_level_form_collection/approve.html'
-    group_required = ['ALL PERMISSION', 'APPROVAL']
+    permission_required = 'users.perm_local_level_form_approve'
 
     def get(self, request, *args, **kwargs):
         context = []

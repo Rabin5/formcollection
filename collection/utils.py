@@ -1,3 +1,7 @@
+import copy
+
+from django.urls.base import reverse
+
 BS_MONTHS = [
     (1, "वैशाख"),
     (2, "जेष्ठ"),
@@ -135,3 +139,40 @@ def num_to_devanagari(num):
         dev_num += DEVANAGARI_DIGITS[int(digit)]
 
     return dev_num
+
+def find_empty_fields(object, app_name, url_name, ROUTE_LINK, STATE):
+    """
+    find all the empty field in collection and return form number, form title and url.
+    to show warning message to user before they submit a collection.
+    """
+    update_url = app_name + ":" + url_name
+    payload = []
+    updated_ch_state = copy.deepcopy(STATE)
+    for field in STATE:
+        if field[1] == "district_covid_management":
+            if (
+                len(getattr(object, field[1]).dist_quarantine_lines.all()) == 0
+                and len(getattr(object, field[1]).dist_isolation_lines.all()) == 0
+                and len(getattr(object, field[1]).dist_lab_lines.all()) == 0
+            ):
+                is_empty = True
+            else:
+                is_empty = False
+        else:
+            is_empty = len(getattr(object, field[1]).lines.all()) == 0
+
+        if is_empty == False:
+            updated_ch_state.remove(field)
+
+    for val in updated_ch_state:
+        if val[1] in ROUTE_LINK:
+            payload.append(
+                {
+                    "order_no": val[0] + 1,
+                    "title": ROUTE_LINK[val[1]]["title"],
+                    "url": reverse(update_url, kwargs={"pk": object.pk})
+                    + f"?form={val[1]}",
+                }
+            )
+
+    return payload

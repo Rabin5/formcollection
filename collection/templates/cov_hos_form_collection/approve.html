@@ -39,6 +39,12 @@
               समीक्षा गर्नुहोस्
             </a>
           </td>
+        {% else %}
+        <td>
+            <a href="{% url 'cov_hos_forms:review' val.id 'submitted' %}">
+              <i class="ic-visible"></i>
+            </a>
+        </td>
         {% endif %}
         
       </tr>

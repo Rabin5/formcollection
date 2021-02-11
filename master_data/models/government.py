@@ -7,7 +7,7 @@ from master_data.models.hospital import CovidHospital
 class GovernmentBodyType(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=255, blank=False,
-                            null=False, verbose_name='वर्णन')
+                            null=False, verbose_name='वर्णन', unique=True)
     parent = models.ForeignKey(
         "self", on_delete=models.CASCADE, blank=True, null=True)
 
@@ -20,7 +20,7 @@ class GovernmentBody(Address):
     created = models.DateTimeField(auto_now_add=True)
     # date_end = models.DateTimeField(null=False, auto_now=True)
     name = models.CharField(max_length=255, blank=False,
-                            null=False, verbose_name='नाम')
+                            null=False, verbose_name='नाम', unique=True)
     type = models.ForeignKey(
         GovernmentBodyType, on_delete=models.CASCADE, verbose_name='वर्णन', blank=False)
     parent = models.ForeignKey(
@@ -36,7 +36,9 @@ class GovernmentBody(Address):
 
 class OfficeBearer(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=300, blank=True, null=True)
+
+    title = models.CharField(
+        max_length=300, blank=True, null=True, unique=True)
 
     def __str__(self) -> str:
         return self.title
@@ -44,7 +46,10 @@ class OfficeBearer(models.Model):
 
 class SourceBudget(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=300, blank=True, null=True)
+
+    title = models.CharField(
+        max_length=300, blank=True, null=True, unique=True)
+
     description = models.TextField()
 
     def __str__(self) -> str:
@@ -53,7 +58,10 @@ class SourceBudget(models.Model):
 
 class ExpenseHeader(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=300, blank=True, null=True)
+
+    title = models.CharField(
+        max_length=300, blank=True, null=True, unique=True)
+
     description = models.TextField()
 
     def __str__(self) -> str:
@@ -62,7 +70,9 @@ class ExpenseHeader(models.Model):
 
 class Manpower(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=300, blank=True, null=True)
+
+    title = models.CharField(
+        max_length=300, blank=True, null=True, unique=True)
 
     def __str__(self) -> str:
         return self.title
@@ -70,7 +80,9 @@ class Manpower(models.Model):
 
 class AllowanceType(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=300, blank=True, null=True)
+
+    name = models.CharField(max_length=300, blank=True, null=True, unique=True)
+
     description = models.TextField()
 
     def __str__(self) -> str:
@@ -83,12 +95,11 @@ class CovidHospitalManagementChecklistDescription(models.Model):
 
     def __str__(self):
         return self.description
-    
 
 
 class Committee(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=30, blank=True, null=True)
+    name = models.CharField(max_length=300, blank=True, null=True, unique=True)
     description = models.TextField()
 
     def __str__(self) -> str:
@@ -97,7 +108,7 @@ class Committee(models.Model):
 
 class ReliefType(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True, unique=True)
 
     def __str__(self) -> str:
         return self.title
@@ -105,7 +116,7 @@ class ReliefType(models.Model):
 
 class ActionPlanActivity(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=30, blank=True, null=True)
+    name = models.CharField(max_length=300, blank=True, null=True, unique=True)
     description = models.TextField()
 
     def __str__(self) -> str:
