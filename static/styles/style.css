@@ -3745,14 +3745,14 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #053559;
+  color: #454545;
   background-color: #ffffff;
-  border: 1px solid #B9B9B9; }
+  border: 1px solid #D0D0D0; }
   .page-link:hover {
     z-index: 2;
     color: #010a11;
     text-decoration: none;
-    background-color: #D0D0D0;
+    background-color: #E8E8E8;
     border-color: #B9B9B9; }
   .page-link:focus {
     z-index: 3;
@@ -3771,8 +3771,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #ffffff;
-  background-color: #2b91fe;
-  border-color: #2b91fe; }
+  background-color: #206DBF;
+  border-color: #206DBF; }
 
 .page-item.disabled .page-link {
   color: #686868;
@@ -8337,6 +8337,11 @@ a.text-dark:hover, a.text-dark:focus {
     margin: 1rem 0; }
     .list-summary h6 {
       font-size: 0.875rem; }
+
+.pagination {
+  justify-content: center; }
+  .pagination li a {
+    font-size: 0.875rem; }
 
 .breadcrumb {
   font-size: 0.875rem; }

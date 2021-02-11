@@ -19,7 +19,7 @@ User = get_user_model()
 
 class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = User
-    permission_required = ''
+    permission_required = 'users.perm_user_management'
     form_class = UserCreateForm
     template_name = 'users/user_create.html'
     success_url = reverse_lazy('users:list')
@@ -27,14 +27,14 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = User
-    permission_required = ''
+    permission_required = 'users.perm_user_management'
     template_name = 'users/user_list.html'
     context_object_name = 'users'
 
 
 class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    permission_required = ''
+    permission_required = 'users.perm_user_management'
     template_name = "users/user_update.html"
     form_class = UserUpdateForm
     success_url = reverse_lazy('users:list')
@@ -50,7 +50,7 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessage
 
 class ResetPasswordView(LoginRequiredMixin, PermissionRequiredMixin, View):
     # form_class = ResetPasswordForm
-    permission_required = ''
+    permission_required = 'users.perm_user_management'
     success_url = reverse_lazy('users:list')
     template_name = 'users/reset_password.html'
 
@@ -110,6 +110,7 @@ class ResetPasswordView(LoginRequiredMixin, PermissionRequiredMixin, View):
     #     return super().form_valid(form)
 
 
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(PermissionRequiredMixin, PasswordChangeView):
+    permission_required = 'users.perm_user_management'
     template_name = 'users/change_password.html'
     success_url = reverse_lazy('users:list')

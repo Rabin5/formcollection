@@ -11,11 +11,7 @@ User Permission
 {% endblock page_title %}
 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon" data-remote="{% url 'users:create_permission' %}"
-    href="{% url 'users:create_permission' %}" data-toggle="modal" data-target="#modalUserPermissionCreate">
-    <i class="ic-add"></i>
-    User Permission थप्नुहोस्
-  </a>
+  
 {% endblock page_actions %}
 
 {% block content %}
@@ -48,21 +44,8 @@ User Permission
 {% endblock content %}
 
 {% block modal %}
-<div class="modal fade" id="modalUserPermissionCreate" tabindex="-1" role="dialog" aria-labelledby="modalUserPermissionCreate" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>
 
 <div class="modal fade" id="modalUserPermissionUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUserPermissionUpdate" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modalUserPermissionDelete" tabindex="-1" role="dialog" aria-labelledby="modalUserPermissionDelete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     </div>
@@ -76,11 +59,6 @@ User Permission
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#modalUserPermissionCreate').on('shown.bs.modal', function (e) {
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
-    });
     
     $('#modalUserPermissionUpdate').on('shown.bs.modal', function (e) {
       var button = $(e.relatedTarget);
@@ -88,17 +66,6 @@ User Permission
       modal.find('.modal-content').load(button.data("remote"));
     });
 
-    $('#modalUserPermissionDelete').on('shown.bs.modal', function (e) {
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
-    });
-
-  });
-
-  $( "#modalUserPermissionCreate").on('submit', 'form', function(e) {
-    e.preventDefault();
-    saveData($(this)) 
   });
 
   $( "#modalUserPermissionUpdate").on('submit', 'form', function(e) {

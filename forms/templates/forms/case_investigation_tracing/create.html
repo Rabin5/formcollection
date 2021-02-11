@@ -13,15 +13,9 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-<div class="align-vertical">
-    <div class="fiscal-year">
-        <span class="text-secondary des">आर्थिक वर्ष</span>
-        <span>२०७७/७८</span>
-        <a href="" class="ic-settings">
-        </a>
+    <div class="align-vertical">
+        {% include 'master_data/partials/go_back.html' %}
     </div>
-    <a href="" class="btn btn-success text-white ml-3">Save</a>
-</div>
 {% endblock page_actions %}
 
 {% block content %}

@@ -106,16 +106,13 @@ Quarantine
     });
 
     $("#modalAddCreate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
         e.preventDefault();
-        saveData($(this))
+        saveData($(this),"#modalAddCreate")
     });
 
     $("#modalAddUpdate").on('submit', 'form', function (e) {
-        var $prod_modal = $(this);
-        console.log($prod_modal)
         e.preventDefault();
-        saveData($(this))
+        saveData($(this),"#modalAddUpdate")
     });
 </script>
 {% endblock extrascripts %}

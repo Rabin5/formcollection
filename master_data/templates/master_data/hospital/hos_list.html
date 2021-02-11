@@ -102,12 +102,12 @@ Hospital
 
   $( "#modalHosCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalHosCreate") 
   });
 
   $( "#modalHosUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalHosUpdate") 
   });
 </script>
 {% endblock extrascripts %}

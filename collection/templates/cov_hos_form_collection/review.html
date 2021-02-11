@@ -8,6 +8,9 @@
 <div class="content">
   <div class="section-title">
     <h6 class="text-dark font-weight-bold">Review</h6>
+    {% if object.reject_msg %}
+      <button class="btn btn-warning" data-toggle="modal" data-target="#reject_msg">View Reject Message</button>
+    {% endif %}
   </div>
 
   <div class="card card-body">
@@ -19,9 +22,21 @@
     </div>
         <div class="card-warning p-2 mt-3"><h6>रकम सबै रु हजारमा छ  </h6></div>
 
+    {% if empty_fields %}
+      <div id="accordion" class="accordion mt-5 mx-n3 alert alert-danger" role="alert">
+        निम्न फारमहरु भरिएका छैनन्
+        {% for val in empty_fields %}
+          <p>
+            {{ val.order_no }} ) {{ val.title }}
+            {% if action == 'submit' %}
+              <a class="text-info" href={{ val.url }}><i class="ic-edit"></i></a>
+            {% endif %}
+          </p>
+        {% endfor %}
+      </div>
+    {% endif %}
 
-
-    <div id="accordion" class="accordion mt-4 mx-n3">
+    <div id="accordion" class="accordion mt-5 mx-n3">
       <div class="accordion-item">
         <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
@@ -231,6 +246,9 @@
               </tbody>
             </table>
           </div>
+          <p class="note">
+            नोट: सामाग्री उपकरण प्राप्त हुन नसकेको भए कारण खुलाउनु होला ।
+          </p>
         </div>
       </div>
 
@@ -279,6 +297,8 @@
               </tbody>
             </table>
           </div>
+          <p class="note">
+          </p>
         </div>
       </div>
 
@@ -652,6 +672,7 @@
                   <th rowspan="2">कोभिड अस्पतालको प्रकार</th>
                   <th colspan="4">कोभिड अस्पताल घोषणा हुँदाको अवस्थामा रहेको संख्या</th>
                   <th colspan="4">२०७७ असार मसान्तसम्म थप भएको संख्या</th>
+                  <th colspan="2"></th>
                 </tr>
               
                 <tr>
@@ -944,7 +965,7 @@
       <div class="accordion-item">
         <a data-toggle="collapse" data-target="#collapseEighteen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
-          कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट
+          18) कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट
         </a>
 
         <div id="collapseEighteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -1000,6 +1021,29 @@
 {% endblock content %}
 
 {% block modal %}
+
+{% if object.reject_msg %}
+  <div class="modal fade" id="reject_msg" tabindex="-1" role="dialog" aria-labelledby="reject_msg" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+          <a class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+        <div class="modal-body pt-2">
+        <textarea class="form-control" rows="3" readonly>{{object.reject_msg}}</textarea>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
 
 <div class="modal fade" id="rejectMessageModal" tabindex="-1" role="dialog" aria-labelledby="rejectMessageModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -1067,6 +1111,13 @@
           }
         })
       }
+
+      {% if object.reject_msg %}
+          $(window).on('load', function() {
+            $('#reject_msg').modal('show');
+          });
+        {% endif %}
+
 
 
 

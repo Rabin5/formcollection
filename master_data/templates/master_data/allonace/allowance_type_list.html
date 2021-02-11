@@ -110,13 +110,13 @@ Allowance Type - Nepal Audit Management System
 
   $("#modalAllowanceCreate").on('submit', 'form', function (e) {
     e.preventDefault();
-    saveData($(this));
+    saveData($(this),'#modalAllowanceCreate') 
   });
 
 
   $("#modalAllowanceUpdate").on('submit', 'form', function (e) {
     e.preventDefault();
-    saveData($(this))
+    saveData($(this),'#modalAllowanceUpdate')
   });
 </script>
 {% endblock extrascripts %}

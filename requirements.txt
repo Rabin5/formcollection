@@ -1,6 +1,5 @@
 asgiref==3.3.1
 Django==3.1.4
-django-braces==1.14.0
 django-crispy-forms==1.10.0
 nepali-datetime==1.0.4
 pip==20.3.3

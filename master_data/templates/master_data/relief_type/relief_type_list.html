@@ -102,12 +102,12 @@ Relief Type
 
   $( "#modalReliefTypeCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalReliefTypeCreate") 
   });
 
   $( "#modalReliefTypeUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalReliefTypeUpdate") 
   });
 </script>
 {% endblock extrascripts %}
