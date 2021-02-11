@@ -22,7 +22,7 @@ class FiscalYear(models.Model):
     objects = FyManager.from_queryset(FyQuerySet)()
     date_start = models.DateField(null=False)
     date_end = models.DateField(null=False)
-    name = models.CharField(max_length=15, blank=False,
+    name = models.CharField(max_length=200, blank=False,
                             null=False, verbose_name='आर्थिक वर्ष')
     date_start_bs = models.CharField(
         max_length=15, blank=False, null=False, verbose_name='सुरू मिति', default='01/01/2000')

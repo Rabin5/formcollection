@@ -36,7 +36,7 @@ class GovernmentBody(Address):
 
 class OfficeBearer(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self) -> str:
         return self.title
@@ -44,7 +44,7 @@ class OfficeBearer(models.Model):
 
 class SourceBudget(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
     description = models.TextField()
 
     def __str__(self) -> str:
@@ -53,7 +53,7 @@ class SourceBudget(models.Model):
 
 class ExpenseHeader(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
     description = models.TextField()
 
     def __str__(self) -> str:
@@ -62,7 +62,7 @@ class ExpenseHeader(models.Model):
 
 class Manpower(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=30, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self) -> str:
         return self.title
@@ -70,7 +70,7 @@ class Manpower(models.Model):
 
 class AllowanceType(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=30, blank=True, null=True)
+    name = models.CharField(max_length=300, blank=True, null=True)
     description = models.TextField()
 
     def __str__(self) -> str:
