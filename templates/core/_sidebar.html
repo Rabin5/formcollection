@@ -16,7 +16,7 @@
       <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false"
         aria-controls="collapseExample">मूल तथ्यांक</a>
       <div class="collapse{% if 'md' in request.resolver_match.view_name %} show {% endif %}" id="master-data">
-        <ul class="menu py-0">
+        <ul class="list pl-3">
           <li {% if 'md-fy:list' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'md-fy:list'%}" class="pl-4">आर्थिक वर्ष</a>
           </li>
@@ -24,7 +24,7 @@
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
               aria-controls="collapseExample1">उत्पादन</a>
             <div class="collapse{% if 'master-data/product' in request.path %} show {% endif %}" id="collapseExample1">
-              <ul class="menu py-0">
+              <ul class="list pl-3">
                 <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-prod:list'%}" class="pl-4">सामग्री</a>
                 </li>
@@ -42,7 +42,7 @@
               aria-controls="collapseExample2">सरकारी निकाय</a>
             <div class="collapse{% if 'master-data/government' in request.path %} show {% endif %}"
               id="collapseExample2">
-              <ul class="menu py-0">
+              <ul class="list pl-3">
                 <li {% if 'md-gov:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-gov:list'%}" class="pl-4">निकाय</a>
                 </li>
@@ -83,7 +83,7 @@
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false"
               aria-controls="collapseExample3">कोभिड अस्पताल</a>
             <div class="collapse{% if 'master-data/hospital' in request.path %} show {% endif %}" id="collapseExample3">
-              <ul class="menu py-0">
+              <ul class="list pl-3">
                 {% comment %} <li {% if 'md-hos:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-hos:list'%}" class="pl-4">अस्पताल</a>
                 </li> {% endcomment %}
@@ -97,7 +97,7 @@
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false"
               aria-controls="collapseExample4">ठेगाना</a>
             <div class="collapse{% if 'master-data/address' in request.path %} show {% endif %}" id="collapseExample4">
-              <ul class="menu py-0">
+              <ul class="list pl-3">
                 <li {% if 'md-locallevel:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-locallevel:list'%}" class="pl-4">स्थानीय निकाय </a>
                 </li>
@@ -117,7 +117,7 @@
             <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false"
               aria-controls="collapseExample5">कम्पनि</a>
             <div class="collapse{% if 'master-data/company' in request.path %} show {% endif %}" id="collapseExample5">
-              <ul class="menu py-0">
+              <ul class="list pl-3">
                 <li {% if 'md-company:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-company:list'%}" class="pl-4">कम्पनि</a>
                 </li>
@@ -147,7 +147,7 @@
       <a href="#form-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
         aria-controls="collapseExample">Forms</a>
       <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
-        <ul class="menu py-0">
+        <ul class="list pl-3">
           {% if perms.users.perm_cov_hos_form %}
             <li {% if 'cov_hos_forms:cov_hos' in request.resolver_match.view_name %}class="active" {% endif %}>
               <a href="{% url 'cov_hos_forms:cov_hos_list'%}" class="pl-4">कोभिड अस्पताल</a>
@@ -184,7 +184,7 @@
       <a href="#user-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
         aria-controls="collapseExample">Users</a>
       <div class="collapse{% if 'users' in request.resolver_match.view_name %} show {% endif %}" id="user-data">
-        <ul class="menu py-0">
+        <ul class="list pl-3">
           <li {% if 'users/list' in request.path %} class="active" {% elif 'users/reset-password' in request.path %}
             class="active" {% elif 'users:update_user' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'users:list'%}" class="pl-4">Users List</a>
@@ -205,8 +205,7 @@
       <a href="#approve-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
         aria-controls="collapseExample">Approve</a>
       <div class="collapse{% if 'approve' in request.resolver_match.view_name %} show {% endif %}" id="approve-data">
-        <ul class="menu py-0">
-        {% if perms.users.perm_cov_hos_form_approve %}
+        <ul class="list pl-3">
           <li {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'cov_hos_forms:review_approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
           </li>
