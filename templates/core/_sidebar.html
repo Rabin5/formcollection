@@ -139,6 +139,18 @@
               </ul>
             </div>
           </li>
+          <li {% if 'md-consultant:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-consultant:list'%}" class="pl-4">परामर्शदाता</a>
+          </li>
+          <li {% if 'md-construction:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-construction:list'%}" class="pl-4">निर्माण व्यवसायी</a>
+          </li>
+          <li {% if 'md-sub_header:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-sub_header:list'%}" class="pl-4">उपशीर्षक</a>
+          </li>
+          <li {% if 'md-work_nature:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+            <a href="{% url 'md-work_nature:list'%}" class="pl-4">कामको प्रकृति</a>
+          </li>
         </ul>
       </div>
     </li>
