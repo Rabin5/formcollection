@@ -209,7 +209,6 @@
           <li {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'cov_hos_forms:review_approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
           </li>
-        {% endif %}
         {% if perms.users.perm_province_form_approve %}
           <li {% if 'province_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
             <a href="{% url 'province_forms:review_approve_list'%}" class="pl-4">Province Approve List</a>

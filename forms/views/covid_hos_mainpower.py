@@ -68,6 +68,8 @@ class CovidHospitalMainpowerUpdateView(UpdateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+            else:
+                return self.form_invalid(form, lines)
 
             return super().form_valid(form)
 

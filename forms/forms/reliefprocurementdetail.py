@@ -19,8 +19,6 @@ class ReliefProcurementDetailLineForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
-        for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
 
 
 ReliefProcurementDetailFormSet = inlineformset_factory(
