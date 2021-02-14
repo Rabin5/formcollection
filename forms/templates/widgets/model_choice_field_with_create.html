@@ -3,8 +3,7 @@
 {% include "django/forms/widgets/select.html" %}
 
 <script>
-  $("select[name='{{ widget.name }}']").width('150px')
-  
-
+  $("select[name='{{ widget.name }}']").width('150px');
+  $("select[name='{{ widget.name }}']").addClass('select_with_create');
 
 </script>

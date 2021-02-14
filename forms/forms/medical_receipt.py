@@ -21,11 +21,6 @@ class MedicalReceiptLineForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
-        for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
 
 
 MedicalReceiptFormSet = inlineformset_factory(
