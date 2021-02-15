@@ -1,50 +1,7314 @@
 [
-    {
-        "model": "master_data.GovernmentBodyType",
-        "pk": "1",
-        "fields": {
-            "name": "कोभिड अस्पताल",
-            "created": "2020-02-02 00:00:00"
-        }
-    },
-    {
-        "model": "master_data.GovernmentBodyType",
-        "pk": "2",
-        "fields": {
-            "name": "स्थानीय निकाय",
-            "created": "2020-02-02 00:00:00"
-        }
-    },
-    {
-        "model": "master_data.GovernmentBodyType",
-        "pk": "3",
-        "fields": {
-            "name": "प्रदेश सरकार",
-            "created": "2020-02-02 00:00:00"
-        }
-    },
-    {
-        "model": "master_data.GovernmentBodyType",
-        "pk": "4",
-        "fields": {
-            "name": "आन्तरिक मामिला तथा कानून मन्त्रालय",
-            "created": "2020-02-02 00:00:00"
-        }
-    },
-    {
-        "model": "master_data.GovernmentBodyType",
-        "pk": "5",
-        "fields": {
-            "name": "मुख्यमन्त्री तथा मन्त्रीपरिषदको कार्यालय",
-            "created": "2020-02-02 00:00:00"
-        }
-    },
-    {
-        "model": "master_data.GovernmentBodyType",
-        "pk": "6",
-        "fields": {
-            "name": "स्थानीय तह",
-            "created": "2020-02-02 00:00:00"
-        }
+{
+    "model": "master_data.country",
+    "pk": 1,
+    "fields": {
+        "name": "Nepal"
     }
+},
+{
+    "model": "master_data.province",
+    "pk": 1,
+    "fields": {
+        "name": "प्रदेश १"
+    }
+},
+{
+    "model": "master_data.province",
+    "pk": 2,
+    "fields": {
+        "name": "प्रदेश २ "
+    }
+},
+{
+    "model": "master_data.province",
+    "pk": 3,
+    "fields": {
+        "name": "बागमती प्रदेश"
+    }
+},
+{
+    "model": "master_data.province",
+    "pk": 4,
+    "fields": {
+        "name": "गण्डकी प्रदेश"
+    }
+},
+{
+    "model": "master_data.province",
+    "pk": 5,
+    "fields": {
+        "name": "प्रदेश ५"
+    }
+},
+{
+    "model": "master_data.province",
+    "pk": 6,
+    "fields": {
+        "name": "कर्णाली प्रदेश"
+    }
+},
+{
+    "model": "master_data.province",
+    "pk": 7,
+    "fields": {
+        "name": "सुदूरपश्चिम प्रदेश"
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 1,
+    "fields": {
+        "name": "ताप्लेजुङ",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 2,
+    "fields": {
+        "name": "संखुवासभा",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 3,
+    "fields": {
+        "name": "सोलुखुम्बु",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 4,
+    "fields": {
+        "name": "ओखलढुङ्गा",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 5,
+    "fields": {
+        "name": "खोटाङ",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 6,
+    "fields": {
+        "name": "भोजपुर",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 7,
+    "fields": {
+        "name": "धनकुटा",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 8,
+    "fields": {
+        "name": "तेह्रथुम",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 9,
+    "fields": {
+        "name": "पाँचथर",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 10,
+    "fields": {
+        "name": "इलाम",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 11,
+    "fields": {
+        "name": "झापा",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 12,
+    "fields": {
+        "name": "मोरङ",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 13,
+    "fields": {
+        "name": "सुनसरी",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 14,
+    "fields": {
+        "name": "उदयपुर",
+        "province": 1
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 15,
+    "fields": {
+        "name": "सप्तरी",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 16,
+    "fields": {
+        "name": "सिरहा",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 17,
+    "fields": {
+        "name": "धनुषा",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 18,
+    "fields": {
+        "name": "महोत्तरी",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 19,
+    "fields": {
+        "name": "सर्लाही",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 20,
+    "fields": {
+        "name": "रौतहट",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 21,
+    "fields": {
+        "name": "बारा",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 22,
+    "fields": {
+        "name": "पर्सा",
+        "province": 2
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 23,
+    "fields": {
+        "name": "दोलखा",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 24,
+    "fields": {
+        "name": "सिन्धुपाल्चोक",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 25,
+    "fields": {
+        "name": "रसुवा",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 26,
+    "fields": {
+        "name": "धादिङ",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 27,
+    "fields": {
+        "name": "नुवाकोट",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 28,
+    "fields": {
+        "name": "काठमाडौँ",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 29,
+    "fields": {
+        "name": "भक्तपुर",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 30,
+    "fields": {
+        "name": "ललितपुर",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 31,
+    "fields": {
+        "name": "काभ्रेपलाञ्चोक",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 32,
+    "fields": {
+        "name": "रामेछाप",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 33,
+    "fields": {
+        "name": "सिन्धुली",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 34,
+    "fields": {
+        "name": "मकवानपुर",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 35,
+    "fields": {
+        "name": "चितवन",
+        "province": 3
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 36,
+    "fields": {
+        "name": "गोरखा",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 37,
+    "fields": {
+        "name": "मनाङ",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 38,
+    "fields": {
+        "name": "मुस्ताङ",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 39,
+    "fields": {
+        "name": "म्याग्दी",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 40,
+    "fields": {
+        "name": "कास्की",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 41,
+    "fields": {
+        "name": "लमजुङ",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 42,
+    "fields": {
+        "name": "तनहुँ",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 43,
+    "fields": {
+        "name": "ूनवलपरासी ((बर्दघाट सुस्ता पूूर्व)",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 44,
+    "fields": {
+        "name": "स्याङजा",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 45,
+    "fields": {
+        "name": "पर्वत",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 46,
+    "fields": {
+        "name": "बागलुङ",
+        "province": 4
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 47,
+    "fields": {
+        "name": "रुकुम (पूर्वी भाग)",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 48,
+    "fields": {
+        "name": "रोल्पा",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 49,
+    "fields": {
+        "name": "प्यूठान",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 50,
+    "fields": {
+        "name": "गुल्मी",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 51,
+    "fields": {
+        "name": "अर्घाखाँची",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 52,
+    "fields": {
+        "name": "पाल्पा",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 53,
+    "fields": {
+        "name": "ूनवलपरासी (बर्दघाट सुस्ता पश्चिम)",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 54,
+    "fields": {
+        "name": "रुपन्देही",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 55,
+    "fields": {
+        "name": "कपिलवस्तु",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 56,
+    "fields": {
+        "name": "दाङ",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 57,
+    "fields": {
+        "name": "बाँके",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 58,
+    "fields": {
+        "name": "बर्दिया",
+        "province": 5
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 59,
+    "fields": {
+        "name": "डोल्पा",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 60,
+    "fields": {
+        "name": "मुगु",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 61,
+    "fields": {
+        "name": "हुम्ला",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 62,
+    "fields": {
+        "name": "जुम्ला",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 63,
+    "fields": {
+        "name": "कालिकोट",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 64,
+    "fields": {
+        "name": "दैलेख",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 65,
+    "fields": {
+        "name": "जाजरकोट",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 66,
+    "fields": {
+        "name": "रुकुम (पश्चिम भाग)",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 67,
+    "fields": {
+        "name": "सल्यान",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 68,
+    "fields": {
+        "name": "सुर्खेत",
+        "province": 6
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 69,
+    "fields": {
+        "name": "बाजुरा",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 70,
+    "fields": {
+        "name": "बझाङ",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 71,
+    "fields": {
+        "name": "दार्चुला",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 72,
+    "fields": {
+        "name": "बैतडी",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 73,
+    "fields": {
+        "name": "डँडेलधुरा",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 74,
+    "fields": {
+        "name": "डोटी",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 75,
+    "fields": {
+        "name": "अछाम",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 76,
+    "fields": {
+        "name": "कैलाली",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.district",
+    "pk": 77,
+    "fields": {
+        "name": "कञ्चनपुर",
+        "province": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 1,
+    "fields": {
+        "name": "फक्ताङ्लुङ्ग गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 2,
+    "fields": {
+        "name": "मिक्वाखोला गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 3,
+    "fields": {
+        "name": "मेरिङ्गदेन गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 4,
+    "fields": {
+        "name": "मैवाखोला गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 5,
+    "fields": {
+        "name": "आठराई त्रिवेणी गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 6,
+    "fields": {
+        "name": "फुङलिङ्ग नगरपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 7,
+    "fields": {
+        "name": "याङ्वरक गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 8,
+    "fields": {
+        "name": "सिरीजङ्गा गाउंपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 9,
+    "fields": {
+        "name": "सिदिङ्गवा गाउँपालिका",
+        "district": 1
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 10,
+    "fields": {
+        "name": "भोटखोला गाउँपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 11,
+    "fields": {
+        "name": "मकालु गाउँपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 12,
+    "fields": {
+        "name": "सिलीचोङ गाउँपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 13,
+    "fields": {
+        "name": "चिचिला गाउँपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 14,
+    "fields": {
+        "name": "सभापोखरी गाउँपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 15,
+    "fields": {
+        "name": "खाँदबारी नगरपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 16,
+    "fields": {
+        "name": "पाँचखपन नगरपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 17,
+    "fields": {
+        "name": "चैनपुर नगरपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 18,
+    "fields": {
+        "name": "मादी नगरपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 19,
+    "fields": {
+        "name": "धर्मदेवी नगरपालिका",
+        "district": 2
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 20,
+    "fields": {
+        "name": "खुम्बु पासाङल्हामु गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 21,
+    "fields": {
+        "name": "माहाकुलुङ गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 22,
+    "fields": {
+        "name": "सोताङ गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 23,
+    "fields": {
+        "name": "दुधकोशी गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 24,
+    "fields": {
+        "name": "दुधकौशिका गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 25,
+    "fields": {
+        "name": "नेचासल्यान गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 26,
+    "fields": {
+        "name": "सोलुदुधकुण्ड नगरपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 27,
+    "fields": {
+        "name": "लिखु पिके गाउँपालिका",
+        "district": 3
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 28,
+    "fields": {
+        "name": "चिशंखुगढी गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 29,
+    "fields": {
+        "name": "सिद्धिचरण नगरपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 30,
+    "fields": {
+        "name": "मोलुङ्ग गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 31,
+    "fields": {
+        "name": "खिजीदेम्बा गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 32,
+    "fields": {
+        "name": "लिखु गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 33,
+    "fields": {
+        "name": "चम्पादेवी गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 34,
+    "fields": {
+        "name": "सुनकोशी गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 35,
+    "fields": {
+        "name": "मानेभन्ज्याङ्ग गाउँपालिका",
+        "district": 4
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 36,
+    "fields": {
+        "name": "केपिलासगढी गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 37,
+    "fields": {
+        "name": "ऐसेलुखर्क गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 38,
+    "fields": {
+        "name": "लामिडाँडा गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 39,
+    "fields": {
+        "name": "हलेसी तुवाचुङ नगरपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 40,
+    "fields": {
+        "name": "रुपाकोट मझुवागढी नगरपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 41,
+    "fields": {
+        "name": "साकेला गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 42,
+    "fields": {
+        "name": "दिप्रुङ्ग गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 43,
+    "fields": {
+        "name": "खोटेहाङ गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 44,
+    "fields": {
+        "name": "जन्तेढुङ्गा गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 45,
+    "fields": {
+        "name": "बराहपोखरी गाउँपालिका",
+        "district": 5
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 46,
+    "fields": {
+        "name": "षडानन्द नगरपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 47,
+    "fields": {
+        "name": "साल्पासिलिछो गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 48,
+    "fields": {
+        "name": "ट्याम्के मैयुम गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 49,
+    "fields": {
+        "name": "भोजपुर नगरपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 50,
+    "fields": {
+        "name": "अरुण गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 51,
+    "fields": {
+        "name": "पौवा दुङ्मा गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 52,
+    "fields": {
+        "name": "रामप्रसाद राई गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 53,
+    "fields": {
+        "name": "हतुवागढी गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 54,
+    "fields": {
+        "name": "आमचोक गाउँपालिका",
+        "district": 6
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 55,
+    "fields": {
+        "name": "महालक्ष्मी नगरपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 56,
+    "fields": {
+        "name": "पाख्रिबास नगरपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 57,
+    "fields": {
+        "name": "छथर जोरपाटी गाउँपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 58,
+    "fields": {
+        "name": "धनकुटा नगरपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 59,
+    "fields": {
+        "name": "खाल्सा छिन्ताङ्ग सहीदभूमि गाउँपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 60,
+    "fields": {
+        "name": "साँगुरीगढी गाउँपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 61,
+    "fields": {
+        "name": "चौविसे गाउँपालिका",
+        "district": 7
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 62,
+    "fields": {
+        "name": "आठराई गाउँपालिका",
+        "district": 8
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 63,
+    "fields": {
+        "name": "फेदाप गाउँपालिका",
+        "district": 8
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 64,
+    "fields": {
+        "name": "मेन्छयायेम गाउँपालिका",
+        "district": 8
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 65,
+    "fields": {
+        "name": "म्याङ्गलुङ्ग नगरपालिका",
+        "district": 8
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 66,
+    "fields": {
+        "name": "लालीगुराँस नगरपालिका",
+        "district": 8
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 67,
+    "fields": {
+        "name": "छथर गाउँपालिका",
+        "district": 8
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 68,
+    "fields": {
+        "name": "याङवरक गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 69,
+    "fields": {
+        "name": "हिलिहाङ्ग गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 70,
+    "fields": {
+        "name": "फालेलुङ्ग गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 71,
+    "fields": {
+        "name": "फिदिम नगरपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 72,
+    "fields": {
+        "name": "फाल्गुनन्द गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 73,
+    "fields": {
+        "name": "कुम्मायक गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 74,
+    "fields": {
+        "name": "तुम्बेवा गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 75,
+    "fields": {
+        "name": "मिक्लाजुङ गाउँपालिका",
+        "district": 9
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 76,
+    "fields": {
+        "name": "माई जोगमाई गाउँपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 77,
+    "fields": {
+        "name": "सन्दकपुर गाउँपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 78,
+    "fields": {
+        "name": "ईलाम नगरपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 79,
+    "fields": {
+        "name": "देउमाई नगरपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 80,
+    "fields": {
+        "name": "फाकफोकथुम गाउँपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 81,
+    "fields": {
+        "name": "माङसेबुङ गाउँपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 82,
+    "fields": {
+        "name": "चुलाचुली गाउँपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 83,
+    "fields": {
+        "name": "माई नगरपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 84,
+    "fields": {
+        "name": "सूर्योदय नगरपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 85,
+    "fields": {
+        "name": "रोङ गाउँपालिका",
+        "district": 10
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 86,
+    "fields": {
+        "name": "मेचीनगर नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 87,
+    "fields": {
+        "name": "बुद्धशान्ति गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 88,
+    "fields": {
+        "name": "अर्जुनधारा नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 89,
+    "fields": {
+        "name": "कन्काई नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 90,
+    "fields": {
+        "name": "शिवसताक्षी नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 91,
+    "fields": {
+        "name": "कमल गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 92,
+    "fields": {
+        "name": "दमक नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 93,
+    "fields": {
+        "name": "गौरादह नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 94,
+    "fields": {
+        "name": "गौरिगञ्ज गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 95,
+    "fields": {
+        "name": "झापा गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 96,
+    "fields": {
+        "name": "बाह्रदशी गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 97,
+    "fields": {
+        "name": "बिर्तामोड नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 98,
+    "fields": {
+        "name": "हल्दीबारी गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 99,
+    "fields": {
+        "name": "भद्रपुर नगरपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 100,
+    "fields": {
+        "name": "कचनकवल गाउँपालिका",
+        "district": 11
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 101,
+    "fields": {
+        "name": "मिक्लाजुङ्ग गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 102,
+    "fields": {
+        "name": "लेटाङ नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 103,
+    "fields": {
+        "name": "केराबारी गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 104,
+    "fields": {
+        "name": "सुन्दरहरैंचा नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 105,
+    "fields": {
+        "name": "बेलबारी नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 106,
+    "fields": {
+        "name": "कानेपोखरी गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 107,
+    "fields": {
+        "name": "पथरी शनिश्चरे नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 108,
+    "fields": {
+        "name": "उर्लाबारी नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 109,
+    "fields": {
+        "name": "रतुवामाई नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 110,
+    "fields": {
+        "name": "सुनवर्षी नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 111,
+    "fields": {
+        "name": "रंगेली नगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 112,
+    "fields": {
+        "name": "ग्रामथान गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 113,
+    "fields": {
+        "name": "बुढीगंगा गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 114,
+    "fields": {
+        "name": "बिराटनगर महानगरपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 115,
+    "fields": {
+        "name": "कटहरी गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 116,
+    "fields": {
+        "name": "धनपालथान गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 117,
+    "fields": {
+        "name": "जहदा गाउँपालिका",
+        "district": 12
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 118,
+    "fields": {
+        "name": "धरान उपमहानगरपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 119,
+    "fields": {
+        "name": "बराह नगरपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 120,
+    "fields": {
+        "name": "कोशी गाउँपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 121,
+    "fields": {
+        "name": "भोक्राहा गाउँपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 122,
+    "fields": {
+        "name": "रामधुनी नगरपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 123,
+    "fields": {
+        "name": "ईटहरी उपमहानगरपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 124,
+    "fields": {
+        "name": "दुहबी नगरपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 125,
+    "fields": {
+        "name": "गढी गाउँपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 126,
+    "fields": {
+        "name": "इनरुवा नगरपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 127,
+    "fields": {
+        "name": "हरिनगरा गाउँपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 128,
+    "fields": {
+        "name": "देवानगन्ज गाउँपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 129,
+    "fields": {
+        "name": "बर्जु गाउँपालिका",
+        "district": 13
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 130,
+    "fields": {
+        "name": "बेलका नगरपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 131,
+    "fields": {
+        "name": "चौदण्डीगढी नगरपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 132,
+    "fields": {
+        "name": "त्रियुगा नगरपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 133,
+    "fields": {
+        "name": "रौतामाई गाउँपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 134,
+    "fields": {
+        "name": "सुनकोशी गाउँपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 135,
+    "fields": {
+        "name": "ताप्ली गाउँपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 136,
+    "fields": {
+        "name": "कटारी नगरपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 137,
+    "fields": {
+        "name": "उदयपुरगढी गाउँपालिका",
+        "district": 14
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 138,
+    "fields": {
+        "name": "सप्तकोशी नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 139,
+    "fields": {
+        "name": "कन्चनरुप नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 140,
+    "fields": {
+        "name": "अग्निसाइर कृष्ण सवरन गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 141,
+    "fields": {
+        "name": "रुपनी गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 142,
+    "fields": {
+        "name": "शम्भुनाथ नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 143,
+    "fields": {
+        "name": "खडक नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 144,
+    "fields": {
+        "name": "सुरुङ्गा नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 145,
+    "fields": {
+        "name": "बलान बिहुल गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 146,
+    "fields": {
+        "name": "बोदेबरसाईन नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 147,
+    "fields": {
+        "name": "डाक्नेश्वरी नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 148,
+    "fields": {
+        "name": "बेल्ही चपेना गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 149,
+    "fields": {
+        "name": "बिष्णुपुर गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 150,
+    "fields": {
+        "name": "राजविराज नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 151,
+    "fields": {
+        "name": "महादेवा गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 152,
+    "fields": {
+        "name": "तिरहुत गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 153,
+    "fields": {
+        "name": "हनुमाननगर कङ्कालिनी नगरपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 154,
+    "fields": {
+        "name": "तिलाठी कोईलाडी गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 155,
+    "fields": {
+        "name": "छिन्नमस्ता गाउँपालिका",
+        "district": 15
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 156,
+    "fields": {
+        "name": "लहान नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 157,
+    "fields": {
+        "name": "धनगढीमाई नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 158,
+    "fields": {
+        "name": "गोलबजार नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 159,
+    "fields": {
+        "name": "मिर्चेया नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 160,
+    "fields": {
+        "name": "कर्जन्हा नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 161,
+    "fields": {
+        "name": "कल्याणपुर नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 162,
+    "fields": {
+        "name": "नरहा गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 163,
+    "fields": {
+        "name": "विष्णुपुर गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 164,
+    "fields": {
+        "name": "अर्नमा गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 165,
+    "fields": {
+        "name": "सुखीपुर नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 166,
+    "fields": {
+        "name": "लक्ष्मीपुर पतारी गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 167,
+    "fields": {
+        "name": "सखुवानान्कारकट्टी गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 168,
+    "fields": {
+        "name": "भगवानपुर गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 169,
+    "fields": {
+        "name": "नवराजपुर गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 170,
+    "fields": {
+        "name": "बरियारपट्टी गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 171,
+    "fields": {
+        "name": "औरही गाउँपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 172,
+    "fields": {
+        "name": "सिराहा नगरपालिका",
+        "district": 16
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 173,
+    "fields": {
+        "name": "गणेशमान चारनाथ नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 174,
+    "fields": {
+        "name": "धनुषाधाम नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 175,
+    "fields": {
+        "name": "मिथिला नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 176,
+    "fields": {
+        "name": "बटेश्वर गाउँपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 177,
+    "fields": {
+        "name": "क्षिरेश्वरनाथ नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 178,
+    "fields": {
+        "name": "लक्ष्मीनिया गाउँपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 179,
+    "fields": {
+        "name": "मिथिला बिहारी नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 180,
+    "fields": {
+        "name": "हंसपुर नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 181,
+    "fields": {
+        "name": "सबैला नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 182,
+    "fields": {
+        "name": "शहीदनगर नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 183,
+    "fields": {
+        "name": "कमला नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 184,
+    "fields": {
+        "name": "जनक नन्दिनी गाउँपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 185,
+    "fields": {
+        "name": "बिदेह नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 186,
+    "fields": {
+        "name": "औरही गाउँपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 187,
+    "fields": {
+        "name": "जनकपुर उपमहानगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 188,
+    "fields": {
+        "name": "धनौजी गाउँपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 189,
+    "fields": {
+        "name": "नगराइन नगरपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 190,
+    "fields": {
+        "name": "मुखियापट्टी मुसहरमिया गाउँपालिका",
+        "district": 17
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 191,
+    "fields": {
+        "name": "बर्दिबास नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 192,
+    "fields": {
+        "name": "गौशाला नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 193,
+    "fields": {
+        "name": "सोनमा गाउँपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 194,
+    "fields": {
+        "name": "औरही नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 195,
+    "fields": {
+        "name": "भँगाहा नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 196,
+    "fields": {
+        "name": "लोहरपट्टी नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 197,
+    "fields": {
+        "name": "बलवा नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 198,
+    "fields": {
+        "name": "राम गोपालपुर नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 199,
+    "fields": {
+        "name": "साम्सी गाउँपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 200,
+    "fields": {
+        "name": "मनरा शिसवा नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 201,
+    "fields": {
+        "name": "एकडारा गाउँपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 202,
+    "fields": {
+        "name": "महोत्तरी गाउँपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 203,
+    "fields": {
+        "name": "पिपरा गाउँपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 204,
+    "fields": {
+        "name": "मटिहानी नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 205,
+    "fields": {
+        "name": "जलेश्वर नगरपालिका",
+        "district": 18
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 206,
+    "fields": {
+        "name": "लालबन्दी नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 207,
+    "fields": {
+        "name": "हरिवन नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 208,
+    "fields": {
+        "name": "बागमती नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 209,
+    "fields": {
+        "name": "बरहथवा नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 210,
+    "fields": {
+        "name": "हरिपुर नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 211,
+    "fields": {
+        "name": "ईश्वरपुर नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 212,
+    "fields": {
+        "name": "हरिपुर्वा नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 213,
+    "fields": {
+        "name": "पर्सा गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 214,
+    "fields": {
+        "name": "ब्रह्मपुरी गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 215,
+    "fields": {
+        "name": "चन्द्रनगर गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 216,
+    "fields": {
+        "name": "कविलासी नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 217,
+    "fields": {
+        "name": "चक्रघट्टा गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 218,
+    "fields": {
+        "name": "बसबरिया गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 219,
+    "fields": {
+        "name": "धनकौल गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 220,
+    "fields": {
+        "name": "रामनगर गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 221,
+    "fields": {
+        "name": "बलरा नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 222,
+    "fields": {
+        "name": "गोडैटा नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 223,
+    "fields": {
+        "name": "विष्णु गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 224,
+    "fields": {
+        "name": "कौडेना गाउँपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 225,
+    "fields": {
+        "name": "मलंगवा नगरपालिका",
+        "district": 19
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 226,
+    "fields": {
+        "name": "चन्द्रपुर नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 227,
+    "fields": {
+        "name": "गुजरा नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 228,
+    "fields": {
+        "name": "फतुवा बिजयपुर नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 229,
+    "fields": {
+        "name": "कटहरिया नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 230,
+    "fields": {
+        "name": "बृन्दावन नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 231,
+    "fields": {
+        "name": "गढीमाई नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 232,
+    "fields": {
+        "name": "माधव नारायण नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 233,
+    "fields": {
+        "name": "गरुडा नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 234,
+    "fields": {
+        "name": "देवाही गोनाही नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 235,
+    "fields": {
+        "name": "मौलापुर नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 236,
+    "fields": {
+        "name": "बौधीमाई नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 237,
+    "fields": {
+        "name": "परोहा नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 238,
+    "fields": {
+        "name": "राजपुर नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 239,
+    "fields": {
+        "name": "यमुनामाई गाउँपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 240,
+    "fields": {
+        "name": "दुर्गा भगवती गाउँपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 241,
+    "fields": {
+        "name": "राजदेवी नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 242,
+    "fields": {
+        "name": "गौर नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 243,
+    "fields": {
+        "name": "ईशनाथ नगरपालिका",
+        "district": 20
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 244,
+    "fields": {
+        "name": "निजगढ नगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 245,
+    "fields": {
+        "name": "कोल्हवी नगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 246,
+    "fields": {
+        "name": "जीतपुर सिमरा उपमहानगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 247,
+    "fields": {
+        "name": "परवानीपुर गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 248,
+    "fields": {
+        "name": "प्रसौनी गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 249,
+    "fields": {
+        "name": "विश्रामपुर गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 250,
+    "fields": {
+        "name": "फेटा गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 251,
+    "fields": {
+        "name": "कलैया उपमहानगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 252,
+    "fields": {
+        "name": "करैयामाई गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 253,
+    "fields": {
+        "name": "बारागढी गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 254,
+    "fields": {
+        "name": "आदर्श कोटवाल गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 255,
+    "fields": {
+        "name": "सिम्रौनगढ नगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 256,
+    "fields": {
+        "name": "पचरौता नगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 257,
+    "fields": {
+        "name": "महागढीमाई नगरपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 258,
+    "fields": {
+        "name": "देवताल गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 259,
+    "fields": {
+        "name": "सुवर्ण गाउँपालिका",
+        "district": 21
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 260,
+    "fields": {
+        "name": "ठोरी (सुवर्णपुर) गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 261,
+    "fields": {
+        "name": "जिराभवानी गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 262,
+    "fields": {
+        "name": "जगरनाथपुर गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 263,
+    "fields": {
+        "name": "पटेर्वा सुगौली गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 264,
+    "fields": {
+        "name": "सखुवा प्रसौनी गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 265,
+    "fields": {
+        "name": "पर्सागढी नगरपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 266,
+    "fields": {
+        "name": "बिरगन्ज महानगरपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 267,
+    "fields": {
+        "name": "बहुदरमाई नगरपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 268,
+    "fields": {
+        "name": "पोखरिया नगरपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 269,
+    "fields": {
+        "name": "कालिकामाई गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 270,
+    "fields": {
+        "name": "धोबीनी गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 271,
+    "fields": {
+        "name": "छिपहरमाई गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 272,
+    "fields": {
+        "name": "पकाहा मैनपुर गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 273,
+    "fields": {
+        "name": "बिन्दबासिनी गाउँपालिका",
+        "district": 22
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 274,
+    "fields": {
+        "name": "गौरिशंकर गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 275,
+    "fields": {
+        "name": "बिगु गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 276,
+    "fields": {
+        "name": "कालिन्चोक गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 277,
+    "fields": {
+        "name": "बैतेधर गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 278,
+    "fields": {
+        "name": "जिरी नगरपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 279,
+    "fields": {
+        "name": "तामाकोशी गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 280,
+    "fields": {
+        "name": "मेलुङ्ग गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 281,
+    "fields": {
+        "name": "शैलुड० गाउँपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 282,
+    "fields": {
+        "name": "भिमेश्वर नगरपालिका",
+        "district": 23
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 283,
+    "fields": {
+        "name": "भोटेकोशी गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 284,
+    "fields": {
+        "name": "जुगल गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 285,
+    "fields": {
+        "name": "पाँचपोखरी थाड०पाल गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 286,
+    "fields": {
+        "name": "हेलम्बु गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 287,
+    "fields": {
+        "name": "मेलम्ची नगरपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 288,
+    "fields": {
+        "name": "ईन्द्रावती गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 289,
+    "fields": {
+        "name": "चौतारा साँगाचोकगढी नगरपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 290,
+    "fields": {
+        "name": "बलेफी गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 291,
+    "fields": {
+        "name": "बाह्रबिसे नगरपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 292,
+    "fields": {
+        "name": "त्रिपुरासुन्दरी गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 293,
+    "fields": {
+        "name": "लिसंखु पाखर गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 294,
+    "fields": {
+        "name": "सुनकोशी गाउँपालिका",
+        "district": 24
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 295,
+    "fields": {
+        "name": "गोसाईकुण्ड गाउँपालिका",
+        "district": 25
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 296,
+    "fields": {
+        "name": "पार्वतीकुण्ड गाउँपालिका",
+        "district": 25
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 297,
+    "fields": {
+        "name": "उत्तरगया गाउँपालिका",
+        "district": 25
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 298,
+    "fields": {
+        "name": "कालिका गाउँपालिका",
+        "district": 25
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 299,
+    "fields": {
+        "name": "नौकुण्ड गाउँपालिका",
+        "district": 25
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 300,
+    "fields": {
+        "name": "रुबी भ्याली गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 301,
+    "fields": {
+        "name": "खनियाबास गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 302,
+    "fields": {
+        "name": "गंङ्गा जमुना गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 303,
+    "fields": {
+        "name": "त्रिपुरासुन्दरी गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 304,
+    "fields": {
+        "name": "नेत्रावती गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 305,
+    "fields": {
+        "name": "नीलकण्ठ नगरपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 306,
+    "fields": {
+        "name": "ज्वालामुखी गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 307,
+    "fields": {
+        "name": "सिद्धलेक गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 308,
+    "fields": {
+        "name": "बेनीघाट रोराङ्ग गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 309,
+    "fields": {
+        "name": "गजुरी गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 310,
+    "fields": {
+        "name": "गल्छी गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 311,
+    "fields": {
+        "name": "थाक्रे गाउँपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 312,
+    "fields": {
+        "name": "धुनीबेंशी नगरपालिका",
+        "district": 26
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 313,
+    "fields": {
+        "name": "दुप्चेश्वर गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 314,
+    "fields": {
+        "name": "तादी गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 315,
+    "fields": {
+        "name": "सुर्यगढी गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 316,
+    "fields": {
+        "name": "बिदुर नगरपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 317,
+    "fields": {
+        "name": "किस्पाङ्ग गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 318,
+    "fields": {
+        "name": "मेघाङ्ग गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 319,
+    "fields": {
+        "name": "तारकेश्वर गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 320,
+    "fields": {
+        "name": "बेलकोटगढी नगरपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 321,
+    "fields": {
+        "name": "लिखु गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 322,
+    "fields": {
+        "name": "पन्चकन्या गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 323,
+    "fields": {
+        "name": "शिवपुरी गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 324,
+    "fields": {
+        "name": "ककनी गाउँपालिका",
+        "district": 27
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 325,
+    "fields": {
+        "name": "शंङ्खरापुर नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 326,
+    "fields": {
+        "name": "कागेश्वरी मनहरा नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 327,
+    "fields": {
+        "name": "गोकर्णेश्वर नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 328,
+    "fields": {
+        "name": "बुढानिलकण्ठ नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 329,
+    "fields": {
+        "name": "टोखा नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 330,
+    "fields": {
+        "name": "तारकेश्वर नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 331,
+    "fields": {
+        "name": "नागार्जुन नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 332,
+    "fields": {
+        "name": "काठमाण्डौ महानगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 333,
+    "fields": {
+        "name": "किर्तिपुर नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 334,
+    "fields": {
+        "name": "चन्द्रागिरी नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 335,
+    "fields": {
+        "name": "दक्षिणकाली नगरपालिका",
+        "district": 28
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 336,
+    "fields": {
+        "name": "चाँगुनारायण नगरपालिका",
+        "district": 29
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 337,
+    "fields": {
+        "name": "भक्तपुर नगरपालिका",
+        "district": 29
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 338,
+    "fields": {
+        "name": "मध्यपुर थिमी नगरपालिका",
+        "district": 29
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 339,
+    "fields": {
+        "name": "सूर्यविनायक नगरपालिका",
+        "district": 29
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 340,
+    "fields": {
+        "name": "महालक्ष्मी नगरपालिका",
+        "district": 30
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 341,
+    "fields": {
+        "name": "ललितपुर महानगरपालिका",
+        "district": 30
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 342,
+    "fields": {
+        "name": "गोदावरी नगरपालिका",
+        "district": 30
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 343,
+    "fields": {
+        "name": "कोन्ज्योसोम गाउँपालिका",
+        "district": 30
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 344,
+    "fields": {
+        "name": "महाङ्काल गाउँपालिका",
+        "district": 30
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 345,
+    "fields": {
+        "name": "बाग्मती गाउँपालिका",
+        "district": 30
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 346,
+    "fields": {
+        "name": "चौरीदेउराली गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 347,
+    "fields": {
+        "name": "भुम्लु गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 348,
+    "fields": {
+        "name": "मण्डन देउपुर नगरपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 349,
+    "fields": {
+        "name": "बनेपा नगरपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 350,
+    "fields": {
+        "name": "धुलिखेल नगरपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 351,
+    "fields": {
+        "name": "पाँचखाल नगरपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 352,
+    "fields": {
+        "name": "तेमाल गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 353,
+    "fields": {
+        "name": "नमोबुद्ध नगरपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 354,
+    "fields": {
+        "name": "पनौती नगरपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 355,
+    "fields": {
+        "name": "बेथानचोक गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 356,
+    "fields": {
+        "name": "रोशी गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 357,
+    "fields": {
+        "name": "महाभारत गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 358,
+    "fields": {
+        "name": "खानीखोला गाउँपालिका",
+        "district": 31
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 359,
+    "fields": {
+        "name": "उमाकुण्ड गाउँपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 360,
+    "fields": {
+        "name": "गोकुलगङ्गा गाउँपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 361,
+    "fields": {
+        "name": "लिखु गाउँपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 362,
+    "fields": {
+        "name": "रामेछाप नगरपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 363,
+    "fields": {
+        "name": "मन्थली नगरपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 364,
+    "fields": {
+        "name": "खाँडादेवी गाउँपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 365,
+    "fields": {
+        "name": "दोरम्बा गाउँपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 366,
+    "fields": {
+        "name": "सुनापती गाउँपालिका",
+        "district": 32
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 367,
+    "fields": {
+        "name": "दुधौली नगरपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 368,
+    "fields": {
+        "name": "फिक्कल गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 369,
+    "fields": {
+        "name": "तीनपाटन गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 370,
+    "fields": {
+        "name": "गोलन्जोर गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 371,
+    "fields": {
+        "name": "कमलामाई नगरपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 372,
+    "fields": {
+        "name": "सुनकोशी गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 373,
+    "fields": {
+        "name": "ध्याङलेख गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 374,
+    "fields": {
+        "name": "मरिण गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 375,
+    "fields": {
+        "name": "हरिहरपुरगढी गाउँपालिका",
+        "district": 33
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 376,
+    "fields": {
+        "name": "ईन्द्रसरोवर गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 377,
+    "fields": {
+        "name": "थाहा नगरपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 378,
+    "fields": {
+        "name": "कैलाश गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 379,
+    "fields": {
+        "name": "राक्सिराङ्ग गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 380,
+    "fields": {
+        "name": "मनहरी गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 381,
+    "fields": {
+        "name": "हेटौडा उपमहानगरपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 382,
+    "fields": {
+        "name": "भिमफेदी गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 383,
+    "fields": {
+        "name": "मकवानपुरगढी गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 384,
+    "fields": {
+        "name": "बकैया गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 385,
+    "fields": {
+        "name": "बाग्मती गाउँपालिका",
+        "district": 34
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 386,
+    "fields": {
+        "name": "राप्ती नगरपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 387,
+    "fields": {
+        "name": "कालिका नगरपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 388,
+    "fields": {
+        "name": "इच्छाकामना गाउँपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 389,
+    "fields": {
+        "name": "भरतपुर महानगरपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 390,
+    "fields": {
+        "name": "रत्ननगर नगरपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 391,
+    "fields": {
+        "name": "खैरहनी नगरपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 392,
+    "fields": {
+        "name": "माडी नगरपालिका",
+        "district": 35
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 393,
+    "fields": {
+        "name": "चुमनुब्री गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 394,
+    "fields": {
+        "name": "अजिरकोट गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 395,
+    "fields": {
+        "name": "सुलीकोट गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 396,
+    "fields": {
+        "name": "धार्चे गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 397,
+    "fields": {
+        "name": "आरुघाट गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 398,
+    "fields": {
+        "name": "भिमसेन गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 399,
+    "fields": {
+        "name": "सिरानचोक गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 400,
+    "fields": {
+        "name": "पालुङ्गटार नगरपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 401,
+    "fields": {
+        "name": "गोरखा नगरपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 402,
+    "fields": {
+        "name": "शहीद लखन गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 403,
+    "fields": {
+        "name": "गण्डकी गाउँपालिका",
+        "district": 36
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 404,
+    "fields": {
+        "name": "नारफु गाउँपालिका",
+        "district": 37
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 405,
+    "fields": {
+        "name": "नेस्याङ गाउँपालिका",
+        "district": 37
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 406,
+    "fields": {
+        "name": "चामे गाउँपालिका",
+        "district": 37
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 407,
+    "fields": {
+        "name": "नाशोङ गाउँपालिका",
+        "district": 37
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 408,
+    "fields": {
+        "name": "दालोमे गाउँपालिका",
+        "district": 38
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 409,
+    "fields": {
+        "name": "घरपझोङ गाउँपालिका",
+        "district": 38
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 410,
+    "fields": {
+        "name": "बाह्रगाउँ मुक्तिक्षेत्र गाउँपालिका",
+        "district": 38
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 411,
+    "fields": {
+        "name": "लोमन्थाङ गाउँपालिका",
+        "district": 38
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 412,
+    "fields": {
+        "name": "थासाङ गाउँपालिका",
+        "district": 38
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 413,
+    "fields": {
+        "name": "अन्नपूर्ण गाउँपालिका",
+        "district": 39
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 414,
+    "fields": {
+        "name": "रघुगंगा गाउँपालिका",
+        "district": 39
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 415,
+    "fields": {
+        "name": "धवलागिरी गाउँपालिका",
+        "district": 39
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 416,
+    "fields": {
+        "name": "मालिका गाउँपालिका",
+        "district": 39
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 417,
+    "fields": {
+        "name": "मंगला गाउँपालिका",
+        "district": 39
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 418,
+    "fields": {
+        "name": "बेनी नगरपालिका",
+        "district": 39
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 419,
+    "fields": {
+        "name": "मादी गाउँपालिका",
+        "district": 40
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 420,
+    "fields": {
+        "name": "माछापुच्छ्र्े गाउँपालिका",
+        "district": 40
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 421,
+    "fields": {
+        "name": "अन्नपूर्ण गाउँपालिका",
+        "district": 40
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 422,
+    "fields": {
+        "name": "पोखरा लेखनाथ महानगरपालिका",
+        "district": 40
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 423,
+    "fields": {
+        "name": "रूपा गाउँपालिका",
+        "district": 40
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 424,
+    "fields": {
+        "name": "दोर्दी गाउँपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 425,
+    "fields": {
+        "name": "मस्र्याङ्गदी गाउँपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 426,
+    "fields": {
+        "name": "क्ब्होलासोथार गाउँपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 427,
+    "fields": {
+        "name": "मध्यनेपाल नगरपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 428,
+    "fields": {
+        "name": "बेंसीशहर नगरापालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 429,
+    "fields": {
+        "name": "सुन्दरबजार नगरपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 430,
+    "fields": {
+        "name": "राईनास नगरपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 431,
+    "fields": {
+        "name": "दुधपोखरी गाउँपालिका",
+        "district": 41
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 432,
+    "fields": {
+        "name": "भानु नगरपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 433,
+    "fields": {
+        "name": "ब्यास नगरपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 434,
+    "fields": {
+        "name": "म्याग्दे गाउँपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 435,
+    "fields": {
+        "name": "शुक्लागण्डकी नगरपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 436,
+    "fields": {
+        "name": "भिमाद नगरपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 437,
+    "fields": {
+        "name": "घिरिङ्ग गाउँपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 438,
+    "fields": {
+        "name": "ऋषिङ्ग गाउँपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 439,
+    "fields": {
+        "name": "देवघाट गाउँपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 440,
+    "fields": {
+        "name": "बन्दिपुर गाउँपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 441,
+    "fields": {
+        "name": "आँबुखैरेनी गाउँपालिका",
+        "district": 42
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 442,
+    "fields": {
+        "name": "गैडाकोट नगरपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 443,
+    "fields": {
+        "name": "बुलिङ्गटार गाउँपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 444,
+    "fields": {
+        "name": "बुङ्दीकाली गाउँपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 445,
+    "fields": {
+        "name": "हुप्सेकोट गाउँपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 446,
+    "fields": {
+        "name": "देवचुली नगरपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 447,
+    "fields": {
+        "name": "कावासोती नगरपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 448,
+    "fields": {
+        "name": "मध्यबिन्दु नगरपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 449,
+    "fields": {
+        "name": "बिनयी त्रिवेणी गाउँपालिका",
+        "district": 43
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 450,
+    "fields": {
+        "name": "पुतलीबजार नगरपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 451,
+    "fields": {
+        "name": "फेदीखोला गाउँपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 452,
+    "fields": {
+        "name": "आँधिखोला गाउँपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 453,
+    "fields": {
+        "name": "अर्जुनचौपारी गाउँपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 454,
+    "fields": {
+        "name": "भीरकोट नगरपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 455,
+    "fields": {
+        "name": "बिरुवा गाउँपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 456,
+    "fields": {
+        "name": "हरिनास गाउँपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 457,
+    "fields": {
+        "name": "चापाकोट नगरपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 458,
+    "fields": {
+        "name": "वालिङ्ग नगरपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 459,
+    "fields": {
+        "name": "गल्याङ नगरपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 460,
+    "fields": {
+        "name": "कालीगण्डकी गाउँपालिका",
+        "district": 44
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 461,
+    "fields": {
+        "name": "मोदी गाउँपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 462,
+    "fields": {
+        "name": "जलजला गाउँपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 463,
+    "fields": {
+        "name": "कुश्मा नगरपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 464,
+    "fields": {
+        "name": "फलेबास नगरपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 465,
+    "fields": {
+        "name": "महाशिला गाउँपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 466,
+    "fields": {
+        "name": "बिहादी गाउँपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 467,
+    "fields": {
+        "name": "पैयुं गाउँपालिका",
+        "district": 45
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 468,
+    "fields": {
+        "name": "बाग्लुङ्ग नगरपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 469,
+    "fields": {
+        "name": "काठेखोला गाउँपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 470,
+    "fields": {
+        "name": "ताराखोला गाउँपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 471,
+    "fields": {
+        "name": "तमानखोला गाउँपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 472,
+    "fields": {
+        "name": "ढोरपाटन नगरपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 473,
+    "fields": {
+        "name": "निसीखोला गाउँपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 474,
+    "fields": {
+        "name": "बडिगाड गाउँपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 475,
+    "fields": {
+        "name": "गल्कोट नगरपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 476,
+    "fields": {
+        "name": "बरेङ गाउँपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 477,
+    "fields": {
+        "name": "जैमुनी नगरपालिका",
+        "district": 46
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 478,
+    "fields": {
+        "name": "पुथा उत्तरगंगा गाउँपालिका",
+        "district": 47
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 479,
+    "fields": {
+        "name": "सिस्ने गाउँपालिका",
+        "district": 47
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 480,
+    "fields": {
+        "name": "भूमे गाउँपालिका",
+        "district": 47
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 481,
+    "fields": {
+        "name": "सुनछहरी गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 482,
+    "fields": {
+        "name": "थबाङ्ग गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 483,
+    "fields": {
+        "name": "दुईखोली गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 484,
+    "fields": {
+        "name": "सुकिदह गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 485,
+    "fields": {
+        "name": "माडी गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 486,
+    "fields": {
+        "name": "त्रिवेणी गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 487,
+    "fields": {
+        "name": "रोल्पा नगरपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 488,
+    "fields": {
+        "name": "रुन्टीगढी गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 489,
+    "fields": {
+        "name": "सुवर्णावती गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 490,
+    "fields": {
+        "name": "लुङ्ग्री गाउँपालिका",
+        "district": 48
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 491,
+    "fields": {
+        "name": "गौमुखी गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 492,
+    "fields": {
+        "name": "नौबहिनी गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 493,
+    "fields": {
+        "name": "झिमरुक गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 494,
+    "fields": {
+        "name": "प्यूठान नगरपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 495,
+    "fields": {
+        "name": "स्वर्गद्धारी नगरपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 496,
+    "fields": {
+        "name": "माण्डवी गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 497,
+    "fields": {
+        "name": "मल्लरानी गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 498,
+    "fields": {
+        "name": "ऐरावती गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 499,
+    "fields": {
+        "name": "सरुमारानी गाउँपालिका",
+        "district": 49
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 500,
+    "fields": {
+        "name": "कालिगण्डकी गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 501,
+    "fields": {
+        "name": "सत्यवती गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 502,
+    "fields": {
+        "name": "चन्द्रकोट गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 503,
+    "fields": {
+        "name": "मुसिकोट नगरपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 504,
+    "fields": {
+        "name": "ईस्मा गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 505,
+    "fields": {
+        "name": "मालिका गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 506,
+    "fields": {
+        "name": "मदाने गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 507,
+    "fields": {
+        "name": "धुर्कोट गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 508,
+    "fields": {
+        "name": "रेसुङ्गा नगरपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 509,
+    "fields": {
+        "name": "गुल्मी दरबार गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 510,
+    "fields": {
+        "name": "छत्रकोट गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 511,
+    "fields": {
+        "name": "रूरू गाउँपालिका",
+        "district": 50
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 512,
+    "fields": {
+        "name": "छत्रदेव गाउँपालिका",
+        "district": 51
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 513,
+    "fields": {
+        "name": "मालारानी गाउँपालिका",
+        "district": 51
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 514,
+    "fields": {
+        "name": "भुमिकास्थान नगरपालिका",
+        "district": 51
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 515,
+    "fields": {
+        "name": "सन्धिखर्क नगरपालिका",
+        "district": 51
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 516,
+    "fields": {
+        "name": "पाणिनी गाउँपालिका",
+        "district": 51
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 517,
+    "fields": {
+        "name": "शितगंगा नगरपालिका",
+        "district": 51
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 518,
+    "fields": {
+        "name": "रामपुर नगरपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 519,
+    "fields": {
+        "name": "पुर्वखोला गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 520,
+    "fields": {
+        "name": "रम्भा गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 521,
+    "fields": {
+        "name": "बगनासकाली गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 522,
+    "fields": {
+        "name": "तानसेन नगरपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 523,
+    "fields": {
+        "name": "रिब्दीकोट गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 524,
+    "fields": {
+        "name": "रैनादेवी छहरा गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 525,
+    "fields": {
+        "name": "तिनाउ गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 526,
+    "fields": {
+        "name": "माथागढी गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 527,
+    "fields": {
+        "name": "निस्दी गाउँपालिका",
+        "district": 52
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 528,
+    "fields": {
+        "name": "बर्दघाट नगरपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 529,
+    "fields": {
+        "name": "सुनवल नगरपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 530,
+    "fields": {
+        "name": "रामग्राम नगरपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 531,
+    "fields": {
+        "name": "पाल्हीनन्दन गाउँपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 532,
+    "fields": {
+        "name": "सरावल गाउँपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 533,
+    "fields": {
+        "name": "प्रतापपुर गाउँपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 534,
+    "fields": {
+        "name": "सुस्ता गाउँपालिका",
+        "district": 53
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 535,
+    "fields": {
+        "name": "देबदह नगरपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 536,
+    "fields": {
+        "name": "बुटवल उपमहानगरपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 537,
+    "fields": {
+        "name": "सैनामैना नगरपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 538,
+    "fields": {
+        "name": "कन्चन गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 539,
+    "fields": {
+        "name": "गैडहवा गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 540,
+    "fields": {
+        "name": "सुद्धोधन गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 541,
+    "fields": {
+        "name": "सियारी गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 542,
+    "fields": {
+        "name": "तिलोत्तमा नगरापालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 543,
+    "fields": {
+        "name": "ओमसतिया गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 544,
+    "fields": {
+        "name": "रोहिणी गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 545,
+    "fields": {
+        "name": "सिद्धार्थनगर नगरपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 546,
+    "fields": {
+        "name": "मायादेवी गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 547,
+    "fields": {
+        "name": "लुम्बिनी साँस्कृतिक नगरपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 548,
+    "fields": {
+        "name": "कोटहीमाई गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 549,
+    "fields": {
+        "name": "सम्मरीमाई गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 550,
+    "fields": {
+        "name": "मर्चवारी गाउँपालिका",
+        "district": 54
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 551,
+    "fields": {
+        "name": "बाणगंगा नगरपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 552,
+    "fields": {
+        "name": "बुद्धभूमी नगरपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 553,
+    "fields": {
+        "name": "शिवराज नगरपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 554,
+    "fields": {
+        "name": "बिजयनगर गाउँपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 555,
+    "fields": {
+        "name": "कृष्णनगर नगरपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 556,
+    "fields": {
+        "name": "महाराजगन्ज नगरपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 557,
+    "fields": {
+        "name": "कपिलबस्तु नगरपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 558,
+    "fields": {
+        "name": "यसोधरा गाउँपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 559,
+    "fields": {
+        "name": "मायादेवी गाउँपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 560,
+    "fields": {
+        "name": "शुद्धोधन गाउँपालिका",
+        "district": 55
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 561,
+    "fields": {
+        "name": "बंगलाचुली गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 562,
+    "fields": {
+        "name": "घोराही उपमहानगरपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 563,
+    "fields": {
+        "name": "तुल्सीपुर उपमहानगरपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 564,
+    "fields": {
+        "name": "शान्तिनगर गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 565,
+    "fields": {
+        "name": "बबई गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 566,
+    "fields": {
+        "name": "दंगीशरण गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 567,
+    "fields": {
+        "name": "लमही नगरपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 568,
+    "fields": {
+        "name": "राप्ती गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 569,
+    "fields": {
+        "name": "गढवा गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 570,
+    "fields": {
+        "name": "राजपुर गाउँपालिका",
+        "district": 56
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 571,
+    "fields": {
+        "name": "राप्ती सोनारी गाउँपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 572,
+    "fields": {
+        "name": "कोहलपुर नगरपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 573,
+    "fields": {
+        "name": "बैजनाथ गाउँपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 574,
+    "fields": {
+        "name": "खजुरा गाउँपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 575,
+    "fields": {
+        "name": "जानकी गाउँपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 576,
+    "fields": {
+        "name": "नेपालगञ्ज उपमहानगरपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 577,
+    "fields": {
+        "name": "डुडुवा गाउँपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 578,
+    "fields": {
+        "name": "नरैनापुर गाउँपालिका",
+        "district": 57
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 579,
+    "fields": {
+        "name": "बाँसगढी नगरपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 580,
+    "fields": {
+        "name": "बारबर्दिया नगरपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 581,
+    "fields": {
+        "name": "ठाकुरबाबा नगरपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 582,
+    "fields": {
+        "name": "गेरुवा गाउँपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 583,
+    "fields": {
+        "name": "राजापुर नगरपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 584,
+    "fields": {
+        "name": "मधुवन नगरपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 585,
+    "fields": {
+        "name": "गुलरीया नगरपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 586,
+    "fields": {
+        "name": "बढैयाताल गाउँपालिका",
+        "district": 58
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 587,
+    "fields": {
+        "name": "डोल्पो बुद्ध गाउँपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 588,
+    "fields": {
+        "name": "शे फोक्सुण्डो गाउँपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 589,
+    "fields": {
+        "name": "जगदुल्ला गाउँपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 590,
+    "fields": {
+        "name": "मुड्केचुला गाउँपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 591,
+    "fields": {
+        "name": "त्रिपुरासुन्दरी नगरपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 592,
+    "fields": {
+        "name": "ठुलीभेरी नगरपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 593,
+    "fields": {
+        "name": "काइके गाउँपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 594,
+    "fields": {
+        "name": "छार्का ताङसोङ गाउँपालिका",
+        "district": 59
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 595,
+    "fields": {
+        "name": "मुगुमकार्मारोग गाउँपालिका",
+        "district": 60
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 596,
+    "fields": {
+        "name": "छायाँनाथ रारा नगरपालिका",
+        "district": 60
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 597,
+    "fields": {
+        "name": "सोरु गाउँपालिका",
+        "district": 60
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 598,
+    "fields": {
+        "name": "खत्याड गाउँपालिका",
+        "district": 60
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 599,
+    "fields": {
+        "name": "चंखेली गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 600,
+    "fields": {
+        "name": "खार्पुनाथ गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 601,
+    "fields": {
+        "name": "सिमकोट गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 602,
+    "fields": {
+        "name": "नाम्खा गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 603,
+    "fields": {
+        "name": "सर्केगाड गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 604,
+    "fields": {
+        "name": "अदानचुली गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 605,
+    "fields": {
+        "name": "ताँजाकोट गाउँपालिका",
+        "district": 61
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 606,
+    "fields": {
+        "name": "पातारासी गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 607,
+    "fields": {
+        "name": "कनका सुन्दरी गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 608,
+    "fields": {
+        "name": "सिंजा गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 609,
+    "fields": {
+        "name": "चन्दननाथ नगरपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 610,
+    "fields": {
+        "name": "गुठिचौर गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 611,
+    "fields": {
+        "name": "तातोपानी गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 612,
+    "fields": {
+        "name": "तिला गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 613,
+    "fields": {
+        "name": "हिमा गाउँपालिका",
+        "district": 62
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 614,
+    "fields": {
+        "name": "पलाता गाउँपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 615,
+    "fields": {
+        "name": "पचाल झरना गाउँपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 616,
+    "fields": {
+        "name": "रास्कोट नगरपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 617,
+    "fields": {
+        "name": "सान्नी त्रिवेणी गाउँपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 618,
+    "fields": {
+        "name": "नरहरिनाथ गाउँपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 619,
+    "fields": {
+        "name": "खाँडाचक्र नगरपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 620,
+    "fields": {
+        "name": "तिलागुफा नगरपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 621,
+    "fields": {
+        "name": "महावै गाउँपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 622,
+    "fields": {
+        "name": "कालिका गाउँपालिका",
+        "district": 63
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 623,
+    "fields": {
+        "name": "नौमुले गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 624,
+    "fields": {
+        "name": "महाबु गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 625,
+    "fields": {
+        "name": "भैरवी गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 626,
+    "fields": {
+        "name": "ठाँटीकाँध गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 627,
+    "fields": {
+        "name": "आठबीस नगरपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 628,
+    "fields": {
+        "name": "चामुण्डा बिन्द्रासैनी नगरपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 629,
+    "fields": {
+        "name": "दुल्लु नगरपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 630,
+    "fields": {
+        "name": "नारायण नगरपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 631,
+    "fields": {
+        "name": "भगवतीमाई गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 632,
+    "fields": {
+        "name": "डुङ्गेश्वर गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 633,
+    "fields": {
+        "name": "गुराँस गाउँपालिका",
+        "district": 64
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 634,
+    "fields": {
+        "name": "बारेकोट गाउँपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 635,
+    "fields": {
+        "name": "कुसे गाउँपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 636,
+    "fields": {
+        "name": "जुनीचाँदे गाउँपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 637,
+    "fields": {
+        "name": "छेडागाड नगरपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 638,
+    "fields": {
+        "name": "शिवालय गाउँपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 639,
+    "fields": {
+        "name": "भेरीमालिका नगरपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 640,
+    "fields": {
+        "name": "त्रिवेणी नलगाड नगरपालिका",
+        "district": 65
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 641,
+    "fields": {
+        "name": "आठबिसकोट नगरपालिका",
+        "district": 66
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 642,
+    "fields": {
+        "name": "सानीभेरी गाउँपालिका",
+        "district": 66
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 643,
+    "fields": {
+        "name": "बाँफिकोट गाउँपालिका",
+        "district": 66
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 644,
+    "fields": {
+        "name": "मुसिकोट नगरपालिका",
+        "district": 66
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 645,
+    "fields": {
+        "name": "त्रिवेणी गाउँपालिका",
+        "district": 66
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 646,
+    "fields": {
+        "name": "चौरजहारी नगरपालिका",
+        "district": 66
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 647,
+    "fields": {
+        "name": "दार्मा गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 648,
+    "fields": {
+        "name": "कुमाख मालिका गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 649,
+    "fields": {
+        "name": "बनगाड कुपिण्डे नगरपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 650,
+    "fields": {
+        "name": "ढोरचौर गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 651,
+    "fields": {
+        "name": "बागचौर नगरपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 652,
+    "fields": {
+        "name": "छत्रेश्वरी गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 653,
+    "fields": {
+        "name": "शारदा नगरपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 654,
+    "fields": {
+        "name": "कालिमाटी गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 655,
+    "fields": {
+        "name": "त्रिवेणी गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 656,
+    "fields": {
+        "name": "कपुरकोट गाउँपालिका",
+        "district": 67
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 657,
+    "fields": {
+        "name": "सिम्ता गाउँपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 658,
+    "fields": {
+        "name": "चिङ्गगाड गाउँपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 659,
+    "fields": {
+        "name": "लेकबेशी नगरपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 660,
+    "fields": {
+        "name": "गुर्भाकोट नगरपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 661,
+    "fields": {
+        "name": "भेरीगंगा नगरपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 662,
+    "fields": {
+        "name": "बीरेन्द्रनगर नगरपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 663,
+    "fields": {
+        "name": "बराहताल गाउँपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 664,
+    "fields": {
+        "name": "पञ्चपुरी नगरपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 665,
+    "fields": {
+        "name": "चौकुने गाउँपालिका",
+        "district": 68
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 666,
+    "fields": {
+        "name": "हिमाली गाउँपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 667,
+    "fields": {
+        "name": "गौमुल गाउँपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 668,
+    "fields": {
+        "name": "बुढीनन्दा नगरपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 669,
+    "fields": {
+        "name": "स्वामी कार्तिक गाउँपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 670,
+    "fields": {
+        "name": "पाण्डव गुफा गाउँपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 671,
+    "fields": {
+        "name": "बडिमालिका नगरपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 672,
+    "fields": {
+        "name": "छेडेदह गाउँपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 673,
+    "fields": {
+        "name": "बुढीगंगा नगरपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 674,
+    "fields": {
+        "name": "त्रिवेणी नगरपालिका",
+        "district": 69
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 675,
+    "fields": {
+        "name": "काँडा गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 676,
+    "fields": {
+        "name": "बुंगल नगरपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 677,
+    "fields": {
+        "name": "सूर्मा गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 678,
+    "fields": {
+        "name": "तालकोट गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 679,
+    "fields": {
+        "name": "मष्टा गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 680,
+    "fields": {
+        "name": "जयपृथ्वी नगरपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 681,
+    "fields": {
+        "name": "छबिस पाथिभरा गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 682,
+    "fields": {
+        "name": "दुर्गाथली गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 683,
+    "fields": {
+        "name": "केदारस्युँ गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 684,
+    "fields": {
+        "name": "बित्थडचिर गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 685,
+    "fields": {
+        "name": "थलारा गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 686,
+    "fields": {
+        "name": "खप्तडछान्ना गाउँपालिका",
+        "district": 70
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 687,
+    "fields": {
+        "name": "ब्याँस गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 688,
+    "fields": {
+        "name": "दुहुँ गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 689,
+    "fields": {
+        "name": "महाकाली नगरपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 690,
+    "fields": {
+        "name": "नौगाड गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 691,
+    "fields": {
+        "name": "अपिहिमाल गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 692,
+    "fields": {
+        "name": "मार्मा गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 693,
+    "fields": {
+        "name": "शैल्यशिखर नगरपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 694,
+    "fields": {
+        "name": "मालिकार्जुन गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 695,
+    "fields": {
+        "name": "लेकम गाउँपालिका",
+        "district": 71
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 696,
+    "fields": {
+        "name": "डीलासैनी गाउँपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 697,
+    "fields": {
+        "name": "दोगडाकेदार गाउँपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 698,
+    "fields": {
+        "name": "पुचौंडी नगरपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 699,
+    "fields": {
+        "name": "सुर्नया गाउँपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 700,
+    "fields": {
+        "name": "दशरथचन्द नगरपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 701,
+    "fields": {
+        "name": "पन्चेश्वर गाउँपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 702,
+    "fields": {
+        "name": "शिवनाथ गाउँपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 703,
+    "fields": {
+        "name": "मेलौली नगरपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 704,
+    "fields": {
+        "name": "पाटन नगरपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 705,
+    "fields": {
+        "name": "सिगास गाउँपालिका",
+        "district": 72
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 706,
+    "fields": {
+        "name": "नवदुर्गा गाउँपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 707,
+    "fields": {
+        "name": "अमरगढी नगरपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 708,
+    "fields": {
+        "name": "अजयमेरु गाउँपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 709,
+    "fields": {
+        "name": "भागेश्वर गाउँपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 710,
+    "fields": {
+        "name": "परशुराम नगरपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 711,
+    "fields": {
+        "name": "आलिताल गाउँपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 712,
+    "fields": {
+        "name": "गन्यापधुरा गाउँपालिका",
+        "district": 73
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 713,
+    "fields": {
+        "name": "पुर्विचौकी गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 714,
+    "fields": {
+        "name": "सायल गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 715,
+    "fields": {
+        "name": "आदर्श गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 716,
+    "fields": {
+        "name": "शिखर नगरपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 717,
+    "fields": {
+        "name": "दिपायल सिलगढी नगरपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 718,
+    "fields": {
+        "name": "के.आई.सिं. गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 719,
+    "fields": {
+        "name": "बोगटान गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 720,
+    "fields": {
+        "name": "बडीकेदार गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 721,
+    "fields": {
+        "name": "जोरायल गाउँपालिका",
+        "district": 74
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 722,
+    "fields": {
+        "name": "पंचदेवल बिनायक नगरपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 723,
+    "fields": {
+        "name": "रामारोशन गाउँपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 724,
+    "fields": {
+        "name": "मेल्लेख गाउँपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 725,
+    "fields": {
+        "name": "साँफेबगर नगरपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 726,
+    "fields": {
+        "name": "चौरपाटी गाउँपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 727,
+    "fields": {
+        "name": "मंगलसेन नगरपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 728,
+    "fields": {
+        "name": "बान्नीगढी जयगढ गाउँपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 729,
+    "fields": {
+        "name": "कमलबजार नगरपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 730,
+    "fields": {
+        "name": "ढकारी गाउँपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 731,
+    "fields": {
+        "name": "तुर्माखाँद गाउँपालिका",
+        "district": 75
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 732,
+    "fields": {
+        "name": "मोहन्याल गाउँपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 733,
+    "fields": {
+        "name": "चुरे गाउँपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 734,
+    "fields": {
+        "name": "गोदावरी नगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 735,
+    "fields": {
+        "name": "गौरीगंगा नगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 736,
+    "fields": {
+        "name": "घोडाघोडी नगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 737,
+    "fields": {
+        "name": "बर्दगोरिया गाउँपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 738,
+    "fields": {
+        "name": "लम्कि चुहा नगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 739,
+    "fields": {
+        "name": "जानकी गाउँपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 740,
+    "fields": {
+        "name": "जोशीपुर गाउँपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 741,
+    "fields": {
+        "name": "टिकापुर नगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 742,
+    "fields": {
+        "name": "भजनी नगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 743,
+    "fields": {
+        "name": "कैलारी गाउँपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 744,
+    "fields": {
+        "name": "धनगढी उपमहानगरपालिका",
+        "district": 76
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 745,
+    "fields": {
+        "name": "कृष्णपुर नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 746,
+    "fields": {
+        "name": "शुक्लाफाँटा नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 747,
+    "fields": {
+        "name": "बेदकोट नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 748,
+    "fields": {
+        "name": "भिमदत्त नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 749,
+    "fields": {
+        "name": "माहाकाली नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 750,
+    "fields": {
+        "name": "लालझाडी गाउँपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 751,
+    "fields": {
+        "name": "पुनर्वास नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 752,
+    "fields": {
+        "name": "बेलौरी नगरपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.locallevel",
+    "pk": 753,
+    "fields": {
+        "name": "बेलडाँडी गाउँपालिका",
+        "district": 77
+    }
+},
+{
+    "model": "master_data.unitofmeasure",
+    "pk": 3,
+    "fields": {
+        "name": "एकाइ"
+    }
+},
+{
+    "model": "master_data.unitofmeasure",
+    "pk": 4,
+    "fields": {
+        "name": "ग्राम"
+    }
+},
+{
+    "model": "master_data.unitofmeasure",
+    "pk": 5,
+    "fields": {
+        "name": "मिटर"
+    }
+},
+{
+    "model": "master_data.unitofmeasure",
+    "pk": 6,
+    "fields": {
+        "name": "लिटर"
+    }
+},
+{
+    "model": "master_data.procurementmethod",
+    "pk": 1,
+    "fields": {
+        "name": "सोझै खरिद विधि"
+    }
+},
+{
+    "model": "master_data.procurementmethod",
+    "pk": 2,
+    "fields": {
+        "name": "तीन वटा हाते कोटेशन"
+    }
+},
+{
+    "model": "master_data.procurementmethod",
+    "pk": 3,
+    "fields": {
+        "name": "सिलबन्दी दरभाउ पत्र"
+    }
+},
+{
+    "model": "master_data.procurementmethod",
+    "pk": 4,
+    "fields": {
+        "name": "बोलपत्र"
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 1,
+    "fields": {
+        "created": "2021-02-11T05:47:04.200Z",
+        "name": "पिपीई",
+        "description": "पिपीई",
+        "type": "Equipment",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-11T05:48:17.407Z",
+        "name": "माक्स",
+        "description": "माक्स",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-11T05:50:16.801Z",
+        "name": "पिसीआर किट",
+        "description": "पिसीआर किट",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-11T05:52:30.548Z",
+        "name": "भिटीएम",
+        "description": "भाइरल यातायात माध्यम",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 5,
+    "fields": {
+        "created": "2021-02-11T05:52:49.328Z",
+        "name": "आरडीटी किट",
+        "description": "आरडीटी किट",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 6,
+    "fields": {
+        "created": "2021-02-11T05:54:11.985Z",
+        "name": "इन्फ्रारेड थर्मोमिटर",
+        "description": "इन्फ्रारेड थर्मोमिटर",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 7,
+    "fields": {
+        "created": "2021-02-11T05:55:04.356Z",
+        "name": "भेन्टीलेटर",
+        "description": "भेन्टीलेटर",
+        "type": "Equipment",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 8,
+    "fields": {
+        "created": "2021-02-11T05:56:17.625Z",
+        "name": "आईसीयू बेड",
+        "description": "आईसीयू बेड",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 9,
+    "fields": {
+        "created": "2021-02-11T05:57:15.586Z",
+        "name": "पिसीआर मेशीन",
+        "description": "पिसीआर मेशीन",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 10,
+    "fields": {
+        "created": "2021-02-11T06:46:54.670Z",
+        "name": "एम्बुलेन्स",
+        "description": "एम्बुलेन्स",
+        "type": "Equipment",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 11,
+    "fields": {
+        "created": "2021-02-11T06:48:36.754Z",
+        "name": "आइसोलेशन",
+        "description": "आइसोलेशन",
+        "type": "Equipment",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 12,
+    "fields": {
+        "created": "2021-02-11T06:50:00.400Z",
+        "name": "पी सी आर मेशिन",
+        "description": "पी सी आर मेशिन",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 13,
+    "fields": {
+        "created": "2021-02-11T06:50:28.271Z",
+        "name": "शु कभर",
+        "description": "शु कभर",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 14,
+    "fields": {
+        "created": "2021-02-11T06:50:42.669Z",
+        "name": "क्याप",
+        "description": "क्याप",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 15,
+    "fields": {
+        "created": "2021-02-11T06:51:05.338Z",
+        "name": "ग्लोव्स",
+        "description": "ग्लोव्स",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 16,
+    "fields": {
+        "created": "2021-02-11T06:53:44.279Z",
+        "name": "गोन मिडियन",
+        "description": "गोन मिडियन",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 17,
+    "fields": {
+        "created": "2021-02-11T06:54:26.006Z",
+        "name": "ह्णड बुक",
+        "description": "ह्णड बुक",
+        "type": "Product",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.product",
+    "pk": 18,
+    "fields": {
+        "created": "2021-02-11T06:55:11.531Z",
+        "name": "प्रोटोकल फर्म",
+        "description": "प्रोटोकल फर्म",
+        "type": "Equipment",
+        "uom": 3
+    }
+},
+{
+    "model": "master_data.governmentbodytype",
+    "pk": 1,
+    "fields": {
+        "created": "2020-02-02T00:00:00Z",
+        "name": "कोभिड अस्पताल",
+        "parent": null
+    }
+},
+{
+    "model": "master_data.governmentbodytype",
+    "pk": 2,
+    "fields": {
+        "created": "2020-02-02T00:00:00Z",
+        "name": "स्थानीय निकाय",
+        "parent": null
+    }
+},
+{
+    "model": "master_data.governmentbodytype",
+    "pk": 3,
+    "fields": {
+        "created": "2020-02-02T00:00:00Z",
+        "name": "प्रदेश सरकार",
+        "parent": null
+    }
+},
+{
+    "model": "master_data.governmentbodytype",
+    "pk": 4,
+    "fields": {
+        "created": "2020-02-02T00:00:00Z",
+        "name": "आन्तरिक मामिला तथा कानून मन्त्रालय",
+        "parent": null
+    }
+},
+{
+    "model": "master_data.governmentbodytype",
+    "pk": 5,
+    "fields": {
+        "created": "2020-02-02T00:00:00Z",
+        "name": "मुख्यमन्त्री तथा मन्त्रीपरिषदको कार्यालय",
+        "parent": null
+    }
+},
+{
+    "model": "master_data.governmentbodytype",
+    "pk": 6,
+    "fields": {
+        "created": "2020-02-02T00:00:00Z",
+        "name": "स्थानीय तह",
+        "parent": null
+    }
+},
+{
+    "model": "master_data.officebearer",
+    "pk": 1,
+    "fields": {
+        "created": "2021-02-15T04:12:49.184Z",
+        "title": "स्वास्थ्यकर्मी"
+    }
+},
+{
+    "model": "master_data.officebearer",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-15T04:13:03.018Z",
+        "title": "सुरक्षाकर्मी"
+    }
+},
+{
+    "model": "master_data.officebearer",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-15T04:13:10.694Z",
+        "title": "प्राबिधिक कर्मचारी"
+    }
+},
+{
+    "model": "master_data.officebearer",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-15T04:13:20.140Z",
+        "title": "प्रशासनिक कर्मचारी"
+    }
+},
+{
+    "model": "master_data.officebearer",
+    "pk": 5,
+    "fields": {
+        "created": "2021-02-15T04:13:28.583Z",
+        "title": "राजनितीक पदाधिकारी"
+    }
+},
+{
+    "model": "master_data.sourcebudget",
+    "pk": 1,
+    "fields": {
+        "created": "2021-02-11T04:02:57.372Z",
+        "title": "संघीय सञ्चित कोषबाट",
+        "description": "संघीय सञ्चित कोषबाट"
+    }
+},
+{
+    "model": "master_data.sourcebudget",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-11T04:03:13.643Z",
+        "title": "प्रदेश  सञ्चित कोषबाट",
+        "description": "प्रदेश  सञ्चित कोषबाट"
+    }
+},
+{
+    "model": "master_data.sourcebudget",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-11T04:03:29.243Z",
+        "title": "स्थानीय तहको आफ्नै बजेटबाट विनियोजन भएको",
+        "description": "स्थानीय तहको आफ्नै बजेटबाट विनियोजन भएको"
+    }
+},
+{
+    "model": "master_data.sourcebudget",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-11T04:03:51.530Z",
+        "title": "संघीय कोभिड कोषबाट",
+        "description": "संघीय कोभिड कोषबाट"
+    }
+},
+{
+    "model": "master_data.sourcebudget",
+    "pk": 5,
+    "fields": {
+        "created": "2021-02-11T04:04:10.606Z",
+        "title": "प्रदेश कोभिड कोषबाट",
+        "description": "प्रदेश कोभिड कोषबाट"
+    }
+},
+{
+    "model": "master_data.sourcebudget",
+    "pk": 6,
+    "fields": {
+        "created": "2021-02-11T04:04:20.036Z",
+        "title": "अन्य स्रोतबाट प्राप्त",
+        "description": "अन्य स्रोतबाट प्राप्त"
+    }
+},
+{
+    "model": "master_data.expenseheader",
+    "pk": 1,
+    "fields": {
+        "created": "2021-02-10T11:36:01.420Z",
+        "title": "राहात वितरण",
+        "description": "राहात वितरण"
+    }
+},
+{
+    "model": "master_data.expenseheader",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-11T06:32:45.856Z",
+        "title": "क्वारेन्टिन होल्डिङ्ग सेन्टर निर्माण व्यवस्थापन",
+        "description": "क्वारेन्टिन होल्डिङ्ग सेन्टर निर्माण व्यवस्थापन"
+    }
+},
+{
+    "model": "master_data.expenseheader",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-11T06:32:55.114Z",
+        "title": "आईशोलेसन केन्द्र निर्माण व्यवस्थापन",
+        "description": "आईशोलेसन केन्द्र निर्माण व्यवस्थापन"
+    }
+},
+{
+    "model": "master_data.expenseheader",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-11T06:33:02.995Z",
+        "title": "जनशक्ति परिचालन",
+        "description": "जनशक्ति परिचालन"
+    }
+},
+{
+    "model": "master_data.expenseheader",
+    "pk": 5,
+    "fields": {
+        "created": "2021-02-11T06:33:10.471Z",
+        "title": "औषधि एवं स्वास्थ्य उपकरण तथा सामग्री खरिद",
+        "description": "औषधि एवं स्वास्थ्य उपकरण तथा सामग्री खरिद"
+    }
+},
+{
+    "model": "master_data.expenseheader",
+    "pk": 6,
+    "fields": {
+        "created": "2021-02-11T06:33:17.036Z",
+        "title": "स्वास्थ्य पूर्वाधार निर्माण",
+        "description": "स्वास्थ्य पूर्वाधार निर्माण"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-11T06:38:49.044Z",
+        "title": "कन्सलटेण्ट फिजिसियन"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-11T06:38:56.883Z",
+        "title": "एनेस्थेसियन"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-11T06:39:01.975Z",
+        "title": "मेडिकल अफिसर"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 5,
+    "fields": {
+        "created": "2021-02-11T06:39:06.992Z",
+        "title": "नर्सिङ्ग सुपरभाइजर"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 6,
+    "fields": {
+        "created": "2021-02-11T06:39:11.438Z",
+        "title": "स्टाफ नर्स"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 7,
+    "fields": {
+        "created": "2021-02-11T06:39:16.390Z",
+        "title": "अन्य नर्सिङ्ग कर्मचारी"
+    }
+},
+{
+    "model": "master_data.manpower",
+    "pk": 8,
+    "fields": {
+        "created": "2021-02-11T06:39:21.229Z",
+        "title": "लेबेरेटेरी पर्सनल"
+    }
+},
+{
+    "model": "master_data.relieftype",
+    "pk": 1,
+    "fields": {
+        "created": "2021-02-11T06:59:29.447Z",
+        "title": "सामग्री खरिद गरी वितरण"
+    }
+},
+{
+    "model": "master_data.relieftype",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-11T06:59:36.896Z",
+        "title": "नगद वितरण"
+    }
+},
+{
+    "model": "master_data.relieftype",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-11T07:00:07.243Z",
+        "title": "खाना खुवाएको"
+    }
+},
+{
+    "model": "master_data.relieftype",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-11T11:23:58.014Z",
+        "title": "यातायातको साधान भाडामा भएको खर्च"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 1,
+    "fields": {
+        "created": "2021-02-15T04:23:28.861Z",
+        "name": "नेपाल भारत सीमाका प्रवेश विन्दु व्यवस्थापन गर्ने",
+        "description": "नेपाल भारत सीमाका प्रवेश विन्दु व्यवस्थापन गर्ने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 2,
+    "fields": {
+        "created": "2021-02-15T04:23:47.366Z",
+        "name": "नेपाल भारत सीमाका प्रवेश विन्दुमा नेपाली नागरिक आएपछि होल्डिङ्ग सेन्टरमा निजको ठेगाना सहितको व्यक्तिगत विवरण तयार गर्ने",
+        "description": "नेपाल भारत सीमाका प्रवेश विन्दुमा नेपाली नागरिक आएपछि होल्डिङ्ग सेन्टरमा निजको ठेगाना सहितको व्यक्तिगत विवरण तयार गर्ने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 3,
+    "fields": {
+        "created": "2021-02-15T04:23:57.758Z",
+        "name": "मोवाइलको सीम कार्ड निशुल्क उपलव्ध गराउने",
+        "description": "मोवाइलको सीम कार्ड निशुल्क उपलव्ध गराउने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 4,
+    "fields": {
+        "created": "2021-02-15T04:24:11.122Z",
+        "name": "सीमा नाकामा रहेका होल्डङ्ग सेन्टरको व्यवस्थापन गर्ने",
+        "description": "सीमा नाकामा रहेका होल्डङ्ग सेन्टरको व्यवस्थापन गर्ने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 5,
+    "fields": {
+        "created": "2021-02-15T04:24:21.707Z",
+        "name": "क्वारेन्टीनको सुरक्षा, रेखदेख, निगरानी र अभिलेख व्यवस्थापन गर्ने",
+        "description": "क्वारेन्टीनको सुरक्षा, रेखदेख, निगरानी र अभिलेख व्यवस्थापन गर्ने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 6,
+    "fields": {
+        "created": "2021-02-15T04:24:31.425Z",
+        "name": "क्वारेन्टीनमा लजिष्टिक सपोर्ट (वेड, विछ्यौना, भाँडावर्तन, पानी, विजुली, भान्सा घर, शौचालय आदि) को व्यवस्था गर्ने",
+        "description": "क्वारेन्टीनमा लजिष्टिक सपोर्ट (वेड, विछ्यौना, भाँडावर्तन, पानी, विजुली, भान्सा घर, शौचालय आदि) को व्यवस्था गर्ने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 7,
+    "fields": {
+        "created": "2021-02-15T04:24:39.582Z",
+        "name": "भारत र अन्य मुलुकबाट नेपाल प्रवेश गरेकाहरुलाई जिल्ला सदरमुकाम हुँदै सम्बन्धित स्थानीय तहको क्वारेन्टीनमा पुर्‍याउने",
+        "description": "भारत र अन्य मुलुकबाट नेपाल प्रवेश गरेकाहरुलाई जिल्ला सदरमुकाम हुँदै सम्बन्धित स्थानीय तहको क्वारेन्टीनमा पुर्‍याउने"
+    }
+},
+{
+    "model": "master_data.actionplanactivity",
+    "pk": 8,
+    "fields": {
+        "created": "2021-02-15T04:24:47.995Z",
+        "name": "व्यक्ति होम क्वारेन्टीनमा रहेको अनुगमन, निरीक्षण गर्ने",
+        "description": "व्यक्ति होम क्वारेन्टीनमा रहेको अनुगमन, निरीक्षण गर्ने"
+    }
+}
 ]
