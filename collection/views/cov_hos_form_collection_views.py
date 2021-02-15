@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db import transaction
 from django.db.models import query, F
 from django.forms import inlineformset_factory
@@ -11,7 +11,7 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from oagn_covid.settings import PAGINATED_BY
 
 from forms import models
@@ -30,7 +30,7 @@ DICT_CH_STATE = {key: value for key, value in CH_STATE}
 LIST_CH_STATE = [value for key, value in CH_STATE]
 
 
-class CovHosFormCollectionCreateView(PermissionRequiredMixin, View):
+class CovHosFormCollectionCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
@@ -89,7 +89,7 @@ class CovHosFormCollectionCreateView(PermissionRequiredMixin, View):
         return HttpResponseRedirect(form_url)
 
 
-class CovHosFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
+class CovHosFormCollectionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -253,7 +253,7 @@ class CovHosFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
         return self._response(form_response)
 
 
-class CovHosFormCollectionListView(PermissionRequiredMixin, ListView):
+class CovHosFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/list.html"
     permission_required = 'users.perm_cov_hos_form'
@@ -261,7 +261,7 @@ class CovHosFormCollectionListView(PermissionRequiredMixin, ListView):
     paginate_by = PAGINATED_BY
 
 
-class CovHosFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
+class CovHosFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/delete.html"
     permission_required = 'users.perm_cov_hos_form'
@@ -269,7 +269,7 @@ class CovHosFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'form_collections'
 
 
-class CovHosFormCollectionReview(PermissionRequiredMixin, DetailView):
+class CovHosFormCollectionReview(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = CovHosFormCollection
     template_name = "cov_hos_form_collection/review.html"
     permission_required = 'users.perm_cov_hos_form'
@@ -280,6 +280,7 @@ class CovHosFormCollectionReview(PermissionRequiredMixin, DetailView):
         context['empty_fields'] = find_empty_fields(self.object, 'cov_hos_forms', 'cov_hos_update', ROUTE_LINK, CH_STATE)
         return context
     
+@login_required
 @permission_required('users.perm_cov_hos_form')
 def cov_hos_submit_form(request, form_pk):
     form_obj = CovHosFormCollection.objects.get(id=form_pk)
@@ -292,7 +293,7 @@ def cov_hos_submit_form(request, form_pk):
     return JsonResponse({'success': '200'}, status=200)
 
 
-class ApproveView(PermissionRequiredMixin, View):
+class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
     template_name = 'cov_hos_form_collection/approve.html'
     permission_required = 'users.perm_cov_hos_form_approve'
 

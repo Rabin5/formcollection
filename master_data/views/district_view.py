@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from master_data.forms.district_form import LocalLevelForm, LocalLevelFormSet, LocalLevelLine
 from master_data.models.address import District
@@ -7,11 +8,12 @@ from django.db import transaction
 from oagn_covid.settings.base import PAGINATED_BY
 
 
-class DistrictCreateView(CreateView):
+class DistrictCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = District
     template_name = "master_data/address/district_create.html"
     form_class = LocalLevelLine
     success_url = None
+    permission_required = 'users.perm_master_data'
 
     def get_context_data(self, **kwargs):
         data = super(DistrictCreateView, self).get_context_data(**kwargs)
@@ -37,19 +39,21 @@ class DistrictCreateView(CreateView):
         return reverse_lazy('md-district:list')
 
 
-class DistrictListView(ListView):
+class DistrictListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = District
     template_name = "master_data/address/district_list.html"
     context_object_name = 'district_list'
     paginate_by = PAGINATED_BY
+    permission_required = 'users.perm_master_data'
 
 
-class DistrictUpdateView(UpdateView):
+class DistrictUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = District
     template_name = "master_data/address/district_update.html"
     form_class = LocalLevelLine
     success_url = None
     context_object_name = 'district_update'
+    permission_required = 'users.perm_master_data'
 
     def get_context_data(self, **kwargs):
         data = super(DistrictUpdateView, self).get_context_data(**kwargs)
@@ -79,8 +83,9 @@ class DistrictUpdateView(UpdateView):
         return reverse_lazy('md-district:list')
 
 
-class DistrictDeleteView(DeleteView):
+class DistrictDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = District
     template_name = 'master_data/address/district_delete.html'
     success_url = reverse_lazy('md-district:list')
     context_object_name = 'district'
+    permission_required = 'users.perm_master_data'

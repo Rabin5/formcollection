@@ -12,6 +12,7 @@
     <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
       <a href="{% url 'index' %}">ड्यासबोर्ड</a>
     </li>
+    {% if request.user|has_group:"Master, ADMIN" %}
     <li>
       <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false"
         aria-controls="collapseExample">मूल तथ्यांक</a>
@@ -142,6 +143,7 @@
         </ul>
       </div>
     </li>
+    {% endif %}
     {% if request.user|has_group:"Form Operator, ADMIN" %}
     <li>
       <a href="#form-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false"
