@@ -5,20 +5,20 @@
 # from django.urls import reverse_lazy
 
 
-# class CovidhospitalCreateView(CreateView):
+# class CovidhospitalCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 #     model = CovidHospital
 #     template_name = "master_data/covidhospital_create.html"
 #     form_class = CovidHospitalForm
 #     success_url = reverse_lazy('md-covidhospital:list')
 
 
-# class CovidhospitalListView(ListView):
+# class CovidhospitalListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 #     model = CovidHospital
 #     template_name = "master_data/covidhospital_list.html"
 #     context_object_name = 'covidhospital_list'
 
 
-# class CovidhospitalUpdateView(UpdateView):
+# class CovidhospitalUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 #     model = CovidHospital
 #     template_name = "master_data/covidhospital_update.html"
 #     form_class = CovidHospitalForm

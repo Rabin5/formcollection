@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -110,7 +110,7 @@ class ResetPasswordView(LoginRequiredMixin, PermissionRequiredMixin, View):
     #     return super().form_valid(form)
 
 
-class ChangePasswordView(PermissionRequiredMixin, PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, PermissionRequiredMixin, PasswordChangeView):
     permission_required = 'users.perm_user_management'
     template_name = 'users/change_password.html'
     success_url = reverse_lazy('users:list')

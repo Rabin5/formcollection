@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -11,7 +11,7 @@ from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from django.views import View
 from django.views.generic.edit import DeleteView
 from forms import models
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import Group
 
 
@@ -29,7 +29,7 @@ DICT_INTERNAL_AFFAIRS_STATE = {key: value for key, value in INTERNAL_AFFAIRS_STA
 LIST_INTERNAL_AFFAIRS_STATE = [value for key, value in INTERNAL_AFFAIRS_STATE]
 
 
-class InternalAffairFormCollectionCreateView(PermissionRequiredMixin, View):
+class InternalAffairFormCollectionCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
@@ -87,7 +87,7 @@ class InternalAffairFormCollectionCreateView(PermissionRequiredMixin, View):
         return HttpResponseRedirect(form_url)
 
 
-class InternalAffairFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
+class InternalAffairFormCollectionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -252,7 +252,7 @@ class InternalAffairFormCollectionUpdateView(PermissionRequiredMixin, UpdateView
         return self._response(form_response)
 
 
-class InternalAffairFormCollectionListView(PermissionRequiredMixin, ListView):
+class InternalAffairFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = InternalAffairFormCollection
     template_name = "internal_affairs_form_collection/list.html"
     permission_required = 'users.perm_internal_affairs_form'
@@ -260,7 +260,7 @@ class InternalAffairFormCollectionListView(PermissionRequiredMixin, ListView):
     paginate_by = PAGINATED_BY
 
 
-class InternalAffairFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
+class InternalAffairFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = InternalAffairFormCollection
     template_name = "internal_affairs_form_collection/delete.html"
     permission_required = 'users.perm_internal_affairs_form'
@@ -268,7 +268,7 @@ class InternalAffairFormCollectionDeleteView(PermissionRequiredMixin, DeleteView
     context_object_name = 'form_collections'
 
 
-class InternalAffairFormCollectionReviewView(PermissionRequiredMixin, DetailView):
+class InternalAffairFormCollectionReviewView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = InternalAffairFormCollection
     template_name = "internal_affairs_form_collection/review.html"
     permission_required = 'users.perm_internal_affairs_form'
@@ -279,6 +279,7 @@ class InternalAffairFormCollectionReviewView(PermissionRequiredMixin, DetailView
         context['empty_fields'] = find_empty_fields(self.object, 'internal_affairs_forms', 'internal_affairs_update', ROUTE_LINK, INTERNAL_AFFAIRS_STATE)
         return context
 
+@login_required
 @permission_required('users.perm_internal_affairs_form')
 def internal_affair_submit_form(request, form_pk):
     form_obj = InternalAffairFormCollection.objects.get(id=form_pk)
@@ -291,7 +292,7 @@ def internal_affair_submit_form(request, form_pk):
     return JsonResponse({'success': '200'}, status=200)
 
 
-class ApproveView(PermissionRequiredMixin, View):
+class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
     template_name = 'internal_affairs_form_collection/approve.html'
     permission_required = 'users.perm_internal_affairs_form_approve'
 
