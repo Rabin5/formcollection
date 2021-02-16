@@ -154,3 +154,12 @@ LOGOUT_URL = 'logout'
 # TODO: change LOGIN_REDIRECT_URL to appropriate homepage url
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '609d41e24629c6'
+EMAIL_HOST_PASSWORD = '1af671eed1c73c'
+EMAIL_PORT = '2525'
