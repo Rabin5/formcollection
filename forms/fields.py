@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -60,9 +62,21 @@ class ModelChoiceFieldWithCreate(forms.ModelChoiceField):
 
 class NepaliDateField(forms.DateField):
     widget = NepaliDateInput
+    # range of date computed by nepali_datetime is 1918-4-13 to 2044-4-13
+    min_date = datetime.date(1975, 1, 1)
+    max_date = datetime.date(2100, 12, 30)
         
     
     def to_python(self, value):
         if value:
-            value = nepali_datetime.datetime.strptime(value, '%d/%m/%Y').to_datetime_date()
+            try:
+                date_str = datetime.datetime.strptime(value, '%d/%m/%Y').date()
+            except:
+                raise ValidationError('Invalid format. Please ensure this format is followed: dd/mm/yyyy')
+            if date_str:
+                if date_str > self.min_date and date_str < self.max_date:
+                    value = nepali_datetime.datetime.strptime(value, '%d/%m/%Y').to_datetime_date()
+                else:
+                    raise ValidationError(f'Please enter date between {self.min_date} and {self.max_date} (BS).')
+
         return value
