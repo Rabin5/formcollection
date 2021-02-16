@@ -1,11 +1,15 @@
 from django.db import transaction
-from django.forms import inlineformset_factory
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models.covid_hospital_manpower import CovidHospitalManpower
-from forms.forms.covid_hos_mainpower import CovidHospitalManpowerForm, CovidHospitalmainpowerFormSet
+from forms.models.covid_hospital_manpower import (
+    CovidHospitalManpower,
+    Manpower
+)
+from forms.forms.covid_hos_mainpower import (
+    CovidHospitalManpowerForm,
+    CovidHospitalmainpowerFormSet
+)
 
 
 class CovidHospitalMainpowerCreateView(CreateView):
@@ -48,15 +52,38 @@ class CovidHospitalMainpowerUpdateView(UpdateView):
     form_class = CovidHospitalManpowerForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+
+        manpowers = Manpower.objects.all()[:7]
+
+        for manpower in manpowers:
+            line = {
+                'manpower': manpower
+            }
+            initial.append(line)
+        return initial
+
     def get_context_data(self, **kwargs):
-        data = super(CovidHospitalMainpowerUpdateView, self).get_context_data(**kwargs)
-        # import pdb;pdb.set_trace()
+        data = super(CovidHospitalMainpowerUpdateView, self).get_context_data(
+            **kwargs
+        )
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = CovidHospitalmainpowerFormSet(
-                self.request.POST, instance=self.object)
-            # data['lines'].full_clean()
+                self.request.POST,
+                instance=self.object,
+                initial=initial
+            )
         else:
-            data['lines'] = CovidHospitalmainpowerFormSet(instance=self.object)
+            data['lines'] = CovidHospitalmainpowerFormSet(
+                instance=self.object,
+                initial=initial
+            )
+            data['lines'].extra = len(initial) + 1 if initial else 1
         return data
 
     def form_valid(self, form):
@@ -74,7 +101,13 @@ class CovidHospitalMainpowerUpdateView(UpdateView):
             return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(self.get_context_data(
+            form=form,
+            lines=lines
+        ))
 
     def get_success_url(self):
-        return reverse_lazy('covid_hos_mainpower:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'covid_hos_mainpower:update',
+            kwargs={'pk': self.object.pk}
+        )

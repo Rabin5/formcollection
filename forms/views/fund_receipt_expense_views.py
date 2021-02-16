@@ -1,11 +1,16 @@
 from django.db import transaction
-from django.forms import inlineformset_factory
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models import FundReceiptExpense, FundReceiptExpenseLine
-from forms.forms.fund_receipt_expense_forms import FundReceiptExpenseForm, FundReceiptExpenseLineFormset
+from forms.models import (
+    FundReceiptExpense,
+    SourceBudget,
+    ExpenseHeader
+)
+from forms.forms.fund_receipt_expense_forms import (
+    FundReceiptExpenseForm,
+    FundReceiptExpenseLineFormset
+)
 
 
 class FundReceiptExpenseCreateView(CreateView):
@@ -47,13 +52,40 @@ class FundReceiptExpenseUpdateView(UpdateView):
     form_class = FundReceiptExpenseForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+
+        budgets = SourceBudget.objects.all()
+        expenses = ExpenseHeader.objects.all().order_by('id')
+
+        for idx, budget in enumerate(budgets):
+            line = {
+                'budget_source': budget,
+                'expense_header': expenses[idx] if idx <= len(expenses)
+                else None
+            }
+            initial.append(line)
+        return initial
+
     def get_context_data(self, **kwargs):
-        data = super(FundReceiptExpenseUpdateView, self).get_context_data(**kwargs)
+        data = super(
+            FundReceiptExpenseUpdateView,
+            self
+            ).get_context_data(**kwargs)
+
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = FundReceiptExpenseLineFormset(
-                self.request.POST, instance=self.object)
+                self.request.POST, instance=self.object, initial=initial)
         else:
-            data['lines'] = FundReceiptExpenseLineFormset(instance=self.object)
+            data['lines'] = FundReceiptExpenseLineFormset(
+                instance=self.object,
+                initial=initial
+                )
+            data['lines'].extra = len(initial) if initial else 1
         return data
 
     def form_valid(self, form):
@@ -71,7 +103,15 @@ class FundReceiptExpenseUpdateView(UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+                lines=lines
+                )
+            )
 
     def get_success_url(self):
-        return reverse_lazy('fund_receipt_expense:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'fund_receipt_expense:update',
+            kwargs={'pk': self.object.pk}
+            )
