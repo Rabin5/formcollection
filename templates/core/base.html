@@ -53,7 +53,7 @@
         <div class="content">
           {% block dashboard %}
           {% endblock dashboard %}
-          {% if 'forms' or 'master-data' or 'users' in request.path %}
+          {% if 'forms' in request.path or 'master-data' in request.path or 'users' in request.path %}
             <div class="card card-body">
           {% endif %}
 
@@ -61,7 +61,7 @@
                 
               {% endblock content %}
               
-          {% if 'forms' or 'master-data' or 'users' not in request.path %}
+          {% if 'forms' in request.path or 'master-data' in request.path or 'users' in request.path %}
             </div>
           {% endif %}
         </div>
