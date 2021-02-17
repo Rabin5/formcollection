@@ -7,14 +7,14 @@
 {% endblock title %}
 
 {% block page_title %}
-Action Plan
+कार्य योजना
 {% endblock page_title %}
 
 {% block page_actions %}
   <a class="btn btn-success btn-with-icon" data-remote="{% url 'md-action_plan:create' %}"
     href="{% url 'md-action_plan:create' %}" data-toggle="modal" data-target="#modalActionPlanCreate">
     <i class="ic-add"></i>
-    Action Plan थप्नुहोस्
+    कार्य योजना थप्नुहोस्
   </a>
 {% endblock page_actions %}
 
@@ -23,8 +23,8 @@ Action Plan
   <thead>
     <tr>
       <th>क्रम सङ्ख्या </th>
-      <th>Name</th>
-      <th>Description</th>
+      <th>शीर्षक</th>
+      <th>वर्णन</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
