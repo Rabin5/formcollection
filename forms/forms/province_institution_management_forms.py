@@ -8,20 +8,27 @@ from crispy_forms.layout import (
     Row,
 )
 from django import forms
-from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
 
 from forms.custom_layout_object import Formset
 from forms.models.province_institution_management import (
     ProvinceInstitutionManagement,
     ProvinceInstitutionManagementLine,
+    Committee
 )
+from forms.fields import ModelChoiceFieldWithCreate
 
 
 class ProvinceInstitutionManagementLineForm(forms.ModelForm):
+    committee = ModelChoiceFieldWithCreate(
+        queryset=Committee.objects.all(),
+        label='प्रदेश तहमा गठन भएका समितिको नाम',
+        blank=False,
+        save_to_field='name'
+    )
+    
     class Meta:
         model = ProvinceInstitutionManagementLine
-        # fields = "__all__"
         exclude = ()
         widgets = {
             "major_works": forms.Textarea(attrs={"cols": 40, "rows": 2}),

@@ -96,9 +96,17 @@ class CovidHospitalManagementChecklistDescription(models.Model):
 class Committee(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(
-        max_length=300, blank=True, null=True, unique=True, verbose_name='नाम'
+        max_length=300,
+        blank=False,
+        null=True,
+        unique=True,
+        verbose_name='नाम'
     )
-    description = models.TextField(verbose_name='वर्णन')
+    description = models.TextField(
+        verbose_name='वर्णन',
+        null=True,
+        blank=True
+    )
 
     def __str__(self) -> str:
         return self.name
@@ -117,7 +125,11 @@ class ReliefType(models.Model):
 class ActionPlanActivity(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(
-        max_length=300, blank=True, null=True, unique=True, verbose_name='शीर्षक'
+        max_length=300,
+        blank=True,
+        null=True,
+        unique=True,
+        verbose_name='शीर्षक'
     )
     description = models.TextField(verbose_name='वर्णन')
 
