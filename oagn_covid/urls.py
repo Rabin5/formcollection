@@ -57,6 +57,10 @@ urlpatterns = [
     path('master-data/government/committee/', include('master_data.urls.committee')),
     path('master-data/government/relief_type/', include('master_data.urls.relief_type')),
     path('master-data/government/action_plan/', include('master_data.urls.action_plan')),
+    path('master-data/government/construction_company/', include('master_data.urls.construction_company')),
+    path('master-data/government/consultant/', include('master_data.urls.consultant')),
+    path('master-data/government/sub_header/', include('master_data.urls.sub_header')),
+    path('master-data/government/work_nature/', include('master_data.urls.work_nature')),
 
     # Forms
 
