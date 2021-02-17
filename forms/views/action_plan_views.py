@@ -1,14 +1,21 @@
 from django.urls import reverse_lazy
 from django.db import transaction
 from django.views.generic import CreateView, UpdateView
-from forms.forms.action_plan_implementation_forms import ActionPlanImplementationForm, ActionPlanImplementationLineForm,ActionPlanImplementationFormSet
-from forms.models.action_plan_implementation import ActionPlanImplementation
+from forms.forms.action_plan_implementation_forms import (
+    ActionPlanImplementationForm,
+    ActionPlanImplementationLineForm,
+    ActionPlanImplementationFormSet
+)
+from forms.models.action_plan_implementation import (
+    ActionPlanImplementation,
+    ActionPlanActivity
+)
 
 
 class ActionPlanImplementationCreateView(CreateView):
     model = ActionPlanImplementation
     template_name = 'forms/action_plan_implementation/create.html'
-    form_class =ActionPlanImplementationForm
+    form_class = ActionPlanImplementationForm
     success_url = None
 
     def get_context_data(self, *args, **kwargs):
@@ -44,14 +51,39 @@ class ActionPlanImplementationUpdateView(UpdateView):
     form_class = ActionPlanImplementationForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+        initial_activities = ActionPlanActivity.objects.all()
+
+        for activity in initial_activities:
+            line = {
+                'activity': activity
+            }
+            initial.append(line)
+        return initial
+
     def get_context_data(self, **kwargs):
-        data = super(ActionPlanImplementationUpdateView,
-                     self).get_context_data(**kwargs)
+        data = super(
+            ActionPlanImplementationUpdateView,
+            self
+        ).get_context_data(**kwargs)
+        
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = ActionPlanImplementationFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST,
+                instance=self.object,
+                initial=initial
+            )
         else:
-            data['lines'] = ActionPlanImplementationFormSet(instance=self.object)
+            data['lines'] = ActionPlanImplementationFormSet(
+                instance=self.object,
+                initial=initial
+            )
+            data['lines'].extra = len(initial) if initial else 1
         return data
 
     def form_valid(self, form):
