@@ -61,6 +61,7 @@ urlpatterns = [
     path('master-data/government/consultant/', include('master_data.urls.consultant')),
     path('master-data/government/sub_header/', include('master_data.urls.sub_header')),
     path('master-data/government/work_nature/', include('master_data.urls.work_nature')),
+    path('master-data/government/complaint_type/',include('master_data.urls.complaint_type')),
 
     # Forms
 
