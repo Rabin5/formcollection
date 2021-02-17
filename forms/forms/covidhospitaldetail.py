@@ -11,7 +11,6 @@ from forms.models.covidhospitaldetail import CovidHospitalDetail, CovidHospitalD
 
 
 class CovidHospitalDetailLineForm(forms.ModelForm):
-    covidhospital = ModelChoiceFieldWithCreate(queryset=CovidHospital.objects.all(), label='डेडिकेटेड अस्पतालको नाम र स्थान', blank=False, save_to_field='name')
     date_announcement = NepaliDateField(label='कोभिड अस्पताल घोषणा भएको मिति')
 
     class Meta:

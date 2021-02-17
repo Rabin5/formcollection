@@ -21,6 +21,12 @@
 <div class="card card-body mt-3">
   <h6 class="heading-01 mb-3">आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
 
+  <div class="text-right">
+    <a data-remote="{% url 'md-isolation:create' %}" href="{% url 'md-isolation:create' %}" class="add-more mt-3" data-toggle="modal" data-target="#modalIsolationCenterCreate">
+        <i class="ic-add"></i>नयाँ आसोलेशन केन्द्र बनाउनुहोस्
+    </a>
+</div>
+
   {% crispy form %}
 
   <div class="card-warning mt-3">
@@ -34,3 +40,33 @@
 </div>
 {% include 'core/forms/form_footer.html' %}
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalIsolationCenterCreate" tabindex="-1" role="dialog" aria-labelledby="modalQuarantineCenterCreate" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    $(".select_class").select2({
+        tags: true
+    })
+
+    $('#modalIsolationCenterCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $( "#modalIsolationCenterCreate").on('submit', 'form', function(e) {
+        e.preventDefault();
+        saveData($(this),"#modalIsolationCenterCreate",  true);
+    });
+
+</script>
+{% endblock extrascripts %}
