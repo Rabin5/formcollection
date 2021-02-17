@@ -26,7 +26,7 @@ class ProvinceInstitutionManagementLineForm(forms.ModelForm):
         blank=False,
         save_to_field='name'
     )
-    
+
     class Meta:
         model = ProvinceInstitutionManagementLine
         exclude = ()

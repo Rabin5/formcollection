@@ -3,7 +3,6 @@ from django.db import transaction
 from django.views.generic import CreateView, UpdateView
 from forms.forms.action_plan_implementation_forms import (
     ActionPlanImplementationForm,
-    ActionPlanImplementationLineForm,
     ActionPlanImplementationFormSet
 )
 from forms.models.action_plan_implementation import (
@@ -70,7 +69,7 @@ class ActionPlanImplementationUpdateView(UpdateView):
             ActionPlanImplementationUpdateView,
             self
         ).get_context_data(**kwargs)
-        
+
         initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = ActionPlanImplementationFormSet(
@@ -101,7 +100,12 @@ class ActionPlanImplementationUpdateView(UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(
+            self.get_context_data(form=form, lines=lines)
+        )
 
     def get_success_url(self):
-        return reverse_lazy('action_plan_forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'action_plan_forms:update',
+            kwargs={'pk': self.object.pk}
+        )

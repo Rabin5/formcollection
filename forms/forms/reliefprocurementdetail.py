@@ -1,12 +1,14 @@
 from django import forms
-from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
-from forms.models.reliefprocurementdetail import ReliefProcurementDetail, ReliefProcurementDetailLine
+from forms.models.reliefprocurementdetail import (
+    ReliefProcurementDetail,
+    ReliefProcurementDetailLine
+)
 
 
 class ReliefProcurementDetailLineForm(forms.ModelForm):
@@ -22,8 +24,15 @@ class ReliefProcurementDetailLineForm(forms.ModelForm):
 
 
 ReliefProcurementDetailFormSet = inlineformset_factory(
-    ReliefProcurementDetail, ReliefProcurementDetailLine, form=ReliefProcurementDetailLineForm,
-    fields=['procure_method', 'amt_purchase', 'reason_procure_method', 'reliefprocurementdetail_line'],
+    ReliefProcurementDetail,
+    ReliefProcurementDetailLine,
+    form=ReliefProcurementDetailLineForm,
+    fields=[
+        'procure_method',
+        'amt_purchase',
+        'reason_procure_method',
+        'reliefprocurementdetail_line'
+    ],
     extra=1,
     can_delete=True
 )
