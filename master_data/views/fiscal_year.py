@@ -49,6 +49,6 @@ class FyDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
         try:
             return self.delete(request, *args, **kwargs)
         except ProtectedError:
-            messages.error(request, "some relationship exists")
+            messages.error(request, "यो डिलीट गर्न सकिदैन।")
             return redirect('md-fy:list')
          
