@@ -25,6 +25,7 @@ admin.site.register(models.ExpenseHeader)
 admin.site.register(models.Product)
 admin.site.register(models.ReliefType)
 admin.site.register(models.ComplaintType)
+admin.site.register(models.PeskiBibaran)
 
 
 
