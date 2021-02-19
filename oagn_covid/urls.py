@@ -48,15 +48,24 @@ urlpatterns = [
     path('master-data/institution/', include('master_data.urls.institution')),
     path('master-data/laboratory/', include('master_data.urls.laboratory')),
     # for allowence and OfficeBearer
-    path('master-data/government/office_bearer/', include('master_data.urls.officebearer')),
-    path('master-data/government/source_budget/', include('master_data.urls.source_budget')),
-    path('master-data/government/allowance_type/', include('master_data.urls.allowance_type')),
-    path('master-data/government/expense_header/', include('master_data.urls.expense_header')),
+    path('master-data/government/office_bearer/',
+         include('master_data.urls.officebearer')),
+    path('master-data/government/source_budget/',
+         include('master_data.urls.source_budget')),
+    path('master-data/government/allowance_type/',
+         include('master_data.urls.allowance_type')),
+    path('master-data/government/expense_header/',
+         include('master_data.urls.expense_header')),
     path('master-data/government/cov_hos_managament/',
          include('master_data.urls.covid_hospital_management_desc')),
-    path('master-data/government/committee/', include('master_data.urls.committee')),
-    path('master-data/government/relief_type/', include('master_data.urls.relief_type')),
-    path('master-data/government/action_plan/', include('master_data.urls.action_plan')),
+    path('master-data/government/committee/',
+         include('master_data.urls.committee')),
+    path('master-data/government/relief_type/',
+         include('master_data.urls.relief_type')),
+    path('master-data/government/action_plan/',
+         include('master_data.urls.action_plan')),
+    path('master-data/government/man_power/',
+         include('master_data.urls.man_power')),
 
     # Forms
 
@@ -106,23 +115,24 @@ urlpatterns = [
     path('forms/province-institution-management/',
          include('forms.urls.province_institution_management_urls')),
 
-     # Local level
-     path('local-level/forms/',
+    # Local level
+    path('local-level/forms/',
          include('collection.urls.local_level_form_collection_urls')),
-     path('forms/ward-relief/', include('forms.urls.ward_relief_urls')),
-     path('forms/received-relief/', include('forms.urls.received_relief_urls')),
-     path('forms/relief-distribution/',include('forms.urls.relief_distribution_urls')),
-     path('forms/case_invs_tracing_opt/',
+    path('forms/ward-relief/', include('forms.urls.ward_relief_urls')),
+    path('forms/received-relief/', include('forms.urls.received_relief_urls')),
+    path('forms/relief-distribution/',
+         include('forms.urls.relief_distribution_urls')),
+    path('forms/case_invs_tracing_opt/',
          include('forms.urls.case_invs_tracing_opt')),
-     path('forms/relief_procure_dis/',
+    path('forms/relief_procure_dis/',
          include('forms.urls.relief_procure_dis')),
-     path('forms/relief_procurement_detail/',
+    path('forms/relief_procurement_detail/',
          include('forms.urls.reliefprocurementdetail')),
-     path('forms/case_invs_tracing/',
-          include('forms.urls.case_investigation_tracing_urls')),
+    path('forms/case_invs_tracing/',
+         include('forms.urls.case_investigation_tracing_urls')),
 
-     # Approve
-     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
+    # Approve
+    # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
 
 
     path('users/', include('users.urls.user_urls')),
