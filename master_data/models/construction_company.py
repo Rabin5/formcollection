@@ -9,8 +9,7 @@ class ConstructionCompany(Address):
                             null=False, verbose_name='नाम',unique=True)
 
     def __str__(self) -> str:
+        if self.name == None:
+            return "ERROR- NAME IS NULL"
         return self.name
-
-    class Meta:
-        abstract = True
 
