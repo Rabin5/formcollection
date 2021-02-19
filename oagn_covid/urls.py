@@ -127,6 +127,10 @@ urlpatterns = [
 
      # Local Level Auditor
      path('forms/procurement-auditor/', include('forms.urls.procurement_auditor_urls')),
+     path('forms/incomplete-construction-work/', include('forms.urls.incomplete_construction_work_urls')),
+     path('forms/quarterly-program/', include('forms.urls.quarterly_program_urls')),
+     path('forms/drp-expense/', include('forms.urls.drp_expense_urls')),
+     path('forms/yearly-target/', include('forms.urls.yearly_target_urls')),
 
      # Approve
      # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))

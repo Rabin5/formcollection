@@ -32,3 +32,5 @@ from .reliefprocurementdetail import *
 from .procurement_auditor import *
 from .incomplete_construction_work import *
 from .quarterly_program import *
+from .drp_expense import *
+from .yearly_target import *

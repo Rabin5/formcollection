@@ -15,6 +15,12 @@ OAGN COVID Reporting
     SQL_PASSWORD=admin
     SQL_HOST=db
     SQL_PORT=5432
+
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST='smtp.gmail.com'
+    EMAIL_HOST_USER='yourmail@gmail.com'
+    EMAIL_HOST_PASSWORD='yourpassword'
+    EMAIL_PORT=587
     ```
 
     - Setup .env for non-docker as following:
@@ -29,6 +35,12 @@ OAGN COVID Reporting
     SQL_USER=admin
     SQL_PASSWORD=admin
     SQL_PORT=5432
+
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST='smtp.gmail.com'
+    EMAIL_HOST_USER='yourmail@gmail.com'
+    EMAIL_HOST_PASSWORD='yourpassword'
+    EMAIL_PORT=587
     ```
 
 - Install fixtures
