@@ -22,7 +22,7 @@ class ProvinceInstitutionManagementLine(FormLineBaseModel):
     province_institution_management = models.ForeignKey(
         ProvinceInstitutionManagement,
         on_delete=models.PROTECT,
-        verbose_name="संस्थागत व्यवस्था: ",
+        verbose_name="संस्थागत व्यवस्था",
         related_name="lines",
         null=True,
         blank=False,
@@ -30,8 +30,7 @@ class ProvinceInstitutionManagementLine(FormLineBaseModel):
     committee = models.ForeignKey(
         Committee,
         on_delete=models.PROTECT,
-        verbose_name="समिति: ",
-        related_name="lines",
+        verbose_name="प्रदेश तहमा गठन भएका समितिको नाम",
         null=True,
         blank=False,
     )

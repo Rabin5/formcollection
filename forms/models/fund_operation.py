@@ -21,8 +21,12 @@ class FundOperation(FormBaseModel):
 class FundOperationLine(FormLineBaseModel):
     fund_operation = models.ForeignKey(
         FundOperation, on_delete=models.CASCADE, related_name='lines')
-    body = models.ForeignKey(GovernmentBody, on_delete=models.CASCADE,
-                             related_name='fund_operation_line', verbose_name="उपलब्ध गराउने निकाय:")
+    body = models.CharField(
+        max_length=300,
+        blank=False,
+        null=True,
+        verbose_name="उपलब्ध गराउने निकाय"
+    )
     amt_received = models.FloatField(verbose_name="प्राप्त रकम")
     expense_header = models.ForeignKey(
         ExpenseHeader, on_delete=models.CASCADE, related_name='fund_operation_line', verbose_name="खर्चको शीर्षक")
