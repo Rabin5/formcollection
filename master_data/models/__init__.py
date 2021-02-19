@@ -16,3 +16,4 @@ from .designation import *
 from .project_type import *
 from .contractor import *
 from .school import *
+from .convenience_type import *
