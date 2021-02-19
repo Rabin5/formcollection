@@ -110,13 +110,13 @@
                 <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-institution:list'%}" class="pl-4">संस्था</a>
                 </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                <li {% if 'md-quarantine:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-quarantine:list'%}" class="pl-4">क्वारेन्टाइन सेन्टर</a>
                 </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                <li {% if 'md-isolation:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-isolation:list'%}" class="pl-4">आइसोलेशन सेन्टर</a>
                 </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                <li {% if 'md-importer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                   <a href="{% url 'md-importer:list' %}" class="pl-4">आपूर्तिकर्ता</a>
                 </li>
               </ul>
