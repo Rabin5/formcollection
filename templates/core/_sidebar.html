@@ -7,48 +7,6 @@
         <h6 class="sidebar-brand--title">OAG COVID-19 Audit</h6>
     </div>
 
-<<<<<<< Updated upstream
-  <ul class="menu">
-    <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-      <a href="{% url 'index' %}">ड्यासबोर्ड</a>
-    </li>
-    {% if request.user|has_group:"Master, ADMIN" %}
-    <li>
-      <a class="hasSub" data-toggle="collapse" href="#master-data" role="button" aria-expanded="false"
-        aria-controls="collapseExample">मूल तथ्यांक</a>
-      <div class="collapse{% if 'md' in request.resolver_match.view_name %} show {% endif %}" id="master-data">
-        <ul class="list pl-3">
-          <li {% if 'md-fy:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-            <a href="{% url 'md-fy:list'%}" class="pl-4">आर्थिक वर्ष</a>
-          </li>
-          <li>
-            <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
-              aria-controls="collapseExample1">उत्पादन</a>
-            <div class="collapse{% if 'master-data/product' in request.path %} show {% endif %}" id="collapseExample1">
-              <ul class="list pl-3">
-                <li {% if 'md-prod:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-prod:list'%}" class="pl-4">सामग्री</a>
-                </li>
-                <li {% if 'md-prod:uom_list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-prod:uom_list'%}" class="pl-4">मापनको एकाई</a>
-                </li>
-                <li {% if 'md-prod:procurement_list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-prod:procurement_list'%}" class="pl-4">खरीद विधि</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
-              aria-controls="collapseExample2">सरकारी निकाय</a>
-            <div class="collapse{% if 'master-data/government' in request.path %} show {% endif %}"
-              id="collapseExample2">
-              <ul class="list pl-3">
-                <li {% if 'md-gov:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-gov:list'%}" class="pl-4">निकाय</a>
-                </li>
-                <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-=======
     <ul class="menu">
         <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
             <a href="{% url 'index' %}">ड्यासबोर्ड</a>
@@ -88,82 +46,8 @@
                                     <a href="{% url 'md-gov:gov_type_list'%}" class="pl-4">सरकारी निकायको प्रकार</a>
                                 </li>
                                 <li {% if 'md-offbearer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
->>>>>>> Stashed changes
-
-                                    <a href="{% url 'md-offbearer:list'%}" class="pl-4">पदाधिकारीहरू
-                  </a>
+                                    <a href="{% url 'md-offbearer:list'%}" class="pl-4">पदाधिकारीहरू</a>  
                                 </li>
-
-<<<<<<< Updated upstream
-                <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
-                </li>
-                <li {% if 'md-source_budget:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-source_budget:list'%}" class="pl-4"> स्रोत बजेट</a>
-                </li>
-                <li {% if 'md-expense_header:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-expense_header:list'%}" class="pl-4">खर्च शीर्षलेख</a>
-                </li>
-                <li {% if 'md-cov_hos_managament:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-cov_hos_managament:list'%}" class="pl-4">कोविड अस्पताल प्रबन्धन प्रकार</a>
-                </li>
-                <li {% if 'md-committee:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-committee:list'%}" class="pl-4">समिति</a>
-                </li>
-                <li {% if 'md-relief_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-relief_type:list'%}" class="pl-4">राहत प्रकार</a>
-                </li>
-                <li {% if 'md-action_plan:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-action_plan:list'%}" class="pl-4">कार्य योजना</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li {% if 'md-hos:cov_list' in request.resolver_match.view_name %}class="active" {% endif %}>
-            <a href="{% url 'md-hos:cov_list'%}" class="pl-4">कोभिड अस्पताल</a>
-          </li>
-          <li>
-            <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false"
-              aria-controls="collapseExample4">ठेगाना</a>
-            <div class="collapse{% if 'master-data/address' in request.path %} show {% endif %}" id="collapseExample4">
-              <ul class="list pl-3">
-                <li {% if 'md-country:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-country:list'%}" class="pl-4">देश</a>
-                </li>
-                <li {% if 'md-province:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-province:list'%}" class="pl-4">प्रदेश</a>
-                </li>
-                <li {% if 'md-district:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-district:list'%}" class="pl-4">जिल्ला</a>
-                </li>
-                <li {% if 'md-locallevel:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-locallevel:list'%}" class="pl-4">स्थानीय निकाय </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false"
-              aria-controls="collapseExample5">कम्पनि</a>
-            <div class="collapse{% if 'master-data/company' in request.path %} show {% endif %}" id="collapseExample5">
-              <ul class="list pl-3">
-                <li {% if 'md-laboratory:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-laboratory:list'%}" class="pl-4">प्रयोगशाला</a>
-                </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-institution:list'%}" class="pl-4">संस्था</a>
-                </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-quarantine:list'%}" class="pl-4">क्वारेन्टाइन सेन्टर</a>
-                </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-isolation:list'%}" class="pl-4">आइसोलेशन सेन्टर</a>
-                </li>
-                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
-                  <a href="{% url 'md-importer:list' %}" class="pl-4">आपूर्तिकर्ता</a>
-                </li>
-              </ul>
-=======
                                 <li {% if 'md-allowance_type:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-allowance_type:list'%}" class="pl-4">भत्ता प्रकार </a>
                                 </li>
@@ -296,7 +180,6 @@
                         <a href="{% url 'users:list_permissions'%}" class="pl-4">Users Permission</a>
                     </li>
                 </ul>
->>>>>>> Stashed changes
             </div>
         </li>
         {% endif %} {% if request.user|has_group:"Approve, ADMIN" %}

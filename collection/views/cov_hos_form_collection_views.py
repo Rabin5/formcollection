@@ -25,6 +25,11 @@ from master_data.models import FiscalYear, Province, District, LocalLevel, Covid
 from users.models.user import User
 from django.contrib.auth.models import Group
 
+from django_weasyprint.views import WeasyTemplateView
+from django_weasyprint import WeasyTemplateResponseMixin
+from django.conf import settings
+import os
+
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key: value for key, value in CH_STATE}
 LIST_CH_STATE = [value for key, value in CH_STATE]
@@ -276,10 +281,40 @@ class CovHosFormCollectionReview(LoginRequiredMixin, PermissionRequiredMixin, De
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action'] = self.kwargs['action']
+        if 'action' in self.kwargs:
+            context['action'] = self.kwargs['action']
         context['empty_fields'] = find_empty_fields(self.object, 'cov_hos_forms', 'cov_hos_update', ROUTE_LINK, CH_STATE)
         return context
-    
+
+class CovHosFormCollectionReportPdf(WeasyTemplateResponseMixin, CovHosFormCollectionReview):
+    model = CovHosFormCollection
+    template_name = 'cov_hos_form_collection/report.html'
+    pdf_filename = 'CovHosFormCollectionReport.pdf'
+    pdf_stylesheets = [
+        os.path.join(os.path.dirname(settings.BASE_DIR), 'static/styles', 'style.css'),
+    ]
+
+
+# class CovHosFormCollectionReportPdf(LoginRequiredMixin, PermissionRequiredMixin, WeasyTemplateView):
+#     model = CovHosFormCollection
+#     permission_required = 'users.perm_cov_hos_form'
+#     ordering = ['-pk']
+#     template_name = 'cov_hos_form_collection/report.html'
+#     pdf_filename = 'CovHosFormCollectionReport.pdf'
+#     pdf_stylesheets = [
+#         os.path.join(os.path.dirname(settings.BASE_DIR), 'static', 'style.css'),
+#     ]
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     cov_hos = CovHosFormCollection.objects.filter(user=self.request.user).order_by('-id')
+        
+    #     context['cov_hos'] = cov_hos
+        
+    #     return context
+
+
+
 @login_required
 @permission_required('users.perm_cov_hos_form')
 def cov_hos_submit_form(request, form_pk):
@@ -311,3 +346,4 @@ class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
         return render(request, self.template_name, context={'data': context})
 
     # def post
+
