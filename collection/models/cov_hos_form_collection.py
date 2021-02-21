@@ -25,18 +25,26 @@ from master_data.models import Province, District, LocalLevel, CovidHospital, Go
 from users.models.user import User
 from collection.utils import CH_STATE, STATUS
 
+
 class CovHosFormCollection(models.Model):
-    province = models.ForeignKey(Province, on_delete=models.PROTECT, null=True, blank=False)
-    district = models.ForeignKey(District, on_delete=models.PROTECT, null=True, blank=False)
-    local_level = models.ForeignKey(LocalLevel, on_delete=models.PROTECT, null=True, blank=False)
-    hospital = models.ForeignKey(CovidHospital, on_delete=models.PROTECT, null=True, blank=False)
+    province = models.ForeignKey(
+        Province, on_delete=models.PROTECT, null=True, blank=False)
+    district = models.ForeignKey(
+        District, on_delete=models.PROTECT, null=True, blank=False)
+    local_level = models.ForeignKey(
+        LocalLevel, on_delete=models.PROTECT, null=True, blank=False)
+    hospital = models.ForeignKey(
+        CovidHospital, on_delete=models.PROTECT, null=True, blank=False)
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     state = models.IntegerField(choices=CH_STATE, default=0, blank=True)
     status = models.CharField(choices=STATUS, default='started', max_length=20)
-    body = models.ForeignKey(GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
-    fiscal_year = models.ForeignKey(FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
-    
-    approver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approver_user')
+    body = models.ForeignKey(
+        GovernmentBody, on_delete=models.PROTECT, blank=True, null=True)
+    fiscal_year = models.ForeignKey(
+        FiscalYear, on_delete=models.PROTECT, null=True, blank=False)
+
+    approver = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approver_user')
     reject_msg = models.CharField(null=True, blank=True, max_length=250)
 
     medical_expense = models.OneToOneField(
@@ -75,7 +83,6 @@ class CovHosFormCollection(models.Model):
         CovidHospitalManagementChecklist, on_delete=models.CASCADE, null=True)
     isolation_construction_expenditure = models.OneToOneField(
         IsolationConstructionExependiture, on_delete=models.CASCADE, null=True)
-
 
     def __str__(self):
         if self.user:

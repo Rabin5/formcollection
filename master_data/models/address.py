@@ -30,7 +30,7 @@ class District(models.Model):
 
 
 class LocalLevel(models.Model):
-    name = models.CharField(max_length=300,verbose_name='स्थानीय स्तर',unique=True)
+    name = models.CharField(max_length=300,verbose_name='स्थानीय स्तर')
     district = models.ForeignKey(
         District, related_name='local_to_district', on_delete=models.CASCADE, null=True, blank=True,verbose_name='जिल्ला')
 

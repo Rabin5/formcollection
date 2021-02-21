@@ -1,5 +1,6 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from master_data.forms.province_form import DistrictFormLine, DistrictFormFormSet
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from master_data.models.address import Province
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -7,11 +8,12 @@ from django.db import transaction
 from oagn_covid.settings.base import PAGINATED_BY
 
 
-class ProvinceCreateView(CreateView):
+class ProvinceCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Province
     template_name = "master_data/address/province_create.html"
     form_class = DistrictFormLine
     success_url = reverse_lazy('md-province:list')
+    permission_required = 'users.perm_master_data'
 
     def get_context_data(self, **kwargs):
         data = super(ProvinceCreateView, self).get_context_data(**kwargs)
@@ -37,18 +39,20 @@ class ProvinceCreateView(CreateView):
         return reverse_lazy('md-province:list')
 
 
-class ProvinceListView(ListView):
+class ProvinceListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Province
     template_name = "master_data/address/province_list.html"
     context_object_name = 'province_list'
     paginate_by = PAGINATED_BY
+    permission_required = 'users.perm_master_data'
 
 
-class ProvinceUpdateView(UpdateView):
+class ProvinceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Province
     template_name = "master_data/address/province_update.html"
     form_class = DistrictFormLine
     context_object_name = 'province_update'
+    permission_required = 'users.perm_master_data'
 
     def get_context_data(self, **kwargs):
         data = super(ProvinceUpdateView, self).get_context_data(**kwargs)
@@ -75,8 +79,9 @@ class ProvinceUpdateView(UpdateView):
         return reverse_lazy('md-province:list')
 
 
-class ProvinceDeleteView(DeleteView):
+class ProvinceDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Province
     template_name = "master_data/address/province_delete.html"
     success_url = reverse_lazy('md-province:list')
     context_object_name = 'province'
+    permission_required = 'users.perm_master_data'

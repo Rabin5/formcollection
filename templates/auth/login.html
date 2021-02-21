@@ -21,7 +21,14 @@
                     <img src="{% static 'images/nepal-emblem.png' %}" alt="NID">
                     <div class="card card_rounded p-4 mt-4">
                         <h6 class="login-heading text-center mb-4">सिस्टम लग - इन</h6>
-
+                        {% comment %} {{form.errors}} {% endcomment %}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                         <form method="post" action="{% url 'login' %}">
                             {% csrf_token %}
                             

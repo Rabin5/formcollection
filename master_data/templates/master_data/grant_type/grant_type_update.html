@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-header">
+  <h6 class="modal-title" id="exampleModalLabel">GrantType</h6>
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body pt-2">
+  <form id="grant_type_update" method="post" action="{% url 'md-grant_type:update' grant_type.pk %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+  <button id="grant_type_update" form="grant_type_update" type="submit" class="btn btn-success">Save</button>
+</div>

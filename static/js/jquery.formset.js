@@ -214,9 +214,14 @@
                 row.insertBefore(buttonRow).show();
                 row.find(childElementSelector).each(function() {
                     updateElementIndex($(this), options.prefix, formCount);
-                    if ($(this).is('select') && $(this).hasClass('select_class')) {
+                    if ($(this).is('select') && $(this).hasClass('select_with_create')) {
                         $(this).select2({
                             tags: true,
+                            width: 'resolve'
+                        })
+                    }
+                    else if ($(this).is('select')) {
+                        $(this).select2({
                             width: 'resolve'
                         })
                     }

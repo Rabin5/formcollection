@@ -16,9 +16,6 @@ class CaseInvestigationLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
 
-        for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
-
 
 CaseInvestigationTracingFormSet = inlineformset_factory(CaseInvestigationTracing, CaseInvestigationTracingLine, form=CaseInvestigationLineForm, fields=[
                                                         'description', 'num_team_members', 'amount_expense', 'num_searched_cases', 'num_identified_infection', 'remarks'], extra=1, can_delete=True)

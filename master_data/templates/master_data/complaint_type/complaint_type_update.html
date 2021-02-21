@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-header">
+  <h6 class="modal-title" id="exampleModalLabel">गुनासो प्रकार</h6>
+  <a class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body pt-2">
+  <form id="complaint_type_update" method="post" action="{% url 'md-complaint_type:update' complaint_type.pk %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+  <button id="complaint_type__update" form="complaint_type_update" type="submit" class="btn btn-success">Save</button>
+</div>
