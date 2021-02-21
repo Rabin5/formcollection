@@ -23,6 +23,10 @@ from collection.utils import PROVINCE_STATE, num_to_devanagari, find_empty_field
 from master_data.models import FiscalYear
 from oagn_covid.settings import PAGINATED_BY
 
+from django_weasyprint import WeasyTemplateResponseMixin
+from django.conf import settings
+import os
+
 # Convert utils PROVINCE_STATE to dict
 DICT_PROVINCE_STATE = {key: value for key, value in PROVINCE_STATE}
 LIST_PROVINCE_STATE = [value for key, value in PROVINCE_STATE]
@@ -273,9 +277,18 @@ class ProvinceFormCollectionReviewView(LoginRequiredMixin, PermissionRequiredMix
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action'] = self.kwargs['action']
+        if 'action' in self.kwargs:
+            context['action'] = self.kwargs['action']
         context['empty_fields'] = find_empty_fields(self.object, 'province_forms', 'province_update', ROUTE_LINK, PROVINCE_STATE)
         return context
+
+class ProvinceFormCollectionReportPdf(WeasyTemplateResponseMixin, ProvinceFormCollectionReviewView):
+    model = ProvinceFormCollection
+    template_name = 'province_form_collection/report.html'
+    pdf_filename = 'ProvinceFormCollectionReport.pdf'
+    pdf_stylesheets = [
+        os.path.join(os.path.dirname(settings.BASE_DIR), 'static/styles', 'style.css'),
+    ]
 
 @login_required
 @permission_required('users.perm_province_form')

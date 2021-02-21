@@ -1,10 +1,13 @@
 {% load static %}
 {% load form_extras %}
+{% if 'cov_hos_forms:review' not in request.resolver_match.view_name %}
+    <link rel="stylesheet" href="{% static 'styles/print.css' %}">
+{% endif %}
   <div class="card card-body">
     <div class="row">
       <div class="col-lg-9 text-center mx-auto">
         <h6 class="font-weight-normal">कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा प्रदेश मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h6>
-        <p class="text-secondary text-center">(यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो बर्षको मात्र उपलव्ध गराउनु हुने छ । प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ ।)</p>
+        <p class="text-secondary text-center">(यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो बर्षको मात्र उपलव्ध गराउनु हुने छ। प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ।)</p>
       </div>
     </div>
     <div class="card-warning p-2 mt-3"><h6>रकम सबै रु हजारमा छ  </h6></div>
@@ -30,10 +33,10 @@
       {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
             class="hasSub">
-            1) जोखिम भत्ता सम्बन्धी बिबरण (अस्पतालले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)
+            1) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण
         </a>
       {% else %}
-        <h6>1) जोखिम भत्ता सम्बन्धी बिबरण (अस्पतालले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)</h6>
+        <h6>1) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h6>
       {% endif %}
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -88,10 +91,14 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
-          2) जोखिम भत्ता सम्बन्धी बिबरण (मन्त्रालयले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)
+          2) जोखिम भत्ता सम्बन्धी बिबरण (अस्पताललेजोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्चभएको रकम खलाउन)
         </a>
+        {% else %}
+          <h6>2) जोखिम भत्ता सम्बन्धी बिबरण (अस्पताललेजोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्चभएको रकम खलाउन)</h6>
+        {% endif %}
 
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -148,10 +155,15 @@
       </div>
 
       <div class="accordion-item">
-        <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"
-          class="hasSub">
-          3) औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)
-        </a>
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"
+            class="hasSub">
+            3) औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)
+          </a>
+        {% else %}
+          <h6>3) औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseThree" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="mt-2 mb-3">
@@ -197,10 +209,15 @@
       </div>
 
       <div class="accordion-item">
-        <a data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne"
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
-          4) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)
-        </a>
+            4) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)
+          </a>
+        {% else %}
+          <h6>4) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="mt-2 mb-3">
@@ -246,10 +263,15 @@
       </div>
 
       <div class="accordion-item">
-        <a data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne"
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           5) औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग
-        </a>
+          </a>
+        {% else %}
+          <h6>5) औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h6>
+        {% endif %}
+        
 
         <div id="collapseFive" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -296,10 +318,15 @@
       </div>
 
       <div class="accordion-item">
-        <a data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne"
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           6) केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)
-        </a>
+          </a>
+        {% else %}
+          <h6>6) केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
+        {% endif %}
+        
 
         <div id="collapseSix" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -346,10 +373,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseOne"
-          class="hasSub">
-          7) पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण
+        class="hasSub">
+        7) पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण
         </a>
+        {% else %}
+          <h6>7) पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण</h6>
+        {% endif %}
+        
 
         <div id="collapseSeven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -409,10 +441,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           8) पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>8) पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseEight" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -458,10 +495,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           9) आरडीटी परीक्षण सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>9) आरडीटी परीक्षण सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseNine" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -501,10 +543,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           10) पिसीआर किटको उपयोग सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>10) पिसीआर किटको उपयोग सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseTen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -550,10 +597,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           11) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण 
         </a>
+        {% else %}
+          <h6>11) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण</h6>
+        {% endif %}
+        
 
         <div id="collapseEleven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -595,10 +647,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           12) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण 
         </a>
+        {% else %}
+          <h6>12) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण </h6>
+        {% endif %}
+        
 
         <div id="collapseTwelve" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -641,10 +698,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           13) कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )
         </a>
+        {% else %}
+          <h6>13) कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h6>
+        {% endif %}
+        
 
         <div id="collapseThirteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -708,10 +770,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           14) क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित क्वारेन्टिनको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>14) क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित क्वारेन्टिनको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseFourteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -770,10 +837,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           15) आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>15) आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseFifteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -832,10 +904,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           16) क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट सञ्चालित क्वारेन्टिन निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>16) क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट सञ्चालित क्वारेन्टिन निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseSixteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -894,10 +971,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           17) आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)
         </a>
+        {% else %}
+          <h6>17) आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h6>
+        {% endif %}
+        
 
         <div id="collapseSeventeen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">
@@ -956,10 +1038,15 @@
       </div>
 
       <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
         <a data-toggle="collapse" data-target="#collapseEighteen" aria-expanded="true" aria-controls="collapseOne"
           class="hasSub">
           18) कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट
         </a>
+        {% else %}
+          <h6>18) कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट</h6>
+        {% endif %}
+        
 
         <div id="collapseEighteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="mt-2 mb-3">

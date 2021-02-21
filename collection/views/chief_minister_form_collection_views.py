@@ -23,6 +23,10 @@ from collection.utils import CHIEF_MINISTER_STATE, num_to_devanagari, find_empty
 from master_data.models import FiscalYear
 from oagn_covid.settings import PAGINATED_BY
 
+from django_weasyprint import WeasyTemplateResponseMixin
+from django.conf import settings
+import os
+
 # Convert utils CHIEF_MINISTER_STATE to dict
 DICT_CHIEF_MINISTER_STATE = {key: value for key, value in CHIEF_MINISTER_STATE}
 LIST_CHIEF_MINISTER_STATE = [value for key, value in CHIEF_MINISTER_STATE]
@@ -275,9 +279,18 @@ class ChiefMinisterOfficeFormCollectionReviewView(LoginRequiredMixin, Permission
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action'] = self.kwargs['action']
+        if 'action' in self.kwargs:
+            context['action'] = self.kwargs['action']
         context['empty_fields'] = find_empty_fields(self.object, 'chief_minister_forms', 'chief_minister_update', ROUTE_LINK, CHIEF_MINISTER_STATE)
         return context
+
+class ChiefMinisterOfficeFormCollectionReportPdf(WeasyTemplateResponseMixin, ChiefMinisterOfficeFormCollectionReviewView):
+    model = ChiefMinisterOfficeFormCollection
+    template_name = 'chief_minister_form_collection/report.html'
+    pdf_filename = 'ChiefMinisterOfficeFormCollectionReport.pdf'
+    pdf_stylesheets = [
+        os.path.join(os.path.dirname(settings.BASE_DIR), 'static/styles', 'style.css'),
+    ]
 
 @login_required
 @permission_required('users.perm_chief_minister_form')

@@ -1,7 +1,8 @@
 from collection.views.province_form_collection_views import (
     ProvinceFormCollectionCreateView, ProvinceFormCollectionDeleteView,
     ProvinceFormCollectionListView, ProvinceFormCollectionReviewView,
-    ProvinceFormCollectionUpdateView, province_submit_form, ApproveView)
+    ProvinceFormCollectionUpdateView, province_submit_form, ApproveView,
+    ProvinceFormCollectionReportPdf)
 from django.urls import path
 
 
@@ -14,4 +15,5 @@ urlpatterns = [
     path('<int:pk>/review/<str:action>', ProvinceFormCollectionReviewView.as_view(), name='review'),
     path('<int:form_pk>/submit', province_submit_form, name='submit_form'),
     path('approve/', ApproveView.as_view(), name='review_approve_list'),
+    path('<int:pk>/report', ProvinceFormCollectionReportPdf.as_view(), name='report-province-pdf'),
 ]
