@@ -1,0 +1,1088 @@
+{% load static %}
+{% load form_extras %}
+{% if 'cov_hos_forms:review' not in request.resolver_match.view_name %}
+    <link rel="stylesheet" href="{% static 'styles/print.css' %}">
+{% endif %}
+  <div class="card card-body">
+    <div class="row">
+      <div class="col-lg-9 text-center mx-auto">
+        <h6 class="font-weight-normal">कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा प्रदेश मन्त्रालयले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h6>
+        <p class="text-secondary text-center">(यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो बर्षको मात्र उपलव्ध गराउनु हुने छ। प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ।)</p>
+      </div>
+    </div>
+    <div class="card-warning p-2 mt-3"><h6>रकम सबै रु हजारमा छ  </h6></div>
+    
+
+    {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        {% if empty_fields %}
+        <div id="accordion" class="accordion mt-5 mx-n3 alert alert-danger" role="alert">
+            निम्न फारमहरु भरिएका छैनन्
+            {% for val in empty_fields %}
+            <p>
+                {{ val.order_no }} ) {{ val.title }}
+                {% if action == 'submit' %}
+                <a class="text-info" href={{ val.url }}><i class="ic-edit"></i></a>
+                {% endif %}
+            </p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endif %}
+    <div id="accordion" class="accordion mt-5 mx-n3">
+      <div class="accordion-item">
+      {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+            class="hasSub">
+            1) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण
+        </a>
+      {% else %}
+        <h6>1) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h6>
+      {% endif %}
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.fund_receipt_expense.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.fund_receipt_expense.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=fund_receipt_expense"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="tr-review-head">
+                  <th>बजेट/आम्दानीको स्रोत</th>
+                  <th>२०७७ असार मसान्तसम्म प्राप्त रकम</th>
+                  <th>२०७७ आश्विन मसान्तसम्म प्राप्त रकम</th>
+                  <th>खर्च शीर्षक</th>
+                  <th>२०७७ असार मसान्तसम्म खर्च रकम</th>
+                  <th>२०७७ आश्विन मसान्तसम्म खर्च रकम</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.fund_receipt_expense.lines.all  %}
+                  <tr>
+                    <td>{{ obj.budget_source }}</td>
+                    <td>{{ obj.fy_start_received_amt }}</td>
+                    <td>{{ obj.fy_end_received_amt }}</td>
+                    <td>{{ obj.expense_header }}</td>
+                    <td>{{ obj.fy_start_expense_amt }}</td>
+                    <td>{{ obj.fy_end_expense_amt }}</td>
+                  </tr>
+                {% endfor %}
+
+                <tr>
+                  <th>जम्मा</th>
+                  <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
+                  <th>जम्मा</th>
+                  <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="note">
+            द्रष्ट्रव्यः माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          2) जोखिम भत्ता सम्बन्धी बिबरण (अस्पताललेजोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्चभएको रकम खलाउन)
+        </a>
+        {% else %}
+          <h6>2) जोखिम भत्ता सम्बन्धी बिबरण (अस्पताललेजोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्चभएको रकम खलाउन)</h6>
+        {% endif %}
+
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.risk_allowance.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.risk_allowance.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=risk_allowance"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                    <th>क्रस</th>
+                    <th>खर्च गर्ने निकायको नाम</th>
+                    <th>जोखिम भत्ता पाउने पदाधिकारी</th>
+                    <th>कर्मचारी वा पदाधिकारी संख्या</th>
+                    <th>भत्ताको प्रकार</th>
+                    <th>२०७६।७७ सम्म खर्च रकम</th>
+                    <th>कैफियत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.risk_allowance.lines.all  %}
+                <tr>
+                    <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                    <td>{{ obj.gov_body }}</td>
+                    <td>{{ obj.office_bearer }}</td>
+                    <td>{{ obj.bearer_num }}</td>
+                    <td>{{ obj.allowance_type }}</td>
+                    <td>{{ obj.expense_amount }}</td>
+                    <td>{{ obj.remarks }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>जम्मा</th>
+                    <th>{% calculate_total_covid_hospital object 'risk_allowance' 'lines' 'bearer_num' %}</th>
+                    <th></th>
+                    <th>{% calculate_total_covid_hospital object 'risk_allowance' 'lines' 'expense_amount' %}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"
+            class="hasSub">
+            3) औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)
+          </a>
+        {% else %}
+          <h6>3) औषधी स्वास्थ्य सामग्री एवं उपकरण खरिद (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseThree" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="mt-2 mb-3">
+                <p>निकाय नाम: <span>{{ object.medical_expense.body }}</span></p>
+                <p>आर्थिक बर्ष : <span>{{ object.medical_expense.fiscal_year }}</span></p>
+                {% if action == 'submit' %}
+                  <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=medical_expense"><i class="ic-edit"></i></a></p>
+                {% endif %}
+            </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
+                  <th>सम्झौता रकम</th>
+                  <th>आपूर्ति गर्नुपर्ने मिति</th>
+                  <th>आपूर्ति गरेको मिति</th>
+                  <th>आपूर्ति भएको सामानको मुल्य</th>
+                  <th>खरिद विधि</th>
+                  <th>कैफियत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.medical_expense.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.amt_agreement }}</td>
+                  <td>{{ obj.date_to_import }}</td>
+                  <td>{{ obj.date_imported }}</td>
+                  <td>{{ obj.amt_imported }}</td>
+                  <td>{{ obj.procure_method }}</td>
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+            4) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)
+          </a>
+        {% else %}
+          <h6>4) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="mt-2 mb-3">
+                <p>निकाय नाम: <span>{{ object.medical_receipt.body }}</span></p>
+                <p>आर्थिक बर्ष : <span>{{ object.medical_receipt.fiscal_year }}</span></p>
+                {% if action == 'submit' %}
+                  <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=medical_receipt"><i class="ic-edit"></i></a></p>
+                {% endif %}
+            </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
+                  <th>प्रदान गर्ने निकाय वा संस्था</th>
+                  <th>परिमाण</th>
+                  <th>प्राप्त औषधी स्वास्थ्य सामग्री उपकरणको मूल्य</th>
+                  <th>प्रयोगको अवस्था</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.medical_receipt.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.provider_institution }}</td>
+                  <!-- if na then provider_body -->
+                  <td>{{ obj.quantity }}</td>
+                  <td>{{ obj.cost_received_items }}</td>
+                  <td>{{ obj.usage_situation }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोट: सामाग्री उपकरण प्राप्त हुन नसकेको भए कारण खुलाउनु होला ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          5) औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग
+          </a>
+        {% else %}
+          <h6>5) औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h6>
+        {% endif %}
+        
+
+        <div id="collapseFive" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.medical_use.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.medical_use.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=medical_use"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                {% with start_index=1 %}
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम</th>
+                  <th>खरिद वा प्राप्ती </th>
+                  <th>सामानको मुल्य</th>
+                  <th>प्रयोगमा नआएको परिमाण</th>
+                  <th>प्रयोगमा नआएको कारण</th>
+                  <th>कैफियत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.medical_use.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.is_purchased }}</td>
+                  <!-- if na then product_price -->
+                  <td>{{ obj.product_price }}</td>
+                  <td>{{ obj.unused_qty }}</td>
+                  <td>{{ obj.unused_reason }}</td>
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+          <a data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          6) केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)
+          </a>
+        {% else %}
+          <h6>6) केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
+        {% endif %}
+        
+
+        <div id="collapseSix" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.med_purchase_desc.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.med_purchase_desc.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=med_purchase_desc"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="tr-review-head">
+                  <th>सामानको नाम</th>
+                  <th>सामानको छोटो स्पेशिफिकेशन</th>
+                  <th>खरिद सम्झौता मिति</th>
+                  <th>सामान प्राप्त मिति</th>
+                  <th>इकाई</th>
+                  <th>परीमाण</th>
+                  <th>दर</th>
+                  <th>कुल रकम</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.med_purchase_desc.lines.all  %}
+                <tr>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.product_specificaiton }}</td>
+                  <td>{{ obj.date_procure_agreement }}</td>
+                  <td>{{ obj.date_received }}</td>
+                  <td>{{ obj.uom }}</td>
+                  <td>{{ obj.qty }}</td>
+                  <td>{{ obj.rate }}</td>
+                  <td>{{ obj.total_amt }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोटः स्वास्थ्य सामाग्री खरिद गर्ने सबै निकायले भर्नु होला । सामानको नामसंगै स्पेशीफिकेशन छोटकरीमा उल्लेख गरिदिनु होला ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseOne"
+        class="hasSub">
+        7) पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण
+        </a>
+        {% else %}
+          <h6>7) पीसीआर परीक्षण मापदण्डको पालना सम्बन्धी बिबरण</h6>
+        {% endif %}
+        
+
+        <div id="collapseSeven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.pcr_test_compliance_detail.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.pcr_test_compliance_detail.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=pcr_test_compliance_detail"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="tr-review-head">
+                  <th rowspan="2">महिना</th>
+                  <th colspan="2">सबै क्षेत्रमा गरेको कुल परीक्षण संख्या</th>
+                  <th colspan="2">Priority-1क्षेत्रमा गरेको परीक्षण संख्या</th>
+                  <th colspan="2">Priority-2क्षेत्रमा गरेको परीक्षण संख्या</th>
+                  <th colspan="2">Priority-3 क्षेत्रमा गरेको परीक्षण संख्या</th>
+                  <th colspan="2">Non-priority क्षेत्रमा गरेको परीक्षण संख्या</th>
+                </tr>
+                <tr>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>संक्रमित संख्या</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.pcr_test_compliance_detail.lines.all  %}
+                <tr>
+                  <td>{{ obj.month }}</td>
+                  <td>{{ obj.all_area_test_num }}</td>
+                  <td>{{ obj.all_area_infected_num }}</td>
+                  <td>{{ obj.priority_1_test_num }}</td>
+                  <td>{{ obj.priority_1_infected_num }}</td>
+                  <td>{{ obj.priority_2_test_num }}</td>
+                  <td>{{ obj.priority_2_infected_num }}</td>
+                  <td>{{ obj.priority_3_test_num }}</td>
+                  <td>{{ obj.priority_3_infected_num }}</td>
+                  <td>{{ obj.non_priority_test_num }}</td>
+                  <td>{{ obj.non_priority_infected_num }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोटः अस्पतालको प्रयोगशालाबाट भएको परीक्षणको आधारमा तयार गर्नुपर्नेछ ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          8) पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>8) पिसीआर प्रयोगशाला  सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseEight" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.pcr_lab_detail.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.pcr_lab_detail.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=pcr_lab_detail"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>पीसीआर ल्यावको नाम र स्थान</th>
+                  <th>स्थापना मिति</th>
+                  <th>दैनिक परीक्षण क्षमता</th>
+                  <th>आषाढ मसान्तसम्म परीक्षण गरेको कुल संख्या</th>
+                  <th>परीक्षण मध्ये संक्रमितको संख्या</th>
+                  <th>नतिजा दिन लाग्ने औषत समय</th>
+                  <th>पीसीआर परीक्षणमा आषाढ समान्त सम्म भएको खर्च</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.pcr_lab_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.laboratory }}</td>
+                  <td>{{ obj.laboratory.date_establishment }}</td>
+                  <td>{{ obj.laboratory.capacity_daily_test }}</td>
+                  <td>{{ obj.num_tested_fy_end }}</td>
+                  <td>{{ obj.num_infected }}</td>
+                  <td>{{ obj.time_test_result }}</td>
+                  <td>{{ obj.expense_pcr_test }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          9) आरडीटी परीक्षण सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>9) आरडीटी परीक्षण सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseNine" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.rdt_test_detail.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.rdt_test_detail.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=rdt_test_detail"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>ल्यावको नाम र स्थान</th>
+                  <th>आषाढ मसान्तसम्म आरडीटी परीक्षण गरेको संख्या</th>
+                  <th>परीक्षण मध्ये पिसीआर गरिएको संख्या</th>
+                  <th>आरडीटी परीक्षणमा आषाढ समान्त सम्म भएको खर्च</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.rdt_test_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.laboratory }}</td>
+                  <td>{{ obj.num_tested_fy_end }}</td>
+                  <td>{{ obj.num_tested_pcr }}</td>
+                  <td>{{ obj.expense_rdt_test }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          10) पिसीआर किटको उपयोग सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>10) पिसीआर किटको उपयोग सम्बन्धी बिबरण (अस्पताल अन्तर्गत रहेका प्रयोगशालाको २०७६।७७ को विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseTen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय नाम: <span>{{ object.pcr_kit_usage.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.pcr_kit_usage.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=pcr_kit_usage"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>सि नं</th>
+                  <th>प्रयोगशालाको नाम</th>
+                  <th>२०७६ चैत्र देखि २०७७ आषाढ सम्म पिसीआर किट प्राप्ती</th>
+                  <th>२०७७ आषाढमसान्त सम्म पीसिआर किट खर्च</th>
+                  <th>२०७७ आषाढमसान्त मौजदात किट</th>
+                  <th>परीक्षण संख्या</th>
+                  <th>वेष्टेज गएको किट संख्या</th>
+                  <th>वेष्टेज प्रतिशत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.pcr_kit_usage.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.laboratory }}</td>
+                  <td>{{ obj.num_kit_received }}</td>
+                  <td>{{ obj.num_kit_expensed }}</td>
+                  <td>{{ obj.num_kit_available }}</td>
+                  <td>{{ obj.num_tests }}</td>
+                  <td>{{ obj.num_wasted }}</td>
+                  <td>{% calculate_percentage obj.num_wasted obj.num_kit_received %} </td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          11) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण 
+        </a>
+        {% else %}
+          <h6>11) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण</h6>
+        {% endif %}
+        
+
+        <div id="collapseEleven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.covid_hos_mainpower }}</span></p>
+            <p>स्थान : <span>{{ object.covid_hos_mainpower.address }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=covid_hos_mainpower"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>स्वास्थ्य जनशक्ति</th>
+                  <th>दरबन्दी संख्या</th>
+                  <th>पदपूर्ति संख्या</th>
+                  <th>रिक्त संख्या</th>
+                  <th>पदपूर्ति मध्ये करार संख्या</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.covid_hos_mainpower.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.num_required }}</td>
+                  <td>{{ obj.num_hired }}</td>
+                  <td>{{ obj.num_vacant }}</td>
+                  <td>{{ obj.num_vacant }}</td>
+                  <td>{{ obj.num_contract }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          12) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण 
+        </a>
+        {% else %}
+          <h6>12) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण </h6>
+        {% endif %}
+        
+
+        <div id="collapseTwelve" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.cov_hos_equipment }}</span></p>
+            <p>स्थान : <span>{{ object.cov_hos_equipment.address }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=cov_hos_equipment"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">स्वास्थ्य उपकरण</th>
+                  <th colspan="3">संख्या</th>
+                </tr>
+                <tr>
+                  <th>आबश्यक</th>
+                  <th>उपलब्ध</th>
+                  <th>नपुग</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.cov_hos_equipment.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.num_required }}</td>
+                  <td>{{ obj.available }}</td>
+                  <td>{{ obj.num_still_required }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          13) कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )
+        </a>
+        {% else %}
+          <h6>13) कोभिड अस्पताल सम्बन्धी बिबरण (कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h6>
+        {% endif %}
+        
+
+        <div id="collapseThirteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय: <span>{{ object.covid_hospital_detail.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.covid_hospital_detail.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=covid_hospital_detail"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">डेडिकेटेड अस्पतालको नाम र स्थान</th>
+                  <th rowspan="2">कोभिड अस्पताल घोषणा भएको मिति</th>
+                  <th rowspan="2">कोभिड अस्पतालको प्रकार</th>
+                  <th colspan="4">कोभिड अस्पताल घोषणा हुँदाको अवस्थामा रहेको संख्या</th>
+                  <th colspan="4">२०७७ असार मसान्तसम्म थप भएको संख्या</th>
+                  <th colspan="2"></th>
+                </tr>
+              
+                <tr>
+                  <th>स्वास्थ्यकर्मीको संख्या</th>
+                  <th>बेड संख्या</th>
+                  <th>आई सी यु संख्या</th>
+                  <th>भेन्टिलेटर संख्या</th>
+                  <th>स्वास्थ्यकर्मीको संख्या</th>
+                  <th>बेड संख्या</th>
+                  <th>आई सी यु संख्या</th>
+                  <th>भेन्टिलेटर संख्या</th>
+                  <th>२०७७ असार मसान्तसम्म उपचार गरेको कोभिड विरामी संख्या</th>
+                  <th>२०७७ असार मसान्तसम्म उपचारमा भएको खर्च</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.covid_hospital_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.covidhospital }}</td>
+                  <td>{{ obj.covidhospital.date_announcement }}</td>
+                  <td>{{ obj.covidhospital.type }}</td>
+                  <td>{{ obj.announce_time_health_workers }}</td>
+                  <td>{{ obj.announce_time_beds }}</td>
+                  <td>{{ obj.announce_time_icu }}</td>
+                  <td>{{ obj.announce_time_ventilators }}</td>
+                  <td>{{ obj.added_health_workers }}</td>
+                  <td>{{ obj.added_beds }}</td>
+                  <td>{{ obj.added_icu }}</td>
+                  <td>{{ obj.added_ventilators }}</td>
+                  <td>{{ obj.num_treated_patients }}</td>
+                  <td>{{ obj.expense_treatment }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          14) क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित क्वारेन्टिनको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>14) क्वारेन्टीन व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित क्वारेन्टिनको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseFourteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय: <span>{{ object.quarantine_management_detail.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.quarantine_management_detail.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=quarantine_management_detail"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">  
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम</th>
+                  <th rowspan="2">निर्माण खर्च</th>
+                  <th rowspan="2">बेड संख्या</th>
+                  <th colspan="2">क्वारेन्टिनमा बस्नेहरुको संख्या</th>
+                  <th rowspan="2">सञ्चालन ब्यबस्थापन प्रयोजनको खर्च</th>
+                </tr>
+                <tr>
+                  <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+                  <th>आषाढ मसान्त सम्म क्वारेन्टिनमा बसेकाहरुको कुल संख्या</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.quarantine_management_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.quarantine_center }}</td>
+                  <td>{{ obj.cost_construction }}</td>
+                  <td>{{ obj.num_bed }}</td>
+                  <td>{{ obj.max_num_daily_stay }}</td>
+                  <td>{{ obj.num_stayed_till_fy_end }}</td>
+                  <td>{{ obj.expense_operations }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <td>जम्मा</td>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'cost_construction' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'num_bed' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_management_detail' 'lines' 'expense_operations' %}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोट: अस्पतालले क्वारेन्टीन निर्माण ब्यबस्थापनमा खर्च गरेको भए यो फारममा उल्लेख गर्नुहोला ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          15) आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>15) आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (अस्पतालबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseFifteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय: <span>{{ object.isolation_management_detail.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.isolation_management_detail.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=isolation_management_detail"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th rowspan="2">क्रस</th>
+                  <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको आईसोलेशन केन्द्रको नाम</th>
+                  <th rowspan="2">निर्माण खर्च</th>
+                  <th rowspan="2">बेड संख्या</th>
+                  <th colspan="2">आईसोलेशन केन्द्रमा बस्नेहरुको संख्या</th>
+                  <th rowspan="2">ब्यबस्थापन प्रयोजनको खर्च</th>
+                </tr>
+                <tr>
+                  <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+                  <th>आषाढ मसान्त सम्म आईसोलेशन केन्द्रमा बसेकाहरुको कुल संख्या</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.isolation_management_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.isolationcenter }}</td>
+                  <td>{{ obj.cost_construction }}</td>
+                  <td>{{ obj.num_bed }}</td>
+                  <td>{{ obj.max_num_daily_stay }}</td>
+                  <td>{{ obj.num_stayed_till_fy_end }}</td>
+                  <td>{{ obj.expense_operations }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <td>जम्मा</td>
+                  <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'cost_construction' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'num_bed' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'isolation_management_detail' 'lines' 'expense_operations' %}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोट: अस्पतालले क्वारेन्टीन निर्माण ब्यबस्थापनमा खर्च गरेको भए उल्लेख गरिदिनुहोला।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          16) क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट सञ्चालित क्वारेन्टिन निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>16) क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट सञ्चालित क्वारेन्टिन निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseSixteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय: <span>{{ object.quarantine_contruction_expenditure.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.quarantine_contruction_expenditure.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=quarantine_contruction_expenditure"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>खरिद भएका सामग्री</th>
+                  <th>इकाई</th>
+                  <th>संख्या</th>
+                  <th>प्रति ईकाइ दर</th>
+                  <th>खर्च रकम</th>
+                  <th>खरिद विधि</th>
+                  <th>कैफियत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.quarantine_contruction_expenditure.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.uom }}</td>
+                  <td>{{ obj.number }}</td>
+                  <td>{{ obj.unit_cost }}</td>
+                  <td>{{ obj.amt_expense }}</td>
+                  <td>{{ obj.procure_method }}</td>
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <td>जम्मा</td>
+                  <td></td>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_contruction_expenditure' 'lines' 'number' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_contruction_expenditure' 'lines' 'unit_cost' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'quarantine_contruction_expenditure' 'lines' 'amt_expense' %}</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          17) आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)
+        </a>
+        {% else %}
+          <h6>17) आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (अस्पतालबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h6>
+        {% endif %}
+        
+
+        <div id="collapseSeventeen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            <p>निकाय: <span>{{ object.isolation_construction_expenditure.body }}</span></p>
+            <p>आर्थिक बर्ष : <span>{{ object.isolation_construction_expenditure.fiscal_year }}</span></p>
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=isolation_construction_expenditure"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>क्रस</th>
+                  <th>खरिद भएका सामग्री</th>
+                  <th>इकाई</th>
+                  <th>संख्या</th>
+                  <th>प्रति ईकाइ दर</th>
+                  <th>खर्च रकम</th>
+                  <th>खरिद विधि</th>
+                  <th>कैफियत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.isolation_construction_expenditure.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.uom }}</td>
+                  <td>{{ obj.number }}</td>
+                  <td>{{ obj.unit_cost }}</td>
+                  <td>{{ obj.amt_expense }}</td>
+                  <td>{{ obj.procure_method }}</td>
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+                <tr>
+                  <td></td>
+                  <td>जम्मा</td>
+                  <td></td>
+                  <th>{% calculate_total_covid_hospital object 'isolation_construction_expenditure' 'lines' 'number' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'isolation_construction_expenditure' 'lines' 'unit_cost' %}</th>
+                  <th>{% calculate_total_covid_hospital object 'isolation_construction_expenditure' 'lines' 'amt_expense' %}</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            नोट- खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}
+        <a data-toggle="collapse" data-target="#collapseEighteen" aria-expanded="true" aria-controls="collapseOne"
+          class="hasSub">
+          18) कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट
+        </a>
+        {% else %}
+          <h6>18) कोभिड अस्पताल ब्यबस्थापन सम्बन्धी चेकलिष्ट</h6>
+        {% endif %}
+        
+
+        <div id="collapseEighteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="mt-2 mb-3">
+            {% if action == 'submit' %}
+              <p align="right"><a class="text-info" href="{% url 'cov_hos_forms:cov_hos_update' object.pk %}?form=cov_hos_management_checklist"><i class="ic-edit"></i></a></p>
+            {% endif %}
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              {% with start_index=1 %}
+              <thead>
+                <tr class="tr-review-head">
+                  <th>बिबरण</th>
+                  <th>छ</th>
+                  <th>छैन</th>
+                  <th>कैफियत</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object.cov_hos_management_checklist.lines.all  %}
+                <tr>
+                  <td>{{ obj.description }}</td>
+                  <td>{{ obj.is_yes }}</td>
+                  {% if obj.is_yes %}
+                    <td>False</td>
+                  {% else %}
+                    <td>True</td>
+                  {% endif %}
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+                {% endfor %}
+                {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

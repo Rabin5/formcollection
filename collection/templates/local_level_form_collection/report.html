@@ -1,0 +1,1249 @@
+{% load static %}
+{% load form_extras %}
+{% if 'local_level_forms:review' not in request.resolver_match.view_name %}
+        <link rel="stylesheet" href="{% static 'styles/print.css' %}">
+{% endif %}
+<div class="card card-body">
+    <div class="row">
+
+        <div class="col-lg-9 text-center mx-auto">
+            <h6 class="font-weight-normal">कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा सम्बन्धित स्थानीय तहले माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h6>
+        </div>
+    </div>
+<div class="card-warning p-2 mt-3"><h6>रकम सबै रु हजारमा छ  </h6></div>
+
+{% if 'local_level_forms:review' in request.resolver_match.view_name %}
+    {% if empty_fields %}
+    <div id="accordion" class="accordion mt-5 mx-n3 alert alert-danger" role="alert">
+        निम्न फारमहरु भरिएका छैनन्
+        {% for val in empty_fields %}
+        <p>
+            {{ val.order_no }} ) {{ val.title }}
+            {% if action == 'submit' %}
+            <a class="text-info" href={{ val.url }}><i class="ic-edit"></i></a>
+            {% endif %}
+        </p>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endif %}
+
+
+    <div id="accordion" class="accordion mt-4 mx-n3">
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+            class="hasSub">
+                1) महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै स्थानीय तहबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य
+            </a>
+            {% else %}
+                <h6>1) महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै स्थानीय तहबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य</h6>
+            {% endif %}
+            
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="mt-2 mb-3">
+                    <p>स्थानीय तहको नामः <span>{{ object.epidemic_outbreak_prep.body }}</span></p>
+                    <p>आर्थिक बर्ष : <span>{{ object.epidemic_outbreak_prep.fiscal_year }}</span></p>
+                    {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=epidemic_outbreak_prep"><i class="ic-edit"></i></a></p>
+                    {% endif %}
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य
+                                </th>
+                                <th>
+                                    सम्पादन भएका प्रमुख क्रियाकलापहरु
+                                </th>
+                                <th>
+                                    खर्च रकम
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in object.epidemic_outbreak_prep.lines.all  %}
+                                <tr>
+                                    <td>{{ obj.preparation_work_to_do }}</td>
+                                    <td>{{ obj.major_activities }}</td>
+                                    <td>{{ obj.amt_expense }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+                <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"
+                    class="hasSub">
+                    2) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण
+                </a>
+            {% else %}
+                <h6>2) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च सम्बन्धी बिबरण</h6>
+            {% endif %}
+                
+
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="mt-2 mb-3">
+                        <p>स्थानीय तहको नामः <span>{{ object.fund_receipt_expense.body }}</span></p>
+                        <p>आर्थिक बर्ष : <span>{{ object.fund_receipt_expense.fiscal_year }}</span></p>
+                        {% if action == 'submit' %}
+                            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=fund_receipt_expense"><i class="ic-edit"></i></a></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="table-responsive">
+                    
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                        <th>बजेट/आम्दानीको स्रोत</th>
+                                        <th>२०७७ असार मसान्तसम्म प्राप्त रकम</th>
+                                        <th>२०७७ आश्विन मसान्तसम्म प्राप्त रकम</th>
+                                        <th>खर्च शीर्षक</th>
+                                        <th>२०७७ असार मसान्तसम्म खर्च रकम</th>
+                                        <th>२०७७ आश्विन मसान्तसम्म खर्च रकम</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for obj in object.fund_receipt_expense.lines.all  %}
+                                    <tr>
+                                        <td>{{ obj.budget_source }}</td>
+                                        <td>{{ obj.fy_start_received_amt }}</td>
+                                        <td>{{ obj.fy_end_received_amt }}</td>
+                                        <td>{{ obj.expense_header }}</td>
+                                        <td>{{ obj.fy_start_expense_amt }}</td>
+                                        <td>{{ obj.fy_end_expense_amt }}</td>
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                        <th>जम्मा</th>
+                                        <th>{% calculate_total_local_level object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}</th>
+                                        <th>{% calculate_total_local_level object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}</th>
+                                        <th>जम्मा</th>
+                                        <th>{% calculate_total_local_level object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}</th>
+                                        <th>{% calculate_total_local_level object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="note">
+                        द्रष्ट्रव्यः १= माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा प्राप्त र खर्च भएको रकम समेत समावेश गर्ने ।
+                    </p>
+                </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+                <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                    3) जोखिम भत्ता सम्बन्धी बिबरण (स्थानीय तहले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)
+                </a>
+            {% else %}
+                <h6>3) जोखिम भत्ता सम्बन्धी बिबरण (स्थानीय तहले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)</h6>
+            {% endif %}
+                
+
+                <div id="collapseThree" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="mt-2 mb-3">
+                        <p>निकाय नाम: <span>{{ object.risk_allowance.body }}</span></p>
+                        <p>आर्थिक बर्ष : <span>{{ object.risk_allowance.fiscal_year }}</span></p>
+                        {% if action == 'submit' %}
+                            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=risk_allowance"><i class="ic-edit"></i></a></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                {% with start_index=1 %}
+                                <tr class="tr-review-head">
+                                    <th>क्रस</th>
+                                    <th>खर्च गर्ने निकायको नाम</th>
+                                    <th>जोखिम भत्ता पाउने पदाधिकारी</th>
+                                    <th>कर्मचारी वा पदाधिकारी संख्या</th>
+                                    <th>भत्ताको प्रकार</th>
+                                    <th>२०७६।७७ सम्म खर्च रकम</th>
+                                    <th>कैफियत</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for obj in object.risk_allowance.lines.all  %}
+                                <tr>
+                                    <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                                    <td>{{ obj.gov_body }}</td>
+                                    <td>{{ obj.office_bearer }}</td>
+                                    <td>{{ obj.bearer_num }}</td>
+                                    <td>{{ obj.allowance_type }}</td>
+                                    <td>{{ obj.expense_amount }}</td>
+                                    <td>{{ obj.remarks }}</td>
+                                </tr>
+                                {% endfor %}
+                                {% endwith %}
+
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>जम्मा</th>
+                                    <th>{% calculate_total_local_level object 'risk_allowance' 'lines' 'bearer_num' %}</th>
+                                    <th></th>
+                                    <th>{% calculate_total_local_level object 'risk_allowance' 'lines' 'expense_amount' %}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne"
+            class="hasSub">
+                4) औषधी, स्वास्थ्य सामग्री एवं उपकरण खरिद (स्थानीय तहले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>4) औषधी, स्वास्थ्य सामग्री एवं उपकरण खरिद (स्थानीय तहले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण खरिद गरेको भए सोको विवरण खुलाउने)</h6>
+            {% endif %}
+            
+
+            <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="mt-2 mb-3">
+                        <p>स्थानीय तहको नामः <span>{{ object.medical_expense.body }}</span></p>
+                        <p>आर्थिक बर्ष : <span>{{ object.medical_expense.fiscal_year }}</span></p>
+                        {% if action == 'submit' %}
+                            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_expense"><i class="ic-edit"></i></a></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                {% with start_index=1 %}
+                                <tr class="tr-review-head">
+                                    <th>क्रस</th>
+                                    <th>खरिद विवरण</th>
+                                    <th>आपूर्तिकर्ताको नाम</th>
+                                    <th>सम्झौता रकम</th>
+                                    <th>आपूर्ति गर्नुपर्ने मिति</th>
+                                    <th>आपूर्ति गरेको मिति</th>
+                                    <th>आपूर्ति भएको सामानको मुल्य</th>
+                                    <th>खरिद विधि</th>
+                                    <th>कैफियत</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for obj in object.medical_expense.lines.all  %}
+                                <tr>
+                                    <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                                    <td>{{ obj.product }}</td>
+                                    <td>{{ obj.importer }}</td>
+                                    <td>{{ obj.amt_agreement }}</td>
+                                    <td>{{ obj.date_to_import }}</td>
+                                    <td>{{ obj.date_imported }}</td>
+                                    <td>{{ obj.amt_imported }}</td>
+                                    <td>{{ obj.procure_method }}</td>
+                                    <td>{{ obj.remarks }}</td>
+                                </tr>
+                                {% endfor %}
+                                {% endwith %}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                5) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (स्थानीय तहले २०७६।७७ मा विभिन्न निकायबाट औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>5) औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (स्थानीय तहले २०७६।७७ मा विभिन्न निकायबाट औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h6>
+            {% endif %}
+            
+
+            <div id="collapseFive" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="mt-2 mb-3">
+                    <p>स्थानीय तहको नामः <span>{{ object.medical_receipt.body }}</span></p>
+                    <p>आर्थिक बर्ष : <span>{{ object.medical_receipt.fiscal_year }}</span></p>
+                    {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_receipt"><i class="ic-edit"></i></a></p>
+                    {% endif %}
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            {% with start_index=1 %}
+                            <tr class="tr-review-head">
+                                <th>क्रस</th>
+                                <th>स्वास्थ्य सामाग्री उपकरणको विवरण</th>
+                                <th>प्रदान गर्ने निकाय वा संस्था</th>
+                                <th>परिमाण</th>
+                                <th>प्राप्त औषधी स्वास्थ्य सामग्री उपकरणको मूल्य</th>
+                                <th>प्रयोगको अवस्था</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in object.medical_receipt.lines.all  %}
+                            <tr>
+                                <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                                <td>{{ obj.product }}</td>
+                                <td>{{ obj.provider_institution }}</td>
+                                <td>{{ obj.quantity }}</td>
+                                <td>{{ obj.cost_received_items }}</td>
+                                <td>{{ obj.usage_situation }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endwith %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                6) औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग
+            </a>
+            {% else %}
+                <h6>6) औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h6>
+            {% endif %}
+    
+
+    <div id="collapseSix" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः <span>{{ object.medical_use.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.medical_use.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=medical_use"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th>क्रस</th>
+              <th>औषधी स्वास्थ्य सामग्री एवं उपकरणको नाम</th>
+              <th>खरिद वा प्राप्ती </th>
+              <th>सामानको मुल्य</th>
+              <th>प्रयोगमा नआएको परिमाण</th>
+              <th>प्रयोगमा नआएको कारण</th>
+              <th>कैफियत</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.medical_use.lines.all  %}
+            <tr>
+              <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+              <td>{{ obj.product }}</td>
+              <td>
+                                    {% if obj.is_purchased %}
+                                        {{ 'खरिद' }}
+                                    {% else %}
+                                        {{ 'प्राप्ती' }}
+                                    {% endif %}
+                                </td>
+              <td>{{ obj.product_price }}</td>
+              <td>{{ obj.unused_qty }}</td>
+              <td>{{ obj.unused_reason }}</td>
+              <td>{{ obj.remarks }}</td>
+            </tr>
+            {% endfor %}
+            {% endwith %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                7) केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)
+            </a>
+            {% else %}
+                <h6>7) केही प्रमुख स्वास्थ्य सामाग्रीको खरिद दर सम्बन्धी बिबरण (२०७६।७७)</h6>
+            {% endif %}
+    
+
+    <div id="collapseSeven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः <span>{{ object.med_purchase_desc.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.med_purchase_desc.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=med_purchase_desc"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="tr-review-head">
+              <th>सामानको नाम</th>
+              <th>सामानको छोटो स्पेशिफिकेशन</th>
+              <th>खरिद सम्झौता मिति</th>
+              <th>सामान प्राप्त मिति</th>
+              <th>इकाई</th>
+              <th>परीमाण</th>
+              <th>दर</th>
+              <th>कुल रकम</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.med_purchase_desc.lines.all  %}
+                <tr>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.product_specificaiton }}</td>
+                  <td>{{ obj.date_procure_agreement }}</td>
+                  <td>{{ obj.date_received }}</td>
+                  <td>{{ obj.uom }}</td>
+                  <td>{{ obj.qty }}</td>
+                  <td>{{ obj.rate }}</td>
+                  <td>{{ obj.total_amt }}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+                </div>
+                <p class="note">
+                    नोटः स्वास्थ्य सामाग्री खरिद गर्ने सबै निकायले भर्नु होला । सामानको नामसंगै स्पेशीफिकेशन छोटकरीमा उल्लेख गरिदिनु होला ।
+                </p>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                8) केस ईन्भेष्टीगेशन तथा कन्ट्रय्याक्ट ट्रेसिङ्ग २०७६।७७
+            </a>
+            {% else %}
+                <h6>8) केस ईन्भेष्टीगेशन तथा कन्ट्रय्याक्ट ट्रेसिङ्ग २०७६।७७</h6>
+            {% endif %}
+    
+
+    <div id="collapseEight" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः <span>{{ object.case_investigation_tracing.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.case_investigation_tracing.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=case_investigation_tracing"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th>सि नं</th>
+              <th>बिबरण</th>
+              <th>टिम गठन संख्या</th>
+              <th>खर्च रकम</th>
+              <th>खोज पडताल गरिएका केश संख्या</th>
+              <th>खोज पडतालबाट पहिचान भएका संक्रमित</th>
+              <th>कैफियत</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.case_investigation_tracing.lines.all  %}
+                                <tr>
+                                    <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                                    <td>{{ obj.description }}</td>
+                                    <td>{{ obj.num_team_members }}</td>
+                                    <td>{{ obj.amount_expense }}</td>
+                                    <td>{{ obj.num_searched_cases }}</td>
+                                    <td>{{ obj.num_identified_infection }}</td>
+                                    <td>{{ obj.remarks }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% endwith %}
+                            <tr>
+                                <th></th>
+                                <th>जम्मा</th>
+                                <th>{% calculate_total_local_level object 'case_investigation_tracing' 'lines' 'num_team_members' %}</th>
+                                <th>{% calculate_total_local_level object 'case_investigation_tracing' 'lines' 'amount_expense' %}</th>
+                                <th>{% calculate_total_local_level object 'case_investigation_tracing' 'lines' 'num_searched_cases' %}</th>
+                                <th>{% calculate_total_local_level object 'case_investigation_tracing' 'lines' 'num_identified_infection' %}</th>
+                                <th></th>
+                            </tr>
+          </tbody>
+        </table>
+                </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                9) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण (स्थानीय तह भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )
+            </a>
+            {% else %}
+                <h6>9) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य जनशक्ति सम्बन्धी विवरण (स्थानीय तह भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h6>
+            {% endif %}
+    
+
+    <div id="collapseTwelve" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.covid_hos_mainpower }}</span></p>
+        <p>स्थान: <span>{{ object.covid_hos_mainpower.address }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=covid_hos_mainpower"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th>क्रस</th>
+              <th>स्वास्थ्य जनशक्ति</th>
+              <th>दरबन्दी संख्या</th>
+              <th>पदपूर्ति संख्या</th>
+              <th>रिक्त संख्या</th>
+              <th>पदपूर्ति मध्ये करार संख्या</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.covid_hos_mainpower.lines.all  %}
+              <tr>
+                <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                <td>{{ obj.num_required }}</td>
+                <td>{{ obj.num_hired }}</td>
+                <td>{{ obj.num_vacant }}</td>
+                <td>{{ obj.num_vacant }}</td>
+                <td>{{ obj.num_contract }}</td>
+              </tr>
+            {% endfor %}
+            {% endwith %}
+          </tbody>
+        </table>
+                </div>
+                <p class="note">
+                    नोटः यो बिबरण सबै संघ प्रदेश र स्थानियतहका कोभिड अस्पतालबाट संकलन गर्नुपर्नेछ ।
+                </p>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                10) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण (प्रदेश भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )
+            </a>
+            {% else %}
+                <h6>10) कोभिड डेडिकेट्ड अस्पतालमा रहेका स्वास्थ्य उपकरण सम्बन्धी विवरण (प्रदेश भित्र रहेका कोभिड अस्पतालको विवरण उल्लेख गर्ने )</h6>
+            {% endif %}
+    
+
+    <div id="collapseTen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>कोभिड डेडिकेटेड अस्पातालको नाम: <span>{{ object.cov_hos_equipment }}</span></p>
+        <p>स्थान: <span>{{ object.cov_hos_equipment.address }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=cov_hos_equipment"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th rowspan="2">क्रस</th>
+              <th rowspan="2">स्वास्थ्य उपकरण</th>
+              <th colspan="3">संख्या</th>
+            </tr>
+
+            <tr>
+              <th>आबश्यक</th>
+              <th>उपलब्ध</th>
+              <th>नपुग</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.cov_hos_equipment.lines.all  %}
+              <tr>
+                <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                <td>{{ obj.product }}</td>
+                <td>{{ obj.num_required }}</td>
+                <td>{{ obj.available }}</td>
+                <td>{{ obj.num_still_required }}</td>
+              </tr>
+            {% endfor %}
+            {% endwith %}
+          </tbody>
+        </table>
+                </div>
+                <p class="note">
+                    नोटः यो बिबरण सबै संघ प्रदेश र स्थानियतहका कोभिड अस्पतालबाट संकलन गर्नुपर्नेछ ।
+                </p>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                11) क्वारेन्टीन/होल्डिङ सेन्टर व्यवस्थापन सम्बन्धी बिबरण (स्थानीय तहबाट सञ्चालित क्वारेन्टिन र होल्डिङ सेन्टरको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>11) क्वारेन्टीन/होल्डिङ सेन्टर व्यवस्थापन सम्बन्धी बिबरण (स्थानीय तहबाट सञ्चालित क्वारेन्टिन र होल्डिङ सेन्टरको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseEleven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः <span>{{ object.quarantine_management_detail.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.quarantine_management_detail.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=quarantine_management_detail"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th rowspan="2">क्रस</th>
+              <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम</th>
+              <th rowspan="2">निर्माण खर्च</th>
+              <th rowspan="2">बेड संख्या</th>
+              <th colspan="2">क्वारेन्टिनमा बस्नेहरुको संख्या</th>
+              <th rowspan="2">सञ्चालन ब्यबस्थापन प्रयोजनको खर्च</th>
+            </tr>
+            <tr>
+              <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+              <th>आषाढ मसान्त सम्म क्वारेन्टिनमा बसेकाहरुको कुल संख्या</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.quarantine_management_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.quarantine_center }}</td>
+                  <td>{{ obj.cost_construction }}</td>
+                  <td>{{ obj.num_bed }}</td>
+                  <td>{{ obj.max_num_daily_stay }}</td>
+                  <td>{{ obj.num_stayed_till_fy_end }}</td>
+                  <td>{{ obj.expense_operations }}</td>
+                </tr>
+            {% endfor %}
+            {% endwith %}
+            <tr>
+              <td></td>
+              <th>जम्मा</th>
+              <td>{% calculate_total_local_level object 'quarantine_management_detail' 'lines' 'cost_construction' %}</td>
+              <td>{% calculate_total_local_level object 'quarantine_management_detail' 'lines' 'num_bed' %}</td>
+              <td>{% calculate_total_local_level object 'quarantine_management_detail' 'lines' 'max_num_daily_stay' %}</td>
+              <td>{% calculate_total_local_level object 'quarantine_management_detail' 'lines' 'num_stayed_till_fy_end' %}</td>
+              <td>{% calculate_total_local_level object 'quarantine_management_detail' 'lines' 'expense_operations' %}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                12) आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (स्थानीय तहबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>12) आसोलेशनकेन्द्र व्यवस्थापन सम्बन्धी बिबरण (स्थानीय तहबाट सञ्चालित आसोलेशन केन्द्रको २०७७ अषाढ मसान्तसम्मको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseTwelve" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः <span>{{ object.isolation_management_detail.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.isolation_management_detail.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=isolation_management_detail"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th rowspan="2">क्रस</th>
+              <th rowspan="2">यस निकायले तयार वा सञ्चालन गरेको आईसोलेशन केन्द्रको नाम</th>
+              <th rowspan="2">निर्माण खर्च</th>
+              <th rowspan="2">बेड संख्या</th>
+              <th colspan="2">आईसोलेशन केन्द्रमा बस्नेहरुको संख्या</th>
+              <th rowspan="2">ब्यबस्थापन प्रयोजनको खर्च</th>
+            </tr>
+            <tr>
+              <th>दैनिकरुपमा बसेको अधिकतम संख्या</th>
+              <th>आषाढ मसान्त सम्म आईसोलेशन केन्द्रमा बसेकाहरुको कुल संख्या</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.isolation_management_detail.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.isolationcenter }}</td>
+                  <td>{{ obj.cost_construction }}</td>
+                  <td>{{ obj.num_bed }}</td>
+                  <td>{{ obj.max_num_daily_stay }}</td>
+                  <td>{{ obj.num_stayed_till_fy_end }}</td>
+                  <td>{{ obj.expense_operations }}</td>
+                </tr>
+            {% endfor %}
+            {% endwith %}
+            <tr>
+              <td></td>
+              <th>जम्मा</th>
+              <th>{% calculate_total_local_level object 'isolation_management_detail' 'lines' 'cost_construction' %}</th>
+              <th>{% calculate_total_local_level object 'isolation_management_detail' 'lines' 'num_bed' %}</th>
+              <th>{% calculate_total_local_level object 'isolation_management_detail' 'lines' 'max_num_daily_stay' %}</th>
+              <th>{% calculate_total_local_level object 'isolation_management_detail' 'lines' 'num_stayed_till_fy_end' %}</th>
+              <th>{% calculate_total_local_level object 'isolation_management_detail' 'lines' 'expense_operations' %}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                13) क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया</b> (स्थानीय तहबाट सञ्चालित क्वारेन्टिन र होल्डिङ सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>13) क्वारेन्टीन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया</b> (स्थानीय तहबाट सञ्चालित क्वारेन्टिन र होल्डिङ सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseThirteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः <span>{{ object.quarantine_contruction_expenditure.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.quarantine_contruction_expenditure.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=quarantine_contruction_expenditure"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th>क्रस</th>
+              <th>खरिद भएका सामग्री</th>
+              <th>इकाई</th>
+              <th>संख्या</th>
+              <th>प्रति ईकाइ दर</th>
+              <th>खर्च रकम</th>
+              <th>खरिद विधि</th>
+              <th>कैफियत</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.quarantine_contruction_expenditure.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.uom }}</td>
+                  <td>{{ obj.number }}</td>
+                  <td>{{ obj.unit_cost }}</td>
+                  <td>{{ obj.amt_expense }}</td>
+                  <td>{{ obj.procure_method }}</td>
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+            {% endfor %}
+            {% endwith %}
+            <tr>
+              <td></td>
+              <th>जम्मा</th>
+              <td></td>
+              <th>{% calculate_total_province object 'quarantine_contruction_expenditure' 'lines' 'number' %}</th>
+              <th>{% calculate_total_province object 'quarantine_contruction_expenditure' 'lines' 'unit_cost' %}</th>
+              <th>{% calculate_total_province object 'quarantine_contruction_expenditure' 'lines' 'amt_expense' %}</th>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+                </div>
+                <p class="note">
+                    नोट- १. खरिद भएको सामग्री अनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।
+                </p>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                14) आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (स्थानीय तहबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>14) आइसोलेशन निर्माणमा खरिद भएका सामग्री र खर्च रकम एवं खरिद प्रकृया (स्थानीय तहबाट आइसोलेशन सेन्टर निर्माणका २०७७ अषाढ मसान्तसम्म खरिद भएका सामग्रीको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseFourteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.isolation_construction_expenditure.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.isolation_construction_expenditure.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+            <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=isolation_construction_expenditure"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th>क्रस</th>
+              <th>खरिद भएका सामग्री</th>
+              <th>इकाई</th>
+              <th>संख्या</th>
+              <th>प्रति ईकाइ दर</th>
+              <th>खर्च रकम</th>
+              <th>खरिद विधि</th>
+              <th>कैफियत</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.isolation_construction_expenditure.lines.all  %}
+                <tr>
+                  <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                  <td>{{ obj.product }}</td>
+                  <td>{{ obj.uom }}</td>
+                  <td>{{ obj.number }}</td>
+                  <td>{{ obj.unit_cost }}</td>
+                  <td>{{ obj.amt_expense }}</td>
+                  <td>{{ obj.procure_method }}</td>
+                  <td>{{ obj.remarks }}</td>
+                </tr>
+            {% endfor %}
+            {% endwith %}
+            <tr>
+              <td></td>
+              <th>जम्मा</th>
+              <td></td>
+              <th>{% calculate_total_local_level object 'isolation_construction_expenditure' 'lines' 'number' %}</th>
+              <th>{% calculate_total_local_level object 'isolation_construction_expenditure' 'lines' 'unit_cost' %}</th>
+              <th>{% calculate_total_local_level object 'isolation_construction_expenditure' 'lines' 'amt_expense' %}</th>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+                </div>
+                <p class="note">
+                    नोट- 1. खरिद भएको सामग्रीअनुसारको खर्च रकम उपलव्ध नभएको अवस्थामा सामग्री खरिदमा भएको कुल खर्च र खरिद विधि उल्लेख गर्नुहोस् ।
+                </p>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                15) केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम  परिचालन (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म टीम परिचालन गरेको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>15) केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम  परिचालन (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म टीम परिचालन गरेको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseFifteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.case_investigation_tracing_operation.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.case_investigation_tracing_operation.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                    <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=case_investigation_tracing_operation"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+              <th>स्थानियतहको नाम</th>
+              <th>टीमको सदस्य संख्या</th>
+              <th>खर्च रकम</th>
+              <th>केश अनुसन्धान संख्या</th>
+              <th>कन्टयाक्टमा आएका व्यक्तिहरूको पहीचान संख्या</th>
+              <th>सामान्य परामर्श, फलोअप तथा रेफर संख्या</th>
+              <th>नमूना संकलन वा द्रुत परिक्षण संख्या</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.case_investigation_tracing_operation.lines.all  %}
+                <tr>
+                  <td>{{ obj.case_invs_body }}</td>
+                  <td>{{ obj.num_team_members }}</td>
+                  <td>{{ obj.amt_expense }}</td>
+                  <td>{{ obj.num_case }}</td>
+                  <td>{{ obj.num_contact_identified }}</td>
+                  <td>{{ obj.num_consult_refer }}</td>
+                  <td>{{ obj.num_sample_collect_test }}</td>
+                </tr>
+            {% endfor %}
+            {% endwith %}
+          </tbody>
+        </table>
+                </div>
+                <p class="note">
+                    नोट१. CICTT-स्थानियतह अन्तगर्त परिचालन भएका केश अनुसन्धान तथा कन्याक्ट खोजपड्ताल टीम (Case Investigation and Contact Tracing Team -CICTT)र ती टीमबाट सम्पादन भएका प्रमुख कार्य खुलाउनुहोस् ।
+                </p>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                16) राहत सामग्री खरिद विधिसम्बन्धी विवरण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म खरिद गरेको राहत सामग्रीको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>16) राहत सामग्री खरिद विधिसम्बन्धी विवरण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म खरिद गरेको राहत सामग्रीको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseSixteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.relief_procurement_detail.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.relief_procurement_detail.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_procurement_detail"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="tr-review-head">
+              <th>राहात सामग्री खरिद गर्दा प्रयोग गरेको विधि</th>
+              <th>खरिद रकम</th>
+              <th>उक्त खरिद विधि प्रयोग गर्नाको कारण</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.relief_procurement_detail.lines.all  %}
+                                <tr>
+                                    <td>{{ obj.procure_method }}</td>
+                                    <td>{{ obj.amt_purchase }}</td>
+                                    <td>{{ obj.reason_procure_method }}</td>
+                                </tr>
+            {% endfor %}
+            <tr>
+                                <th>जम्मा</th>
+                                <td>{% calculate_total_local_level object 'relief_procurement_detail' 'lines' 'amt_purchase' %}</td>
+                                <td></td>
+                            </tr>
+          </tbody>
+        </table>
+                </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                17) राहात सामग्रीको खरिद र वितरणको परिमाण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म खरिद र वितरण गरेको राहत सामग्रीको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>17) राहात सामग्रीको खरिद र वितरणको परिमाण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म खरिद र वितरण गरेको राहत सामग्रीको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseSeventeen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.relief_procurement_distribution.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.relief_procurement_distribution.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_procurement_distribution"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="tr-review-head">
+              <th>राहात सामग्री</th>
+              <th>ईकाइ</th>
+              <th>खरिद परिमाण</th>
+              <th>प्रतिईकाइ दर</th>
+              <th>रकम</th>
+              <th>वितरण परिमाण</th>
+              <th>बाँकी परिमाण</th>
+              <th>गुणस्तरमा सिकायत छ । छैन</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.relief_procurement_distribution.lines.all  %}
+                                <tr>
+                                    <td>{{ obj.product }}</td>
+                                    <td>{{ obj.uom }}</td>
+                                    <td>{{ obj.qty_purchase }}</td>
+                                    <td>{{ obj.rate }}</td>
+                                    <td>{{ obj.amt_total }}</td>
+                                    <td>{{ obj.qty_distributed }}</td>
+                                    <td>{{ obj.qty_remaining }}</td>
+                                    {% if obj.has_quality_complaint %}
+                                        <td>{{ 'छ' }}</td>
+                                    {% else %}
+                                        <td>{{ 'छैन' }}</td>
+                                    {% endif %}
+                                </tr>
+            {% endfor %}
+            <tr>
+                                <th>जम्मा</th>
+                                <td></td>
+                                <td>{% calculate_total_local_level object 'relief_procurement_distribution' 'lines' 'qty_purchase' %}</td>
+                                <td>{% calculate_total_local_level object 'relief_procurement_distribution' 'lines' 'rate' %}</td>
+                                <td>{% calculate_total_local_level object 'relief_procurement_distribution' 'lines' 'amt_total' %}</td>
+                                <td>{% calculate_total_local_level object 'relief_procurement_distribution' 'lines' 'qty_distributed' %}</td>
+                                <td>{% calculate_total_local_level object 'relief_procurement_distribution' 'lines' 'qty_remaining' %}</td>
+                                <td></td>
+                            </tr>
+          </tbody>
+        </table>
+                </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseEighteen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                18) वडा अनुसारको राहात सामग्री खरिद र वितरणको विवरण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म खरिद र वितरण गरेको राहत सामग्रीको वडा अनुसारको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>18) वडा अनुसारको राहात सामग्री खरिद र वितरणको विवरण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म खरिद र वितरण गरेको राहत सामग्रीको वडा अनुसारको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseEighteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.ward_relief_procurement_dist.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.ward_relief_procurement_dist.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=ward_relief_procurement_dist"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="tr-review-head">
+              <th>वडा नं</th>
+              <th>राहत सामग्री खरिद रकम</th>
+              <th>खरिद विधि</th>
+              <th>राहत लाभग्राही परिवार</th>
+              <th>उपलव्ध गराएको राहतबाट सुविधा प्राप्त जनसंख्या</th>
+              <th>केही व्यहोरा भए खुलाउने</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.ward_relief_procurement_dist.lines.all  %}
+                                <tr>
+                                    <td>{{ obj.ward_num }}</td>
+                                    <td>{{ obj.amt_relief_material_purchase }}</td>
+                                    <td>{{ obj.procure_method }}</td>
+                                    <td>{{ obj.relief_beneficiary_family }}</td>
+                                    <td>{{ obj.num_relief_benefitted }}</td>
+                                    <td>{{ obj.remarks }}</td>
+                                </tr>
+            {% endfor %}
+            <tr>
+                                <th>जम्मा</th>
+                                <td>{% calculate_total_local_level object 'ward_relief_procurement_dist' 'lines' 'amt_relief_material_purchase' %}</td>
+                                <td></td>
+                                <td></td>
+                                <td>{% calculate_total_local_level object 'ward_relief_procurement_dist' 'lines' 'num_relief_benefitted' %}</td>
+                                <td></td>
+                            </tr>
+          </tbody>
+        </table>
+                </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseNineteen" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                19) संघ संस्था तथा व्यक्तीबाट राहत वितरणको लागि प्राप्त उपभोग्य वस्तुहरुको परिमाण र वितरण (स्थानीय तहबाट राहत वितरण गर्न विभिन्न निकाय एवं व्यक्त्तिबाट २०७७ अषाढ मसान्तसम्म प्राप्त गरी वितरण गरेको राहत सामग्रीको विवरण खुलाउने)
+            </a>
+            {% else %}
+                <h6>19) संघ संस्था तथा व्यक्तीबाट राहत वितरणको लागि प्राप्त उपभोग्य वस्तुहरुको परिमाण र वितरण (स्थानीय तहबाट राहत वितरण गर्न विभिन्न निकाय एवं व्यक्त्तिबाट २०७७ अषाढ मसान्तसम्म प्राप्त गरी वितरण गरेको राहत सामग्रीको विवरण खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseNineteen" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.received_relief_detail.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.received_relief_detail.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=received_relief_detail"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="tr-review-head">
+              <th>राहत सामग्री प्रदान गर्नेको नाम</th>
+              <th>राहत सामग्री</th>
+              <th>ईकाइ</th>
+              <th>प्राप्त परिमाण</th>
+              <th>वितरण परिमाण</th>
+              <th>बाँकी परिमाण</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.received_relief_detail.lines.all  %}
+                                <tr>
+                                    <td>{{ obj.provider }}</td>
+                                    <td>{{ obj.qty_received }}</td>
+                                    <td>{{ obj.unit }}</td>
+                                    <td>{{ obj.qty_received }}</td>
+                                    <td>{{ obj.qty_distributed }}</td>
+                                    <td>{{ obj.qty_remaining }}</td>
+                                </tr>
+            {% endfor %}
+            <tr>
+                                <th>जम्मा</th>
+                                <th>{% calculate_total_local_level object 'received_relief_detail' 'lines' 'qty_received' %}</th>
+                                <th></th>
+                                <th>{% calculate_total_local_level object 'received_relief_detail' 'lines' 'qty_received' %}</th>
+                                <th>{% calculate_total_local_level object 'received_relief_detail' 'lines' 'qty_distributed' %}</th>
+                                <th>{% calculate_total_local_level object 'received_relief_detail' 'lines' 'qty_remaining' %}</th>
+                            </tr>
+          </tbody>
+        </table>
+                </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseTwenty" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                20) राहत वितरण खर्च सम्वन्धी विवरण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म राहतमा भएको खर्च खुलाउने)
+            </a>
+            {% else %}
+                <h6>20) राहत वितरण खर्च सम्वन्धी विवरण (स्थानीय तहबाट २०७७ अषाढ मसान्तसम्म राहतमा भएको खर्च खुलाउने)</h6>
+            {% endif %}
+    
+
+    <div id="collapseTwenty" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.relief_distribution_expense.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.relief_distribution_expense.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=relief_distribution_expense"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="tr-review-head">
+              <th>राहातको प्रकार</th>
+              <th>खर्च रकम</th>
+              <th>राहात पाउनेको संख्या</th>
+              <th>कैफियत</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.relief_distribution_expense.lines.all  %}
+                                <tr>
+                                    <td>{{ obj.relief_type }}</td>
+                  <td>{{ obj.amt_expense }}</td>
+                  <td>{{ obj.num_relif_beneficiary }}</td>
+                  <td>{{ obj.remarks }}</td>
+                                </tr>
+            {% endfor %}
+            <tr>
+                                <th>जम्मा</th>
+                                <th>{% calculate_total_local_level object 'relief_distribution_expense' 'lines' 'amt_expense' %}</th>
+                                <th>{% calculate_total_local_level object 'relief_distribution_expense' 'lines' 'num_relif_beneficiary' %}</th>
+                                <th></th>
+                            </tr>
+          </tbody>
+        </table>
+                </div>
+    </div>
+        </div>
+
+        <div class="accordion-item">
+            {% if 'local_level_forms:review' in request.resolver_match.view_name %}
+            <a data-toggle="collapse" data-target="#collapseTwentyone" aria-expanded="true" aria-controls="collapseOne"
+                class="hasSub">
+                21) कार्ययोजना कार्यान्वयन- (कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै स्थानीय तहको समेत जिम्मेवारी हुने गरी तोकेको छ । यस सम्बन्धमा स्थानीय तहबाट भएका क्रियाकलाप र यसमा भएको खर्च खुलाउनु होस् ।)
+            </a>
+            {% else %}
+                <h6>21) कार्ययोजना कार्यान्वयन- (कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै स्थानीय तहको समेत जिम्मेवारी हुने गरी तोकेको छ । यस सम्बन्धमा स्थानीय तहबाट भएका क्रियाकलाप र यसमा भएको खर्च खुलाउनु होस् ।)</h6>
+            {% endif %}
+    
+
+    <div id="collapseTwentyone" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="mt-2 mb-3">
+        <p>स्थानीय तहको नामः<span>{{ object.action_plan_implementation.body }}</span></p>
+        <p>आर्थिक बर्ष : <span>{{ object.action_plan_implementation.fiscal_year }}</span></p>
+        {% if action == 'submit' %}
+                        <p align="right"><a class="text-info" href="{% url 'local_level_forms:local_level_update' object.pk %}?form=action_plan_implementation"><i class="ic-edit"></i></a></p>
+        {% endif %}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            {% with start_index=1 %}
+            <tr class="tr-review-head">
+                <th>क्रस</th>
+                <th>क्रियाकलाप</th>
+                <th>उक्त कार्यमा भएको खर्च</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in object.action_plan_implementation.lines.all  %}
+                                <tr>
+                                    <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                                    <td>{{ obj.activity }}</td>
+                                    <td>{{ obj.work_expense }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% endwith %}
+          </tbody>
+        </table>
+                </div>
+    </div>
+  </div>
+    </div>
+</div>

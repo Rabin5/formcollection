@@ -5,7 +5,8 @@ from collection.views.internal_affairs_form_collection_views import (
     InternalAffairFormCollectionReviewView,
     InternalAffairFormCollectionUpdateView, 
     ApproveView,
-    internal_affair_submit_form
+    internal_affair_submit_form,
+    InternalAffairFormCollectionReportPdf
     )
 from django.urls import path
 
@@ -18,4 +19,5 @@ urlpatterns = [
     path('<int:pk>/review/<str:action>', InternalAffairFormCollectionReviewView.as_view(), name='review'),
     path('<int:form_pk>/submit', internal_affair_submit_form, name='submit_form'),
     path('approve/', ApproveView.as_view(), name='review_approve_list'),
+    path('<int:pk>/report', InternalAffairFormCollectionReportPdf.as_view(), name='report-internal-affair-pdf'),
 ]
