@@ -10,6 +10,8 @@ from oagn_covid.settings.base import PAGINATED_BY
 from django.contrib import messages
 from django.shortcuts import redirect
 
+from master_data.utils import *
+
 class FyCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = FiscalYear
     template_name = "master_data/fy_create.html"
@@ -27,6 +29,10 @@ class FyListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'fys'
     paginate_by = PAGINATED_BY
     permission_required = 'users.perm_master_data'
+
+    # def get_queryset(self):
+    #     query = self.request.GET.get('query', None)
+    #     return super().get_queryset()
 
 
 class FyUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

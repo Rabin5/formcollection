@@ -32,7 +32,11 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            password = request.POST.get('password')
+            group = request.POST.get('groups')
+            user.set_password(password)
             user.save()
+            user.groups.add(group)
             subject = "Account created successfully"
             template = render_to_string(
                 'users/email_template.html',

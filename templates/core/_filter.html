@@ -1,0 +1,18 @@
+{% if 'md' in request.resolver_match.view_name %}
+<div class='row'>
+    <div class='col-6'>
+        <form method="get">
+            <input id="django-text-input" placeholder="खोज" type="text" name="query"
+                value="{% if request.GET.query %} {{ request.GET.query}}{% endif %}" class="form-control" />
+        </form>
+    </div>
+</div>
+{% endif %}
+<!--
+<div class="section-title">
+    <h6 class="text-dark font-weight-bold"></h6>
+    <a class="btn btn-ghost-info btn-icon-only" data-toggle="modal" data-target="#exampleModal">
+        <span class="ic-filter"></span>
+    </a>
+</div>
+-->

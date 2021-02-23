@@ -265,6 +265,14 @@ class CovHosFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, 
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        form_collection = self.model.objects.filter(user=self.request.user)
+        if query:
+            query = query.strip()
+            form_collection = form_collection.filter()
+        return form_collection
+
 
 class CovHosFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = CovHosFormCollection
