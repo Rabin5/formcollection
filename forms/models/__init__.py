@@ -34,3 +34,8 @@ from .incomplete_construction_work import *
 from .quarterly_program import *
 from .drp_expense import *
 from .yearly_target import *
+from .designation_vacancy import *
+from .contract_desc import *
+from .recover_amount import *
+from .expense_desc import *
+from .integral_advancement import *

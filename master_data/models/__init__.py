@@ -9,3 +9,5 @@ from .construction_company import *
 from .consultant import *
 from .sub_header import *
 from .grant_type import *
+from .designation import *
+from  .contractor import *
