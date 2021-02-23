@@ -1,5 +1,5 @@
-from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -28,7 +28,7 @@ DICT_CHIEF_MINISTER_STATE = {key: value for key, value in CHIEF_MINISTER_STATE}
 LIST_CHIEF_MINISTER_STATE = [value for key, value in CHIEF_MINISTER_STATE]
 
 
-class ChiefMinisterOfficeFormCollectionCreateView(PermissionRequiredMixin, View):
+class ChiefMinisterOfficeFormCollectionCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
@@ -86,7 +86,7 @@ class ChiefMinisterOfficeFormCollectionCreateView(PermissionRequiredMixin, View)
         return HttpResponseRedirect(form_url)
 
 
-class ChiefMinisterOfficeFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
+class ChiefMinisterOfficeFormCollectionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -251,7 +251,7 @@ class ChiefMinisterOfficeFormCollectionUpdateView(PermissionRequiredMixin, Updat
         return self._response(form_response)
 
 
-class ChiefMinisterOfficeFormCollectionListView(PermissionRequiredMixin, ListView):
+class ChiefMinisterOfficeFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/list.html"
     permission_required = 'users.perm_chief_minister_form'
@@ -260,7 +260,7 @@ class ChiefMinisterOfficeFormCollectionListView(PermissionRequiredMixin, ListVie
 
 
 
-class ChiefMinisterOfficeFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
+class ChiefMinisterOfficeFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/delete.html"
     permission_required = 'users.perm_chief_minister_form'
@@ -268,7 +268,7 @@ class ChiefMinisterOfficeFormCollectionDeleteView(PermissionRequiredMixin, Delet
     context_object_name = 'form_collections'
 
 
-class ChiefMinisterOfficeFormCollectionReviewView(PermissionRequiredMixin, DetailView):
+class ChiefMinisterOfficeFormCollectionReviewView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = ChiefMinisterOfficeFormCollection
     template_name = "chief_minister_form_collection/review.html"
     permission_required = 'users.perm_chief_minister_form'
@@ -279,6 +279,7 @@ class ChiefMinisterOfficeFormCollectionReviewView(PermissionRequiredMixin, Detai
         context['empty_fields'] = find_empty_fields(self.object, 'chief_minister_forms', 'chief_minister_update', ROUTE_LINK, CHIEF_MINISTER_STATE)
         return context
 
+@login_required
 @permission_required('users.perm_chief_minister_form')
 def chief_minister_submit_form(request, form_pk):
     form_obj = ChiefMinisterOfficeFormCollection.objects.get(id=form_pk)
@@ -290,7 +291,7 @@ def chief_minister_submit_form(request, form_pk):
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
 
-class ApproveView(PermissionRequiredMixin, View):
+class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
     template_name = 'chief_minister_form_collection/approve.html'
     permission_required = 'users.perm_chief_minister_form_approve'
 

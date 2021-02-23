@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from master_data.models import contractor, convenience_type, designation
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from reports.views.dashboard_view import DashboardView
@@ -72,6 +73,24 @@ urlpatterns = [
          include('master_data.urls.sub_header')),
     path('master-data/government/work_nature/',
          include('master_data.urls.work_nature')),
+    path('master-data/government/committee/', include('master_data.urls.committee')),
+    path('master-data/government/relief_type/', include('master_data.urls.relief_type')),
+    path('master-data/government/action_plan/', include('master_data.urls.action_plan')),
+    path('master-data/government/construction_company/', include('master_data.urls.construction_company')),
+    path('master-data/government/consultant/', include('master_data.urls.consultant')),
+    path('master-data/government/sub_header/', include('master_data.urls.sub_header')),
+    path('master-data/government/work_nature/', include('master_data.urls.work_nature')),
+    path('master-data/government/complaint_type/',include('master_data.urls.complaint_type')),
+    path('master-data/government/peski_bibaran/',include('master_data.urls.peski_bibaran')),
+    path('master-data/government/grant_type/',include('master_data.urls.grant_type')),
+    path('master-data/government/vehicle/',include('master_data.urls.vehicle')),
+    path('master-data/government/designation/',include('master_data.urls.designation')),
+    path('master-data/government/project_type/',include('master_data.urls.project_type')),
+    path('master-data/government/contractor/',include('master_data.urls.contractor')),
+    path('master-data/government/school/',include('master_data.urls.school')),
+    path('master-data/government/convenience_type/',include('master_data.urls.convenience_type')),
+    
+
 
     # Forms
 

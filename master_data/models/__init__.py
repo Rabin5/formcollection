@@ -11,3 +11,12 @@ from .sub_header import *
 from .grant_type import *
 from .designation import *
 from  .contractor import *
+from .complaint_type import *
+from .peski_bibaran import *
+from .vehicle import *
+from .designation import *
+from .project_type import *
+from .contractor import *
+from .school import *
+from .convenience_type import *
+

@@ -1,5 +1,5 @@
-from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db import transaction
 from django.db.models import query
 from django.forms import inlineformset_factory
@@ -28,7 +28,7 @@ DICT_PROVINCE_STATE = {key: value for key, value in PROVINCE_STATE}
 LIST_PROVINCE_STATE = [value for key, value in PROVINCE_STATE]
 
 
-class ProvinceFormCollectionCreateView(PermissionRequiredMixin, View):
+class ProvinceFormCollectionCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
     """
     Creates form collection and initializes all forms in the collection
     """
@@ -85,7 +85,7 @@ class ProvinceFormCollectionCreateView(PermissionRequiredMixin, View):
         return HttpResponseRedirect(form_url)
 
 
-class ProvinceFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
+class ProvinceFormCollectionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     """
     Contains added attributes:
         route_link => containing dict of form metadata from metadata.py
@@ -250,7 +250,7 @@ class ProvinceFormCollectionUpdateView(PermissionRequiredMixin, UpdateView):
         return self._response(form_response)
 
 
-class ProvinceFormCollectionListView(PermissionRequiredMixin, ListView):
+class ProvinceFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/list.html"
     permission_required = 'users.perm_province_form'
@@ -258,7 +258,7 @@ class ProvinceFormCollectionListView(PermissionRequiredMixin, ListView):
     paginate_by = PAGINATED_BY
 
 
-class ProvinceFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
+class ProvinceFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/delete.html"
     permission_required = 'users.perm_province_form'
@@ -266,7 +266,7 @@ class ProvinceFormCollectionDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'form_collections'
 
 
-class ProvinceFormCollectionReviewView(PermissionRequiredMixin, DetailView):
+class ProvinceFormCollectionReviewView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = ProvinceFormCollection
     template_name = "province_form_collection/review.html"
     permission_required = 'users.perm_province_form'
@@ -277,6 +277,7 @@ class ProvinceFormCollectionReviewView(PermissionRequiredMixin, DetailView):
         context['empty_fields'] = find_empty_fields(self.object, 'province_forms', 'province_update', ROUTE_LINK, PROVINCE_STATE)
         return context
 
+@login_required
 @permission_required('users.perm_province_form')
 def province_submit_form(request, form_pk):
     form_obj = ProvinceFormCollection.objects.get(id=form_pk)
@@ -288,7 +289,7 @@ def province_submit_form(request, form_pk):
     form_obj.save()
     return JsonResponse({'success': '200'}, status=200)
 
-class ApproveView(PermissionRequiredMixin, View):
+class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
     template_name = 'province_form_collection/approve.html'
     permission_required = 'users.perm_province_form_approve'
 

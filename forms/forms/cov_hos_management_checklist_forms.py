@@ -20,8 +20,6 @@ class CovidHospitalManagementChecklistLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         self.fields['description'].widget.attrs['readonly'] = True
-        for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
     
 
 

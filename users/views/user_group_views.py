@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, permission_required
-from django.contrib.auth.mixins import UserPassesTestMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect, get_object_or_404
@@ -15,7 +15,7 @@ from users.forms.user_group_forms import UserGroupForm, UserPermissionUpdateForm
 from users.models.user_group import GlobalPermission
 from users.models.user import User
 
-class CreateGroup(PermissionRequiredMixin, generic.CreateView, SuccessMessageMixin):
+class CreateGroup(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView, SuccessMessageMixin):
     model = Group
     form_class = UserGroupForm
     template_name = 'user_groups/add_group.html'
@@ -41,7 +41,7 @@ class CreateGroup(PermissionRequiredMixin, generic.CreateView, SuccessMessageMix
         return reverse_lazy('users:groups_list')
 
 
-class ListGroup(PermissionRequiredMixin, generic.ListView):
+class ListGroup(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     model = Group
     context_object_name = 'groups'
     template_name = 'user_groups/list_groups.html'
@@ -67,7 +67,7 @@ class ListGroup(PermissionRequiredMixin, generic.ListView):
     
 
 
-class GroupDetail(PermissionRequiredMixin, generic.DetailView):
+class GroupDetail(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
     model = Group
     template_name = 'user_groups/group_detail.html'
     context_object_name = 'group'
@@ -111,7 +111,7 @@ class GroupDetail(PermissionRequiredMixin, generic.DetailView):
 #         return redirect('users:group_detail', group.pk)
 
 
-class RemoveUserFromGroup(PermissionRequiredMixin, View):
+class RemoveUserFromGroup(LoginRequiredMixin, PermissionRequiredMixin, View):
     # permission_required = 'user_management.perm_user_management'
     permission_required = 'users.perm_user_management'
 
@@ -127,7 +127,7 @@ class RemoveUserFromGroup(PermissionRequiredMixin, View):
         messages.success(request, 'Successfully done.')
         return redirect('users:group_detail', group.pk)
 
-class RemovePermissionFromGroup(PermissionRequiredMixin, View):
+class RemovePermissionFromGroup(LoginRequiredMixin, PermissionRequiredMixin, View):
     # permission_required = 'user_management.perm_user_management'
     permission_required = 'users.perm_user_management'
 
@@ -140,7 +140,7 @@ class RemovePermissionFromGroup(PermissionRequiredMixin, View):
         messages.success(request, 'Successfully done.')
         return redirect('users:group_detail', group.pk)
 
-class AssignUserInGroup(PermissionRequiredMixin, View):
+class AssignUserInGroup(LoginRequiredMixin, PermissionRequiredMixin, View):
     # permission_required = 'user_management.perm_user_management'
     permission_required = 'users.perm_user_management'
 
@@ -160,7 +160,7 @@ class AssignUserInGroup(PermissionRequiredMixin, View):
         else:
             return redirect('users:group_detail', group.pk)
 
-class AssignPermissionInGroup(PermissionRequiredMixin, View):
+class AssignPermissionInGroup(LoginRequiredMixin, PermissionRequiredMixin, View):
     # permission_required = 'user_management.perm_user_management'
     permission_required = 'users.perm_user_management'
 
@@ -178,7 +178,7 @@ class AssignPermissionInGroup(PermissionRequiredMixin, View):
         else:
             return redirect('users:group_detail', group.pk)
 
-class ChangeGroupName(PermissionRequiredMixin, View):
+class ChangeGroupName(LoginRequiredMixin, PermissionRequiredMixin, View):
     # permission_required = 'user_management.perm_user_management_stray'
     permission_required = 'users.perm_user_management'
 
@@ -192,7 +192,7 @@ class ChangeGroupName(PermissionRequiredMixin, View):
 
 
 
-class UpdateGroup(PermissionRequiredMixin, generic.UpdateView, SuccessMessageMixin):
+class UpdateGroup(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView, SuccessMessageMixin):
     model = Group
     form_class = UserGroupForm
     template_name = 'user_groups/update_group.html'
@@ -211,7 +211,7 @@ class UpdateGroup(PermissionRequiredMixin, generic.UpdateView, SuccessMessageMix
         return reverse_lazy('users:groups_list')
 
 
-class DeleteGroup(PermissionRequiredMixin, generic.DeleteView):
+class DeleteGroup(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
     model = Group
     template_name = 'user_groups/delete_group.html'
     context_object_name = 'group'
@@ -228,7 +228,7 @@ class DeleteGroup(PermissionRequiredMixin, generic.DeleteView):
 #         messages.success(request, 'Successfully deleted.')
 #         return redirect('users:list_groups')
 
-class CreatePermissionView(PermissionRequiredMixin, UserPassesTestMixin, generic.CreateView):
+class CreatePermissionView(LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = GlobalPermission
     fields = ['name', 'codename']
     template_name = 'user_groups/create_permission.html'
@@ -240,7 +240,7 @@ class CreatePermissionView(PermissionRequiredMixin, UserPassesTestMixin, generic
 
 
 
-class ListPermissionView(PermissionRequiredMixin, generic.ListView):
+class ListPermissionView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     model = GlobalPermission
     context_object_name = 'permissions'
     template_name = 'user_groups/list_permissions.html'
@@ -250,7 +250,7 @@ class ListPermissionView(PermissionRequiredMixin, generic.ListView):
         return GlobalPermission.objects.filter(content_type__model='global permission').order_by('name')
 
 
-class EditPermissionView(PermissionRequiredMixin, UpdateView):
+class EditPermissionView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'users.perm_user_management'
     model = GlobalPermission
     template_name = "user_groups/permission_update.html"
@@ -258,7 +258,7 @@ class EditPermissionView(PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('users:list_permissions')
     context_object_name = 'permission'
 
-class DeletePermission(PermissionRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class DeletePermission(LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = GlobalPermission
     context_object_name = 'permission'
     # success_url = reverse_lazy('user_management.perm_user_management')
