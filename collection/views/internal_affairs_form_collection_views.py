@@ -24,6 +24,10 @@ from collection.utils import INTERNAL_AFFAIRS_STATE, num_to_devanagari, find_emp
 from master_data.models import FiscalYear
 from oagn_covid.settings import PAGINATED_BY
 
+from django_weasyprint import WeasyTemplateResponseMixin
+from django.conf import settings
+import os
+
 # Convert utils INTERNAL_AFFAIRS_STATE to dict
 DICT_INTERNAL_AFFAIRS_STATE = {key: value for key, value in INTERNAL_AFFAIRS_STATE}
 LIST_INTERNAL_AFFAIRS_STATE = [value for key, value in INTERNAL_AFFAIRS_STATE]
@@ -275,9 +279,18 @@ class InternalAffairFormCollectionReviewView(LoginRequiredMixin, PermissionRequi
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action'] = self.kwargs['action']
+        if 'action' in self.kwargs:
+            context['action'] = self.kwargs['action']
         context['empty_fields'] = find_empty_fields(self.object, 'internal_affairs_forms', 'internal_affairs_update', ROUTE_LINK, INTERNAL_AFFAIRS_STATE)
         return context
+
+class InternalAffairFormCollectionReportPdf(WeasyTemplateResponseMixin, InternalAffairFormCollectionReviewView):
+    model = InternalAffairFormCollection
+    template_name = 'internal_affairs_form_collection/report.html'
+    pdf_filename = 'InternalAffairFormCollectionReport.pdf'
+    pdf_stylesheets = [
+        os.path.join(os.path.dirname(settings.BASE_DIR), 'static/styles', 'style.css'),
+    ]
 
 @login_required
 @permission_required('users.perm_internal_affairs_form')

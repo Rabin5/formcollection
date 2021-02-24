@@ -1,10 +1,14 @@
 from django.db import transaction
-from django.forms import inlineformset_factory
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from forms.models.relief_distribution_expense import ReliefDistributionExpense
-from forms.forms.relief_distribution_forms import ReliefDistributionExpenseForm, ReliefDistributionExpenseLineForm, ReliefDistributionExpenseFormSet
+from forms.models.relief_distribution_expense import (
+    ReliefDistributionExpense,
+    ReliefType
+)
+from forms.forms.relief_distribution_forms import (
+    ReliefDistributionExpenseForm,
+    ReliefDistributionExpenseFormSet
+)
 
 
 class ReliefDistributionExpenseCreateView(CreateView):
@@ -47,14 +51,36 @@ class ReliefDistributionExpenseUpdateView(UpdateView):
     form_class = ReliefDistributionExpenseForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+        initial_relieftypes = ReliefType.objects.all()[:4]
+
+        for relieftype in initial_relieftypes:
+            line = {
+                'relief_type': relieftype
+            }
+            initial.append(line)
+        return initial
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = ReliefDistributionExpenseFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST,
+                instance=self.object,
+                initial=initial
+            )
         else:
             data['lines'] = ReliefDistributionExpenseFormSet(
-                instance=self.object)
+                instance=self.object,
+                initial=initial
+            )
+            data['lines'].extra = len(initial) if initial else 1
         return data
 
     def form_valid(self, form):
@@ -72,7 +98,12 @@ class ReliefDistributionExpenseUpdateView(UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(
+            self.get_context_data(form=form, lines=lines)
+        )
 
     def get_success_url(self):
-        return reverse_lazy('relief_distribution:relief_distribution_update', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'relief_distribution:relief_distribution_update',
+            kwargs={'pk': self.object.pk}
+        )

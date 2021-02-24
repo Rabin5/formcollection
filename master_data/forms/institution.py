@@ -6,4 +6,7 @@ from master_data.models.company import Institution
 class InstitutionForm(ModelForm):
     class Meta:
         model = Institution
-        fields = '__all__'
+        fields = (
+            'name', 'date_establishment',
+            'country', 'province', 'district', 'local_level', 'ward',
+        )

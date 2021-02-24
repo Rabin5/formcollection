@@ -1,11 +1,14 @@
 from django.db import transaction
-from django.forms import inlineformset_factory
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models.case_inve_trac_operations import CaseInvestigationTracingOperations
-from forms.forms.case_invs_tracing_opt import CaseInvestigationTracingOptForm, CaseInvestigationTracingOptFormSet
+from forms.models.case_inve_trac_operations import (
+    CaseInvestigationTracingOperations
+)
+from forms.forms.case_invs_tracing_opt import (
+    CaseInvestigationTracingOptForm,
+    CaseInvestigationTracingOptFormSet
+)
 
 
 class CaseInvTacingOptCreateView(CreateView):
@@ -76,7 +79,12 @@ class CaseInvTacingOptUpdateView(UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(
+            self.get_context_data(form=form, lines=lines)
+        )
 
     def get_success_url(self):
-        return reverse_lazy('case_inv_tracing_opt:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'case_inv_tracing_opt:update',
+            kwargs={'pk': self.object.pk}
+        )

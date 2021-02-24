@@ -10,7 +10,6 @@ from forms.models import IsolationManagementDetailLine, IsolationManagementDetai
 
 
 class IsolationDetailManagementLineForm(forms.ModelForm):
-    isolationcenter = ModelChoiceFieldWithCreate(queryset=IsolationCenter.objects.all(), label='यस निकायले तयार वा सञ्चालन गरेको आईसोलेशन केन्द्रको नाम', blank=False, save_to_field='name')
 
     class Meta:
         model = IsolationManagementDetailLine

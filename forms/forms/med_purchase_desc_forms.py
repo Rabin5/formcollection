@@ -1,12 +1,13 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, Div, Fieldset, Hidden, Layout, Row
 from django import forms
 from django.forms.models import inlineformset_factory
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
+from master_data.widgets import NepaliDateInput
 
 from forms.custom_layout_object import Formset
-from forms.models import MedicalPurchaseDescription, MedicalPurchaseDescriptionLine
-from master_data.widgets import NepaliDateInput
+from forms.models import (MedicalPurchaseDescription,
+                          MedicalPurchaseDescriptionLine)
+
 
 class MedPurchaseDescLineForm(forms.ModelForm):
 
@@ -21,9 +22,15 @@ class MedPurchaseDescLineForm(forms.ModelForm):
 
 
 MedPurchaseDescLineFormSet = inlineformset_factory(
-    MedicalPurchaseDescription, MedicalPurchaseDescriptionLine, form=MedPurchaseDescLineForm,
-    fields=['medical_purchase', 'product','product_specificaiton', 'date_procure_agreement', 'date_received', 'uom', 'qty', 'rate', 'total_amt'],
-    widgets = {
+    MedicalPurchaseDescription,
+    MedicalPurchaseDescriptionLine,
+    form=MedPurchaseDescLineForm,
+    fields=[
+        'medical_purchase', 'product', 'product_specificaiton',
+        'date_procure_agreement', 'date_received', 'uom', 'qty',
+        'rate', 'total_amt'
+        ],
+    widgets={
         'date_procure_agreement': NepaliDateInput(),
         'date_received': NepaliDateInput(),
     },
@@ -38,7 +45,7 @@ class MedPurchaseDescForm(forms.ModelForm):
         model = MedicalPurchaseDescription
         fields = '__all__'
         exclude = ('create_user', )
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -52,7 +59,8 @@ class MedPurchaseDescForm(forms.ModelForm):
                 css_class='form-row'
                 ),
             Div(
-                Fieldset('',
+                Fieldset(
+                    '',
                     Formset('lines')
                 ),
             )

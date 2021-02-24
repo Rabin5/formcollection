@@ -14,8 +14,12 @@ from django.contrib.auth.models import Group
 
 from users.forms.user_forms import UserCreateForm, UserUpdateForm, ResetPasswordForm
 
-User = get_user_model()
+from django.conf import settings
+from django.template.loader import render_to_string
 
+from users.tasks import send_email
+
+User = get_user_model()
 
 class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = User
@@ -23,6 +27,21 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = UserCreateForm
     template_name = 'users/user_create.html'
     success_url = reverse_lazy('users:list')
+
+    def post(self, request, *args: str, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            subject = "Account created successfully"
+            template = render_to_string(
+                'users/email_template.html',
+                {'name': user.first_name, 'user': user.username, 'password': user.password}
+            )
+            send_email(subject, template, settings.EMAIL_HOST_USER, [user.email])
+            # send_email.delay(subject, template, settings.EMAIL_HOST_USER, user.email)
+
+        return HttpResponseRedirect(reverse('users:list'))
 
 
 class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):

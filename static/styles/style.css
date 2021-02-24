@@ -6998,6 +6998,28 @@ a {
   .add-more:hover {
     color: #053559; }
 
+.flex-layout {
+  display: flex;
+  flex-direction: column; }
+
+.scrollable {
+  overflow: auto;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */ }
+  .scrollable::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; }
+  .scrollable::-webkit-scrollbar-track {
+    background: rgba(232, 232, 232, 0.16);
+    border-radius: 4px; }
+  .scrollable::-webkit-scrollbar-thumb {
+    background: #4e85c0;
+    border-radius: 4px; }
+  .scrollable::-webkit-scrollbar-thumb:hover {
+    cursor: pointer; }
+
 h1, .h1 {
   font-size: 2.488rem;
   margin: 0; }
@@ -7071,9 +7093,6 @@ label {
 
 .textbox h6 {
   font-size: 0.833rem; }
-
-.font-weight-normal {
-  font-weight: 400; }
 
 .mt--2 {
   margin-top: 2em; }
@@ -7233,7 +7252,8 @@ button span {
 
 .btn-with-icon [class^="ic-"], .btn-with-icon [class*=" ic-"] {
   margin-right: 0.5rem;
-  opacity: 0.8; }
+  opacity: 0.8;
+  font-size: 12px; }
 
 .btn-purple {
   color: #0E0E0E;
@@ -8337,6 +8357,21 @@ a.text-dark:hover, a.text-dark:focus {
     margin: 1rem 0; }
     .list-summary h6 {
       font-size: 0.875rem; }
+  .list-role {
+    margin-top: 1rem; }
+    .list-role li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(43, 145, 254, 0.16);
+      padding: .5rem .75rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem; }
+      .list-role li h6 {
+        font-size: 0.875rem;
+        font-weight: 600; }
+    .list-role.gray-bg li {
+      background-color: rgba(161, 161, 161, 0.16) !important; }
 
 .pagination {
   justify-content: center; }
@@ -8388,12 +8423,16 @@ a.text-dark:hover, a.text-dark:focus {
   padding-top: 0; }
 
 .modal-header {
+  padding: 0.75rem 1rem;
   align-items: center; }
   .modal-header a.close {
-    font-size: 1.5rem; }
-    @media (max-width: 1920px) {
-      .modal-header a.close {
-        font-size: calc(1.45833rem + 0.03472vw) ; } }
+    font-size: 1.25rem; }
+
+.modal-body {
+  padding: 0 1rem; }
+
+.modal-title {
+  font-size: 1rem; }
 
 .progress {
   height: 0.5rem; }

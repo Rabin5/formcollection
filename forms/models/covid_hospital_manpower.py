@@ -1,15 +1,17 @@
-from master_data.models import FiscalYear
 from django.db import models
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from collection.utils import STATES, BS_MONTHS
 from master_data.models.hospital import CovidHospital
-from master_data.models.company import Location
-from master_data.models.government import GovernmentBody, Manpower
+from master_data.models.government import Manpower
 
 
 class CovidHospitalManpower(FormBaseModel):
     covidhospital = models.ForeignKey(
-        CovidHospital, on_delete=models.PROTECT, verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम:: ', null=True, blank=True)
+        CovidHospital,
+        on_delete=models.PROTECT,
+        verbose_name='कोभिड डेडिकेटेड अस्पातालको नाम',
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         if self.covidhospital:
