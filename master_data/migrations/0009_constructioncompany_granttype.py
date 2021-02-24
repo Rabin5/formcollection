@@ -12,24 +12,32 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='GrantType',
+            name='forms',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='नाम')),
+                ('name', models.CharField(max_length=255,
+                                          unique=True, verbose_name='नाम')),
             ],
         ),
         migrations.CreateModel(
             name='ConstructionCompany',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('ward', models.IntegerField(blank=True, null=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='नाम')),
-                ('country', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='master_data.country')),
-                ('district', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='master_data.district')),
-                ('local_level', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='master_data.locallevel')),
-                ('province', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='master_data.province', verbose_name='प्रदेश')),
+                ('name', models.CharField(max_length=255,
+                                          unique=True, verbose_name='नाम')),
+                ('country', models.ForeignKey(blank=True, null=True,
+                                              on_delete=django.db.models.deletion.CASCADE, to='master_data.country')),
+                ('district', models.ForeignKey(blank=True, null=True,
+                                               on_delete=django.db.models.deletion.CASCADE, to='master_data.district')),
+                ('local_level', models.ForeignKey(blank=True, null=True,
+                                                  on_delete=django.db.models.deletion.CASCADE, to='master_data.locallevel')),
+                ('province', models.ForeignKey(blank=True, null=True,
+                                               on_delete=django.db.models.deletion.CASCADE, to='master_data.province', verbose_name='प्रदेश')),
             ],
             options={
                 'abstract': False,
