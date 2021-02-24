@@ -64,6 +64,15 @@ class UomListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = 'users.perm_master_data'
     paginate_by = PAGINATED_BY
 
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        prod = self.model.objects.all()
+        # If foreign key then include field__foreignKeyField
+        search_list = ['name']
+        if query and (len(query) != 0):
+            return filter_helper(prod, query, search_list)
+        return super().get_queryset()
+
 
 class UomUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = UnitOfMeasure
@@ -94,6 +103,15 @@ class ProcurementListView(LoginRequiredMixin, PermissionRequiredMixin, ListView)
     context_object_name = 'procurements'
     paginate_by = PAGINATED_BY
     permission_required = 'users.perm_master_data'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        prod = self.model.objects.all()
+        # If foreign key then include field__foreignKeyField
+        search_list = ['name']
+        if query and (len(query) != 0):
+            return filter_helper(prod, query, search_list)
+        return super().get_queryset()
 
 
 class ProcurementUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

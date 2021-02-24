@@ -8,11 +8,11 @@ import django_filters
 def __search_query(query: str, fields: list) -> list:
     '''
         Returns:
-            [{'name': val}, {'type': val}]
+            [{'name__icontains': val}, {'type__icontains': val}]
     '''
-    return [{field: query} for field in fields]
+    return [{f'{field}__icontains': query} for field in fields]
 
-def filter_helper(objects: QuerySet, query: str, fields: list, foreign_fields: list=None):
+def filter_helper(objects: QuerySet, query: str=None, fields: list=None, address: bool=False):
     query = query.strip()
     query_list = __search_query(query, fields)
     # Similar to  objects.filter(Q(name__icontains=query), Q(type__icontains=query))
@@ -23,14 +23,15 @@ def filter_helper(objects: QuerySet, query: str, fields: list, foreign_fields: l
     return objects
 
 
+def date_filter(model_class, field_name):
+    class ModelDateFilter(django_filters.FilterSet):
+        """ Filter respective field using django-filters package"""
+        start_date = django_filters.DateFilter(
+            field_name=field_name, lookup_expr='date__gte')
+        end_date = django_filters.DateFilter(
+            field_name=field_name, lookup_expr='date__lte')
 
-class ReportFilter(django_filters.FilterSet):
-    """ Filter Report a/c to created_at field using django-filters package"""
-    start_date = django_filters.DateFilter(
-        field_name='created_at', lookup_expr='date__gte')
-    end_date = django_filters.DateFilter(
-        field_name='created_at', lookup_expr='date__lte')
-
-    class Meta:
-        # model = Report
-        fields = []
+        class Meta:
+            model = model_class
+            fields = []
+    return ModelDateFilter

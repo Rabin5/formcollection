@@ -30,10 +30,6 @@ class FyListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     paginate_by = PAGINATED_BY
     permission_required = 'users.perm_master_data'
 
-    # def get_queryset(self):
-    #     query = self.request.GET.get('query', None)
-    #     return super().get_queryset()
-
 
 class FyUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = FiscalYear
