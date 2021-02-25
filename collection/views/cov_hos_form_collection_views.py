@@ -19,7 +19,7 @@ from forms import models
 from collection.forms.covid_hospital_forms import CovHosFormCollectionForm
 from collection.models import CovHosFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import CH_STATE, num_to_devanagari, find_empty_fields
+from collection.utils import CH_STATE, num_to_devanagari, find_empty_fields, filter_helper, date_filter
 from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 
 from users.models.user import User
@@ -29,6 +29,7 @@ from django_weasyprint.views import WeasyTemplateView
 from django_weasyprint import WeasyTemplateResponseMixin
 from django.conf import settings
 import os
+
 
 # Convert utils CH_STATE to dict
 DICT_CH_STATE = {key: value for key, value in CH_STATE}
@@ -266,12 +267,30 @@ class CovHosFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, 
     paginate_by = PAGINATED_BY
 
     def get_queryset(self):
-        query = self.request.GET.get('query', None)
+        province = self.request.GET.get('province', None)
+        district = self.request.GET.get('district', None)
+        local_level = self.request.GET.get('local_level', None)
+        hospital = self.request.GET.get('hospital', None)
+        # province = self.request.GET.get('province', None)
         form_collection = self.model.objects.filter(user=self.request.user)
-        if query:
-            query = query.strip()
-            form_collection = form_collection.filter()
+        print(province, district, local_level, hospital)
+        if province or district or local_level or hospital:
+            form_collection = filter_helper(form_collection, 
+                        {'province_id': province, 'district_id': district, 'local_level_id': local_level, 'hospital_id': hospital}) 
+        #     form_collection = form_collection.filter()
         return form_collection
+
+
+    def get_context_data(self, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = super().get_context_data(**kwargs)
+        context['provinces'] = list(Province.objects.all().values('id', text=F('name')))
+        context['districts'] = list(District.objects.all().values('id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', text=F('name')))
+        context['hospitals'] = list(CovidHospital.objects.all().values('id', text=F('name')))
+        return context
 
 
 class CovHosFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):

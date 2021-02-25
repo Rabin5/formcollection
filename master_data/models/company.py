@@ -30,9 +30,6 @@ class Company(Address):
         null=True, blank=False, verbose_name='स्थापना मिति'
     )
 
-    def __init__(self, *args, **kwargs) -> None:
-        super(Company, self).__init__(*args, **kwargs)
-
     def __str__(self):
         if self.local_level and self.district:
             return f"{self.name}, {self.local_level.name}, {self.district.name}"

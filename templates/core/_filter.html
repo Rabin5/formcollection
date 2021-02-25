@@ -1,3 +1,4 @@
+{% load url_extras %}
 {% if 'md' in request.resolver_match.view_name %}
 <div class='row'>
     <div class='col-6'>
@@ -7,12 +8,12 @@
         </form>
     </div>
 </div>
-{% endif %}
-<!--
+{% elif 'cov_hos_list, province_list'|url_contains:request.resolver_match.view_name %}
 <div class="section-title">
     <h6 class="text-dark font-weight-bold"></h6>
-    <a class="btn btn-ghost-info btn-icon-only" data-toggle="modal" data-target="#exampleModal">
+    <a class="btn btn-ghost-info btn-icon-only" data-toggle="modal" data-target="#filterModal">
         <span class="ic-filter"></span>
     </a>
 </div>
--->
+{% endif %}
+

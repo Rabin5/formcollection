@@ -1,0 +1,71 @@
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <form method="get">
+                    <div class="form-group">
+                        <label for="">Province</label>
+                        <select name="province" class="form-control">
+                            <option value="">-------------</option>
+                            {% for province in provinces %}
+                                <option value="{{province.id}}" >{{ province.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">District</label>
+                        <select name="district" class="form-control">
+                            <option value="">-------------</option>
+                            {% for district in districts %}
+                                <option value="{{district.id}}" >{{ district.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">Local Level</label>
+                        <select name="local_level" class="form-control">
+                            <option value="">-------------</option>
+                            {% for local_level in local_levels %}
+                                <option value="{{local_level.id}}" >{{ local_level.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">Hospital Name</label>
+                        <select name="hospital" class="form-control">
+                            <option value="">-------------</option>
+                            {% for hospital in hospitals %}
+                                <option value="{{hospital.id}}" >{{ hospital.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label> Fiscal Year</label>
+                        </div>
+                        <!--  -->
+                        <div class="form-group col-md-6">
+                            <label for="">From: </label>
+                            <input type="text" class="form-control" name="start_fy_year">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">To: </label>
+                            <input type="text" class="form-control" name="end_fy_year">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
