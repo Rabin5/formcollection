@@ -142,6 +142,9 @@ urlpatterns = [
      path('forms/quarterly-program/', include('forms.urls.quarterly_program_urls')),
      path('forms/drp-expense/', include('forms.urls.drp_expense_urls')),
      path('forms/yearly-target/', include('forms.urls.yearly_target_urls')),
+     path('forms/revenue-distribution/',include('forms.urls.revenue_distribution_urls')),
+     path('forms/state/partnership-program/',include('forms.urls.state_partnership_program_urls')),
+     path('forms/local/partnership-program/',include('forms.urls.local_partnership_program_urls')),
 
      # Approve
      # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
