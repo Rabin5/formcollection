@@ -9,60 +9,64 @@
             </div>
             <div class="modal-body">
                 <form method="get">
-                    <div class="form-group">
-                        <label for="">Province</label>
-                        <select name="province" class="form-control">
-                            <option value="">-------------</option>
-                            {% for province in provinces %}
-                                <option value="{{province.id}}" >{{ province.text }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">District</label>
-                        <select name="district" class="form-control">
-                            <option value="">-------------</option>
-                            {% for district in districts %}
-                                <option value="{{district.id}}" >{{ district.text }}</option>
-                            {% endfor %}
-                        </select>
-                    </div> 
-                    <div class="form-group">
-                        <label for="">Local Level</label>
-                        <select name="local_level" class="form-control">
-                            <option value="">-------------</option>
-                            {% for local_level in local_levels %}
-                                <option value="{{local_level.id}}" >{{ local_level.text }}</option>
-                            {% endfor %}
-                        </select>
-                    </div> 
-                    <div class="form-group">
-                        <label for="">Hospital Name</label>
-                        <select name="hospital" class="form-control">
-                            <option value="">-------------</option>
-                            {% for hospital in hospitals %}
-                                <option value="{{hospital.id}}" >{{ hospital.text }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label> Fiscal Year</label>
+                    {% if provinces %}
+                        <div class="form-group">
+                            <label for>Province</label>
+                            <select name="province" class="js-example-responsive" style="width:100%">
+                                <option value="">-------------</option>
+                                {% for province in provinces %}
+                                    <option value="{{province.id}}" >{{ province.text }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                        <!--  -->
-                        <div class="form-group col-md-6">
-                            <label for="">From: </label>
-                            <input type="text" class="form-control" name="start_fy_year">
+                    {% endif %}
+                    {% if districts %}
+                        <div class="form-group">
+                            <label for>District</label>
+                            <select name="district" class="js-example-responsive" style="width:100%">
+                                <option value="">-------------</option>
+                                {% for district in districts %}
+                                    <option value="{{district.id}}" >{{ district.text }}</option>
+                                {% endfor %}
+                            </select>
+                        </div> 
+                    {% endif %}
+                    {% if local_levels %}
+                        <div class="form-group">
+                            <label for>Local Level</label>
+                            <select name="local_level" class="js-example-responsive" style="width:100%">
+                                <option value="">-------------</option>
+                                {% for local_level in local_levels %}
+                                    <option value="{{local_level.id}}" >{{ local_level.text }}</option>
+                                {% endfor %}
+                            </select>
+                        </div> 
+                    {% endif %}
+                    {% if hospitals %}
+                        <div class="form-group">
+                            <label for>Hospital Name</label>
+                            <select name="hospital" class="js-example-responsive" style="width:100%">
+                                <option value="">-------------</option>
+                                {% for hospital in hospitals %}
+                                    <option value="{{hospital.id}}" >{{ hospital.text }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="">To: </label>
-                            <input type="text" class="form-control" name="end_fy_year">
+                    {% endif %}
+                    {% if fiscal_years %}
+                        <div class="form-group">
+                            <label for> Fiscal Year</label>
+                            <select name="fiscal_year" class="js-example-responsive" style="width:100%">
+                                <option value="">-------------</option>
+                                {% for fiscal_year in fiscal_years %}
+                                    <option value="{{fiscal_year.id}}" >{{ fiscal_year.text }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                    </div>
+                    {% endif %}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </form>
             </div>

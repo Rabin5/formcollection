@@ -19,9 +19,9 @@ from django.apps import apps
 from collection.forms.local_level_forms import LocalLevelFormCollectionForm
 from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari, find_empty_fields
+from collection.utils import LOCAL_LEVEL_STATE, filter_helper, num_to_devanagari, find_empty_fields
 
-from master_data.models import FiscalYear, District, LocalLevel
+from master_data.models import FiscalYear, District, LocalLevel, Province,  CovidHospital
 from oagn_covid.settings import PAGINATED_BY
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -268,6 +268,31 @@ class LocalLevelFormCollectionListView(LoginRequiredMixin, PermissionRequiredMix
     permission_required = 'users.perm_local_level_form'
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
+
+    def get_queryset(self):
+        province = self.request.GET.get('province', None)
+        district = self.request.GET.get('district', None)
+        local_level = self.request.GET.get('local_level', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        
+        form_collection = self.model.objects.filter(user=self.request.user)
+
+        if province or district or local_level  or fiscal_year:
+            form_collection = filter_helper(form_collection, 
+                        {'province_id': province, 'district_id': district, 'local_level_id': local_level, 'fiscal_year_id': fiscal_year}) 
+        return form_collection
+
+
+    def get_context_data(self, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = super().get_context_data(**kwargs)
+        context['provinces'] = list(Province.objects.all().values('id', text=F('name')))
+        context['districts'] = list(District.objects.all().values('id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', text=F('name')))
+        context['fiscal_years'] = list(FiscalYear.objects.all().values('id', text=F('name')))
+        return context
 
 
 class LocalLevelFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):

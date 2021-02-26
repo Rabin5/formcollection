@@ -51,6 +51,7 @@ class CovHosFormCollectionCreateView(LoginRequiredMixin, PermissionRequiredMixin
 
         col_update_params = {}
         fiscal_year = self.object.fiscal_year
+        
         for form in LIST_CH_STATE:
             if ROUTE_LINK[form]['form_field'] in ['cov_hos_equipment', 'covid_hos_mainpower', 'cov_hos_management_checklist']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
@@ -271,13 +272,13 @@ class CovHosFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, 
         district = self.request.GET.get('district', None)
         local_level = self.request.GET.get('local_level', None)
         hospital = self.request.GET.get('hospital', None)
-        # province = self.request.GET.get('province', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        
         form_collection = self.model.objects.filter(user=self.request.user)
-        print(province, district, local_level, hospital)
-        if province or district or local_level or hospital:
+
+        if province or district or local_level or hospital or fiscal_year:
             form_collection = filter_helper(form_collection, 
-                        {'province_id': province, 'district_id': district, 'local_level_id': local_level, 'hospital_id': hospital}) 
-        #     form_collection = form_collection.filter()
+                        {'province_id': province, 'district_id': district, 'local_level_id': local_level, 'hospital_id': hospital, 'fiscal_year_id': fiscal_year}) 
         return form_collection
 
 
@@ -290,6 +291,7 @@ class CovHosFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin, 
         context['districts'] = list(District.objects.all().values('id', text=F('name')))
         context['local_levels'] = list(LocalLevel.objects.all().values('id', text=F('name')))
         context['hospitals'] = list(CovidHospital.objects.all().values('id', text=F('name')))
+        context['fiscal_years'] = list(FiscalYear.objects.all().values('id', text=F('name')))
         return context
 
 

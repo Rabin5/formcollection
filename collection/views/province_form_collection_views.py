@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db import transaction
-from django.db.models import query
+from django.db.models import query, F
 from django.forms import inlineformset_factory
 from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -19,8 +19,8 @@ from django.apps import apps
 from collection.forms.province_forms import ProvinceFormCollectionForm
 from collection.models import ProvinceFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import PROVINCE_STATE, num_to_devanagari, find_empty_fields
-from master_data.models import FiscalYear
+from collection.utils import PROVINCE_STATE, filter_helper, num_to_devanagari, find_empty_fields
+from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 from oagn_covid.settings import PAGINATED_BY
 
 from django_weasyprint import WeasyTemplateResponseMixin
@@ -260,6 +260,27 @@ class ProvinceFormCollectionListView(LoginRequiredMixin, PermissionRequiredMixin
     permission_required = 'users.perm_province_form'
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
+
+    def get_queryset(self):
+        province = self.request.GET.get('province', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        
+        form_collection = self.model.objects.filter(user=self.request.user)
+
+        if province or fiscal_year:
+            form_collection = filter_helper(form_collection, 
+                        {'province_id': province, 'fiscal_year_id': fiscal_year}) 
+        return form_collection
+
+
+    def get_context_data(self, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = super().get_context_data(**kwargs)
+        context['provinces'] = list(Province.objects.all().values('id', text=F('name')))
+        context['fiscal_years'] = list(FiscalYear.objects.all().values('id', text=F('name')))
+        return context
 
 
 class ProvinceFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
