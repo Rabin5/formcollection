@@ -19,7 +19,7 @@ from django.apps import apps
 from collection.forms.chief_minister_forms import ChiefMinisterOfficeFormCollectionForm
 from collection.models import ChiefMinisterOfficeFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import CHIEF_MINISTER_STATE, num_to_devanagari, find_empty_fields, filter_helper
+from collection.utils import CHIEF_MINISTER_STATE, num_to_devanagari, find_empty_fields, filter_helper, STATUS
 from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 from oagn_covid.settings import PAGINATED_BY
 
@@ -30,6 +30,7 @@ import os
 
 # Convert utils CHIEF_MINISTER_STATE to dict
 DICT_CHIEF_MINISTER_STATE = {key: value for key, value in CHIEF_MINISTER_STATE}
+dict_status = {key: value for key, value in STATUS}
 LIST_CHIEF_MINISTER_STATE = [value for key, value in CHIEF_MINISTER_STATE]
 
 
@@ -266,12 +267,13 @@ class ChiefMinisterOfficeFormCollectionListView(LoginRequiredMixin, PermissionRe
     def get_queryset(self):
         province = self.request.GET.get('province', None)
         fiscal_year = self.request.GET.get('fiscal_year', None)
+        status = self.request.GET.get('status', None)
         
         form_collection = self.model.objects.filter(user=self.request.user)
 
-        if province or fiscal_year:
+        if province or fiscal_year or status:
             form_collection = filter_helper(form_collection, 
-                        {'province_id': province, 'fiscal_year_id': fiscal_year}) 
+                        {'province_id': province, 'fiscal_year_id': fiscal_year, 'status':status}) 
         return form_collection
 
 
@@ -282,6 +284,7 @@ class ChiefMinisterOfficeFormCollectionListView(LoginRequiredMixin, PermissionRe
         context = super().get_context_data(**kwargs)
         context['provinces'] = list(Province.objects.all().values('id', text=F('name')))
         context['fiscal_years'] = list(FiscalYear.objects.all().values('id', text=F('name')))
+        context['statuses'] = dict_status
         return context
 
 
@@ -332,7 +335,23 @@ class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         context = []
-        data = list(ChiefMinisterOfficeFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
+        data = ChiefMinisterOfficeFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected'])
+        province = self.request.GET.get('province', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        status = self.request.GET.get('status', None)
+
+        if province or fiscal_year or status:
+            data = filter_helper(data, 
+                        {'province_id': province, 'fiscal_year_id': fiscal_year, 'status': status}) 
+        
         for index, val in enumerate(data):
             context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
-        return render(request, self.template_name, context={'data': context})
+        
+        returnContext = {'data': context,
+        'provinces':list(Province.objects.all().values('id', text=F('name'))),
+        'fiscal_years':list(FiscalYear.objects.all().values('id', text=F('name'))),
+        'statuses': {'submitted':'SUBMITTED', 'approved':'APPROVED', 'rejected':'REJECTED'}
+        }
+        return render(request, self.template_name, context=returnContext)
+
+

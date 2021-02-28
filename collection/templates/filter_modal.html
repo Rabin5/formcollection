@@ -64,6 +64,17 @@
                             </select>
                         </div>
                     {% endif %}
+                    {% if statuses %}
+                        <div class="form-group">
+                            <label for> Form Status</label>
+                            <select name="status" class="js-example-responsive" style="width:100%">
+                                <option value="">-------------</option>
+                                {% for key, value in statuses.items %}
+                                    <option value="{{key}}" >{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Search</button>

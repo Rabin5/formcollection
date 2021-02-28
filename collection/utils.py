@@ -44,8 +44,8 @@ STATES = [
 STATUS = [
     ('started', 'STARTED'),
     ('incomplete', 'INCOMPLETE'),
-    ('submitted', 'SUBMITTED'),
     ('completed', 'COMPLETED'),
+    ('submitted', 'SUBMITTED'),
     ('approved', 'APPROVED'),
     ('rejected', 'REJECTED'),
 ]
@@ -201,6 +201,7 @@ def __remove_none_fields(fields: dict) -> dict:
 
 def filter_helper(objects: QuerySet, fields: dict=None):
     query_list = __remove_none_fields(fields)
+    
     objects = objects.filter(
         Q(**query_list)
     )
