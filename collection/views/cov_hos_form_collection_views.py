@@ -59,11 +59,20 @@ class CovHosFormCollectionCreateView(LoginRequiredMixin, PermissionRequiredMixin
                     create_user=self.request.user,
                 )
             else:
-                form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.object.body,
-                    fiscal_year=fiscal_year,
-                    create_user=self.request.user,
-                )
+                if ROUTE_LINK[form]['form_field'] == 'fund_receipt_expense':
+                    form_obj = ROUTE_LINK[form]['model'].objects.create(
+                        body=self.object.body,
+                        fiscal_year=fiscal_year,
+                        create_user=self.request.user,
+                        fiscal_year_from=fiscal_year,
+                        fiscal_year_to=fiscal_year
+                    )
+                else:
+                    form_obj = ROUTE_LINK[form]['model'].objects.create(
+                        body=self.object.body,
+                        fiscal_year=fiscal_year,
+                        create_user=self.request.user,
+                    )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
 
         CovHosFormCollection.objects.filter(

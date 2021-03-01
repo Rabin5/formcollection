@@ -50,17 +50,26 @@ class InternalAffairFormCollectionCreateView(LoginRequiredMixin, PermissionRequi
         col_update_params = {}
         fiscal_year = self.object.fiscal_year
         for form in LIST_INTERNAL_AFFAIRS_STATE:
-            if ROUTE_LINK[form]['form_field'] == 'action_plan_implementation':
+            if ROUTE_LINK[form]['form_field'] in ['action_plan_implementation']:
                 form_obj = ROUTE_LINK[form]['model'].objects.create(
                     body=self.object.body,
                     create_user=self.request.user,
                 )
             else:
-                form_obj = ROUTE_LINK[form]['model'].objects.create(
-                    body=self.object.body,
-                    fiscal_year=fiscal_year,
-                    create_user=self.request.user,
-                )
+                if ROUTE_LINK[form]['form_field'] == 'fund_receipt_expense':
+                    form_obj = ROUTE_LINK[form]['model'].objects.create(
+                        body=self.object.body,
+                        fiscal_year=fiscal_year,
+                        create_user=self.request.user,
+                        fiscal_year_from=fiscal_year,
+                        fiscal_year_to=fiscal_year
+                    )
+                else:
+                    form_obj = ROUTE_LINK[form]['model'].objects.create(
+                        body=self.object.body,
+                        fiscal_year=fiscal_year,
+                        create_user=self.request.user,
+                    )
             col_update_params[ROUTE_LINK[form]['form_field']] = form_obj
 
         InternalAffairFormCollection.objects.filter(
