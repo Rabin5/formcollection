@@ -1,4 +1,8 @@
+
 from forms.models.local_partnership_program import LocalPartnershipProgramLine
+
+from forms.models.covidhospitaldetail import CovidHospitalDetail
+
 from django.contrib import admin
 
 
@@ -50,4 +54,11 @@ admin.site.register([
     models.ProjectType,
     models.LocalPartnershipProgramLine,
     models.LocalPartnershipProgram,
+    models.DesignationVacancy,
+    models.DesignationVacancyLine,
+    models.ContractDesc,
+    models.ContractDescLine,
+    models.CovidHospitalDetail,
+    models.CovidHospitalDetailLine,
+
 ])
