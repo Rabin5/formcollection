@@ -1,3 +1,4 @@
+from forms.models.covidhospitaldetail import CovidHospitalDetail
 from django.contrib import admin
 
 
@@ -46,4 +47,10 @@ admin.site.register([
     models.ReceivedReliefDetailLine,
     models.ReliefDistributionExpense,
     models.ReliefDistributionExpenseLine,
+    models.DesignationVacancy,
+    models.DesignationVacancyLine,
+    models.ContractDesc,
+    models.ContractDescLine,
+    models.CovidHospitalDetail,
+    models.CovidHospitalDetailLine,
 ])
