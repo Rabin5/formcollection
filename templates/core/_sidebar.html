@@ -1,7 +1,6 @@
 {% load static %} {% load auth_extras %}
 
 
-<aside class="sidebar">
     <div class="sidebar-brand">
         <img src="{% static 'images/nepal-emblem.png' %}" alt="Nepal Emblem">
         <h6 class="sidebar-brand--title">OAG COVID-19 Audit</h6>
@@ -112,9 +111,9 @@
                         <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">कम्पनि</a>
                         <div class="collapse{% if 'master-data/company' in request.path %} show {% endif %}" id="collapseExample5">
                             <ul class="list pl-3">
-                                <li {% if 'md-company:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                                <!-- <li {% if 'md-company:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-company:list'%}" class="pl-4">कम्पनि</a>
-                                </li>
+                                </li> -->
                                 <li {% if 'md-laboratory:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-laboratory:list'%}" class="pl-4">Laboratory</a>
                                 </li>
@@ -213,4 +212,3 @@
         </li>
         {% endif %}
     </ul>
-</aside>

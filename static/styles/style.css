@@ -7020,6 +7020,24 @@ a {
   .scrollable::-webkit-scrollbar-thumb:hover {
     cursor: pointer; }
 
+.filter {
+  display: flex;
+  justify-content: space-between; }
+  .filter-options {
+    margin-bottom: 1rem;
+    margin-top: -0.5rem; }
+    .filter-options a {
+      font-size: 10px; }
+    .filter-options .badge {
+      margin-top: 0.5rem; }
+      .filter-options .badge:not(:last-child) {
+        margin-right: 0.5rem; }
+  .filter a.clear {
+    color: #206DBF;
+    font-weight: 600;
+    font-size: 0.875rem;
+    white-space: nowrap; }
+
 h1, .h1 {
   font-size: 2.488rem;
   margin: 0; }

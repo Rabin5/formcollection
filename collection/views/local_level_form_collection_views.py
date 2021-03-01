@@ -19,9 +19,9 @@ from django.apps import apps
 from collection.forms.local_level_forms import LocalLevelFormCollectionForm
 from collection.models import LocalLevelFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import LOCAL_LEVEL_STATE, num_to_devanagari, find_empty_fields
+from collection.utils import LOCAL_LEVEL_STATE, filter_helper, num_to_devanagari, find_empty_fields, STATUS
 
-from master_data.models import FiscalYear, District, LocalLevel
+from master_data.models import FiscalYear, District, LocalLevel, Province,  CovidHospital
 from oagn_covid.settings import PAGINATED_BY
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -31,6 +31,7 @@ import os
 
 # Convert utils LOCAL_LEVEL_STATE to dict
 DICT_LOCAL_LEVEL_STATE = {key: value for key, value in LOCAL_LEVEL_STATE}
+dict_status = {key: value for key, value in STATUS}
 LIST_LOCAL_LEVEL_STATE = [value for key, value in LOCAL_LEVEL_STATE]
 
 
@@ -269,6 +270,33 @@ class LocalLevelFormCollectionListView(LoginRequiredMixin, PermissionRequiredMix
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
+    def get_queryset(self):
+        province = self.request.GET.get('province', None)
+        district = self.request.GET.get('district', None)
+        local_level = self.request.GET.get('local_level', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        status = self.request.GET.get('status', None)
+        
+        form_collection = self.model.objects.filter(user=self.request.user)
+
+        if province or district or local_level or fiscal_year or status:
+            form_collection = filter_helper(form_collection, 
+                        {'province_id': province, 'district_id': district, 'local_level_id': local_level, 'fiscal_year_id': fiscal_year, 'status':status}) 
+        return form_collection
+
+
+    def get_context_data(self, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = super().get_context_data(**kwargs)
+        context['provinces'] = list(Province.objects.all().values('id', text=F('name')))
+        context['districts'] = list(District.objects.all().values('id', text=F('name')))
+        context['local_levels'] = list(LocalLevel.objects.all().values('id', text=F('name')))
+        context['fiscal_years'] = list(FiscalYear.objects.all().values('id', text=F('name')))
+        context['statuses'] = dict_status
+        return context
+
 
 class LocalLevelFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = LocalLevelFormCollection
@@ -316,8 +344,26 @@ class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         context = []
-        data = list(LocalLevelFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
-        print(data)
+        data = LocalLevelFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected'])
+
+        province = self.request.GET.get('province', None)
+        district = self.request.GET.get('district', None)
+        local_level = self.request.GET.get('local_level', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        status = self.request.GET.get('status', None)
+
+        if province or district or local_level or fiscal_year or status:
+            data = filter_helper(data, 
+                        {'province_id': province, 'district_id': district, 'local_level_id': local_level, 'fiscal_year_id': fiscal_year, 'status': status}) 
+
         for index, val in enumerate(data):
             context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
-        return render(request, self.template_name, context={'data': context})
+        returnContext = {'data': context,
+        'provinces':list(Province.objects.all().values('id', text=F('name'))),
+        'fiscal_years':list(FiscalYear.objects.all().values('id', text=F('name'))),
+        'districts':list(District.objects.all().values('id', text=F('name'))),
+        'local_levels':list(LocalLevel.objects.all().values('id', text=F('name'))),
+        'statuses': {'submitted':'SUBMITTED', 'approved':'APPROVED', 'rejected':'REJECTED'}
+        }
+
+        return render(request, self.template_name, context=returnContext)

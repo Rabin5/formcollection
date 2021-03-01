@@ -5,7 +5,9 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from master_data.forms.product import ProdForm, UomForm, ProcurementForm
 from master_data.models.product import *
 from oagn_covid.settings.base import PAGINATED_BY
-PermissionRequiredMixin
+
+from master_data.utils import *
+
 class ProdCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     template_name = "master_data/product/prod_create.html"
@@ -20,6 +22,16 @@ class ProdListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'prods'
     paginate_by = PAGINATED_BY
     permission_required = 'users.perm_master_data'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        prod = self.model.objects.all()
+        # If foreign key then include field__foreignKeyField
+        search_list = ['name', 'type', 'uom__name']
+        if query and (len(query) != 0):
+            return filter_helper(prod, query, search_list)
+        return super().get_queryset()
+    
 
 
 class ProdUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -52,6 +64,15 @@ class UomListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = 'users.perm_master_data'
     paginate_by = PAGINATED_BY
 
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        prod = self.model.objects.all()
+        # If foreign key then include field__foreignKeyField
+        search_list = ['name']
+        if query and (len(query) != 0):
+            return filter_helper(prod, query, search_list)
+        return super().get_queryset()
+
 
 class UomUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = UnitOfMeasure
@@ -82,6 +103,15 @@ class ProcurementListView(LoginRequiredMixin, PermissionRequiredMixin, ListView)
     context_object_name = 'procurements'
     paginate_by = PAGINATED_BY
     permission_required = 'users.perm_master_data'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        prod = self.model.objects.all()
+        # If foreign key then include field__foreignKeyField
+        search_list = ['name']
+        if query and (len(query) != 0):
+            return filter_helper(prod, query, search_list)
+        return super().get_queryset()
 
 
 class ProcurementUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

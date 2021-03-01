@@ -1,3 +1,4 @@
+from master_data.utils import filter_helper
 from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, LoginRequiredMixin, PermissionRequiredMixin
@@ -32,7 +33,11 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            password = request.POST.get('password')
+            group = request.POST.get('groups')
+            user.set_password(password)
             user.save()
+            user.groups.add(group)
             subject = "Account created successfully"
             template = render_to_string(
                 'users/email_template.html',
@@ -49,6 +54,15 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = 'users.perm_user_management'
     template_name = 'users/user_list.html'
     context_object_name = 'users'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        prod = self.model.objects.all()
+        # If foreign key then include field__foreignKeyField
+        search_list = ['email', 'username']
+        if query and (len(query) != 0):
+            return filter_helper(prod, query, search_list)
+        return super().get_queryset()
 
 
 class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
