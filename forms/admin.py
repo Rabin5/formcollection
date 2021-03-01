@@ -46,4 +46,8 @@ admin.site.register([
     models.ReceivedReliefDetailLine,
     models.ReliefDistributionExpense,
     models.ReliefDistributionExpenseLine,
+    models.ConditionalGrant,
+    models.ConditionalGrantLine,
+    models.ServiceFlow,
+    models.ServiceFlowLine,
 ])

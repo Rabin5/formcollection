@@ -39,7 +39,6 @@ class ModelChoiceFieldWithCreate(forms.ModelChoiceField):
         self.limit_choices_to = limit_choices_to   # limit the queryset later.
         self.to_field_name = to_field_name
         self.save_to_field = save_to_field
-        
 
     def to_python(self, value):
         try:
@@ -53,7 +52,7 @@ class ModelChoiceFieldWithCreate(forms.ModelChoiceField):
             obj = self.queryset.model.objects.filter(**params)
             if obj:
                 return obj[0]
-            
+
             new_obj = self.queryset.model.objects.create(
                 **params
             )

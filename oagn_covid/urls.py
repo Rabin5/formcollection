@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from master_data.models import contractor, convenience_type, designation
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from reports.views.dashboard_view import DashboardView
@@ -134,6 +135,18 @@ urlpatterns = [
     # Approve
     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
 
+    # Approve
+    # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
+    # collection-6
+    path('forms/service_flow/',
+         include('forms.urls.service_flow')),
+    path('forms/house_map_construction/',
+         include('forms.urls.house_map_construction')),
+    path('forms/vechile_puches/', include('forms.urls.vechile_purches')),
+    path('forms/additional_convenience/',
+         include('forms.urls.additionalconvenience')),
+    path('forms/conditionalgrant/',
+         include('forms.urls.conditionalgrant')),
 
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
