@@ -155,8 +155,7 @@ urlpatterns = [
          include('forms.urls.relief_procure_dis')),
     path('forms/relief_procurement_detail/',
          include('forms.urls.reliefprocurementdetail')),
-    path('forms/case_invs_tracing/',
-         include('forms.urls.case_investigation_tracing_urls')),
+
 
     # Local Level Auditor
     path('forms/procurement-auditor/',
@@ -167,6 +166,19 @@ urlpatterns = [
          include('forms.urls.quarterly_program_urls')),
     path('forms/drp-expense/', include('forms.urls.drp_expense_urls')),
     path('forms/yearly-target/', include('forms.urls.yearly_target_urls')),
+    path('forms/revenue-distribution/',
+         include('forms.urls.revenue_distribution_urls')),
+    path('forms/state/partnership-program/',
+         include('forms.urls.state_partnership_program_urls')),
+    path('forms/local/partnership-program/',
+         include('forms.urls.local_partnership_program_urls')),
+    path('forms/designation-vacancy/',
+         include('forms.urls.designation_vacancy_urls')),
+    path('forms/contract-desc/', include('forms.urls.contract_desc_urls')),
+    path('forms/recover-amount/', include('forms.urls.recover_amount_urls')),
+    path('forms/expense-desc/', include('forms.urls.expense_desc_urls')),
+    path('forms/integral-advancement/',
+         include('forms.urls.integral_advancement_urls')),
 
     # Approve
     # collection-6
