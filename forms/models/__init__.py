@@ -34,6 +34,11 @@ from .incomplete_construction_work import *
 from .quarterly_program import *
 from .drp_expense import *
 from .yearly_target import *
+from .procedure_guide import *
+from .expenditure_exceeding_allocation import *
+from .sectoral_budget import *
+from .foreign_trip import *
+from .expenditure_detail import *
 from .revenue_distribution import *
 from .state_partnership_program import *
 from .local_partnership_program import *

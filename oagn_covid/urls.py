@@ -168,10 +168,6 @@ urlpatterns = [
      path('forms/revenue-distribution/',include('forms.urls.revenue_distribution_urls')),
      path('forms/state/partnership-program/',include('forms.urls.state_partnership_program_urls')),
      path('forms/local/partnership-program/',include('forms.urls.local_partnership_program_urls')),
-
-     # Approve
-     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
-    # Local Level Auditor
     path('forms/designation-vacancy/',
          include('forms.urls.designation_vacancy_urls')),
     path('forms/contract-desc/',include('forms.urls.contract_desc_urls')),
@@ -181,9 +177,6 @@ urlpatterns = [
 
     # Approve
     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
-
-
-
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
 
