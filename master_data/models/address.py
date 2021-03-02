@@ -40,14 +40,24 @@ class LocalLevel(models.Model):
 
 class Address(models.Model):
     country = models.ForeignKey(
-        Country, on_delete=models.CASCADE, null=True, blank=True)
+        Country, on_delete=models.CASCADE, null=True, blank=True, verbose_name='देश'
+    )
     province = models.ForeignKey(
-        Province, on_delete=models.CASCADE, null=True, blank=True,verbose_name='प्रदेश')
+        Province, on_delete=models.CASCADE, null=True, blank=True,verbose_name='प्रदेश'
+    )
     district = models.ForeignKey(
-        District, on_delete=models.CASCADE, null=True, blank=True)
+        District, on_delete=models.CASCADE, null=True, blank=True, verbose_name='जिल्ला'
+    )
     local_level = models.ForeignKey(
-        LocalLevel, on_delete=models.CASCADE, null=True, blank=True)
-    ward = models.IntegerField(null=True, blank=True)
+        LocalLevel, 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True, 
+        verbose_name='स्थानीय निकाय'
+    )
+    ward = models.IntegerField(
+        null=True, blank=True, verbose_name='वार्ड न'
+    )
 
     def __str__(self):
         return "%s %s %s %s" % (self.country, self.province, self.district, self.local_level)

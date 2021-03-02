@@ -21,8 +21,44 @@
 <div class="card card-body mt-3">
     <h6 class="heading-01 mb-3">कोभिड अस्पताल सम्बन्धी बिबरण</h6>
 
+    <div class="text-right">
+        <a data-remote="{% url 'md-hos:cov_create' %}" href="{% url 'md-hos:cov_create' %}" class="add-more mt-3" data-toggle="modal" data-target="#modalHospitalCreate">
+            <i class="ic-add"></i>नयाँ अस्पताल बनाउनुहोस्
+        </a>
+    </div>
+
     {% crispy form %}
 
 </div>
 {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalHospitalCreate" tabindex="-1" role="dialog" aria-labelledby="modalHospitalCreate" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    $(".select_class").select2({
+        tags: true
+    })
+
+    $('#modalHospitalCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $( "#modalHospitalCreate").on('submit', 'form', function(e) {
+        e.preventDefault();
+        saveData($(this),"#modalHospitalCreate",  true);
+    });
+
+</script>
+{% endblock extrascripts %}

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db import transaction
-from django.db.models import query
+from django.db.models import query, F
 from django.forms import inlineformset_factory
 from django.http import request
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -20,12 +20,17 @@ from django.apps import apps
 from collection.forms.internal_affairs_forms import InternalAffairsFormCollectionForm
 from collection.models import InternalAffairFormCollection
 from collection.metadata import ROUTE_LINK
-from collection.utils import INTERNAL_AFFAIRS_STATE, num_to_devanagari, find_empty_fields
-from master_data.models import FiscalYear
+from collection.utils import INTERNAL_AFFAIRS_STATE, filter_helper, num_to_devanagari, find_empty_fields, STATUS
+from master_data.models import FiscalYear, Province, District, LocalLevel, CovidHospital
 from oagn_covid.settings import PAGINATED_BY
+
+from django_weasyprint import WeasyTemplateResponseMixin
+from django.conf import settings
+import os
 
 # Convert utils INTERNAL_AFFAIRS_STATE to dict
 DICT_INTERNAL_AFFAIRS_STATE = {key: value for key, value in INTERNAL_AFFAIRS_STATE}
+dict_status = {key: value for key, value in STATUS}
 LIST_INTERNAL_AFFAIRS_STATE = [value for key, value in INTERNAL_AFFAIRS_STATE]
 
 
@@ -259,6 +264,29 @@ class InternalAffairFormCollectionListView(LoginRequiredMixin, PermissionRequire
     context_object_name = 'form_collections'
     paginate_by = PAGINATED_BY
 
+    def get_queryset(self):
+        province = self.request.GET.get('province', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        status = self.request.GET.get('status', None)
+        
+        form_collection = self.model.objects.filter(user=self.request.user)
+
+        if province or fiscal_year or status:
+            form_collection = filter_helper(form_collection, 
+                        {'province_id': province, 'fiscal_year_id': fiscal_year, 'status':status}) 
+        return form_collection
+
+
+    def get_context_data(self, **kwargs):
+        """
+        renders forms initial page to fill initial data like province, district
+        """
+        context = super().get_context_data(**kwargs)
+        context['provinces'] = list(Province.objects.all().values('id', text=F('name')))
+        context['fiscal_years'] = list(FiscalYear.objects.all().values('id', text=F('name')))
+        context['statuses'] = dict_status
+        return context
+
 
 class InternalAffairFormCollectionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = InternalAffairFormCollection
@@ -275,9 +303,18 @@ class InternalAffairFormCollectionReviewView(LoginRequiredMixin, PermissionRequi
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action'] = self.kwargs['action']
+        if 'action' in self.kwargs:
+            context['action'] = self.kwargs['action']
         context['empty_fields'] = find_empty_fields(self.object, 'internal_affairs_forms', 'internal_affairs_update', ROUTE_LINK, INTERNAL_AFFAIRS_STATE)
         return context
+
+class InternalAffairFormCollectionReportPdf(WeasyTemplateResponseMixin, InternalAffairFormCollectionReviewView):
+    model = InternalAffairFormCollection
+    template_name = 'internal_affairs_form_collection/report.html'
+    pdf_filename = 'InternalAffairFormCollectionReport.pdf'
+    pdf_stylesheets = [
+        os.path.join(os.path.dirname(settings.BASE_DIR), 'static/styles', 'style.css'),
+    ]
 
 @login_required
 @permission_required('users.perm_internal_affairs_form')
@@ -298,7 +335,21 @@ class ApproveView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         context = []
-        data = list(InternalAffairFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected']))
+        data = InternalAffairFormCollection.objects.select_related().filter(status__in=['submitted', 'approved', 'rejected'])
+        province = self.request.GET.get('province', None)
+        fiscal_year = self.request.GET.get('fiscal_year', None)
+        status = self.request.GET.get('status', None)
+
+        if province or fiscal_year or status:
+            data = filter_helper(data, 
+                        {'province_id': province, 'fiscal_year_id': fiscal_year, 'status': status}) 
+
         for index, val in enumerate(data):
             context.append({'user':val.user, 'state': val.get_state_display(), 'id': val.id, 'status': val.get_status_display()})
-        return render(request, self.template_name, context={'data': context})
+        
+        returnContext = {'data': context,
+        'provinces':list(Province.objects.all().values('id', text=F('name'))),
+        'fiscal_years':list(FiscalYear.objects.all().values('id', text=F('name'))),
+        'statuses': {'submitted':'SUBMITTED', 'approved':'APPROVED', 'rejected':'REJECTED'}
+        }
+        return render(request, self.template_name, context=returnContext)

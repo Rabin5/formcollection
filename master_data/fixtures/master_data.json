@@ -7310,5 +7310,55 @@
         "name": "व्यक्ति होम क्वारेन्टीनमा रहेको अनुगमन, निरीक्षण गर्ने",
         "description": "व्यक्ति होम क्वारेन्टीनमा रहेको अनुगमन, निरीक्षण गर्ने"
     }
+},
+{
+    "model": "master_data.vehicle",
+    "pk": 6,
+    "fields": {
+        
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"जीप"
+
+    }
+},
+{
+    "model": "master_data.vehicle",
+    "pk": 2,
+    "fields": {
+        
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"डोजर"
+
+    }
+},
+{
+    "model": "master_data.vehicle",
+    "pk": 3,
+    "fields": {
+        
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"लोडर"
+
+    }
+},
+{
+    "model": "master_data.vehicle",
+    "pk": 4,
+    "fields": {
+        
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"जे.सी.बि."
+
+    }
+},
+{
+    "model": "master_data.vehicle",
+    "pk": 5,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"अन्य"
+
+    }
 }
 ]

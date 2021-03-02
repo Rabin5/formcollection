@@ -1,16 +1,12 @@
 from django.db import transaction
-from django.forms import inlineformset_factory
-from django.shortcuts import HttpResponse, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from forms.forms.province_institution_management_forms import (
     ProvinceInstitutionManagementForm,
-    ProvinceInstitutionManagementLineForm,
     ProvinceInstitutionManagementLineFormSet,
 )
 from forms.models.province_institution_management import (
     ProvinceInstitutionManagement,
-    ProvinceInstitutionManagementLine,
 )
 
 
@@ -23,7 +19,9 @@ class ProvinceInstitutionManagementCreateView(CreateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data["lines"] = ProvinceInstitutionManagementLineFormSet(self.request.POST)
+            data["lines"] = ProvinceInstitutionManagementLineFormSet(
+                self.request.POST
+            )
         else:
             data["lines"] = ProvinceInstitutionManagementLineFormSet()
         return data
@@ -82,9 +80,12 @@ class ProvinceInstitutionManagementUpdateView(UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(
+            self.get_context_data(form=form, lines=lines)
+        )
 
     def get_success_url(self):
         return reverse_lazy(
-            "province_institution_management:update", kwargs={"pk": self.object.pk}
+            "province_institution_management:update",
+            kwargs={"pk": self.object.pk}
         )

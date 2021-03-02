@@ -1,94 +1,106 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base.html' %} 
 {% load static %}
-{% load crispy_forms_tags %}
-
-{% block title %}
-  कोभिड अस्पतालका लागि प्रश्नावलीहरू - Nepal Audit Management System
-{% endblock title %}
-
-{% block page_title %}
-कोभिड अस्पतालका लागि प्रश्नावलीहरू
-{% endblock page_title %}
-
+{% load crispy_forms_tags %} {% block title %} कोभिड अस्पतालका लागि प्रश्नावलीहरू - Nepal Audit Management System {% endblock title %}
+{% block page_title %} कोभिड अस्पतालका लागि प्रश्नावलीहरू {% endblock page_title %} 
 {% block page_actions %}
-  <a class="btn btn-success btn-with-icon text-nowrap" href='{% url "cov_hos_forms:cov_hos_create" %}'>
-    <i class="ic-add"></i>
-    प्रश्नावलीहरू भर्नुहोस्
-  </a>
-{% endblock page_actions %}
+<a class="btn btn-success btn-with-icon text-nowrap" href='{% url "cov_hos_forms:cov_hos_create" %}'>
+    <i class="ic-add"></i> प्रश्नावलीहरू भर्नुहोस्
+</a>
+{% endblock page_actions %} 
 
 {% block content %}
 <table class="table table-striped table-borderless">
-  <thead>
-    <tr>
-      <th>क्रम सङ्ख्या</th>
-      <th>State</th>
-      <th>Status</th>
-      <th class="text-right">कार्य</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for form_collection in form_collections %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ form_collection }}</td>
-        <td>{{ form_collection.get_status_display }}</td>
-        {% if form_collection.get_status_display in 'SUBMITTED, APPROVED' %}
-          <td>
-            <a href="{% url 'cov_hos_forms:review' form_collection.pk 'submitted' %}">
-              <i class="ic-visible"></i>
-            </a>
-          </td>
-        {% elif form_collection.get_status_display in 'REJECTED' %}
-          <td class="action">
-            <a href="{% url 'cov_hos_forms:review' form_collection.pk 'submitted' %}">
-              <i class="ic-visible"></i>
-            </a> | 
-            <a href="{% url 'cov_hos_forms:cov_hos_update' form_collection.pk %}">
-              <i class="ic-edit mr-2"></i>
-            </a>
-        {% else %}
+    <thead>
+        <tr>
+            <th>क्रम सङ्ख्या</th>
+            <th>State</th>
+            <th>Status</th>
+            <th class="text-right">कार्य</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for form_collection in form_collections %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ form_collection }}</td>
+            {% if form_collection.get_status_display in 'STARTED' %}
+            <td><span class="badge badge-info">{{ form_collection.get_status_display }}</span></td>
+            {% elif form_collection.get_status_display in 'APPROVED' %}
+            <td><span class="badge badge-success">{{ form_collection.get_status_display }}</span></td>
+            {% elif form_collection.get_status_display in 'INCOMPLETE' %}
+            <td><span class="badge badge-secondary">{{ form_collection.get_status_display }}</span></td>
+            {% elif form_collection.get_status_display in 'REJECTED' %}
+            <td><span class="badge badge-danger">{{ form_collection.get_status_display }}</span></td>
+            {% else %}
+            <td><span class="badge badge-warning">{{ form_collection.get_status_display }}</span></td>
+            {% endif %}
+            {% if form_collection.get_status_display in 'SUBMITTED, APPROVED' %}
+          
+            <td class="action">
+                <a href="{% url 'cov_hos_forms:review' form_collection.pk 'submitted' %}">
+                    <i class="ic-visible"></i>
+                </a>
+            </td>
+            {% elif form_collection.get_status_display in 'REJECTED' %}
+            <td class="action">
+                <a href="{% url 'cov_hos_forms:review' form_collection.pk 'submitted' %}">
+                    <i class="ic-visible"></i>
+                </a> |
+                <a href="{% url 'cov_hos_forms:cov_hos_update' form_collection.pk %}">
+                    <i class="ic-edit mr-2"></i>
+                </a>
+                {% else %}
 
-          <td class="action">
-            <a href="{% url 'cov_hos_forms:cov_hos_update' form_collection.pk %}">
-              <i class="ic-edit mr-2"></i>
-            </a>
-            <a data-remote="{% url 'cov_hos_forms:cov_hos_delete' form_collection.pk %}"
-              href="{% url 'cov_hos_forms:cov_hos_delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
-              <i class="ic-delete"></i>
-            </a>
-          </td>
-        {% endif %}
-        
-      </tr>
-    {% endfor %}
-  </tbody>
+                <td class="action">
+                    <a href="{% url 'cov_hos_forms:cov_hos_update' form_collection.pk %}">
+                        <i class="ic-edit mr-2"></i>
+                    </a>
+                    <a data-remote="{% url 'cov_hos_forms:cov_hos_delete' form_collection.pk %}" href="{% url 'cov_hos_forms:cov_hos_delete' form_collection.pk %}" data-toggle="modal" data-target="#modalProdDelete">
+                        <i class="ic-delete"></i>
+                    </a>
+                </td>
+                {% endif %}
+
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
-{% block pagination %}
-  {% include 'master_data/partials/pagination.html' %}
-{% endblock pagination %}
-
-{% endblock content %}
+{% block pagination %} {% include 'master_data/partials/pagination.html' %} {% endblock pagination %} {% endblock content %} 
 
 {% block modal %}
 
 <div class="modal fade" id="modalProdDelete" tabindex="-1" role="dialog" aria-labelledby="modalProdDelete" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
     </div>
-  </div>
 </div>
 
-{% endblock %}
+{% include 'filter_modal.html' %}
+
+{% endblock modal %} 
 
 {% block extrascripts %}
 <script>
-    $('#modalProdDelete').on('shown.bs.modal', function (e) {
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-content').load(button.data("remote"));
+    $('#modalProdDelete').on('shown.bs.modal', function(e) {
+        var button = $(e.relatedTarget);
+        var modal = $(this);
+        modal.find('.modal-content').load(button.data("remote"));
     });
-})
+
+    $(function () {
+        $("input[name='start_fy_year']").calendarsPicker({
+            calendar: $.calendars.instance('nepali'),
+            firstDay: 0,
+            dateFormat: 'dd/mm/yyyy'
+        });
+        $("input[name='end_fy_year']").calendarsPicker({
+            calendar: $.calendars.instance('nepali'),
+            firstDay: 0,
+            dateFormat: 'dd/mm/yyyy'
+        });
+    });
 </script>
+
 {% endblock extrascripts %}

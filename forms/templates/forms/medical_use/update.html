@@ -11,18 +11,18 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">औषधी, स्वास्थ्य सामग्री एवं उपकरणको उपयोग</h6>
 
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    {% crispy form %}
+
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

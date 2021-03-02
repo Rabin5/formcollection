@@ -23,11 +23,8 @@
   <thead>
     <tr>
       <th>क्रम सङ्ख्या</th>
-      <th>
-      </th>
+      <th>नाम</th>
       <th> सरकारी निकाय प्रकार</th>
-      <th>Parent</th>
-      <th>Covid Hospital</th>
       <th class="text-right">कार्य</th>
     </tr>
   </thead>
@@ -37,8 +34,6 @@
         <td>{{ forloop.counter }}</td>
         <td>{{ gov_body.name }}</td>
         <td>{{ gov_body.type }}</td>
-        <td>{% if gov_body.parent %}{{gov_body.parent}}{% else %} - {% endif %}</td>
-        <td>{% if gov_body.covid_hospital %}{{gov_body.covid_hospital}}{% else %} - {% endif %}</td>
         <td class="action">
           <a data-remote="{% url 'md-gov:update' gov_body.pk %}"
             href="{% url 'md-gov:update' gov_body.pk %}" data-toggle="modal" data-target="#modalGovUpdate">

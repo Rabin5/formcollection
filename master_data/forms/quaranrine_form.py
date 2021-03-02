@@ -6,4 +6,6 @@ from master_data.models.company import QuanrantineCenter
 class QuanrantineCenterForm(ModelForm):
     class Meta:
         model = QuanrantineCenter
-        fields = '__all__'
+        fields = (
+            'name', 'country', 'province', 'district', 'local_level', 'ward',
+        )

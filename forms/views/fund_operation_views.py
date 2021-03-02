@@ -42,13 +42,48 @@ class FundOperationUpdateView(UpdateView):
     form_class = FundOperationForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = [
+            {
+                'body': 'प्रदेश सरकार',
+            },
+            {
+                'body': 'संघीय सरकार',
+            },
+            {
+                'body': 'स्थानीय तह',
+            },
+            {
+                'body': 'अन्य ब्यक्ति संस्था निकाय पदाधिकारी',
+            },
+            {
+                'body': 'अन्तरराष्ट्रिय गैर सरकारी संस्था',
+            },
+            {
+                'body': 'गैरसरकारी संस्था',
+            },
+        ]
+        return initial
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = FundOperationFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST,
+                instance=self.object,
+                initial=initial
+            )
         else:
-            data['lines'] = FundOperationFormSet(instance=self.object)
+            data['lines'] = FundOperationFormSet(
+                instance=self.object,
+                initial=initial
+            )
+            data['lines'].extra = len(initial) if initial else 1
         return data
 
     def form_valid(self, form):

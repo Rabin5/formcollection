@@ -21,8 +21,44 @@
     <div class="card card-body mt-3">
         <h6 class="heading-01 mb-3">औषधी स्वास्थ्य सामग्री एवं उपकरण प्राप्ति (अस्पतालले २०७६।७७ मा औषधी, स्वास्थ्य समग्री एवं उपकरण प्राप्त गरेको भए सोको विवरण खुलाउने)</h6>
 
+        <div class="text-right">
+            <a data-remote="{% url 'md-institution:create' %}" href="{% url 'md-institution:create' %}" class="add-more mt-3" data-toggle="modal" data-target="#modalInstituteCreate">
+                <i class="ic-add"></i>नयाँ संस्था बनाउनुहोस्
+            </a>
+        </div>
+
         {% crispy form %}
         
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
+
+{% block modal %}
+<div class="modal fade" id="modalInstituteCreate" tabindex="-1" role="dialog" aria-labelledby="modalInstituteCreate" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block extrascripts %}
+<script src="{% static 'js/post_data.js' %}"></script>
+<script>
+    $(".select_class").select2({
+        tags: true
+    })
+
+    $('#modalInstituteCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $( "#modalInstituteCreate").on('submit', 'form', function(e) {
+        e.preventDefault();
+        saveData($(this),"#modalInstituteCreate",  true);
+    });
+
+</script>
+{% endblock extrascripts %}

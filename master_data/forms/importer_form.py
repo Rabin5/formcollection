@@ -6,4 +6,7 @@ from master_data.models.company import Importer
 class ImporterForm(ModelForm):
     class Meta:
         model = Importer
-        fields = '__all__'
+        fields = (
+            'name', 'date_establishment',
+            'country', 'province', 'district', 'local_level', 'ward',
+        )

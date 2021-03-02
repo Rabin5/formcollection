@@ -12,7 +12,6 @@ from master_data.widgets import NepaliDateInput
 
 class MedExpLineForm(forms.ModelForm):
     product = ModelChoiceFieldWithCreate(queryset=Product.objects.all(), blank=False, label='स्वास्थ्य सामाग्री उपकरण', save_to_field='name')
-    importer = ModelChoiceFieldWithCreate(queryset=Importer.objects.all(), label='आपूर्तिकर्ताको नाम', save_to_field='name')
     procure_method = ModelChoiceFieldWithCreate(queryset=ProcurementMethod.objects.all(), label='खरिद विधि', blank=False, save_to_field='name')
 
     class Meta:

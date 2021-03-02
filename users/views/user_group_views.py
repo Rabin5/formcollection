@@ -1,3 +1,4 @@
+from master_data.utils import filter_helper
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, permission_required
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
@@ -63,9 +64,7 @@ class ListGroup(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
 
         context['groups'] = Group.objects.all().order_by('name')
         return render(request, self.template_name, context=context)
-
-    
-
+  
 
 class GroupDetail(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
     model = Group

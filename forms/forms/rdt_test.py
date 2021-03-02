@@ -5,12 +5,10 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
-from forms.fields import ModelChoiceFieldWithCreate
 from forms.models.rdttestdetail import RdtTestDetailLine, RdtTestDetail, Laboratory
 
 
 class RdtTestLineForm(forms.ModelForm):
-    laboratory = ModelChoiceFieldWithCreate(queryset=Laboratory.objects.all(), label='ल्यावको नाम र स्थान', blank=False, save_to_field='name')
     class Meta:
         model = RdtTestDetailLine
         exclude = ()

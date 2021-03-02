@@ -6,4 +6,6 @@ from master_data.models.company import IsolationCenter
 class IsolationCenterForm(ModelForm):
     class Meta:
         model = IsolationCenter
-        fields = '__all__'
+        fields = (
+            'name', 'country', 'province', 'district', 'local_level', 'ward',
+        )

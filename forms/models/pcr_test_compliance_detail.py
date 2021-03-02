@@ -1,16 +1,19 @@
 from django.db import models
 from forms.abstract import FormBaseModel, FormLineBaseModel
-from collection.utils import STATES, BS_MONTHS
-from master_data.models import FiscalYear, Product
-from master_data.models.government import GovernmentBody
 from collection.utils import BS_MONTHS
+from master_data.models import FiscalYear
+from master_data.models.government import GovernmentBody
 
 
 class PcrTestComplianceDetail(FormBaseModel):
     body = models.ForeignKey(
-        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नामः: ')
+        GovernmentBody, on_delete=models.PROTECT, verbose_name='निकायको नाम')
     fiscal_year = models.ForeignKey(
-        FiscalYear, on_delete=models.PROTECT, related_name='pctr_test_fiscal_year', verbose_name='आर्थिक बर्ष: ')
+        FiscalYear,
+        on_delete=models.PROTECT,
+        related_name='pctr_test_fiscal_year',
+        verbose_name='आर्थिक बर्ष'
+    )
 
     def __str__(self):
         return self.body.name
@@ -44,4 +47,7 @@ class PcrTestComplianceDetailLine(FormLineBaseModel):
     non_priority_infected_num = models.IntegerField(
         verbose_name='Non-priority  क्षेत्रमा गरेको संक्रमित संख्या')
     pcrtest_compliance_detail = models.ForeignKey(
-        PcrTestComplianceDetail, on_delete=models.PROTECT, related_name='lines')
+        PcrTestComplianceDetail,
+        on_delete=models.PROTECT,
+        related_name='lines'
+    )

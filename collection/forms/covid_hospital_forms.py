@@ -9,7 +9,6 @@ from master_data import models
 from forms.fields import ModelChoiceFieldWithCreate
 
 class CovHosFormCollectionForm(forms.ModelForm):
-    hospital = ModelChoiceFieldWithCreate(queryset=CovidHospital.objects.all(), required=True, widget=forms.Select(attrs={'autocomplete': 'off'}))
     
     class Meta:
         model = CovHosFormCollection

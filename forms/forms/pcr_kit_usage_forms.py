@@ -9,7 +9,6 @@ from forms.fields import ModelChoiceFieldWithCreate
 from forms.models import PcrKitUsage, PcrKitUsageLine, Laboratory   
 
 class PcrKitUsageLineForm(forms.ModelForm):
-    laboratory = ModelChoiceFieldWithCreate(queryset=Laboratory.objects.all(), label='प्रयोगशालाको नाम', blank=False, save_to_field='name')
 
     class Meta:
         model = PcrKitUsageLine

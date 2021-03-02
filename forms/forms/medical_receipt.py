@@ -11,7 +11,6 @@ from forms.models.medical_receipt import MedicalReceiptLine, MedicalReceipt, Ins
 
 class MedicalReceiptLineForm(forms.ModelForm):
     product = ModelChoiceFieldWithCreate(queryset=Product.objects.all(), blank=False, label='स्वास्थ्य सामाग्री उपकरण', save_to_field='name')
-    provider_institution = ModelChoiceFieldWithCreate(queryset=Institution.objects.all(), label='यदि संस्था भए, प्रदान गर्ने संस्था', save_to_field='name')
 
     class Meta:
         model = MedicalReceiptLine
