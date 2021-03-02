@@ -165,22 +165,18 @@ urlpatterns = [
      path('forms/quarterly-program/', include('forms.urls.quarterly_program_urls')),
      path('forms/drp-expense/', include('forms.urls.drp_expense_urls')),
      path('forms/yearly-target/', include('forms.urls.yearly_target_urls')),
-     path('forms/procedure-guide/',include('forms.urls.procedure_guide_urls')),
-     path('forms/expenditure/exceeding-allocation/',include('forms.urls.expenditure_exceeding_allocation_urls')),
-     path('forms/sectoral-budget/',include('forms.urls.sectoral_budget_urls')),
-     path('forms/foreign-trip/',include('forms.urls.foreign_trip_urls')),
-     path('forms/expenditure-detail/',include('forms.urls.expenditure_detail_urls')),
-
-     # Approve
-     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
-
-    # Local Level Auditor
+     path('forms/revenue-distribution/',include('forms.urls.revenue_distribution_urls')),
+     path('forms/state/partnership-program/',include('forms.urls.state_partnership_program_urls')),
+     path('forms/local/partnership-program/',include('forms.urls.local_partnership_program_urls')),
     path('forms/designation-vacancy/',
          include('forms.urls.designation_vacancy_urls')),
     path('forms/contract-desc/',include('forms.urls.contract_desc_urls')),
     path('forms/recover-amount/',include('forms.urls.recover_amount_urls')),
     path('forms/expense-desc/',include('forms.urls.expense_desc_urls')),
     path('forms/integral-advancement/',include('forms.urls.integral_advancement_urls')),
+
+    # Approve
+    # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
 

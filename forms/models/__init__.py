@@ -39,9 +39,11 @@ from .expenditure_exceeding_allocation import *
 from .sectoral_budget import *
 from .foreign_trip import *
 from .expenditure_detail import *
+from .revenue_distribution import *
+from .state_partnership_program import *
+from .local_partnership_program import *
 from .designation_vacancy import *
 from .contract_desc import *
 from .recover_amount import *
 from .expense_desc import *
 from .integral_advancement import *
-
