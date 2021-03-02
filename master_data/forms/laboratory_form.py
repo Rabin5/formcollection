@@ -6,4 +6,7 @@ from master_data.models.company import Laboratory
 class LaboratoryForm(ModelForm):
     class Meta:
         model = Laboratory
-        fields = '__all__'
+        fields = (
+            'name', 'date_establishment', 'capacity_daily_test',
+            'country', 'province', 'district', 'local_level', 'ward',
+        )

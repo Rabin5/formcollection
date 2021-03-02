@@ -2,11 +2,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.shortcuts import render, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.db.models import ProtectedError
 
 from master_data.forms.fiscal_year import FyForm
 from master_data.models import FiscalYear
 from oagn_covid.settings.base import PAGINATED_BY
+from django.contrib import messages
+from django.shortcuts import redirect
 
+from master_data.utils import *
 
 class FyCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = FiscalYear
@@ -35,9 +39,18 @@ class FyUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     context_object_name = 'fy'
     permission_required = 'users.perm_master_data'
 
+
 class FyDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = FiscalYear
     template_name = "master_data/fy_delete.html"
     success_url = reverse_lazy('md-fy:list')
     context_object_name = 'fy'
     permission_required = 'users.perm_master_data'
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(request, "यो डिलीट गर्न सकिदैन।")
+            return redirect('md-fy:list')
+         

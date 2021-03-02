@@ -3,9 +3,7 @@ from forms.views.case_investigation_views import CaseInvestigationTracingCreateV
 app_name = 'case_investigation_forms'
 urlpatterns = [
     path('create/', CaseInvestigationTracingCreateView.as_view(),
-         name='case_investigation_tracing-create'),
+         name='conditional-grant-create'),
     path('<int:pk>/update/',
-         CaseInvestigationTracingUpdateView.as_view(), name='case_investigation_tracing-update'),
-
-
+         CaseInvestigationTracingUpdateView.as_view(), name='conditional-grant-update'),
 ]

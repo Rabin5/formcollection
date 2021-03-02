@@ -21,20 +21,41 @@
     <div class="card card-body mt-3">
         <h6 class="heading-01 mb-3">पिसीआर प्रयोगशाला सम्बन्धी बिबरण</h6>
 
+        <div class="text-right">
+          <a data-remote="{% url 'md-laboratory:create' %}" href="{% url 'md-laboratory:create' %}" class="add-more mt-3" data-toggle="modal" data-target="#modalLabCreate">
+              <i class="ic-add"></i>नयाँ प्रयोगशाला बनाउनुहोस्
+          </a>
+        </div>
+
         {% crispy form %}
         
       </div>
     {% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
 
+{% block modal %}
+<div class="modal fade" id="modalLabCreate" tabindex="-1" role="dialog" aria-labelledby="modalLabCreate" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+</div>
+{% endblock modal %}
+
 {% block extrascripts %}
 <script src="{% static 'js/post_data.js' %}"></script>
 <script>
 
-  //'.select_class'
-  $('.select_class').select2({
-    tags: true
-  });
+  $('#modalLabCreate').on('shown.bs.modal', function (e) {
+      var button = $(e.relatedTarget);
+      var modal = $(this);
+      modal.find('.modal-content').load(button.data("remote"));
+    });
+
+    $( "#modalLabCreate").on('submit', 'form', function(e) {
+        e.preventDefault();
+        saveData($(this),"#modalLabCreate",  true);
+    });
 
   var date_choice = {{date_choice|safe}};
   var capacity_choice = {{capacity_choice|safe}};

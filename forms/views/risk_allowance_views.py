@@ -1,11 +1,15 @@
 from django.db import transaction
-from django.forms import inlineformset_factory
-from django.shortcuts import render, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from forms.models.risk_allowance import RiskAllowance, RiskAllowanceLine
-from forms.forms.riskallowance_forms import RiskAllowanceForm, RiskAllowanceLine, RiskAllowanceLineFormSet
+from forms.models.risk_allowance import (
+    RiskAllowance,
+    OfficeBearer
+)
+from forms.forms.riskallowance_forms import (
+    RiskAllowanceForm,
+    RiskAllowanceLineFormSet
+)
 
 
 class RiskAllowanceCreateView(CreateView):
@@ -31,7 +35,7 @@ class RiskAllowanceCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-        
+
         collection = context.get('collection')
         if collection:
             collection.risk_allowance = self.object
@@ -49,13 +53,35 @@ class RiskAllowanceUpdateView(UpdateView):
     form_class = RiskAllowanceForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+        bearers = OfficeBearer.objects.all()[:5]
+
+        for bearer in bearers:
+            line = {
+                'office_bearer': bearer
+            }
+            initial.append(line)
+
+        return initial
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = RiskAllowanceLineFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, instance=self.object,
+                initial=initial
+                )
         else:
-            data['lines'] = RiskAllowanceLineFormSet(instance=self.object)
+            data['lines'] = RiskAllowanceLineFormSet(
+                instance=self.object, initial=initial
+                )
+            data['lines'].extra = len(initial) if initial else 1
         return data
 
     def form_valid(self, form):
@@ -73,7 +99,11 @@ class RiskAllowanceUpdateView(UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines))
+        return self.render_to_response(self.get_context_data(
+            form=form,
+            lines=lines
+            )
+        )
 
     def get_success_url(self):
         return reverse_lazy('risk_forms:update', kwargs={'pk': self.object.pk})

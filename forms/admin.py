@@ -60,5 +60,9 @@ admin.site.register([
     models.ContractDescLine,
     models.CovidHospitalDetail,
     models.CovidHospitalDetailLine,
+    models.ConditionalGrant,
+    models.ConditionalGrantLine,
+    models.ServiceFlow,
+    models.ServiceFlowLine,
 
 ])

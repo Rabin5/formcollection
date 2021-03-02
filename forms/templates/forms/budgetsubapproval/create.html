@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+फारम नं। २० बजेट पेश र स्वीकृति
+{% endblock title %}
+
+{% block page_title %}
+फारम नं। २० बजेट पेश र स्वीकृति
+{% endblock page_title %}
+
+{% block page_actions %}
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
+{% endblock page_actions %}
+
+{% block content %}
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+
+
+    <div class="table-responsive">
+        <table class="table table-01 table-bordered mt-3">
+            {% crispy form %}
+        </table>
+    </div>
+
+</div>
+{% include 'core/forms/form_footer.html' %}
+{% endblock content %}

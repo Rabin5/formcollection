@@ -26,7 +26,9 @@
       {% comment %} use this {% endcomment %}
     {% endblock modal %}
     <div class="dashboard">
-      {% include 'core/_sidebar.html' %}
+      <aside class="sidebar">
+        {% include 'core/_sidebar.html' %}
+      </aside>
 
       <main class="dashboard--main">
         {% include 'core/_header.html' %}
@@ -51,9 +53,12 @@
         </div>
         
         <div class="content">
+
           {% block dashboard %}
+            {% include 'core/_filter.html' %}
           {% endblock dashboard %}
-          {% if 'forms' or 'master-data' or 'users' in request.path %}
+          
+          {% if 'forms' in request.path or 'master-data' in request.path or 'users' in request.path %}
             <div class="card card-body">
           {% endif %}
 
@@ -61,13 +66,13 @@
                 
               {% endblock content %}
               
-          {% if 'forms' or 'master-data' or 'users' not in request.path %}
+          {% if 'forms' in request.path or 'master-data' in request.path or 'users' in request.path %}
             </div>
           {% endif %}
         </div>
       </main>
-
-      {% block scripts %}
+    </div>
+    {% block scripts %}
         {% include 'core/_scripts.html' %}
 
         {% block extrascripts %}
@@ -79,10 +84,9 @@
             });
         });
         </script>
-<!-- use for textareafield -->
+        <!-- use for textareafield -->
         {% endblock extrascripts %}
 
       {% endblock scripts %}
-    </div>
   </body>
 </html>

@@ -6,11 +6,18 @@ User = get_user_model()
 
 
 class FormLineBaseModel(models.Model):
-    created_date = models.DateField(verbose_name='सिर्जना मिति', auto_now_add=True)
-    updated_date = models.DateField(verbose_name='अद्यावधिक मिति', auto_now=True)
-    
+    created_date = models.DateField(
+        verbose_name='सिर्जना मिति',
+        auto_now_add=True
+        )
+    updated_date = models.DateField(
+        verbose_name='अद्यावधिक मिति',
+        auto_now=True
+        )
+
     class Meta:
         abstract = True
+        ordering = ['id']
 
 
 class FormBaseModel(FormLineBaseModel):
@@ -18,3 +25,4 @@ class FormBaseModel(FormLineBaseModel):
 
     class Meta:
         abstract = True
+        ordering = ['id']

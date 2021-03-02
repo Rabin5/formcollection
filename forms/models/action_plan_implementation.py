@@ -16,10 +16,20 @@ class ActionPlanImplementation(FormBaseModel):
 
 class ActionPlanImplementationLine(FormLineBaseModel):
     action_plan_implementation = models.ForeignKey(
-        ActionPlanImplementation, on_delete=models.PROTECT, verbose_name='कार्य योजना कार्यान्वयन', related_name='lines')
+        ActionPlanImplementation,
+        on_delete=models.PROTECT,
+        verbose_name='कार्य योजना कार्यान्वयन',
+        related_name='lines'
+    )
     activity = models.ForeignKey(
-        ActionPlanActivity, on_delete=models.PROTECT, verbose_name='क्रियाकलाप')
-    work_done = models.CharField(max_length=500, verbose_name='प्रदेश सरकारबाट भएको कार्य')
+        ActionPlanActivity,
+        on_delete=models.PROTECT,
+        verbose_name='क्रियाकलाप'
+    )
+    work_done = models.CharField(
+        max_length=500,
+        verbose_name='प्रदेश सरकारबाट भएको कार्य'
+    )
     work_expense = models.FloatField(verbose_name='उक्त कार्यमा भएको खर्च')
 
     def __str__(self):

@@ -30,7 +30,7 @@ class PcrLaboratoryDetailLineForm(forms.ModelForm):
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_with_create', 'onchange': 'get_select_value(event)'})
+                field.widget.attrs.update({'onchange': 'get_select_value(event)'})
             else:
                 field.widget.attrs['class'] = 'form-control'
         

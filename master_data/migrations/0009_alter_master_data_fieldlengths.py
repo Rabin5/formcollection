@@ -26,11 +26,6 @@ class Migration(migrations.Migration):
             field=models.CharField(blank=True, max_length=300, null=True, unique=True),
         ),
         migrations.AlterField(
-            model_name='district',
-            name='name',
-            field=models.CharField(max_length=300, unique=True, verbose_name='जिल्ला'),
-        ),
-        migrations.AlterField(
             model_name='expenseheader',
             name='title',
             field=models.CharField(blank=True, max_length=300, null=True, unique=True),
@@ -44,11 +39,6 @@ class Migration(migrations.Migration):
             model_name='governmentbodytype',
             name='name',
             field=models.CharField(max_length=255, unique=True, verbose_name='वर्णन'),
-        ),
-        migrations.AlterField(
-            model_name='locallevel',
-            name='name',
-            field=models.CharField(max_length=300, unique=True, verbose_name='स्थानीय स्तर'),
         ),
         migrations.AlterField(
             model_name='manpower',
@@ -70,11 +60,11 @@ class Migration(migrations.Migration):
             name='name',
             field=models.CharField(max_length=255, unique=True, verbose_name='नाम'),
         ),
-        migrations.AlterField(
-            model_name='province',
-            name='name',
-            field=models.CharField(max_length=300, unique=True, verbose_name='प्रदेश'),
-        ),
+        # migrations.AlterField(
+        #     model_name='province',
+        #     name='name',
+        #     field=models.CharField(max_length=300, unique=True, verbose_name='प्रदेश'),
+        # ),
         migrations.AlterField(
             model_name='relieftype',
             name='title',

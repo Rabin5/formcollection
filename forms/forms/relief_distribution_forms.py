@@ -2,10 +2,13 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, Submit, ButtonHolder
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden
 
 from forms.custom_layout_object import Formset
-from forms.models import ReliefDistributionExpense, ReliefDistributionExpenseLine
+from forms.models import (
+    ReliefDistributionExpense,
+    ReliefDistributionExpenseLine
+)
 
 
 class ReliefDistributionExpenseLineForm(forms.ModelForm):
@@ -21,9 +24,16 @@ class ReliefDistributionExpenseLineForm(forms.ModelForm):
 
 
 ReliefDistributionExpenseFormSet = inlineformset_factory(
-    ReliefDistributionExpense, ReliefDistributionExpenseLine, form=ReliefDistributionExpenseLineForm,
-    fields=['amt_expense', 'relief_type', 'num_relif_beneficiary', 'remarks',
-            'relief_distribution'],
+    ReliefDistributionExpense,
+    ReliefDistributionExpenseLine,
+    form=ReliefDistributionExpenseLineForm,
+    fields=[
+        'relief_type',
+        'amt_expense',
+        'num_relif_beneficiary',
+        'remarks',
+        'relief_distribution'
+    ],
     extra=1,
     can_delete=True
 )
@@ -48,10 +58,9 @@ class ReliefDistributionExpenseForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                Fieldset('',
-                         Formset('lines')
-                         ),
-            
-
+                Fieldset(
+                    '',
+                    Formset('lines')
+                ),
             )
         )

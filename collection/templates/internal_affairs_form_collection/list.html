@@ -32,9 +32,19 @@
       <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ form_collection }}</td>
-        <td>{{ form_collection.get_status_display }}</td>
+        {% if form_collection.get_status_display in 'STARTED' %}
+        <td><span class="badge badge-info">{{ form_collection.get_status_display }}</span></td>
+        {% elif form_collection.get_status_display in 'APPROVED' %}
+        <td><span class="badge badge-success">{{ form_collection.get_status_display }}</span></td>
+        {% elif form_collection.get_status_display in 'INCOMPLETE' %}
+        <td><span class="badge badge-secondary">{{ form_collection.get_status_display }}</span></td>
+        {% elif form_collection.get_status_display in 'REJECTED' %}
+        <td><span class="badge badge-danger">{{ form_collection.get_status_display }}</span></td>
+        {% else %}
+        <td><span class="badge badge-warning">{{ form_collection.get_status_display }}</span></td>
+        {% endif %}
         {% if form_collection.get_status_display in 'SUBMITTED, APPROVED' %}
-          <td>
+          <td class="action">
             <a href="{% url 'internal_affairs_forms:review' form_collection.pk 'submitted' %}">
               <i class="ic-visible"></i>
             </a>
@@ -77,6 +87,8 @@
     </div>
   </div>
 </div>
+
+{% include 'filter_modal.html' %}
 
 {% endblock %}
 

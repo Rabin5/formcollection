@@ -9,7 +9,6 @@ from forms.fields import ModelChoiceFieldWithCreate
 from forms.models import QuarantineManagementDetail, QuarantineManagementDetailLine, QuanrantineCenter
 
 class QuarantineManagementDetailLineForm(forms.ModelForm):
-    quarantine_center = ModelChoiceFieldWithCreate(queryset=QuanrantineCenter.objects.all(), label='यस निकायले तयार वा सञ्चालन गरेको क्वारेन्टिन/होल्डिङ सेन्टरको नाम', blank=False, save_to_field='name')
 
     class Meta:
         model = QuarantineManagementDetailLine

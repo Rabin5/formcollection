@@ -1,0 +1,19 @@
+{% load url_extras %}
+{% if 'md, users'|url_contains:request.resolver_match.view_name %}
+<div class='row'>
+    <div class='col-6'>
+        <form method="get">
+            <input id="django-text-input" placeholder="खोज" type="text" name="query"
+                value="{% if request.GET.query %} {{ request.GET.query}}{% endif %}" class="form-control" />
+        </form>
+    </div>
+</div>
+{% elif 'cov_hos_list, province_list, local_level_list, chief_minister_list, internal_affairs_list, review_approve_list'|url_contains:request.resolver_match.view_name %}
+<div class="section-title">
+    <h6 class="text-dark font-weight-bold"></h6>
+    <a class="btn btn-ghost-info btn-icon-only" data-toggle="modal" data-target="#filterModal">
+        <span class="ic-filter"></span>
+    </a>
+</div>
+{% endif %}
+
