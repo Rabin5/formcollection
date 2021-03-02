@@ -34,8 +34,17 @@ from .incomplete_construction_work import *
 from .quarterly_program import *
 from .drp_expense import *
 from .yearly_target import *
+from .revenue_distribution import *
+from .state_partnership_program import *
+from .local_partnership_program import *
+from .designation_vacancy import *
+from .contract_desc import *
+from .recover_amount import *
+from .expense_desc import *
+from .integral_advancement import *
 from .service_flow import *
 from .house_map_construction import *
 from .vechile_purches import *
 from .additionalconvenience import *
 from .conditionalgrant import *
+

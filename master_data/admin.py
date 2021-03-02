@@ -24,8 +24,12 @@ admin.site.register(models.CovidHospitalManagementChecklistDescription)
 admin.site.register(models.ExpenseHeader)
 admin.site.register(models.Product)
 admin.site.register(models.ReliefType)
+admin.site.register(models.Designation)
+admin.site.register(models.Contractor)
 admin.site.register(models.ComplaintType)
 admin.site.register(models.PeskiBibaran)
+
 admin.site.register(models.GrantType)
 admin.site.register(models.Vehicle)
 admin.site.register(models.ConvenienceType)
+
