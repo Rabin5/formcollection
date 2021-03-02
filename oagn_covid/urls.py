@@ -73,23 +73,23 @@ urlpatterns = [
          include('master_data.urls.sub_header')),
     path('master-data/government/work_nature/',
          include('master_data.urls.work_nature')),
-    path('master-data/government/committee/', include('master_data.urls.committee')),
-    path('master-data/government/relief_type/', include('master_data.urls.relief_type')),
-    path('master-data/government/action_plan/', include('master_data.urls.action_plan')),
-    path('master-data/government/construction_company/', include('master_data.urls.construction_company')),
-    path('master-data/government/consultant/', include('master_data.urls.consultant')),
-    path('master-data/government/sub_header/', include('master_data.urls.sub_header')),
-    path('master-data/government/work_nature/', include('master_data.urls.work_nature')),
-    path('master-data/government/complaint_type/',include('master_data.urls.complaint_type')),
-    path('master-data/government/peski_bibaran/',include('master_data.urls.peski_bibaran')),
-    path('master-data/government/grant_type/',include('master_data.urls.grant_type')),
-    path('master-data/government/vehicle/',include('master_data.urls.vehicle')),
-    path('master-data/government/designation/',include('master_data.urls.designation')),
-    path('master-data/government/project_type/',include('master_data.urls.project_type')),
-    path('master-data/government/contractor/',include('master_data.urls.contractor')),
-    path('master-data/government/school/',include('master_data.urls.school')),
-    path('master-data/government/convenience_type/',include('master_data.urls.convenience_type')),
-    
+    path('master-data/government/complaint_type/',
+         include('master_data.urls.complaint_type')),
+    path('master-data/government/peski_bibaran/',
+         include('master_data.urls.peski_bibaran')),
+    path('master-data/government/grant_type/',
+         include('master_data.urls.grant_type')),
+    path('master-data/government/vehicle/',
+         include('master_data.urls.vehicle')),
+    path('master-data/government/designation/',
+         include('master_data.urls.designation')),
+    path('master-data/government/project_type/',
+         include('master_data.urls.project_type')),
+    path('master-data/government/contractor/',
+         include('master_data.urls.contractor')),
+    path('master-data/government/school/', include('master_data.urls.school')),
+    path('master-data/government/convenience_type/',
+         include('master_data.urls.convenience_type')),
 
 
     # Forms
@@ -120,9 +120,6 @@ urlpatterns = [
          include('forms.urls.quarantine_contruct_urls')),
     path('forms/cov-hos-management/',
          include('forms.urls.cov_hos_management_checklist_urls')),
-   
-
-
 
     # Province
     path('province/forms/', include('collection.urls.province_form_collection_urls')),
@@ -156,33 +153,29 @@ urlpatterns = [
          include('forms.urls.relief_procure_dis')),
     path('forms/relief_procurement_detail/',
          include('forms.urls.reliefprocurementdetail')),
-     path('forms/case_invs_tracing/',
-          include('forms.urls.case_investigation_tracing_urls')),
+    path('forms/case_invs_tracing/',
+         include('forms.urls.case_investigation_tracing_urls')),
 
-     # Local Level Auditor
-     path('forms/procurement-auditor/', include('forms.urls.procurement_auditor_urls')),
-     path('forms/incomplete-construction-work/', include('forms.urls.incomplete_construction_work_urls')),
-     path('forms/quarterly-program/', include('forms.urls.quarterly_program_urls')),
-     path('forms/drp-expense/', include('forms.urls.drp_expense_urls')),
-     path('forms/yearly-target/', include('forms.urls.yearly_target_urls')),
-     path('forms/revenue-distribution/',include('forms.urls.revenue_distribution_urls')),
-     path('forms/state/partnership-program/',include('forms.urls.state_partnership_program_urls')),
-     path('forms/local/partnership-program/',include('forms.urls.local_partnership_program_urls')),
-
-     # Approve
-     # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
     # Local Level Auditor
-    path('forms/designation-vacancy/',
-         include('forms.urls.designation_vacancy_urls')),
-    path('forms/contract-desc/',include('forms.urls.contract_desc_urls')),
-    path('forms/recover-amount/',include('forms.urls.recover_amount_urls')),
-    path('forms/expense-desc/',include('forms.urls.expense_desc_urls')),
-    path('forms/integral-advancement/',include('forms.urls.integral_advancement_urls')),
+    path('forms/procurement-auditor/',
+         include('forms.urls.procurement_auditor_urls')),
+    path('forms/incomplete-construction-work/',
+         include('forms.urls.incomplete_construction_work_urls')),
+    path('forms/quarterly-program/',
+         include('forms.urls.quarterly_program_urls')),
+    path('forms/drp-expense/', include('forms.urls.drp_expense_urls')),
+    path('forms/yearly-target/', include('forms.urls.yearly_target_urls')),
 
     # Approve
-    # path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
-
-
+    # collection-6
+    path('forms/teacherdesgination/',
+         include('forms.urls.teacherdesignation')),
+    path('forms/judicialcommittee/', include('forms.urls.judicialcommittee')),
+    path('forms/consumercommitteecons_desc/',
+         include('forms.urls.consumercommitteecons_desc')),
+    path('forms/financialstatement/', include('forms.urls.financialstatement')),
+    #path('cov-hos/approve/', include('collection.urls.cov_hos_form_collection_urls'))
+    path('forms/budgetsubapproval/', include('forms.urls.budgetsubapproval')),
 
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
