@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('master_data', '0021_house_map_construction'),
+        ('master_data', '0001_initial'),
         ('forms', '0035_house_map_construction'),
     ]
 
