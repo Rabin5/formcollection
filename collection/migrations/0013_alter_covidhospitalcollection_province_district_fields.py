@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('master_data', '0004_alter_hospital_body_inheritaddress'),
+        ('master_data', '0001_initial'),
         ('collection', '0012_merge_20210129_0915'),
     ]
 

@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('master_data', '0021_house_map_construction'),
+        ('master_data', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('forms', '0037_additionalconvenience'),
     ]

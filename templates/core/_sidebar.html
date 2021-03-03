@@ -1,4 +1,5 @@
 {% load static %} {% load auth_extras %}
+{% load url_extras %}
 
 
     <div class="sidebar-brand">
@@ -109,7 +110,7 @@
                     </li>
                     <li>
                         <a class="pl-4 hasSub" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">कम्पनि</a>
-                        <div class="collapse{% if 'master-data/company' in request.path %} show {% endif %}" id="collapseExample5">
+                        <div class="collapse{% if 'md-laboratory, md-institution, md-quarantine, md-isolation, md-importer'|url_contains:request.resolver_match.view_name %} show {% endif %}" id="collapseExample5">
                             <ul class="list pl-3">
                                 <!-- <li {% if 'md-company:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-company:list'%}" class="pl-4">कम्पनि</a>
@@ -120,13 +121,13 @@
                                 <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-institution:list'%}" class="pl-4">Institution</a>
                                 </li>
-                                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                                <li {% if 'md-quarantine:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-quarantine:list'%}" class="pl-4">क्वारेन्टाइन सेन्टर</a>
                                 </li>
-                                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                                <li {% if 'md-isolation:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-isolation:list'%}" class="pl-4">आइसोलेशन सेन्टर</a>
                                 </li>
-                                <li {% if 'md-institution:list' in request.resolver_match.view_name %}class="active" {% endif %}>
+                                <li {% if 'md-importer:list' in request.resolver_match.view_name %}class="active" {% endif %}>
                                     <a href="{% url 'md-importer:list' %}" class="pl-4">आपूर्तिकर्ता</a>
                                 </li>
                             </ul>
@@ -138,26 +139,26 @@
         {% endif %} {% if request.user|has_group:"Form Operator, ADMIN" %}
         <li>
             <a href="#form-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">Forms</a>
-            <div class="collapse{% if 'forms' in request.path %} show {% endif %}" id="form-data">
+            <div class="collapse{% if 'cov_hos_forms:cov_hos, province_forms:province, internal_affairs_forms:internal_affairs, chief_minister_forms:chief_minister, local_level_forms:local_level'|url_contains:request.resolver_match.view_name or 'submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %} show {% endif %}" id="form-data">
                 <ul class="list pl-3">
                     {% if perms.users.perm_cov_hos_form %}
-                    <li {% if 'cov_hos_forms:cov_hos' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'cov_hos_forms:cov_hos' in request.resolver_match.view_name or 'cov-hos/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'cov_hos_forms:cov_hos_list'%}" class="pl-4">कोभिड अस्पताल</a>
                     </li>
                     {% endif %} {% if perms.users.perm_province_form %}
-                    <li {% if 'province_forms:province' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'province_forms:province' in request.resolver_match.view_name or 'province/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'province_forms:province_list'%}" class="pl-4">प्रदेश</a>
                     </li>
                     {% endif %} {% if perms.users.perm_internal_affairs_form %}
-                    <li {% if 'internal_affairs_forms:internal_affairs' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'internal_affairs_forms:internal_affairs' in request.resolver_match.view_name or 'internal-affairs/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'internal_affairs_forms:internal_affairs_list'%}" class="pl-4">आन्तरिक मामिला</a>
                     </li>
                     {% endif %} {% if perms.users.perm_chief_minister_form %}
-                    <li {% if 'chief_minister_forms:chief_minister' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'chief_minister_forms:chief_minister' in request.resolver_match.view_name or 'chief-minister-office/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'chief_minister_forms:chief_minister_list'%}" class="pl-4">मुख्यमंत्री कार्यालय</a>
                     </li>
                     {% endif %} {% if perms.users.perm_local_level_form %}
-                    <li {% if 'local_level_forms:local_level' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'local_level_forms:local_level' in request.resolver_match.view_name or 'local-level/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'local_level_forms:local_level_list'%}" class="pl-4">स्थानीय स्तर</a>
                     </li>
                     {% endif %}
@@ -176,7 +177,7 @@
                         <a href="{% url 'users:groups_list'%}" class="pl-4">Users Groups</a>
                     </li>
                     <li {% if '/users/user_permission' in request.path %}class="active" {% endif %}>
-                        <a href="{% url 'users:list_permissions'%}" class="pl-4">Users Permission</a>
+                        <a href="{% url 'users:permissions_list'%}" class="pl-4">Users Permission</a>
                     </li>
                 </ul>
             </div>
@@ -184,26 +185,28 @@
         {% endif %} {% if request.user|has_group:"Approve, ADMIN" %}
         <li>
             <a href="#approve-data" class="hasSub" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">Approve</a>
-            <div class="collapse{% if 'approve' in request.resolver_match.view_name %} show {% endif %}" id="approve-data">
+            <div class="collapse{% if 'approve' in request.path  or 'submitted' in request.path and 'approve' in request.META.HTTP_REFERER %} show {% endif %}" id="approve-data">
                 <ul class="list pl-3">
-                    <li {% if 'cov_hos_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    {% if perms.users.perm_cov_hos_form_approve %}
+                    <li {% if 'cov-hos/forms/review/approve, cov-hos/forms/approve'|url_contains:request.path or 'cov-hos/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'cov_hos_forms:review_approve_list'%}" class="pl-4">Covid Hospital Approve List</a>
                     </li>
+                    {% endif %}
                     {% if perms.users.perm_province_form_approve %}
-                    <li {% if 'province_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'province/forms/review/approve, province/forms/approve'|url_contains:request.path or 'province/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'province_forms:review_approve_list'%}" class="pl-4">Province Approve List</a>
                     </li>
                     {% endif %} {% if perms.users.perm_internal_affairs_form_approve %}
-                    <li {% if 'internal_affairs_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'internal-affairs/forms/review/approve, internal-affairs/forms/approve'|url_contains:request.path or 'internal-affairs/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'internal_affairs_forms:review_approve_list'%}" class="pl-4">Internal Affairs Approve
               List</a>
                     </li>
                     {% endif %} {% if perms.users.perm_chief_minister_form_approve %}
-                    <li {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'chief-minister-office/forms/review/approve, chief-minister-office/forms/approve'|url_contains:request.path or 'chief-minister-office/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'chief_minister_forms:review_approve_list'%}" class="pl-4">Chief Minister Approve List</a>
                     </li>
                     {% endif %} {% if perms.users.perm_local_level_form_approve %}
-                    <li {% if 'local_level_forms:review' in request.resolver_match.view_name %}class="active" {% endif %}>
+                    <li {% if 'local-level/forms/review/approve, local-level/forms/approve'|url_contains:request.path or 'local-level/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'local_level_forms:review_approve_list'%}" class="pl-4">Local Leve Approve List</a>
                     </li>
                     {% endif %}

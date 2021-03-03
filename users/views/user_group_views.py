@@ -231,7 +231,7 @@ class CreatePermissionView(LoginRequiredMixin, PermissionRequiredMixin, UserPass
     model = GlobalPermission
     fields = ['name', 'codename']
     template_name = 'user_groups/create_permission.html'
-    success_url = reverse_lazy('users:list_permissions')
+    success_url = reverse_lazy('users:permissions_list')
     permission_required = 'users.perm_user_management'
 
     def test_func(self):
@@ -254,7 +254,7 @@ class EditPermissionView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
     model = GlobalPermission
     template_name = "user_groups/permission_update.html"
     form_class = UserPermissionUpdateForm
-    success_url = reverse_lazy('users:list_permissions')
+    success_url = reverse_lazy('users:permissions_list')
     context_object_name = 'permission'
 
 class DeletePermission(LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin, generic.DeleteView):

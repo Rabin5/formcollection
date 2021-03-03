@@ -31,7 +31,7 @@ urlpatterns = [
 
     # Permission
     path('user_permission/create/', CreatePermissionView.as_view(), name='create_permission'),
-    path('user_permission/list/', ListPermissionView.as_view(), name='list_permissions'),
+    path('user_permission/list/', ListPermissionView.as_view(), name='permissions_list'),
     path('user_permission/<int:pk>/update/', EditPermissionView.as_view(), name='edit_permission'),
     path('user_permission/<int:pk>/delete/', DeletePermission.as_view(), name='delete_permission'),
 

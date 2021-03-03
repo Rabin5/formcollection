@@ -46,13 +46,13 @@
       {% endif %}
       {% if form_collection.get_status_display in 'SUBMITTED, APPROVED' %}
       <td class="action">
-        <a href="{% url 'chief_minister_forms:review' form_collection.pk 'submitted' %}">
+        <a href="{% url 'chief_minister_forms:review' 'submitted' form_collection.pk %}">
           <i class="ic-visible"></i>
         </a>
       </td>
       {% elif form_collection.get_status_display in 'REJECTED' %}
       <td class="action">
-        <a href="{% url 'chief_minister_forms:review' form_collection.pk 'submitted' %}">
+        <a href="{% url 'chief_minister_forms:review' 'submitted' form_collection.pk %}">
           <i class="ic-visible"></i>
         </a> |
         <a href="{% url 'chief_minister_forms:chief_minister_update' form_collection.pk %}">

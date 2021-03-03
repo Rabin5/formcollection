@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('master_data', '0010_add_designation_vacancy'),
+        ('master_data', '0001_initial'),
         ('forms', '0033_dprexpense_dprexpenseline_quarterlyprogram_quarterlyprogramline_yearlytarget_yearlytargetline'),
     ]
 

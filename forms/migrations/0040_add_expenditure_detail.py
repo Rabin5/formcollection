@@ -8,9 +8,9 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('master_data', '0021_add_null_true_blank_true_designation_field'),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('forms', '0039_add_null_true_blank_true_designation_field'),
+        ('master_data', '__latest__'),
+        # migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('forms', '0039_financialstatement'),
     ]
 
     operations = [
