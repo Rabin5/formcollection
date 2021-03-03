@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('master_data', '0003_alter_manpower_fields'),
+        ('master_data', '0001_initial'),
         ('forms', '0011_alter_covidhospitaldetailline_date_announcement'),
     ]
 

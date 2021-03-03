@@ -8,8 +8,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('master_data', '0020_merge_20210224_1035'),
         ('forms', '0037_add_sectoral_budget'),
     ]
 
@@ -35,7 +33,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=300, verbose_name='बैदेशिक भ्रमणमा जानेको पद र नाम ')),
                 ('payment_amount', models.FloatField(verbose_name='भुक्तानी रकम')),
                 ('country', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='foreign_trip_line', to='master_data.country', verbose_name='भ्रमण गरेको देश')),
-                ('designation', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='master_data.designation', verbose_name='')),
+                ('designation', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='master_data.designation', verbose_name='')),
                 ('foreign_trip', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='lines', to='forms.foreigntrip')),
             ],
             options={

@@ -13,7 +13,16 @@ class UserCreateForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
-
+    def clean_email(self):
+        email=self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('this email is already used please choose another one')
+        return email
+    def clean_mobile_number(self):
+        mobile_number=self.cleaned_data.get('mobile_number')
+        if not (len(mobile_number) == 10 and mobile_number.isdigit()):
+            raise forms.ValidationError('mobile number is not valid')
+        return mobile_number
 
 class UserUpdateForm(forms.ModelForm):
     

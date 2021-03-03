@@ -37,6 +37,7 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
             group = request.POST.get('groups')
             user.set_password(password)
             user.save()
+            return redirect('users:list')
             user.groups.add(group)
             subject = "Account created successfully"
             template = render_to_string(
@@ -46,8 +47,8 @@ class UserCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
             send_email(subject, template, settings.EMAIL_HOST_USER, [user.email])
             # send_email.delay(subject, template, settings.EMAIL_HOST_USER, user.email)
 
-        return HttpResponseRedirect(reverse('users:list'))
-
+        # return HttpResponseRedirect(reverse('users:list'))
+        return render(request,self.template_name,{'form':form})
 
 class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = User

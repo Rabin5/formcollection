@@ -106,12 +106,12 @@ User
 
   $( "#modalUserCreate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),'#modalUserCreate') 
   });
 
   $( "#modalUserUpdate").on('submit', 'form', function(e) {
     e.preventDefault();
-    saveData($(this)) 
+    saveData($(this),"#modalUserUpdate") 
   });
 </script>
 {% endblock extrascripts %}
