@@ -30,10 +30,10 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # adress,company
-    path('master-data/country/', include('master_data.urls.country')),
-    path('master-data/province/', include('master_data.urls.province')),
-    path('master-data/district/', include('master_data.urls.district')),
-    path('master-data/locallevel/', include('master_data.urls.locallevel')),
+    path('master-data/address/country/', include('master_data.urls.country')),
+    path('master-data/address/province/', include('master_data.urls.province')),
+    path('master-data/address/district/', include('master_data.urls.district')),
+    path('master-data/address/locallevel/', include('master_data.urls.locallevel')),
     path('master-data/address/', include('master_data.urls.address')),
 
     path('master-data/companies/', include('master_data.urls.company')),

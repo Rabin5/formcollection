@@ -1,5 +1,5 @@
 {% load url_extras %}
-{% if 'md, users'|url_contains:request.resolver_match.view_name %}
+{% if 'md, users:list'|url_contains:request.resolver_match.view_name %}
 <div class='row'>
     <div class='col-6'>
         <form method="get">

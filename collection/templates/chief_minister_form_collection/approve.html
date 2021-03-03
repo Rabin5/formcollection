@@ -35,13 +35,13 @@
         <td>{{ val.status }}</td>
         {% if val.status not in 'APPROVED, REJECTED' %}
           <td>
-            <a href="{% url 'chief_minister_forms:review' val.id 'approve' %}">
+            <a href="{% url 'chief_minister_forms:review' 'approve' val.id %}">
               समीक्षा गर्नुहोस्
             </a>
           </td>
         {% else %}
         <td>
-            <a href="{% url 'chief_minister_forms:review' val.id 'submitted' %}">
+            <a href="{% url 'chief_minister_forms:review' 'submitted' val.id %}">
               <i class="ic-visible"></i>
             </a>
         </td>
