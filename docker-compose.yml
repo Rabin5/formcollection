@@ -22,7 +22,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=oag_covid
+      - POSTGRES_DB=oagn_covid
 
 volumes:
   db_data:
