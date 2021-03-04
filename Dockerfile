@@ -15,12 +15,17 @@ RUN apt-get update \
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements .
+RUN pip install -r development.txt
 
 # remove build dependencies
 RUN apt-get autoremove -y gcc
 
+# copy entrypoint.sh
+COPY ./entrypoint.sh .
 
 # copy project
 COPY . .
+
+# run entrypoint.sh
+ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
