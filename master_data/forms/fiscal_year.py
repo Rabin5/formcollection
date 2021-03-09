@@ -15,7 +15,7 @@ class FyForm(ModelForm):
             'date_start_bs': NepaliDateInput(),
             'date_end_bs': NepaliDateInput(),
         }
-    
+
     def clean(self):
         """
         Overrides clean method to check if fiscal year is valid and unique.
@@ -23,9 +23,16 @@ class FyForm(ModelForm):
 
         is_clean = True
         cd = self.cleaned_data
+        try:
 
-        cd['date_start'] = nepali_datetime.datetime.strptime(cd.get('date_start_bs'), '%d/%m/%Y').date().to_datetime_date()
-        cd['date_end'] = nepali_datetime.datetime.strptime(cd.get('date_end_bs'), '%d/%m/%Y').date().to_datetime_date()
+
+            cd['date_start'] = nepali_datetime.datetime.strptime(
+            cd.get('date_start_bs'), '%d/%m/%Y').date().to_datetime_date()
+
+            cd['date_end'] = nepali_datetime.datetime.strptime(
+            cd.get('date_end_bs'), '%d/%m/%Y').date().to_datetime_date()
+        except:
+            raise ValidationError('date format is not valid please choose d/m/y format.')
 
         if (cd.get('date_start') >= cd.get('date_end')):
             is_clean = False
@@ -34,20 +41,22 @@ class FyForm(ModelForm):
 
         for fy in fys:
             if (
-                (cd.get('date_start') <= fy.date_end) and \
-                    (fy.date_start <= cd.get('date_end'))
-                ):
+                    (cd.get('date_start') <= fy.date_end) and
+                (fy.date_start <= cd.get('date_end'))
+            ):
                 is_clean = False
-        
+
         if is_clean:
             return cd
         else:
-            raise ValidationError('Fiscal Year is not valid or unique.', code='not_unique')
-    
+            raise ValidationError(
+                'Fiscal Year is not valid or unique.', code='not_unique')
 
     def save(self, commit=True):
         fy = super().save(commit=False)
-        fy.date_start = nepali_datetime.datetime.strptime(fy.date_start_bs, '%d/%m/%Y').date().to_datetime_date()
-        fy.date_end = nepali_datetime.datetime.strptime(fy.date_end_bs, '%d/%m/%Y').date().to_datetime_date()
+        fy.date_start = nepali_datetime.datetime.strptime(
+            fy.date_start_bs, '%d/%m/%Y').date().to_datetime_date()
+        fy.date_end = nepali_datetime.datetime.strptime(
+            fy.date_end_bs, '%d/%m/%Y').date().to_datetime_date()
         fy.save()
         return fy
