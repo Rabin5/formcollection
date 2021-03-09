@@ -201,7 +201,14 @@ urlpatterns = [
          include('forms.urls.conditionalgrant')),
 
      # Collection -7
-     
+     path('forms/pm_employment_expense/', include('forms.urls.pm_employment_expense_urls')),
+    path('forms/registered_unemployment/',
+         include('forms.urls.registered_unemployment_urls')),
+    path('forms/employment_assessment/',
+         include('forms.urls.employment_assessment_urls')),
+    path('forms/notify_employee/', include('forms.urls.notify_employee_urls')),
+    path('forms/detail_to_employer/',
+         include('forms.urls.detail_to_employer_urls')),
 
     path('users/', include('users.urls.user_urls')),
     path('', DashboardView.as_view(), name='index'),
