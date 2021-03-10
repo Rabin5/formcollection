@@ -1,5 +1,6 @@
 from django.contrib import admin
 from collection import models
+from collection.models.collection_six import CollectionSixFormCollection
 # Register your models here.
 
 admin.site.register([
@@ -7,5 +8,6 @@ admin.site.register([
     models.ProvinceFormCollection,
     models.InternalAffairFormCollection,
     models.ChiefMinisterOfficeFormCollection,
-    models.LocalLevelFormCollection
+    models.LocalLevelFormCollection,
+    models.CollectionSixFormCollection
 ])

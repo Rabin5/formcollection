@@ -10,7 +10,7 @@ class AdditionalConvenience(FormBaseModel):
 
 class AdditionalConvenienceLine(FormLineBaseModel):
     additionalconvenction_line = models.ForeignKey(
-        AdditionalConvenience, on_delete=models.CASCADE, related_name='line')
+        AdditionalConvenience, on_delete=models.CASCADE, related_name='lines')
     convenience_type = models.ForeignKey(
         ConvenienceType, on_delete=models.CASCADE, related_name='lines', verbose_name='सुविधाको किसिम')
     conveniece_staff_count = models.IntegerField(

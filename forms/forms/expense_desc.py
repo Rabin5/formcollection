@@ -55,7 +55,6 @@ class ExpenseDescForm(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
 
             )
         )

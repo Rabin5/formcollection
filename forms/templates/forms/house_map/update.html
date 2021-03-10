@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block page_title %}
-फाराम — ७ ःघर नक्शापास र निर्माण कार्य सम्पन्न सम्वन्धी विवरण (स्थानीय तहको लागि)
+घर नक्शापास र निर्माण कार्य सम्पन्न सम्वन्धी विवरण (स्थानीय तहको लागि)
 {% endblock page_title %}
 
 {% block page_actions %}
@@ -19,15 +19,15 @@
 {% block content %}
 {% include 'core/forms/progress_bar.html' %}
 <div class="card card-body mt-3">
-    <h6 class="heading-01 mb-3">फाराम — ७ ःघर नक्शापास र निर्माण कार्य सम्पन्न सम्वन्धी विवरण (स्थानीय तहको लागि)</h6>
+    <h6 class="heading-01 mb-3">घर नक्शापास र निर्माण कार्य सम्पन्न सम्वन्धी विवरण (स्थानीय तहको लागि)</h6>
 
-    <div class="table-responsive">
-        <table class="table table-01 table-bordered mt-3">
-            {% crispy form %}
-        </table>
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
+        </div>
     </div>
 </div>
-
-
-{% include 'core/forms/form_footer.html' %}
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

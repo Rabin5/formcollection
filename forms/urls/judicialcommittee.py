@@ -1,6 +1,6 @@
 from django.urls import path
 
-from forms.views.judicialcommittee import JudicialCommitteeCreateView, JudicialCommitteeUpdateView
+from forms.views.judicialcommittee_view import JudicialCommitteeCreateView, JudicialCommitteeUpdateView
 
 app_name = 'judicial-com'
 urlpatterns = [

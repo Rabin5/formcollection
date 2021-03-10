@@ -3,6 +3,7 @@ from django.db import transaction
 from django.views.generic import CreateView, UpdateView
 from forms.forms.additionalconvenience import AdditionalConvenienceFormLine, AdditionalConvenienceFormSet
 from forms.models.additionalconvenience import AdditionalConvenienceLine, AdditionalConvenience
+from master_data.models.convenience_type import ConvenienceType
 
 
 class AdditionalConvenienceCreateView(CreateView):
@@ -44,15 +45,37 @@ class AdditionalConvenienceUpdateView(UpdateView):
     form_class = AdditionalConvenienceFormLine
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+        initial_convince = [
+            'थप तलब भत्ता', 'खाजा खर्च', 'यातायात खर्च', 'सन्चार खर्च', 'अन्य'
+        ]
+
+        convince_typess = ConvenienceType.objects.filter(
+            name__in=initial_convince
+        )
+
+        for convince_type in convince_typess:
+            line = {
+                'convince_type': convince_type
+            }
+            initial.append(line)
+        return initial
+
     def get_context_data(self, **kwargs):
         data = super(AdditionalConvenienceUpdateView,
                      self).get_context_data(**kwargs)
+        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = AdditionalConvenienceFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, instance=self.object, initial=initial)
         else:
             data['lines'] = AdditionalConvenienceFormSet(
-                instance=self.object)
+                instance=self.object, initial=initial)
+            data['lines'].extra = len(initial) if initial else 1
         return data
 
     def form_valid(self, form):

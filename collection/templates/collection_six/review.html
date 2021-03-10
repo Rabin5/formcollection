@@ -1,0 +1,135 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load form_extras %}
+{% block title %}
+Review (Chief Minister) - Nepal Audit Management System
+{% endblock title %}
+{% block content %}
+<link src="{% static 'styles/style.css' %}">
+{% load crispy_forms_tags %}
+<div class="content">
+  <div class="section-title">
+    <h6 class="text-dark font-weight-bold">Review</h6>
+    {% if object.reject_msg %}
+    <button class="btn btn-warning" data-toggle="modal" data-target="#reject_msg">View Reject Message</button>
+    {% endif %}
+
+    <a class="btn btn-primary" href="{% url 'collection_six:report-collection_six-office-pdf' object.id %}">डाउनलोड
+      गर्नुहोस्
+    </a>
+  </div>
+
+  {% include 'chief_minister_form_collection/report.html' %}
+
+</div>
+
+<div class='row'>
+  {% if action == 'submit' %}
+  <button class="btn btn-success ml-2" form="form_to_submit" id="submit">Submit</button>
+  {% elif action == 'approve' %}
+  <button class="btn btn-success" id="approve">Approve</button>
+  <button class="btn btn-warning" data-toggle="modal" data-target="#rejectMessageModal">Reject</button>
+  {% endif %}
+</div>
+{% endblock content %}
+
+{% block modal %}
+
+{% if object.reject_msg %}
+<div class="modal fade" id="reject_msg" tabindex="-1" role="dialog" aria-labelledby="reject_msg" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body pt-2">
+        <textarea class="form-control" rows="3" readonly>{{object.reject_msg}}</textarea>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+<div class="modal fade" id="rejectMessageModal" tabindex="-1" role="dialog" aria-labelledby="rejectMessageModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLabel">Reject Message</h6>
+        <a class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body pt-2">
+        <textarea class="form-control" rows="3" id='rejectMessage'></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button id="submit_reject" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock modal %}
+
+{% block extrascripts %}
+<script>
+  var status = 'rejected';
+  var success_url = '' 
+  {% if action == 'submit' %}
+  success_url = "{% url 'collection_six:collection_six_list' %}" 
+  {% else %}
+  success_url = "{% url 'collection_six:collection_six_approve' %}" 
+  {% endif %}
+  $('#approve').on('click', function (event) {
+    status = 'approved';
+    approve_reject()
+  });
+
+  $('#submit').on('click', function (event) {
+    status = 'submitted';
+    approve_reject()
+  });
+
+  $('#submit_reject').on('click', function (event) {
+    approve_reject(rejectMessage = $('#rejectMessage').val())
+  });
+
+  function approve_reject(rejectMessage = '') {
+    var data = {
+      'csrfmiddlewaretoken': '{{ csrf_token }}',
+      'pk': '{{ object.pk }}',
+      'status': status
+    }
+    if (rejectMessage) {
+      data['reject_msg'] = rejectMessage;
+    }
+    $.ajax({
+      url: "{% url 'collection_six:submit_form' form_pk=object.pk %}",
+      method: 'POST',
+      data: data,
+      dataType: 'json',
+
+      success: function (response) {
+        window.location.href = success_url;
+      }
+    })
+  } 
+  {% if object.reject_msg %}
+  $(window).on('load', function () {
+    $('#reject_msg').modal('show');
+  });
+   {% endif %}
+
+</script>
+
+{% endblock extrascripts %}

@@ -11,20 +11,27 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">चौमासिक कार्यक्रम संचालन/पुँजीगत खर्च विवरण</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">चौमासिक कार्यक्रम संचालन/पुँजीगत खर्च विवरण</h6>
 
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>द्रष्टव्य : यो विवरणमा पुँजीगततर्फको रकम समावेशगरी सैद्धान्तिक व्यहोरा लेखापरीक्षण प्रतिवेदनमा समावेश
+                गर्ने । तर कुनै निकायमा यस सम्बन्धी सूचना प्राप्त हुने भएमा यो फाराम ती निकायमा पनि प्रयोग गर्न सकिनेछ।
+            </h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
+        </div>
+    </div>
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
 
 {% block extrascripts %}

@@ -2,18 +2,18 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden,ButtonHolder,Submit
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
 from forms.fields import ModelChoiceFieldWithCreate
-from forms.models.recover_amount import RecoverAmount,RecoverAmountLine
+from forms.models.recover_amount import RecoverAmount, RecoverAmountLine
 
 
 class RecoverAmountLineForm(forms.ModelForm):
     class Meta:
-        model =RecoverAmountLine
-        exclude = ()    
-    
+        model = RecoverAmountLine
+        exclude = ()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -26,9 +26,9 @@ class RecoverAmountLineForm(forms.ModelForm):
 
 
 RecoverAmountFormSet = inlineformset_factory(
-   RecoverAmount,RecoverAmountLine, form=RecoverAmountLineForm,
+    RecoverAmount, RecoverAmountLine, form=RecoverAmountLineForm,
     fields=['contractor', 'income_name', 'prev_year_rem_amt',
-            'this_year_recover_amt', 'cur_rem_amt','rem_recover_amt','total_rem_amt','recover_amount'],
+            'this_year_recover_amt', 'cur_rem_amt', 'rem_recover_amt', 'total_rem_amt', 'recover_amount'],
     extra=1,
     can_delete=True
 )
@@ -37,10 +37,10 @@ RecoverAmountFormSet = inlineformset_factory(
 class RecoverAmountForm(forms.ModelForm):
 
     class Meta:
-        model =RecoverAmount
+        model = RecoverAmount
         fields = '__all__'
         exclude = ('create_user', )
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -50,12 +50,11 @@ class RecoverAmountForm(forms.ModelForm):
             Hidden('next_state', 'next'),
             Row(
                 css_class='form-row'
-                ),
+            ),
             Div(
                 Fieldset('',
-                    Formset('lines')
-                ),
-            ButtonHolder(Submit('submit', 'save')),
-             
-            ) 
+                         Formset('lines')
+                         ),
+
+            )
         )

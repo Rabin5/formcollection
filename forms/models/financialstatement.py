@@ -12,7 +12,7 @@ class FinancialStatement(FormBaseModel):
 
 class FinancialStatementResponsibilityLine(FormLineBaseModel):
     financialstatement_line = models.ForeignKey(
-        FinancialStatement, on_delete=models.CASCADE, related_name='lines_res')
+        FinancialStatement, on_delete=models.CASCADE, related_name='lines')
     desc = models.CharField(max_length=300, verbose_name='विवरण')
     is_true = models.BooleanField(default=False, verbose_name='छ वा छैन')
     deadline = models.DateField(
@@ -99,7 +99,7 @@ class RemainingAdvanceLine(FormLineBaseModel):
     financialstatement_line = models.ForeignKey(
         FinancialStatement,  on_delete=models.CASCADE, related_name='lines_ad')
     remaining_advance = models.CharField(
-        max_length=300, verbose_name='५ पेश्की बाँकी ')
+        max_length=300, verbose_name='पेश्की बाँकी ')
     not_expired = models.CharField(
         max_length=300, verbose_name='म्याद ननाघेको')
     expired = models.CharField(max_length=300, verbose_name='म्याद नाघेको')

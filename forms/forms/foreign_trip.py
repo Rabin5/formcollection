@@ -56,6 +56,6 @@ class ForeignTripForm(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-            
+
             )
         )
