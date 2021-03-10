@@ -26,33 +26,33 @@ class Financial_St_ResCreateView(CreateView):
         if self.request.POST:
             data['lines'] = FinancialStatementResponsibilityLineFormSet(
                 self.request.POST)
-            data['lines1'] = FinancialStatementBankAccountReconciledLineFormSet(
+            data['lines_bankac'] = FinancialStatementBankAccountReconciledLineFormSet(
                 self.request.POST)
-            data['lines2'] = FinancialStatementDeductAmountLineFormSet(
+            data['lines_finalst'] = FinancialStatementDeductAmountLineFormSet(
                 self.request.POST)
-            data['lines3'] = GrantReturnLineFormSet(
+            data['lines_grant'] = GrantReturnLineFormSet(
                 self.request.POST)
-            data['lines4'] = RevenueDistributedLineFormSet(
+            data['lines_renenu'] = RevenueDistributedLineFormSet(
                 self.request.POST)
-            data['lines5'] = RemainingAdvanceLineFormSet(
+            data['lines_ad'] = RemainingAdvanceLineFormSet(
                 self.request.POST)
         else:
             data['lines'] = FinancialStatementResponsibilityLineFormSet()
-            data['lines1'] = FinancialStatementBankAccountReconciledLineFormSet()
-            data['lines2'] = FinancialStatementDeductAmountLineFormSet()
-            data['lines3'] = GrantReturnLineFormSet()
-            data['lines4'] = RevenueDistributedLineFormSet()
-            data['lines5'] = RemainingAdvanceLineFormSet()
+            data['lines_bankac'] = FinancialStatementBankAccountReconciledLineFormSet()
+            data['lines_finalst'] = FinancialStatementDeductAmountLineFormSet()
+            data['lines_grant'] = GrantReturnLineFormSet()
+            data['lines_renenu'] = RevenueDistributedLineFormSet()
+            data['lines_ad'] = RemainingAdvanceLineFormSet()
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
-        lines1 = context['lines1']
-        lines2 = context['lines2']
-        lines3 = context['lines3']
-        lines4 = context['lines4']
-        lines5 = context['lines5']
+        lines1 = context['lines_bankac']
+        lines2 = context['lines_finalst']
+        lines3 = context['lines_grant']
+        lines4 = context['lines_renenu']
+        lines5 = context['lines_ad']
         with transaction.atomic():
             form.instance.create_user = self.request.user
             self.object = form.save()
@@ -87,7 +87,7 @@ class Financial_St_ResUpdateView(UpdateView):
     success_url = None
 
     def _get_initial_data(self):
-        if self.object.lines_ad.all():
+        if self.object.lines.all():
             return None
 
         initial = [
@@ -100,7 +100,7 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial
 
     def _get_initial_data1(self):
-        if self.object.lines_ad.all():
+        if self.object.lines_bankac.all():
             return None
         initial1 = [
             {
@@ -111,7 +111,7 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial1
 
     def _get_initial_data2(self):
-        if self.object.lines_ad.all():
+        if self.object.lines_finalst.all():
             return None
         initial2 = [
             {
@@ -122,7 +122,7 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial2
 
     def _get_initial_data3(self):
-        if self.object.lines_ad.all():
+        if self.object.lines_grant.all():
             return None
         initial3 = [
             {
@@ -133,7 +133,7 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial3
 
     def _get_initial_data4(self):
-        if self.object.lines_ad.all():
+        if self.object.lines_renenu.all():
             return None
         initial4 = [
             {
@@ -170,42 +170,43 @@ class Financial_St_ResUpdateView(UpdateView):
         initial3 = self._get_initial_data3()
         initial4 = self._get_initial_data4()
         initial5 = self._get_initial_data5()
+        print(initial, initial1, initial4)
         if self.request.POST:
             data['lines'] = FinancialStatementResponsibilityLineFormSet(
                 self.request.POST, initial=initial)
-            data['lines1'] = FinancialStatementBankAccountReconciledLineFormSet(
+            data['lines_bankac'] = FinancialStatementBankAccountReconciledLineFormSet(
                 self.request.POST, initial=initial1)
-            data['lines2'] = FinancialStatementDeductAmountLineFormSet(
+            data['lines_finalst'] = FinancialStatementDeductAmountLineFormSet(
                 self.request.POST, initial=initial2)
-            data['lines3'] = GrantReturnLineFormSet(
+            data['lines_grant'] = GrantReturnLineFormSet(
                 self.request.POST, initial=initial3)
-            data['lines4'] = RevenueDistributedLineFormSet(
+            data['lines_renenu'] = RevenueDistributedLineFormSet(
                 self.request.POST, initial=initial4)
-            data['lines5'] = RemainingAdvanceLineFormSet(
+            data['lines_ad'] = RemainingAdvanceLineFormSet(
                 self.request.POST, initial=initial5)
         else:
             data['lines'] = FinancialStatementResponsibilityLineFormSet(
                 instance=self.object, initial=initial)
-            data['lines1'] = FinancialStatementBankAccountReconciledLineFormSet(
+            data['lines_bankac'] = FinancialStatementBankAccountReconciledLineFormSet(
                 instance=self.object, initial=initial1)
-            data['lines2'] = FinancialStatementDeductAmountLineFormSet(
+            data['lines_finalst'] = FinancialStatementDeductAmountLineFormSet(
                 instance=self.object, initial=initial2)
-            data['lines3'] = GrantReturnLineFormSet(
+            data['lines_grant'] = GrantReturnLineFormSet(
                 instance=self.object, initial=initial3)
-            data['lines4'] = RevenueDistributedLineFormSet(
+            data['lines_renenu'] = RevenueDistributedLineFormSet(
                 instance=self.object, initial=initial4)
-            data['lines5'] = RemainingAdvanceLineFormSet(
+            data['lines_ad'] = RemainingAdvanceLineFormSet(
                 instance=self.object, initial=initial5)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         lines = context['lines']
-        lines1 = context['lines1']
-        lines2 = context['lines2']
-        lines3 = context['lines3']
-        lines4 = context['lines4']
-        lines5 = context['lines5']
+        lines1 = context['lines_bankac']
+        lines2 = context['lines_finalst']
+        lines3 = context['lines_grant']
+        lines4 = context['lines_renenu']
+        lines5 = context['lines_ad']
         with transaction.atomic():
             form.instance.create_user = self.request.user
             self.object = form.save()

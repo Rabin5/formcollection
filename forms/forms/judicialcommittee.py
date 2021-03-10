@@ -20,7 +20,7 @@ class JudicialCommitteeForm(forms.ModelForm):
 JudicialCommitteeFormSet = inlineformset_factory(
     JudicialCommittee, JudicialCommitteeLine, form=JudicialCommitteeForm,
     fields=['complaint_type', 'prev_remaining', 'current_addition',
-            'total', 'summed_up', 'remaining', 'desc'],
+            'total', 'summed_up', 'remaining', 'desc', 'judicialcommittee_line'],
     extra=1,
     can_delete=True
 )
@@ -41,8 +41,6 @@ class JudicialCommitteeFormLine(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(

@@ -79,7 +79,7 @@ class UsersConfig(AppConfig):
                 {
                     'name': '(Approve) Collection Six Form Permission',
                     'content_type': content_type,
-                    'codename': 'collection_six_form_approve',
+                    'codename': 'perm_collection_six_form_approve',
                 },
                 {
                     'name': 'Master Data Permission',

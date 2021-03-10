@@ -13,7 +13,7 @@ app_name = 'collection_six'
 urlpatterns = [
     path('create/', CollectionSixFormCreateView.as_view(),
          name='collection_six_create'),
-    path('approve/', ApproveView.as_view(), name='collection_six_approve'),
+    path('approve/', ApproveView.as_view(), name='review_approve_list'),
     path('<int:pk>/update', CollectionSixFormUpdateView.as_view(),
          name='collection_six_update'),
     path('<int:pk>/delete', CollectionSixFormDeleteView.as_view(),
