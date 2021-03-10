@@ -49,6 +49,5 @@ class ConsumercomConsDespFormLine(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
             )
         )

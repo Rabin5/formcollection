@@ -49,6 +49,5 @@ class JudicialCommitteeFormLine(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
             )
         )

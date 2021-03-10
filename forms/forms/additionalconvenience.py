@@ -4,9 +4,14 @@ from django.forms.models import inlineformset_factory
 from crispy_forms.helper import FormHelper
 from forms.custom_layout_object import Formset
 from crispy_forms.layout import Layout, Field, Fieldset, Div, ButtonHolder, Submit, Hidden, Row, Column
+from forms.fields import ModelChoiceFieldWithCreate
+from master_data.models.convenience_type import ConvenienceType
 
 
 class AdditionalConvenienceForm(forms.ModelForm):
+    convenience_type = ModelChoiceFieldWithCreate(queryset=ConvenienceType.objects.all(
+    ), label='सुविधाको किसिम', blank=False, save_to_field='name')
+
     class Meta:
         model = AdditionalConvenienceLine
         exclude = ()
@@ -32,11 +37,8 @@ class AdditionalConvenienceFormLine(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_tag = True
         self.helper.form_id = 'form_to_submit'
-        # self.helper.form_class = 'form-horizontal'
-        # self.helper.label_class = 'col-md-3 create-label'
-        # self.helper.field_class = 'col-md-9'
+        self.helper.form_tag = True
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(Column('body', css_class='col-md-6 mb-0'),
@@ -44,7 +46,6 @@ class AdditionalConvenienceFormLine(forms.ModelForm):
                 css_class='form-row'
                 ),
             Div(Fieldset('', Formset('lines')),
-                ButtonHolder(Submit('submit', 'save')),
                 )
 
         )

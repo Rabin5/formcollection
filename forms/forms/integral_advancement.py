@@ -18,11 +18,6 @@ class IntegralAdvancementLineForm(forms.ModelForm):
         model = IntegralAdvancementLine
         exclude = ()
 
-      
-
-     
-    
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -64,7 +59,5 @@ class IntegralAdvancementForm(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
-
             )
         )

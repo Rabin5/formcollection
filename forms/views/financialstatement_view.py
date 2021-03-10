@@ -86,36 +86,116 @@ class Financial_St_ResUpdateView(UpdateView):
     form_class = FinancialStatementForm
     success_url = None
 
+    def _get_initial_data(self):
+        if self.object.lines_ad.all():
+            return None
+
+        initial = [
+            {
+                'desc': 'जिम्मेवारी फरक परेको',
+                'way_of_looking': 'प्राप्ती र भुक्तानी हिसाबको च र गत बर्षको मौदात भिडाउने',
+
+            },
+        ]
+        return initial
+
+    def _get_initial_data1(self):
+        if self.object.lines_ad.all():
+            return None
+        initial1 = [
+            {
+                'desc': 'बैंक हिसाव मिलान गरेको',
+                'way_of_looking': 'प्राप्ती र भुक्तानी हिसाबको (ङ + च) रकम र अनुसूची २४ अनुसूची २४ मा बैंक फरक रकम देखाएको भए सो समेत बुझ्ने',
+            },
+        ]
+        return initial1
+
+    def _get_initial_data2(self):
+        if self.object.lines_ad.all():
+            return None
+        initial2 = [
+            {
+                'desc': 'कट्टी रकम भुक्तानीरदाखिला गर्न बाकी',
+                'way_of_looking': 'प्राप्ती र भुक्तानी हिसाबको अन्य भुक्तानी घ अन्तर्गत यस्तो रकम राखेको हुनसक्ने',
+            },
+        ]
+        return initial2
+
+    def _get_initial_data3(self):
+        if self.object.lines_ad.all():
+            return None
+        initial3 = [
+            {
+                'desc': 'अनुदान फिर्ता गर्न बाँकी',
+                'way_of_looking': 'सुत्रको वित्तीय विवरणको अनुसूची २१',
+            },
+        ]
+        return initial3
+
+    def _get_initial_data4(self):
+        if self.object.lines_ad.all():
+            return None
+        initial4 = [
+            {
+                'desc': 'राजस्व बाँडफाँड रकम पठाउन बाँकी',
+                'way_of_looking': 'सुत्रको वित्तीय विवरणको अनुसूची २१',
+            },
+        ]
+        return initial4
+
+    def _get_initial_data5(self):
+        if self.object.lines_ad.all():
+            return None
+        initial5 = [
+            {
+                'remaining_advance': 'कर्मचारी',
+                'way_of_looking': 'सुत्रको वित्तीय विवरणको अनुसूची २३',
+            },
+            {
+                'remaining_advance': 'संस्थागत',
+                'way_of_looking': 'सुत्रको वित्तीय विवरणको अनुसूची २३',
+            },
+            {
+                'remaining_advance': 'व्यक्तिगत',
+                'way_of_looking': 'सुत्रको वित्तीय विवरणको अनुसूची २३',
+            },
+        ]
+        return initial5
+
     def get_context_data(self, **kwargs):
-        data = super(Financial_St_ResUpdateView,
-                     self).get_context_data(**kwargs)
-        # import pdb;pdb.set_trace()
+        data = super().get_context_data(**kwargs)
+        initial = self._get_initial_data()
+        initial1 = self._get_initial_data1()
+        initial2 = self._get_initial_data2()
+        initial3 = self._get_initial_data3()
+        initial4 = self._get_initial_data4()
+        initial5 = self._get_initial_data5()
         if self.request.POST:
             data['lines'] = FinancialStatementResponsibilityLineFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, initial=initial)
             data['lines1'] = FinancialStatementBankAccountReconciledLineFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, initial=initial1)
             data['lines2'] = FinancialStatementDeductAmountLineFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, initial=initial2)
             data['lines3'] = GrantReturnLineFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, initial=initial3)
             data['lines4'] = RevenueDistributedLineFormSet(
-                self.request.POST, instance=self.object)
+                self.request.POST, initial=initial4)
             data['lines5'] = RemainingAdvanceLineFormSet(
-                self.request.POST, instance=self.object)
-
-            # data['lines'].full_clean()
+                self.request.POST, initial=initial5)
         else:
             data['lines'] = FinancialStatementResponsibilityLineFormSet(
-                instance=self.object)
+                instance=self.object, initial=initial)
             data['lines1'] = FinancialStatementBankAccountReconciledLineFormSet(
-                instance=self.object)
+                instance=self.object, initial=initial1)
             data['lines2'] = FinancialStatementDeductAmountLineFormSet(
-                instance=self.object)
-            data['lines3'] = GrantReturnLineFormSet(instance=self.object)
+                instance=self.object, initial=initial2)
+            data['lines3'] = GrantReturnLineFormSet(
+                instance=self.object, initial=initial3)
             data['lines4'] = RevenueDistributedLineFormSet(
-                instance=self.object)
-            data['lines5'] = RemainingAdvanceLineFormSet(instance=self.object)
+                instance=self.object, initial=initial4)
+            data['lines5'] = RemainingAdvanceLineFormSet(
+                instance=self.object, initial=initial5)
         return data
 
     def form_valid(self, form):
@@ -126,7 +206,6 @@ class Financial_St_ResUpdateView(UpdateView):
         lines3 = context['lines3']
         lines4 = context['lines4']
         lines5 = context['lines5']
-
         with transaction.atomic():
             form.instance.create_user = self.request.user
             self.object = form.save()
@@ -145,11 +224,11 @@ class Financial_St_ResUpdateView(UpdateView):
                 lines4.save()
                 lines5.save()
             else:
-                return self.form_invalid(form, lines)+self.form_invalid(form, lines1)+self.form_invalid(form, lines2)+self.form_invalid(form, lines3)+self.form_invalid(form, lines4)+self.form_invalid(form, lines5)
+                return self.form_invalid(form, lines)
         return super().form_valid(form)
 
     def form_invalid(self, form, lines=None):
-        return self.render_to_response(self.get_context_data(form=form, lines=lines)+self.get_context_data(form=form, lines=lines1)+self.get_context_data(form=form, lines=lines2)+self.get_context_data(form=form, lines=lines3)+self.get_context_data(form=form, lines=lines4)+self.get_context_data(form=form, lines=lines5))
+        return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
         return reverse_lazy('finalcial_statement:update', kwargs={'pk': self.object.pk})

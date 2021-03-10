@@ -68,13 +68,14 @@ class FundReceiptExpenseUpdateView(UpdateView):
                 else None
             }
             initial.append(line)
+        print(initial[0].get('expense_header'))
         return initial
 
     def get_context_data(self, **kwargs):
         data = super(
             FundReceiptExpenseUpdateView,
             self
-            ).get_context_data(**kwargs)
+        ).get_context_data(**kwargs)
 
         initial = self._get_initial_data()
         if self.request.POST:
@@ -84,7 +85,7 @@ class FundReceiptExpenseUpdateView(UpdateView):
             data['lines'] = FundReceiptExpenseLineFormset(
                 instance=self.object,
                 initial=initial
-                )
+            )
             data['lines'].extra = len(initial) if initial else 1
         return data
 
@@ -107,11 +108,11 @@ class FundReceiptExpenseUpdateView(UpdateView):
             self.get_context_data(
                 form=form,
                 lines=lines
-                )
             )
+        )
 
     def get_success_url(self):
         return reverse_lazy(
             'fund_receipt_expense:update',
             kwargs={'pk': self.object.pk}
-            )
+        )

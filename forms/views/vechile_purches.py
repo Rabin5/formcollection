@@ -1,6 +1,7 @@
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
+from master_data.models.vehicle import Vehicle
 
 from forms.models.vechile_purches import (
     VehiclePurchase,
@@ -54,6 +55,27 @@ class VehiclePurchaseUpdateView(UpdateView):
     template_name = "forms/vechile_purches/update.html"
     form_class = VehiclePurchaseFormLine
     success_url = None
+
+    def _get_initial_data(self):
+        if self.object.lines.all():
+            return None
+
+        initial = []
+        initial_vechile = [
+            'जीप', 'डोजर', 'लोडर', 'जे.सी.बि.',
+            'अन्य'
+        ]
+
+        vechicles = Vehicle.objects.filter(
+            name__in=initial_vechile
+        )
+
+        for vechicle in vechicles:
+            line = {
+                'vechicle': vechicle
+            }
+            initial.append(line)
+        return initial
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)

@@ -6,8 +6,9 @@ from django import forms
 from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
 from master_data.widgets import NepaliDateInput
-from forms.fields import ModelChoiceFieldWithCreate, NepaliDateField
+
 from forms.custom_layout_object import Formset as Formsett
+from forms.fields import ModelChoiceFieldWithCreate, NepaliDateField
 from forms.models.financialstatement import (
     FinancialStatement, FinancialStatementBankAccountReconciledLine,
     FinancialStatementDeductAmountLine, FinancialStatementResponsibilityLine,
@@ -17,17 +18,31 @@ from forms.models.financialstatement import (
 class FinancialStatementResponsibilityLineForm(forms.ModelForm):
     start_date = NepaliDateField(label='गतको बर्षको अन्तिम मौदात')
     deadline = NepaliDateField(label='यस बर्षको सुरु मौदात')
+    desc = ModelChoiceFieldWithCreate(queryset=FinancialStatementResponsibilityLine.objects.all(
+    ), label='विवरण', blank=False, save_to_field='desc')
 
     class Meta:
         model = FinancialStatementResponsibilityLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(FinancialStatementResponsibilityLineForm,
+              self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            # to make way of loking field read only
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['way_of_looking'].widget.attrs['readonly'] = True
+
+    def clean_way_of_looking(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.way_of_looking
+        else:
+            return self.cleaned_data['way_of_looking']
 
 
 FinancialStatementResponsibilityLineFormSet = inlineformset_factory(
@@ -40,17 +55,31 @@ FinancialStatementResponsibilityLineFormSet = inlineformset_factory(
 
 
 class FinancialStatementBankAccountReconciledLineForm(forms.ModelForm):
+    desc = ModelChoiceFieldWithCreate(queryset=FinancialStatementBankAccountReconciledLine.objects.all(
+    ), label='विवरण', blank=False, save_to_field='desc')
 
     class Meta:
         model = FinancialStatementBankAccountReconciledLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(FinancialStatementBankAccountReconciledLineForm,
+              self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            # to make way of loking field read only
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['way_of_looking'].widget.attrs['readonly'] = True
+
+    def clean_way_of_looking(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.way_of_looking
+        else:
+            return self.cleaned_data['way_of_looking']
 
 
 FinancialStatementBankAccountReconciledLineFormSet = inlineformset_factory(
@@ -63,17 +92,31 @@ FinancialStatementBankAccountReconciledLineFormSet = inlineformset_factory(
 
 
 class FinancialStatementDeductAmountLineForm(forms.ModelForm):
+    desc = ModelChoiceFieldWithCreate(queryset=FinancialStatementDeductAmountLine.objects.all(
+    ), label='विवरण', blank=False, save_to_field='desc')
 
     class Meta:
         model = FinancialStatementDeductAmountLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(FinancialStatementDeductAmountLineForm,
+              self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+        # to make way of loking field read only
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['way_of_looking'].widget.attrs['readonly'] = True
+
+    def clean_way_of_looking(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.way_of_looking
+        else:
+            return self.cleaned_data['way_of_looking']
 
 
 FinancialStatementDeductAmountLineFormSet = inlineformset_factory(
@@ -86,17 +129,30 @@ FinancialStatementDeductAmountLineFormSet = inlineformset_factory(
 
 
 class GrantReturnLineForm(forms.ModelForm):
+    desc = ModelChoiceFieldWithCreate(queryset=GrantReturnLine.objects.all(
+    ), label='विवरण', blank=False, save_to_field='desc')
 
     class Meta:
         model = GrantReturnLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(GrantReturnLineForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+  # to make way of loking field read only
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['way_of_looking'].widget.attrs['readonly'] = True
+
+    def clean_way_of_looking(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.way_of_looking
+        else:
+            return self.cleaned_data['way_of_looking']
 
 
 GrantReturnLineFormSet = inlineformset_factory(
@@ -109,17 +165,31 @@ GrantReturnLineFormSet = inlineformset_factory(
 
 
 class RevenueDistributedLineForm(forms.ModelForm):
+    desc = ModelChoiceFieldWithCreate(queryset=RevenueDistributedLine.objects.all(
+    ), label='विवरण', blank=False, save_to_field='desc')
 
     class Meta:
         model = RevenueDistributedLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(RevenueDistributedLineForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+  # to make way of loking field read only
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['way_of_looking'].widget.attrs['readonly'] = True
+
+    def clean_way_of_looking(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.way_of_looking
+        else:
+            return self.cleaned_data['way_of_looking']
 
 
 RevenueDistributedLineFormSet = inlineformset_factory(
@@ -133,17 +203,30 @@ RevenueDistributedLineFormSet = inlineformset_factory(
 
 
 class RemainingAdvanceLineForm(forms.ModelForm):
+    remaining_advance = ModelChoiceFieldWithCreate(queryset=RemainingAdvanceLine.objects.all(
+    ), label='पेश्की बाँकी', blank=False, save_to_field='desc')
 
     class Meta:
         model = RemainingAdvanceLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(RemainingAdvanceLineForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+    # to make way of loking field read only
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            self.fields['way_of_looking'].widget.attrs['readonly'] = True
+
+    def clean_way_of_looking(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.way_of_looking
+        else:
+            return self.cleaned_data['way_of_looking']
 
 
 RemainingAdvanceLineFormSet = inlineformset_factory(
@@ -170,8 +253,6 @@ class FinancialStatementForm(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(
@@ -189,6 +270,5 @@ class FinancialStatementForm(forms.ModelForm):
                     'lines4'), id='5th_fieldset'),
                 Fieldset('पेश्की बाँकी', Formsett('lines5'),
                          id='6th_fieldset'),
-                ButtonHolder(Submit('submit', 'save')),
             )
         )

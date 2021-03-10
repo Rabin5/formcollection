@@ -43,8 +43,35 @@ from forms.forms.relief_procure_dist import ReliefProcureDistributionForm
 from forms.forms.ward_relief_forms import WardReliefProcureDistributionForm
 from forms.forms.received_relief_forms import ReceivedReliefDetailForm
 from forms.forms.relief_distribution_forms import ReliefDistributionExpenseForm
-
-
+from forms.forms.procurement_auditor import ProcurementAuditorForm
+from forms.forms.incomplete_construction_work import IncompleteConstructionWorkForm
+from forms.forms.quarterly_program import QuarterlyProgramForm
+from forms.forms.drp_expense import DPRExpenseForm
+from forms.forms.yearly_target import YearlyTargetForm
+from forms.forms.service_flow import ServiceFlowFormLine
+from forms.forms.house_map_construction import HouseMapConstructionForm
+from forms.forms.vechile_purches import VehiclePurchaseFormLine
+from forms.forms.additionalconvenience import AdditionalConvenienceFormLine
+from forms.forms.conditionalgrant import ConditionalGrantFormLine
+from forms.forms.designation_vacancy import DesignationVacancyForm
+from forms.forms.conditionalgrant import ConditionalGrantFormLine
+from forms.forms.designation_vacancy import DesignationVacancyForm
+from forms.forms.contract_desc import ContractDescForm
+from forms.forms.recover_amount import RecoverAmountForm
+from forms.forms.expense_desc import ExpenseDescForm
+from forms.forms.integral_advancement import IntegralAdvancementForm
+from forms.forms.teacherdesgination import TeacherDesginationLineForm
+from forms.forms.judicialcommittee import JudicialCommitteeFormLine
+from forms.forms.consumercommitteecons_desc import ConsumercomConsDespFormLine
+from forms.forms.financialstatement import FinancialStatementForm
+from forms.forms.budgetsubapproval import BudgetSubmitApprovalFormLine
+from forms.forms.procedure_guide import ProcedureGuideForm
+from forms.forms.expenditure_exceeding_allocation import ExpenditureExceedingAllocationForm
+from forms.forms.sectoral_budget import SectoralBudgetForm
+from forms.forms.foreign_trip import ForeignTripForm
+from forms.forms.expenditure_detail import ExpenditureDetailForm
+from forms.forms.revenue_distribution import RevenueDistributionForm
+from forms.forms.state_partnership_program import StatePartnershipProgramForm
 from forms import models
 
 from forms.views import (
@@ -76,7 +103,35 @@ from forms.views import (
     reliefprocurementdetail,
     relief_distribution_views,
     received_relief_views,
-    ward_relief_views
+    ward_relief_views,
+
+    procurement_auditor_views,
+    incomplete_construction_work_views,
+    quarterly_program_views,
+    drp_expense_views,
+    yearly_target_views,
+    service_flow,
+    house_map_construction,
+    vechile_purches,
+    additionalconvenience,
+    conditionalgrant,
+    designation_vacancy_views,
+    contract_desc_views,
+    recover_amount_views,
+    expense_desc_views,
+    integral_advancement_views,
+    teacherdesignation_view,
+    judicialcommittee_view,
+    consumercommitteecons_desc_view,
+    financialstatement_view,
+    budgetsubapproval_view,
+    procedure_guide_views,
+    expenditure_exceeding_allocation_views,
+    sectoral_budget_views,
+    foreign_trip_views,
+    expenditure_detail_views,
+    revenue_distribution_views,
+    state_partnership_program_views,
 )
 
 # Asign form, model, form collection field to route view name
@@ -360,5 +415,194 @@ ROUTE_LINK = {
         'update_view': relief_distribution_views.
         ReliefDistributionExpenseUpdateView,
     },
+    'procurement_auditor': {
+        'title': 'बोलपत्र, सिलबन्दी दरभाउपत्र बेगर काम टुक्रा पारी खरिद गरेको विवरण',
+        'form': ProcurementAuditorForm,
+        'model': models.ProcurementAuditor,
+        'form_field': 'procurement_auditor',
+        'update_view': procurement_auditor_views.ProcurementAuditorUpdateView,
+    },
+    'incomplete_construction_work': {
+        'title': 'अधुरो निर्माण कार्यको विवरण',
+        'form': IncompleteConstructionWorkForm,
+        'model': models.IncompleteConstructionWork,
+        'form_field': 'incomplete_construction_work',
+        'update_view': incomplete_construction_work_views.IncompleteConstructionWorkUpdateView,
+    },
+    'quarterly_program': {
+        'title': 'चौमासिक कार्यक्रम सञ्चालन÷पुँजीगत खर्च विवरण',
+        'form': QuarterlyProgramForm,
+        'model': models.QuarterlyProgram,
+        'form_field': 'quarterly_program',
+        'update_view': quarterly_program_views.QuarterlyProgramUpdateView},
+    'dpr_expense': {
+        'title': 'डिपिआर खर्च सम्बन्धी विवरण',
+        'form': DPRExpenseForm,
+        'model': models.DPRExpense,
+        'form_field': 'dpr_expense',
+        'update_view': drp_expense_views.DPRExpenseUpdateView,
+    },
+    'yearly_target': {
+        'title': 'वार्षिक लक्ष्य तथा प्रगति',
+        'form': YearlyTargetForm,
+        'model': models.YearlyTarget,
+        'form_field': 'yearly_target',
+        'update_view': yearly_target_views.YearlyTargetUpdateView,
+    },
+    'service_flow': {
+        'title': 'सेवा प्रवाह सम्वन्धी विवरण (स्थानीय तहको लागि)',
+        'form': ServiceFlowFormLine,
+        'model': models.ServiceFlow,
+        'form_field': 'service_flow',
+        'update_view': service_flow.ServiceFlowUpdateView,
+    },
+    'house_map_construction': {
+        'title': 'घर नक्शापास र निर्माण कार्य सम्पन्न सम्वन्धी विवरण (स्थानीय तहको लागि)',
+        'form': HouseMapConstructionForm,
+        'model': models.HouseMapConstruction,
+        'form_field': 'house_map_construction',
+        'update_view': house_map_construction.HouseMapConstructionUpdateView,
+    },
+    'vehicle_purchase': {
+        'title': 'सवारी साधन खरिदको विवरण (स्थानीय तहको लागि)',
+        'form': VehiclePurchaseFormLine,
+        'model': models.VehiclePurchase,
+        'form_field': 'vehicle_purchase',
+        'update_view': vechile_purches.VehiclePurchaseUpdateView,
+    },
+    'additional_convenience': {
+        'title': 'थप सुविधाको विवरण (स्थानीय तह र प्रदेश तहको लागि)',
+        'form': AdditionalConvenienceFormLine,
+        'model': models.AdditionalConvenience,
+        'form_field': 'additional_convenience',
+        'update_view': additionalconvenience.AdditionalConvenienceUpdateView,
+    },
+    'conditional_grant': {
+        'title': 'सशर्त अनुदानतर्फ रकम फ्रिजको विवरण (स्थानीय तहको लागि)',
+        'form': ConditionalGrantFormLine,
+        'model': models.ConditionalGrant,
+        'form_field': 'conditional_grant',
+        'update_view': conditionalgrant.ConditionalGrantUpdateView,
+    },
+    'designation_vacancy': {
+        'title': 'दरवन्दी र पदपूर्तिको विवरण(स्थानीय तह र प्रदेश तहको लागि)',
+        'form': DesignationVacancyForm,
+        'model': models.DesignationVacancy,
+        'form_field': 'designation_vacancy',
+        'update_view': designation_vacancy_views.DesignationVacancyUpdateView,
+    },
+    'contract_desc': {
+        'title': 'कर, दस्तुर, सेवा शुल्क र भाडाको ठेक्का सम्बन्धी विवरण',
+        'form': ContractDescForm,
+        'model': models.ContractDesc,
+        'form_field': 'contract_desc',
+        'update_view': contract_desc_views.ContractDescUpdateView,
+    },
+    'recover_amount': {
+        'title': 'असुल गर्न बाँकी बक्यौता सम्बन्धी विवरण',
+        'form': RecoverAmountForm,
+        'model': models.RecoverAmount,
+        'form_field': 'recover_amount',
+        'update_view': recover_amount_views.RecoverAmountUpdateView,
+    },
+    'expense_desc': {
+        'title': 'आर्थिक सहायता, भैपरी आउने र प्रशासनिक खर्चको विवरण',
+        'form': ExpenseDescForm,
+        'model': models.ExpenseDesc,
+        'form_field': 'expense_desc',
+        'update_view': expense_desc_views.ExpenseDescUpdateView,
+    },
+    'integral_advancement': {
+        'title': 'आ.व २०७६।७७ सम्मको पेश्कीको एकीकृत विवरण',
+        'form': IntegralAdvancementForm,
+        'model': models.IntegralAdvancement,
+        'form_field': 'integral_advancement',
+        'update_view': integral_advancement_views.IntegralAdvancementUpdateView,
+    },
+    'teacher_designation': {
+        'title': 'शिक्षक दरबन्दी र पदपूर्ति विवरण',
+        'form': TeacherDesginationLineForm,
+        'model': models.teacherdesignation.TeacherDesignation,
+        'form_field': 'teacher_designation',
+        'update_view': teacherdesignation_view.TeacherDesginationUpdateView,
+    },
+    'judicial_committee': {
+        'title': 'न्यायीक समिती (उजुरी र फछयौट) विवरण',
+        'form': JudicialCommitteeFormLine,
+        'model': models.judicialcommittee.JudicialCommittee,
+        'form_field': 'judicial_committee',
+        'update_view': judicialcommittee_view.JudicialCommitteeUpdateView,
+    },
+    'consumer_committee_construction_description': {
+        'title': ' कुल निर्माण कार्य मध्ये उपभोक्ता समिती र निर्माण व्यवसायीबाट भएको कार्य सम्बन्धि विवरण',
+        'form': ConsumercomConsDespFormLine,
+        'model': models.consumercommitteecons_desc.ConsumerCommitteeConstructionDescription,
+        'form_field': 'consumer_committee_construction_description',
+        'update_view': consumercommitteecons_desc_view.ConsumercomConsDespUpdateView,
+    },
+    'financial_statement': {
+        'title': ' सुत्रबाट प्राप्त हुने वित्तीय विवरण र अनुसूचीबाट देखिएका व्यहोरा सम्बन्धी विवरण',
+        'form': FinancialStatementForm,
+        'model': models.financialstatement.FinancialStatement,
+        'form_field': 'financial_statement',
+        'update_view': financialstatement_view.Financial_St_ResUpdateView,
+    },
+    'budget_submit_approval': {
+        'title': 'बजेट पेश र स्वीकृति',
+        'form': BudgetSubmitApprovalFormLine,
+        'model': models.budgetsubapproval.BudgetSubmitApproval,
+        'form_field': 'budget_submit_approval',
+        'update_view': budgetsubapproval_view.BudgetSubmitApprovalUpdateView,
+    },
+    'procedure_guide': {
+        'title': 'कानून कार्यविधि निर्देशिका एवं नर्म्स तयारी सम्बन्धी विवरण',
+        'form': ProcedureGuideForm,
+        'model': models.ProcedureGuide,
+        'form_field': 'procedure_guide',
+        'update_view': procedure_guide_views.ProcedureGuideUpdateView,
+    },
+    'expenditure_exceeding_allocation': {
+        'title': 'विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण',
+        'form': ExpenditureExceedingAllocationForm,
+        'model': models.ExpenditureExceedingAllocation,
+        'form_field': 'expenditure_exceeding_allocation',
+        'update_view': expenditure_exceeding_allocation_views.ExpenditureExceedingAllocationUpdateView,
+    },
+    'sectoral_budget': {
+        'title': ' क्षेत्रगत बजेट र खर्च सम्बन्धी विवरण',
+        'form': SectoralBudgetForm,
+        'model': models.SectoralBudget,
+        'form_field': 'sectoral_budget',
+        'update_view': sectoral_budget_views.SectoralBudgetUpdateView,
+    },
+    'foreign_trip': {
+        'title': 'बैदेशिक भ्रमण सम्बन्धी विवरण',
+        'form': ForeignTripForm,
+        'model': models.ForeignTrip,
+        'form_field': 'foreign_trip',
+        'update_view': foreign_trip_views.ForeignTripUpdateView,
+    },
+    'expenditure_detail': {
+        'title': 'अनुदान प्राप्ति, खर्च र बाँकीको विवरण',
+        'form': ExpenditureDetailForm,
+        'model': models.ExpenditureDetail,
+        'form_field': 'expenditure_detail',
+        'update_view': expenditure_detail_views.ExpenditureDetailUpdateView,
+    },
+    'revenue_distribution': {
+        'title': 'राजश्व बाँडफाँड सम्बन्धी विवरण',
+        'form': RevenueDistributionForm,
+        'model': models.RevenueDistribution,
+        'form_field': 'revenue_distribution',
+        'update_view': expenditure_detail_views.ExpenditureDetailUpdateView,
+    },
+    'state_partnership_program': {
+        'title': ' प्रदेश र स्यानीय पूर्वाधार विकास साझेदारी कार्यक्रम सम्बन्धी विवरण',
+        'form': StatePartnershipProgramForm,
+        'model': models.StatePartnershipProgram,
+        'form_field': 'state_partnership_program',
+        'update_view': state_partnership_program_views.StatePartnershipProgramtUpdateView,
+    },
+
 
 }

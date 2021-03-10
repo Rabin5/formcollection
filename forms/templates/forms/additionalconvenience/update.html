@@ -3,31 +3,31 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-जोखिम भत्ता सम्बन्धी बिबरण - Nepal Audit Management System
+थप सुविधाको विवरण (स्थानीय तह र प्रदेश तहको लागि) - Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
-जोखिम भत्ता सम्बन्धी बिबरण
+थप सुविधाको विवरण (स्थानीय तह र प्रदेश तहको लागि)
 {% endblock page_title %}
 
 {% block page_actions %}
-    <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">जोखिम भत्ता सम्बन्धी बिबरण</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">थप सुविधाको विवरण (स्थानीय तह र प्रदेश तहको लागि)</h6>
 
-        {% crispy form %}
-        <div class="card-warning mt-3">
-            <div class="align-vertical justify-content-between">
-                <h6>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</h6>
-                <a href="javascript:void(0)" class="ic-close close-card"></a>
-            </div>
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
         </div>
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    </div>
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}

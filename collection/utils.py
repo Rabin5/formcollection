@@ -132,6 +132,35 @@ LOCAL_LEVEL_STATE = [
     (19, 'relief_distribution_expense'),
     (20, 'action_plan_implementation')
 ]
+COLLECTION_SIX_STATE = [
+    (0, 'procurement_auditor'),
+    (1, 'incomplete_construction_work'),
+    (2, 'quarterly_program'),
+    (3, 'dpr_expense'),
+    (4, 'yearly_target'),
+    (5, 'service_flow'),
+    (6, 'house_map_construction'),
+    (7, 'vehicle_purchase'),
+    (8, 'additional_convenience'),
+    (9, 'conditional_grant'),
+    (10, 'designation_vacancy'),
+    (11, 'contract_desc'),
+    (12, 'recover_amount'),
+    (13, 'expense_desc'),
+    (14, 'integral_advancement'),
+    (15, 'teacher_designation'),
+    (16, 'judicial_committee'),
+    (17, 'consumer_committee_construction_description'),
+    (18, 'financial_statement'),
+    (19, 'budget_submit_approval'),
+    (20, 'procedure_guide'),
+    (21, 'expenditure_exceeding_allocation'),
+    (22, 'sectoral_budget'),
+    (23, 'foreign_trip'),
+    (24, 'expenditure_detail'),
+    (25, 'revenue_distribution'),
+    (26, 'state_partnership_program')
+]
 
 
 def num_to_devanagari(num):
@@ -190,18 +219,17 @@ def find_empty_fields(object, app_name, url_name, ROUTE_LINK, STATE):
     return payload
 
 
-
-
 def __remove_none_fields(fields: dict) -> dict:
     '''
         Returns:
             {'province': '1', 'district': '2'}
     '''
-    return {k: v for k, v in fields.items() if v is not None and v }
+    return {k: v for k, v in fields.items() if v is not None and v}
 
-def filter_helper(objects: QuerySet, fields: dict=None):
+
+def filter_helper(objects: QuerySet, fields: dict = None):
     query_list = __remove_none_fields(fields)
-    
+
     objects = objects.filter(
         Q(**query_list)
     )

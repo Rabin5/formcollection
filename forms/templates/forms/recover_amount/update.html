@@ -11,20 +11,27 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">असुल गर्न बाँकी बक्यौता सम्बन्धी विवरण</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">असुल गर्न बाँकी बक्यौता सम्बन्धी विवरण</h6>
 
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>द्रष्टव्यः १(सम्भव भए कुन कुन सालको कोसँग कति रकम असुल गर्नबाँकी छ। विस्तृत विवरण लिनुपर्ने ।<br>
+                २. यो विवरण कर बहाल आदि रकम असुल हुन बाँकीको लागि तयार गर्नुपर्ने।<br>
+                ३. के बापत असुल हुन बाँकी हो कैफियत जनाउने। </h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
+        </div>
+    </div>
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
 
 {% block extrascripts %}
