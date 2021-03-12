@@ -87,8 +87,8 @@ class Financial_St_ResUpdateView(UpdateView):
     success_url = None
 
     def _get_initial_data(self):
-        if self.object.lines.all():
-            return None
+        # if self.object.lines.all():
+        #     return None
 
         initial = [
             {
@@ -100,8 +100,8 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial
 
     def _get_initial_data1(self):
-        if self.object.lines_bankac.all():
-            return None
+        # if self.object.lines_bankac.all():
+        #     return None
         initial1 = [
             {
                 'desc': 'बैंक हिसाव मिलान गरेको',
@@ -111,8 +111,8 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial1
 
     def _get_initial_data2(self):
-        if self.object.lines_finalst.all():
-            return None
+        # if self.object.lines_finalst.all():
+        #     return None
         initial2 = [
             {
                 'desc': 'कट्टी रकम भुक्तानीरदाखिला गर्न बाकी',
@@ -122,8 +122,8 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial2
 
     def _get_initial_data3(self):
-        if self.object.lines_grant.all():
-            return None
+        # if self.object.lines_grant.all():
+        #     return None
         initial3 = [
             {
                 'desc': 'अनुदान फिर्ता गर्न बाँकी',
@@ -133,8 +133,8 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial3
 
     def _get_initial_data4(self):
-        if self.object.lines_renenu.all():
-            return None
+        # if self.object.lines_renenu.all():
+        #     return None
         initial4 = [
             {
                 'desc': 'राजस्व बाँडफाँड रकम पठाउन बाँकी',
@@ -144,8 +144,8 @@ class Financial_St_ResUpdateView(UpdateView):
         return initial4
 
     def _get_initial_data5(self):
-        if self.object.lines_ad.all():
-            return None
+        # if self.object.lines_ad.all():
+        #     return None
         initial5 = [
             {
                 'remaining_advance': 'कर्मचारी',
@@ -170,7 +170,6 @@ class Financial_St_ResUpdateView(UpdateView):
         initial3 = self._get_initial_data3()
         initial4 = self._get_initial_data4()
         initial5 = self._get_initial_data5()
-        print(initial, initial1, initial4)
         if self.request.POST:
             data['lines'] = FinancialStatementResponsibilityLineFormSet(
                 self.request.POST, initial=initial)

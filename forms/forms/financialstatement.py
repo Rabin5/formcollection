@@ -31,14 +31,12 @@ class FinancialStatementResponsibilityLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
             # to make way of loking field read only
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['way_of_looking'].widget.attrs['readonly'] = True
+            self.fields['desc'].widget.attrs['readonly'] = True
 
     def clean_way_of_looking(self):
         instance = getattr(self, 'instance', None)
@@ -71,14 +69,12 @@ class FinancialStatementBankAccountReconciledLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
             # to make way of loking field read only
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['way_of_looking'].widget.attrs['readonly'] = True
+            self.fields['desc'].widget.attrs['readonly'] = True
 
     def clean_way_of_looking(self):
         instance = getattr(self, 'instance', None)
@@ -111,14 +107,12 @@ class FinancialStatementDeductAmountLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
         # to make way of loking field read only
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['way_of_looking'].widget.attrs['readonly'] = True
+            self.fields['desc'].widget.attrs['readonly'] = True
 
     def clean_way_of_looking(self):
         instance = getattr(self, 'instance', None)
@@ -150,14 +144,12 @@ class GrantReturnLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
   # to make way of loking field read only
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['way_of_looking'].widget.attrs['readonly'] = True
+            self.fields['desc'].widget.attrs['readonly'] = True
 
     def clean_way_of_looking(self):
         instance = getattr(self, 'instance', None)
@@ -189,15 +181,13 @@ class RevenueDistributedLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
 
   # to make way of loking field read only
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['way_of_looking'].widget.attrs['readonly'] = True
+            self.fields['desc'].widget.attrs['readonly'] = True
 
     def clean_way_of_looking(self):
         instance = getattr(self, 'instance', None)
@@ -220,7 +210,7 @@ RevenueDistributedLineFormSet = inlineformset_factory(
 class RemainingAdvanceLineForm(forms.ModelForm):
     # remaining_advance = ModelChoiceFieldWithCreate(queryset=RemainingAdvanceLine.objects.all(
     # ), label='पेश्की बाँकी', blank=False, save_to_field='desc')
-
+    remaining_advance = forms.ChoiceField(choices=[('कर्मचारी','कर्मचारी'), ('संस्थागत','संस्थागत'), ('व्यक्तिगत','व्यक्तिगत')], required=False, label='पेश्की बाँकी')
     class Meta:
         model = RemainingAdvanceLine
         exclude = ()
@@ -230,14 +220,12 @@ class RemainingAdvanceLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
     # to make way of loking field read only
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['way_of_looking'].widget.attrs['readonly'] = True
+            self.fields['remaining_advance'].widget.attrs['readonly'] = True
 
     def clean_way_of_looking(self):
         instance = getattr(self, 'instance', None)
