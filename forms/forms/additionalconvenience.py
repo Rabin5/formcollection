@@ -26,7 +26,8 @@ AdditionalConvenienceFormSet = inlineformset_factory(
     AdditionalConvenience, AdditionalConvenienceLine, form=AdditionalConvenienceForm,
     fields=[
         'convenience_type', 'conveniece_staff_count', 'convenience_officer_count',
-        'yearly_expense', 'remarks'], extra=1, can_delete=True)
+        'yearly_expense', 'remarks', 'additionalconvenction_line'],
+    extra=1, can_delete=True)
 
 
 class AdditionalConvenienceFormLine(forms.ModelForm):

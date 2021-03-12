@@ -30,7 +30,7 @@ class ServiceFlowForm(forms.ModelForm):
 ServiceFlowLineFormSet = inlineformset_factory(
     ServiceFlow, ServiceFlowLine, form=ServiceFlowForm,
     fields=['description', 'application_count', 'recommendation_count',
-            'remarks'],
+            'remarks', 'serice_flow'],
     extra=1,
     can_delete=True
 )
@@ -51,8 +51,6 @@ class ServiceFlowFormLine(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(

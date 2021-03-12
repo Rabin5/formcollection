@@ -27,7 +27,7 @@ ConditionalGrantFormSet = inlineformset_factory(
     ConditionalGrant, ConditionalGrantLine, form=ConditionalGrantForm,
     fields=[
         'grant_type', 'total_grant', 'expense',
-        'freeze_amount', 'remarks'],
+        'freeze_amount', 'remarks', 'condtionalgrant_line'],
     widgets={
 
     },
@@ -47,8 +47,7 @@ class ConditionalGrantFormLine(forms.ModelForm):
         self.helper.form_id = 'form_to_submit'
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
-            Row(Column('body', css_class='col-md-6 mb-0'),
-                Column('state', css_class='col-md-6 mb-0'),
+            Row(
                 css_class='form-row'
                 ),
             Div(Fieldset('', Formset('lines')),
