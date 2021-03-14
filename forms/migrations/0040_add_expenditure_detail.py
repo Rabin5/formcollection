@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('master_data', '__latest__'),
+        ('master_data', '0002_employertype_industry_trainingcenter'),
         # migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('forms', '0039_financialstatement'),
     ]

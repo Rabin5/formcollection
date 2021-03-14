@@ -7,38 +7,37 @@ from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, Butt
 
 from forms.custom_layout_object import Formset
 from forms.fields import ModelChoiceFieldWithCreate
-from forms.models.service_flow import ServiceFlow, ServiceFlowLine
+from forms.models.admin_operative_expense import AdminOperativeExpense, AdminOperativeExpenseLine
 
 
-class ServiceFlowForm(forms.ModelForm):
-    # office_bearer = ModelChoiceFieldWithCreate(queryset=OfficeBearer.objects.all(
-    # ), label='जोखिम भत्ता पाउने पदाधिकारी', blank=False, save_to_field='title')
-    # allowance_type = ModelChoiceFieldWithCreate(queryset=AllowanceType.objects.all(
-    # ), label='भत्ताको प्रकार', blank=False, save_to_field='name')
-
+class AdminOperativeExpenseLineForm(forms.ModelForm):
+    
     class Meta:
-        model = ServiceFlowLine
+        model = AdminOperativeExpenseLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
+        for _, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
 
-ServiceFlowLineFormSet = inlineformset_factory(
-    ServiceFlow, ServiceFlowLine, form=ServiceFlowForm,
-    fields=['description', 'application_count', 'recommendation_count',
-            'remarks'],
+AdminOperativeExpenseLineFormSet = inlineformset_factory(
+    AdminOperativeExpense, AdminOperativeExpenseLine, form=AdminOperativeExpenseLineForm,
+    fields=['designation', 'monthly_salary_expense', 'total_expense_pre_previous_fy',
+            'total_expense_previous_fy', 'total_expense_current_fy',
+            'admin_op_expense_line'],
     extra=1,
-    can_delete=True
+    can_delete=False
 )
 
 
-class ServiceFlowFormLine(forms.ModelForm):
+class AdminOperativeExpenseForm(forms.ModelForm):
 
     class Meta:
-        model = ServiceFlow
+        model = AdminOperativeExpense
         fields = '__all__'
         exclude = ('create_user', )
 
@@ -55,6 +54,7 @@ class ServiceFlowFormLine(forms.ModelForm):
             Div(
                 Fieldset('', Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
+                Column('amt_operational_expenses', css_class='col-md-6 mb-0'),
+                # ButtonHolder(Submit('submit', 'save')),
             )
         )

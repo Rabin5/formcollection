@@ -35,7 +35,7 @@ class CaseInvestigationTracingCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:case_investigation_tracing-create')
+        return reverse_lazy('case_investigation_forms:conditional-grant-create')
 
 
 class CaseInvestigationTracingUpdateView(UpdateView):
@@ -72,4 +72,4 @@ class CaseInvestigationTracingUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:case_investigation_tracing-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('case_investigation_forms:conditional-grant-update', kwargs={'pk': self.object.pk})

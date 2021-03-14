@@ -28,7 +28,7 @@ class NotifyEmployeeLineForm(forms.ModelForm):
 
 NotifyEmployeeFormSet = inlineformset_factory(
     NotifyEmployee, NotifyEmployeeLine, form=NotifyEmployeeLineForm,
-    fields=['employer_name_address', 'employer_type', 'num_workers_provided'
+    fields=['employer_name_address', 'employer_type', 'num_workers_provided',
             'employment_provided_total_days', 'employment_provided_days_per_person', 'notify_employee_line'],
     extra=1,
     can_delete=True

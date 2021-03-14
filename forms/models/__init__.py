@@ -57,3 +57,5 @@ from .registered_unemployment import *
 from .employment_assessment import *
 from .detail_to_employer import *
 from .notify_employee import *
+from .transparency_detail import *
+from .admin_operative_expense import *

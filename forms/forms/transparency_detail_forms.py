@@ -1,18 +1,19 @@
 from django import forms
+from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden,ButtonHolder,Submit
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
 from forms.fields import ModelChoiceFieldWithCreate
-from forms.models.employment_assessment import EmploymentAssessment, EmploymentAssessmentLine
+from forms.models.transparency_detail import TransparencyDetail, TransparencyDetailLine
 
 
-class EmploymentAssessmentLineForm(forms.ModelForm):
-
+class TransparencyDetailLineForm(forms.ModelForm):
+    
     class Meta:
-        model = EmploymentAssessmentLine
+        model = TransparencyDetailLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
@@ -20,25 +21,22 @@ class EmploymentAssessmentLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            if field.widget.input_type == 'select':
-                field.widget.attrs.update({'class': 'select_class'})
-            else:
-                field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control'
 
 
-EmploymentAssessmentFormSet = inlineformset_factory(
-    EmploymentAssessment, EmploymentAssessmentLine, form=EmploymentAssessmentLineForm,
-    fields=['fiscal_year', 'available_employment', 'employment_sector',
-            'emp_assessment_line'],
+TransparencyDetailLineFormSet = inlineformset_factory(
+    TransparencyDetail, TransparencyDetailLine, form=TransparencyDetailLineForm,
+    fields=['details', 'is_true', 'remarks',
+            'transparency_detail_line'],
     extra=1,
-    can_delete=True
+    can_delete=False
 )
 
 
-class EmploymentAssessmentForm(forms.ModelForm):
+class TransparencyDetailForm(forms.ModelForm):
 
     class Meta:
-        model = EmploymentAssessment
+        model = TransparencyDetail
         fields = '__all__'
         exclude = ('create_user', )
 
@@ -53,10 +51,8 @@ class EmploymentAssessmentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                Fieldset('',
-                         Formset('lines')
+                Fieldset('', Formset('lines')
                          ),
-            ButtonHolder(Submit('submit', 'save')),
-            
+                # ButtonHolder(Submit('submit', 'save')),
             )
         )

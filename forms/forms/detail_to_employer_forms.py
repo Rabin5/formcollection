@@ -30,7 +30,7 @@ class DetailToEmployerLineForm(forms.ModelForm):
 
 DetailToEmployerFormSet = inlineformset_factory(
     DetailToEmployer, DetailToEmployerLine, form=DetailToEmployerLineForm,
-    fields=['employer_name_address', 'employer_type', 'employer_notified_date'
+    fields=['employer_name_address', 'employer_type', 'employer_notified_date',
             'detail_to_emp_line'],
     extra=1,
     can_delete=True
