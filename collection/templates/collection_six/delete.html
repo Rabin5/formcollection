@@ -7,11 +7,13 @@
   </a>
 </div>
 <div class="modal-body pt-2">
-  <form id="industry_delete" method="post" action="{% url 'md-industry:delete' industry.pk %}">
+  <form id="collection_six_delete" method="post"
+    action="{% url 'collection_six:collection_six_delete' collections_six_delete.pk %}">
     {% csrf_token %}
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-  <button id="btn_industry_delete" form="industry_delete" type="submit" class="btn btn-danger">Delete</button>
+  <button id="btn_chief_minister_delete" form="collection_six_delete" type="submit"
+    class="btn btn-danger">Delete</button>
 </div>

@@ -2,7 +2,7 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden,ButtonHolder,Submit
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
 from forms.fields import ModelChoiceFieldWithCreate
@@ -20,7 +20,7 @@ class ProcedureGuideLineForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         for _, field in self.fields.items():
-            field.widget.attrs['class']='form-control'
+            field.widget.attrs['class'] = 'form-control'
             # if field.widget.input_type == 'select':
             #     field.widget.attrs.update({'class': 'select_class'})
             # else:
@@ -57,7 +57,6 @@ class ProcedureGuideForm(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-            ButtonHolder(Submit('submit', 'save')),
-            
+
             )
         )

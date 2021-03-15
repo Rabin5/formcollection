@@ -3,167 +3,31 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-{% extends 'core/base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-
-{% block title %}
-विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
- - Nepal Audit Management System
+विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण- Nepal Audit Management System
 {% endblock title %}
 
 {% block page_title %}
 विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
-
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण</h6>
 
-</h6>
-
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
-{% endblock content %}
-
-{% block extrascripts %}
-<script>
-    $(".select_class").select2({
-        tags: true
-    })
-
-</script>
-{% endblock extrascripts %}
-
- - Nepal Audit Management System
-{% endblock title %}
-
-{% block page_title %}
-{% extends 'core/base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-
-{% block title %}
-विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
- - Nepal Audit Management System
-{% endblock title %}
-
-{% block page_title %}
-विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
-
-{% endblock page_title %}
-
-{% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला ।</h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
+        </div>
     </div>
-{% endblock page_actions %}
-
-{% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
-</h6>
-
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
-
-{% block extrascripts %}
-<script>
-    $(".select_class").select2({
-        tags: true
-    })
-
-</script>
-{% endblock extrascripts %}
-
-
-{% endblock page_title %}
-
-{% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
-{% endblock page_actions %}
-
-{% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">{% extends 'core/base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-
-{% block title %}
-विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
- - Nepal Audit Management System
-{% endblock title %}
-
-{% block page_title %}
-विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
-
-{% endblock page_title %}
-
-{% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
-{% endblock page_actions %}
-
-{% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">विनियोजनभन्दा बढी खर्च सम्बन्धी विवरण
-
-</h6>
-
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
-{% endblock content %}
-
-{% block extrascripts %}
-<script>
-    $(".select_class").select2({
-        tags: true
-    })
-
-</script>
-{% endblock extrascripts %}
-
-</h6>
-
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
-{% endblock content %}
-
-{% block extrascripts %}
-<script>
-    $(".select_class").select2({
-        tags: true
-    })
-
-</script>
-{% endblock extrascripts %}

@@ -1,0 +1,324 @@
+{% load static %}
+{% load form_extras %}
+{% if 'chief_minister_forms:review' not in request.resolver_match.view_name %}
+<link rel="stylesheet" href="{% static 'styles/print.css' %}">
+{% endif %}
+<div class="card card-body">
+  <div class="row">
+
+    <div class="col-lg-9 text-center mx-auto">
+      <h6 class="font-weight-normal">कोभिड-१९ विशेष लेखापरीक्षणको सिलसिलामा मुख्यमन्त्री तथा मन्त्रीपरिषदको कार्यालयले
+        माग गरेको सूचना एवं जानकारी उपलव्ध गराउने प्रयोजनको लागि तयार गरेको प्रश्नावली एवं विवरण</h6>
+      <p class="text-secondary">(यी फारामहरु २०७६।७७ को लेखापरीक्षणको लागि तर्जुमा गरिएकोले विवरण उपलव्ध गराउँदा सो
+        बर्षको मात्र उपलव्ध गराउनु हुने छ। प्राप्त सूचनाहरु लेखापरीक्षणको प्रयोजनको लागि मात्र प्रयोग गरिने छ।)</p>
+    </div>
+  </div>
+
+  <div class="card-warning p-2 mt-3">
+    <h6>रकम सबै रु हजारमा छ </h6>
+  </div>
+
+  {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}
+  {% if empty_fields %}
+  <div id="accordion" class="accordion mt-5 mx-n3 alert alert-danger" role="alert">
+    निम्न फारमहरु भरिएका छैनन्
+    {% for val in empty_fields %}
+    <p>
+      {{ val.order_no }} ) {{ val.title }}
+      {% if action == 'submit' %}
+      <a class="text-info" href={{ val.url }}><i class="ic-edit"></i></a>
+      {% endif %}
+    </p>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endif %}
+
+  <div id="accordion" class="accordion mt-5 mx-n3">
+    <div class="accordion-item">
+      {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}
+      <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+        class="hasSub">
+        1) महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य
+      </a>
+      {% else %}
+      <h6>1) महामारी फैलनसक्ने अबस्थालाई मध्यनजर राख्दै प्रदेश सरकारबाट सम्पादन गरिएको पूर्बतयारी सम्बन्धी कार्य</h6>
+      {% endif %}
+
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="mt-2 mb-3">
+          <p>निकाय नाम: <span>{{ object.epidemic_outbreak_prep.body }}</span></p>
+          <p>आर्थिक बर्ष : <span>{{ object.epidemic_outbreak_prep.fiscal_year }}</span></p>
+          {% if action == 'submit' %}
+          <p align="right"><a class="text-info"
+              href="{% url 'collection_six:collection_six_update' object.pk %}?form=epidemic_outbreak_prep"><i
+                class="ic-edit"></i></a></p>
+          {% endif %}
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  पूर्व तयारी सम्बन्धी गर्नुपर्ने कार्य
+                </th>
+                <th>
+                  सम्पादन भएका प्रमुख क्रियाकलापहरु
+                </th>
+                <th>
+                  खर्च रकम
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object.epidemic_outbreak_prep.lines.all  %}
+              <tr>
+                <td>{{ obj.preparation_work_to_do }}</td>
+                <td>{{ obj.major_activities }}</td>
+                <td>{{ obj.amt_expense }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}
+      <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"
+        class="hasSub">
+        2) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च
+        सम्बन्धी बिबरण
+      </a>
+      {% else %}
+      <h6>2) कोभिड-१९ रोकथाम नियन्त्रण र व्यवस्थापनमा २०७७ असार मसान्त र २०७७ आश्विन मसान्तसम्मको प्राप्त रकम र खर्च
+        सम्बन्धी बिबरण</h6>
+      {% endif %}
+
+
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="mt-2 mb-3">
+          <p>निकाय नाम: <span>{{ object.fund_receipt_expense.body }}</span></p>
+          <p>आर्थिक बर्ष : <span>{{ object.fund_receipt_expense.fiscal_year }}</span></p>
+          {% if action == 'submit' %}
+          <p align="right"><a class="text-info"
+              href="{% url 'collection_six:collection_six_update' object.pk %}?form=fund_receipt_expense"><i
+                class="ic-edit"></i></a></p>
+          {% endif %}
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>बजेट/आम्दानीको स्रोत</th>
+                <th>२०७७ असार मसान्तसम्म प्राप्त रकम</th>
+                <th>२०७७ आश्विन मसान्तसम्म प्राप्त रकम</th>
+                <th>खर्च शीर्षक</th>
+                <th>२०७७ असार मसान्तसम्म खर्च रकम</th>
+                <th>२०७७ आश्विन मसान्तसम्म खर्च रकम</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object.fund_receipt_expense.lines.all  %}
+              <tr>
+                <td>{{ obj.budget_source }}</td>
+                <td>{{ obj.fy_start_received_amt }}</td>
+                <td>{{ obj.fy_end_received_amt }}</td>
+                <td>{{ obj.expense_header }}</td>
+                <td>{{ obj.fy_start_expense_amt }}</td>
+                <td>{{ obj.fy_end_expense_amt }}</td>
+              </tr>
+              {% endfor %}
+
+              <tr>
+                <th>जम्मा</th>
+                <th>{% calculate_total_chief_minister object 'fund_receipt_expense' 'lines' 'fy_start_received_amt' %}
+                </th>
+                <th>{% calculate_total_chief_minister object 'fund_receipt_expense' 'lines' 'fy_end_received_amt' %}
+                </th>
+                <th>जम्मा</th>
+                <th>{% calculate_total_chief_minister object 'fund_receipt_expense' 'lines' 'fy_start_expense_amt' %}
+                </th>
+                <th>{% calculate_total_chief_minister object 'fund_receipt_expense' 'lines' 'fy_end_expense_amt' %}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note">
+          रष्ट्रव्यः १= माथिको तालिका भर्दा २०७६।७७ बेग्लै र २०७७ आश्विन मसान्तसम्मको प्राप्त र खर्च रकममा २०७६।७७ मा
+          प्राप्त र खर्च भएको रकम समेत समावेश गर्नुहोला ।
+          २. मन्त्रालय आफैले खर्च नगरी अन्य निकायलाई निकासा दिएको भएका सो विवरण खुलाउनु होला ।
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}
+      <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"
+        class="hasSub">
+        3) जोखिम भत्ता सम्बन्धी बिबरण (मन्त्रालयले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)
+      </a>
+      {% else %}
+      <h6>3) जोखिम भत्ता सम्बन्धी बिबरण (मन्त्रालयले जोखिम भत्ता वितरण गरेको भए २०७६।७७ मा खर्च भएको रकम खुलाउने)</h6>
+      {% endif %}
+
+
+      <div id="collapseThree" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="mt-2 mb-3">
+          <p>निकाय नाम: <span>{{ object.risk_allowance.body }}</span></p>
+          <p>आर्थिक बर्ष : <span>{{ object.risk_allowance.fiscal_year }}</span></p>
+          {% if action == 'submit' %}
+          <p align="right"><a class="text-info"
+              href="{% url 'collection_six:collection_six_update' object.pk %}?form=risk_allowance"><i
+                class="ic-edit"></i></a></p>
+          {% endif %}
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              {% with start_index=1 %}
+              <tr class="tr-review-head">
+                <th>क्रस</th>
+                <th>खर्च गर्ने निकायको नाम</th>
+                <th>जोखिम भत्ता पाउने पदाधिकारी</th>
+                <th>कर्मचारी वा पदाधिकारी संख्या</th>
+                <th>भत्ताको प्रकार</th>
+                <th>२०७६।७७ सम्म खर्च रकम</th>
+                <th>कैफियत</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object.risk_allowance.lines.all  %}
+              <tr>
+                <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                <td>{{ obj.gov_body }}</td>
+                <td>{{ obj.office_bearer }}</td>
+                <td>{{ obj.bearer_num }}</td>
+                <td>{{ obj.allowance_type }}</td>
+                <td>{{ obj.expense_amount }}</td>
+                <td>{{ obj.remarks }}</td>
+              </tr>
+              {% endfor %}
+              {% endwith %}
+
+              <tr>
+                <th></th>
+                <th></th>
+                <th>जम्मा</th>
+                <th>{% calculate_total_chief_minister object 'risk_allowance' 'lines' 'bearer_num' %}</th>
+                <th></th>
+                <th>{% calculate_total_chief_minister object 'risk_allowance' 'lines' 'expense_amount' %}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">नोटः प्रशासनिक कर्मचारीलाई समेत जोखिम भत्ता दिएको भए सोको कारण र रकम कैफियतमा उल्लेख गरिदिनुहोला
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}
+      <a data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne"
+        class="hasSub">
+        4) संस्थागत व्यवस्था- कोभिड-१९ को रोकथाम, नियन्त्रण तथा व्यवस्थापनमा प्रदेश सरकारको भूमिका महत्वपूर्ण रहँदै आएको
+        छ । उल्लिखित भूमिका निर्वाहको लागि तहमा प्रदेश सरकार अन्तर्गत गठन भएको PCCMC लगायतका संस्थागत व्यवस्था र ती
+        संरचनबाट सम्पादित कार्यको सम्बन्धमा उल्लेख गर्नुहोस् ।
+      </a>
+      {% else %}
+      <h6>4) संस्थागत व्यवस्था- कोभिड-१९ को रोकथाम, नियन्त्रण तथा व्यवस्थापनमा प्रदेश सरकारको भूमिका महत्वपूर्ण रहँदै
+        आएको छ । उल्लिखित भूमिका निर्वाहको लागि तहमा प्रदेश सरकार अन्तर्गत गठन भएको PCCMC लगायतका संस्थागत व्यवस्था र ती
+        संरचनबाट सम्पादित कार्यको सम्बन्धमा उल्लेख गर्नुहोस् ।</h6>
+      {% endif %}
+
+      <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        {% if action == 'submit' %}
+        <p align="right"><a class="text-info"
+            href="{% url 'collection_six:collection_six_update' object.pk %}?form=province_institute_management"><i
+              class="ic-edit"></i></a></p>
+        {% endif %}
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              {% with start_index=1 %}
+              <tr class="tr-review-head">
+                <th>क्रस</th>
+                <th>प्रदेश तहमा गठन भएका समितिको नाम</th>
+                <th>समितिले सम्पादन गरेको प्रमुख कार्यहरु</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object.province_institute_management.lines.all  %}
+              <tr>
+                <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                <td>{{ obj.committee }}</td>
+                <td>{{ obj.major_works }}</td>
+              </tr>
+              {% endfor %}
+              {% endwith %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      {% if 'chief_minister_forms:review' in request.resolver_match.view_name %}
+      <a data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne"
+        class="hasSub">
+        5) कार्ययोजना कार्यान्वयन- कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा स्वदेश आउनैपर्ने
+        अवस्थामा रहेका नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्वन्धी आदेश, २०७७ को लागि तयार पारिएको नेपाली
+        नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै
+        प्रदेश सरकारको समेत जिम्मेवारी हुने सहयोग गर्नुपर्ने गरी तोकेको छ । यस सम्बन्धमा प्रदेश सरकारबाट भएका क्रियाकलाप
+        र यसमा भएको खर्च खुलाउनु होस् ।
+      </a>
+      {% else %}
+      <h6>5) कार्ययोजना कार्यान्वयन- कोभिड-१९ को विश्वव्यापी संक्रमणको कारणबाट उत्पन्न असहज परिस्थितिमा स्वदेश आउनैपर्ने
+        अवस्थामा रहेका नेपाली नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्वन्धी आदेश, २०७७ को लागि तयार पारिएको नेपाली
+        नागरिकलाई स्वदेश आउन सहजीकरण गर्ने सम्बन्धी कार्ययोजना २०७७ बमोजिम देहायका कार्यहरु अन्य सरकारी निकायको साथै
+        प्रदेश सरकारको समेत जिम्मेवारी हुने सहयोग गर्नुपर्ने गरी तोकेको छ । यस सम्बन्धमा प्रदेश सरकारबाट भएका क्रियाकलाप
+        र यसमा भएको खर्च खुलाउनु होस् ।</h6>
+      {% endif %}
+
+
+      <div id="collapseFive" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        {% if action == 'submit' %}
+        <p align="right"><a class="text-info"
+            href="{% url 'collection_six:collection_six_update' object.pk %}?form=action_plan_implementation"><i
+              class="ic-edit"></i></a></p>
+        {% endif %}
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              {% with start_index=1 %}
+              <tr class="tr-review-head">
+                <th>क्रस</th>
+                <th>क्रियाकलाप</th>
+                <th>प्रदेश सरकारबाट भएको कार्य</th>
+                <th>उक्त कार्यमा भएको खर्च</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object.action_plan_implementation.lines.all  %}
+              <tr>
+                <td class="cell-num">{{ forloop.counter0|add:start_index|num_to_devanagari_temp }}</td>
+                <td>{{ obj.activity }}</td>
+                <td>{{ obj.work_done }}</td>
+                <td>{{ obj.work_expense }}</td>
+              </tr>
+              {% endfor %}
+              {% endwith %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

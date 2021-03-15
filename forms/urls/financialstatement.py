@@ -1,5 +1,5 @@
 from django.urls import path
-from forms.views.financialstatement import (
+from forms.views.financialstatement_view import (
     Financial_St_ResCreateView, Financial_St_ResUpdateView)
 app_name = 'finalcial_statement'
 urlpatterns = [

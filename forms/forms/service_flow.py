@@ -11,11 +11,6 @@ from forms.models.service_flow import ServiceFlow, ServiceFlowLine
 
 
 class ServiceFlowForm(forms.ModelForm):
-    pass
-    # office_bearer = ModelChoiceFieldWithCreate(queryset=OfficeBearer.objects.all(
-    # ), label='जोखिम भत्ता पाउने पदाधिकारी', blank=False, save_to_field='title')
-    # allowance_type = ModelChoiceFieldWithCreate(queryset=AllowanceType.objects.all(
-    # ), label='भत्ताको प्रकार', blank=False, save_to_field='name')
 
     class Meta:
         model = ServiceFlowLine
@@ -25,12 +20,17 @@ class ServiceFlowForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = False
+        for _, field in self.fields.items():
+            if field.widget.input_type == 'select':
+                field.widget.attrs.update({'class': 'select_class'})
+            else:
+                field.widget.attrs['class'] = 'form-control'
 
 
 ServiceFlowLineFormSet = inlineformset_factory(
     ServiceFlow, ServiceFlowLine, form=ServiceFlowForm,
     fields=['description', 'application_count', 'recommendation_count',
-            'remarks'],
+            'remarks', 'serice_flow'],
     extra=1,
     can_delete=True
 )
@@ -51,13 +51,10 @@ class ServiceFlowFormLine(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(
                 Fieldset('', Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
             )
         )

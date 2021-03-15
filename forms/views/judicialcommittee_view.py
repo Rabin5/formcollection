@@ -3,23 +3,22 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from master_data.models.government import GovernmentBody
-from forms.models import RegisteredUnemployment
-from forms.forms.registered_unemployment_forms import RegisteredUnemploymentForm, RegisteredUnemploymentFormSet
+from forms.forms.judicialcommittee import JudicialCommitteeFormLine, JudicialCommitteeFormSet
+from forms.models.judicialcommittee import JudicialCommittee
 
 
-class RegisteredUnemploymentCreateView(CreateView):
-    model = RegisteredUnemployment
-    template_name = "forms/registered_unemployment/create.html"
-    form_class = RegisteredUnemploymentForm
+class JudicialCommitteeCreateView(CreateView):
+    model = JudicialCommittee
+    template_name = "forms/judicialcommittee/create.html"
+    form_class = JudicialCommitteeFormLine
     success_url = None
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = RegisteredUnemploymentFormSet(self.request.POST)
+            data['lines'] = JudicialCommitteeFormSet(self.request.POST)
         else:
-            data['lines'] = RegisteredUnemploymentFormSet()
+            data['lines'] = JudicialCommitteeFormSet()
         return data
 
     def form_valid(self, form):
@@ -31,30 +30,33 @@ class RegisteredUnemploymentCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-
         collection = context.get('collection')
         if collection:
-            collection.registered_unemployment = self.object
+            collection.med_purchase_desc = self.object
             collection.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('registered_unemployment-forms:create')
+        return reverse_lazy('judicial-com:create')
 
 
-class RegisteredUnemploymentUpdateView(UpdateView):
-    model = RegisteredUnemployment
-    template_name = "forms/registered_unemployment/update.html"
-    form_class = RegisteredUnemploymentForm
+class JudicialCommitteeUpdateView(UpdateView):
+    model = JudicialCommittee
+    template_name = "forms/judicialcommittee/update.html"
+    form_class = JudicialCommitteeFormLine
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
+        data = super(JudicialCommitteeUpdateView,
+                     self).get_context_data(**kwargs)
+        # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = RegisteredUnemploymentFormSet(
+            data['lines'] = JudicialCommitteeFormSet(
                 self.request.POST, instance=self.object)
+            # data['lines'].full_clean()
         else:
-            data['lines'] = RegisteredUnemploymentFormSet(instance=self.object)
+            data['lines'] = JudicialCommitteeFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -75,4 +77,4 @@ class RegisteredUnemploymentUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('registered_unemployment-forms:update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('judicial-com:update', kwargs={'pk': self.object.pk})

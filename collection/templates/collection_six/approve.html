@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+मुख्यमंत्री कार्यालय Approve - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+मुख्यमंत्री कार्यालय Approve
+{% endblock page_title %}
+
+{% block page_actions %}
+
+{% endblock page_actions %}
+
+{% block content %}
+<table class="table table-striped table-borderless">
+  <thead>
+    <tr>
+      <th>#.</th>
+      <th>प्रयोगकर्ता</th>
+      <th>state</th>
+      <th>status</th>
+      <th>कार्य</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for val in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ val.user }}</td>
+      <td>{{ val.state }}</td>
+      <td>{{ val.status }}</td>
+      {% if val.status not in 'APPROVED, REJECTED' %}
+      <td>
+        <a href="{% url 'collection_six:review' val.id 'approve' %}">
+          समीक्षा गर्नुहोस्
+        </a>
+      </td>
+      {% else %}
+      <td>
+        <a href="{% url 'collection_six:review' val.id 'submitted' %}">
+          <i class="ic-visible"></i>
+        </a>
+      </td>
+      {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
+
+{% block modal %}
+
+{% include 'filter_modal.html' %}
+
+{% endblock %}

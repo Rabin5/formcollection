@@ -11,20 +11,27 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">अधुरो निर्माण कार्यको विवरण</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">अधुरो निर्माण कार्यको विवरण</h6>
 
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>द्रष्टव्यः गत विगत वर्ष शुरु भई सम्पन्न भै सक्नेु पर्ने निर्माण कार्यमा अपेक्षित प्रगति नभएको, निर्माण
+                कार्य स्थगित रहेको अवस्थामा सो निर्माण कार्य सम्बन्धी मूख्य व्यहोरा र हालसम्मको खर्च एकिन गरी
+                प्रतिवेदनमा समावेश गर्ने। </h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
+        </div>
+    </div>
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
 
 {% block extrascripts %}

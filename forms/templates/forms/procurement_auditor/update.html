@@ -11,20 +11,26 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">बोलपत्र, सिलबन्दी दरभाउपत्र बगैर काम टुत्रा पारी खरिद गरेको विवरण</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">बोलपत्र, सिलबन्दी दरभाउपत्र बगैर काम टुत्रा पारी खरिद गरेको विवरण</h6>
 
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    {% crispy form %}
+    <div class="card-warning mt-3">
+        <div class="align-vertical justify-content-between">
+            <h6>द्रष्टव्यः बोलपत्रबाट खरिद गर्नुपर्नेमा टुुक्रा पारी खरिद गरेको भएमा यस सम्बन्धी व्यहोरा प्रारम्भिक
+                प्रतिवेदनमा समावेश गर्ने ।</h6>
+            <a href="javascript:void(0)" class="ic-close close-card"></a>
+        </div>
+    </div>
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
 
 {% block extrascripts %}

@@ -11,20 +11,20 @@
 {% endblock page_title %}
 
 {% block page_actions %}
-        <div class="align-vertical">
-        {% include 'master_data/partials/go_back.html' %}
-    </div>
+<div class="align-vertical">
+    {% include 'master_data/partials/go_back.html' %}
+</div>
 {% endblock page_actions %}
 
 {% block content %}
-    {% include 'core/forms/progress_bar.html' %}
-    <div class="card card-body mt-3">
-        <h6 class="heading-01 mb-3">वार्षिक लक्ष्य तथा प्रगति</h6>
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">वार्षिक लक्ष्य तथा प्रगति</h6>
 
-        {% crispy form %}
-        
-      </div>
-    {% include 'core/forms/form_footer.html' with pk=pk %}
+    {% crispy form %}
+
+</div>
+{% include 'core/forms/form_footer.html' with pk=pk %}
 {% endblock content %}
 
 {% block extrascripts %}
@@ -32,6 +32,16 @@
     $(".select_class").select2({
         tags: true
     })
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("textarea").attr({
+            "rows": "2",
+            "cols": "30",
+            'class': 'textarea_id'
+        });
+    });
 
 </script>
 {% endblock extrascripts %}

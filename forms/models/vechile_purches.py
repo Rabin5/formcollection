@@ -16,7 +16,7 @@ class VehiclePurchaseLine(FormLineBaseModel):
     purchased_amount = models.IntegerField(verbose_name='खरिद संख्या')
     price = models.FloatField(verbose_name='मूल्य')
     body = models.ForeignKey(
-        GovernmentBody, on_delete=models.CASCADE, verbose_name='विप्रयोग गर्नेपदाधिकारी र्सस्थावरण')
+        GovernmentBody, on_delete=models.CASCADE, verbose_name='प्रयोग गर्नेपदाधिकारी र्सस्था')
     remarks = models.CharField(max_length=300, verbose_name='कैफियत')
 
     def __str__(self):

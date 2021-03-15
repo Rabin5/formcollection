@@ -53,54 +53,18 @@ class ServiceFlowUpdateView(UpdateView):
     form_class = ServiceFlowFormLine
     success_url = None
 
-    # def _get_initial_data(self):
-    #     if self.object.lines.all():
-    #         return None
-
-    #     initial = []
-    #     bearers = ServiceFlow.objects.all()[:5]
-
-    #     for bearer in bearers:
-    #         line = {
-    #             'office_bearer': bearer
-    #         }
-    #         initial.append(line)
-
-    #     return initial
-    def _get_initial_data(self):
-        if self.object.lines.all():
-            return None
-
-        initial = []
-        initial_service = [
-            'नागरिकता सिफारिस', 'घरबाटो सिफारिस', 'नाता प्रमाणित', 'जन्म', 'मृत्यु दर्ता', 'अन्य'
-        ]
-
-        service = ServiceFlow.objects.filter(
-            name__in=initial_service
-        )
-
-        for service in service:
-            line = {
-                'description': service
-            }
-            initial.append(line)
-        return initial
-
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
+        data = super(ServiceFlowUpdateView, self).get_context_data(**kwargs)
 
-        initial = self._get_initial_data()
         if self.request.POST:
             data['lines'] = ServiceFlowLineFormSet(
-                self.request.POST, instance=self.object,
-                initial=initial
+                self.request.POST, instance=self.object
             )
         else:
             data['lines'] = ServiceFlowLineFormSet(
-                instance=self.object, initial=initial
+                instance=self.object
             )
-            data['lines'].extra = len(initial) if initial else 1
+
         return data
 
     def form_valid(self, form):

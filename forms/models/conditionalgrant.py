@@ -9,7 +9,7 @@ class ConditionalGrant(FormBaseModel):
 
 class ConditionalGrantLine(FormLineBaseModel):
     condtionalgrant_line = models.ForeignKey(
-        ConditionalGrant, on_delete=models.CASCADE, related_name='line')
+        ConditionalGrant, on_delete=models.CASCADE, related_name='lines')
     grant_type = models.ForeignKey(
         GrantType, on_delete=models.CASCADE, verbose_name='अनुदानको किसिम')
     total_grant = models.IntegerField(verbose_name='जम्मा अनुदान')

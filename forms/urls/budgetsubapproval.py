@@ -1,6 +1,6 @@
 from django.urls import path
 
-from forms.views.budgetsubapproval import BudgetSubmitApprovalCreateView, BudgetSubmitApprovalUpdateView
+from forms.views.budgetsubapproval_view import BudgetSubmitApprovalCreateView, BudgetSubmitApprovalUpdateView
 
 app_name = 'budget_apprval'
 urlpatterns = [

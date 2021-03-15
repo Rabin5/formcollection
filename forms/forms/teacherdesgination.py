@@ -22,7 +22,7 @@ class TeacherDesginationForm(forms.ModelForm):
 TeacherDesginationFormSet = inlineformset_factory(
     TeacherDesignation, TeacherDesignationLine, form=TeacherDesginationForm,
     fields=['school', 'num_vacancy', 'num_vacancy_filled',
-            'num_temp_filled', 'num_student'],
+            'num_temp_filled', 'num_student', 'teacherdesignation_line'],
     extra=1,
     can_delete=True
 
@@ -43,8 +43,6 @@ class TeacherDesginationLineForm(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(

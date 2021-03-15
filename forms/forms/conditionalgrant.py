@@ -27,13 +27,17 @@ ConditionalGrantFormSet = inlineformset_factory(
     ConditionalGrant, ConditionalGrantLine, form=ConditionalGrantForm,
     fields=[
         'grant_type', 'total_grant', 'expense',
-        'freeze_amount', 'remarks'], extra=1, can_delete=True)
+        'freeze_amount', 'remarks', 'condtionalgrant_line'],
+    widgets={
+
+    },
+    extra=1, can_delete=True)
 
 
 class ConditionalGrantFormLine(forms.ModelForm):
-
     class Meta:
         model = ConditionalGrant
+        fields = '__all__'
         exclude = ('create_user',)
 
     def __init__(self, *args, **kwargs):
@@ -41,17 +45,12 @@ class ConditionalGrantFormLine(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_id = 'form_to_submit'
-        # self.helper.form_class = 'form-horizontal'
-        # self.helper.label_class = 'col-md-3 create-label'
-        # self.helper.field_class = 'col-md-9'
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
-            Row(Column('body', css_class='col-md-6 mb-0'),
-                Column('state', css_class='col-md-6 mb-0'),
+            Row(
                 css_class='form-row'
                 ),
             Div(Fieldset('', Formset('lines')),
-                ButtonHolder(Submit('submit', 'save')),
                 )
 
         )
