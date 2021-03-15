@@ -59,3 +59,6 @@ from .detail_to_employer import *
 from .notify_employee import *
 from .transparency_detail import *
 from .admin_operative_expense import *
+from .meeting_detail import *
+from .program_monitoring import *
+from .contact_details import *

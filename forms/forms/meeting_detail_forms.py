@@ -1,19 +1,19 @@
 from django import forms
-from django.forms.forms import Form
 from django.forms.models import inlineformset_factory
 
+import nepali_datetime
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
-from forms.fields import ModelChoiceFieldWithCreate
-from forms.models.admin_operative_expense import AdminOperativeExpense, AdminOperativeExpenseLine
+from master_data.widgets import NepaliDateInput
+from forms.models.meeting_detail import MeetingDetail, MeetingDetailLine
 
 
-class AdminOperativeExpenseLineForm(forms.ModelForm):
-    
+class MeetingDetailLineForm(forms.ModelForm):
+
     class Meta:
-        model = AdminOperativeExpenseLine
+        model = MeetingDetailLine
         exclude = ()
 
     def __init__(self, *args, **kwargs):
@@ -24,20 +24,22 @@ class AdminOperativeExpenseLineForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
     
 
-AdminOperativeExpenseLineFormSet = inlineformset_factory(
-    AdminOperativeExpense, AdminOperativeExpenseLine, form=AdminOperativeExpenseLineForm,
-    fields=['designation', 'monthly_salary_expense', 'total_expense_pre_previous_fy',
-            'total_expense_previous_fy', 'total_expense_current_fy',
-            'admin_op_expense_line'],
+MeetingDetailLineFormSet = inlineformset_factory(
+    MeetingDetail, MeetingDetailLine, form=MeetingDetailLineForm,
+    fields=['fiscal_year', 'meeting_date', 'meeting_conclusion', 
+    'meeting_detail_line'],
     extra=1,
-    can_delete=False
+    can_delete=True,
+    widgets = {
+        'meeting_date': NepaliDateInput(),
+    },
 )
 
 
-class AdminOperativeExpenseForm(forms.ModelForm):
+class MeetingDetailForm(forms.ModelForm):
 
     class Meta:
-        model = AdminOperativeExpense
+        model = MeetingDetail
         fields = '__all__'
         exclude = ('create_user', )
 
@@ -52,9 +54,10 @@ class AdminOperativeExpenseForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                Fieldset('', Formset('lines')
+                Fieldset('',
+                         Formset('lines')
                          ),
-                Column('amt_operational_expenses', css_class='col-md-6 mb-0'),
-                # ButtonHolder(Submit('submit', 'save')),
+
             )
+
         )
