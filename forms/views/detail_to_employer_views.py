@@ -1,22 +1,25 @@
-from django.urls import reverse_lazy
 from django.db import transaction
+from django.forms import inlineformset_factory
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from forms.forms.case_investigation_tracing_forms import CaseInvestigationTracingForm,CaseInvestigationLineForm,CaseInvestigationTracingFormSet
-from forms.models.case_investigation_tracing import CaseInvestigationTracing
+from master_data.models.government import GovernmentBody
+from forms.models import DetailToEmployer
+from forms.forms.detail_to_employer_forms import DetailToEmployerForm, DetailToEmployerFormSet
 
 
-class CaseInvestigationTracingCreateView(CreateView):
-    model = CaseInvestigationTracing
-    template_name = 'forms/case_investigation_tracing/create.html'
-    form_class =CaseInvestigationTracingForm
+class DetailToEmployerCreateView(CreateView):
+    model = DetailToEmployer
+    template_name = "forms/detail_to_employer/create.html"
+    form_class = DetailToEmployerForm
     success_url = None
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] =CaseInvestigationTracingFormSet(self.request.POST)
+            data['lines'] = DetailToEmployerFormSet(self.request.POST)
         else:
-            data['lines'] = CaseInvestigationTracingFormSet()
+            data['lines'] = DetailToEmployerFormSet()
         return data
 
     def form_valid(self, form):
@@ -28,30 +31,30 @@ class CaseInvestigationTracingCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
+
         collection = context.get('collection')
         if collection:
-            collection.case_investigation_tracing = self.object
+            collection.detail_to_employer = self.object
             collection.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:conditional-grant-create')
+        return reverse_lazy('detail_to_employer-forms:create')
 
 
-class CaseInvestigationTracingUpdateView(UpdateView):
-    model = CaseInvestigationTracing
-    template_name = 'forms/case_investigation_tracing/update.html'
-    form_class = CaseInvestigationTracingForm
+class DetailToEmployerUpdateView(UpdateView):
+    model = DetailToEmployer
+    template_name = "forms/detail_to_employer/update.html"
+    form_class = DetailToEmployerForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(CaseInvestigationTracingUpdateView,
-                     self).get_context_data(**kwargs)
+        data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = CaseInvestigationTracingFormSet(
+            data['lines'] = DetailToEmployerFormSet(
                 self.request.POST, instance=self.object)
         else:
-            data['lines'] = CaseInvestigationTracingFormSet(instance=self.object)
+            data['lines'] = DetailToEmployerFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -72,4 +75,4 @@ class CaseInvestigationTracingUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:conditional-grant-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('detail_to_employer-forms:update', kwargs={'pk': self.object.pk})

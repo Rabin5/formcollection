@@ -19,4 +19,6 @@ from .project_type import *
 from .contractor import *
 from .school import *
 from .convenience_type import *
-
+from .employer_type import *
+from .industry import *
+from .training_center import *

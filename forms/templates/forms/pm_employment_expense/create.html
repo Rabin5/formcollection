@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+प्रधानमन्त्री रोजगार कार्यक्रम अन्तर्गत भएको जम्मा खर्च - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+प्रधानमन्त्री रोजगार कार्यक्रम अन्तर्गत भएको जम्मा खर्च
+{% endblock page_title %}
+
+{% block page_actions %}
+    <div class="align-vertical">
+        {% include 'master_data/partials/go_back.html' %}
+    </div>
+{% endblock page_actions %}
+
+{% block content %}
+{% include 'core/forms/progress_bar.html' %}
+<div class="card card-body mt-3">
+    <h6 class="heading-01 mb-3">प्रधानमन्त्री रोजगार कार्यक्रम अन्तर्गत भएको जम्मा खर्च: </h6>
+
+    <!-- <form action="">
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="">निकायको नाम</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </form> -->
+
+    <div class="table-responsive">
+        <table class="table table-01 table-bordered mt-3">
+            {% crispy form %}
+        </table>
+    </div>
+</div>
+
+
+{% include 'core/forms/form_footer.html' %}
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+स्थानिय तह भित्र रहेको रोजगार सेवा केन्द्रमा दर्ता गरिएको कुल बेरोजगार संख्या - Nepal Audit Management System
+{% endblock title %}
+
+{% block page_title %}
+स्थानिय तह भित्र रहेको रोजगार सेवा केन्द्रमा दर्ता गरिएको कुल बेरोजगार संख्या
+{% endblock page_title %}
+
+{% block page_actions %}
+        <div class="align-vertical">
+        {% include 'master_data/partials/go_back.html' %}
+    </div>
+{% endblock page_actions %}
+
+{% block content %}
+    {% include 'core/forms/progress_bar.html' %}
+    <div class="card card-body mt-3">
+        <h6 class="heading-01 mb-3">स्थानिय तह भित्र रहेको रोजगार सेवा केन्द्रमा दर्ता गरिएको कुल बेरोजगार संख्या:</h6>
+
+        {% crispy form %}
+        
+      </div>
+    {% include 'core/forms/form_footer.html' with pk=pk %}
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+    $(".select_class").select2({
+        tags: true
+    })
+
+</script>
+{% endblock extrascripts %}

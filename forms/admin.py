@@ -64,4 +64,6 @@ admin.site.register([
     models.ConditionalGrantLine,
     models.ServiceFlow,
     models.ServiceFlowLine,
+    models.ContactDetails,
+    models.ContactDetailsLine
 ])
