@@ -161,6 +161,10 @@
                     <li {% if 'local_level_forms:local_level' in request.resolver_match.view_name or 'local-level/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
                         <a href="{% url 'local_level_forms:local_level_list'%}" class="pl-4">स्थानीय स्तर</a>
                     </li>
+                    {% endif %} {% if perms.users.perm_collection_six_form %}
+                    <li {% if 'collection_six:collection_six' in request.resolver_match.view_name or 'collection-six/forms/review/submitted' in request.path and 'approve' not in request.META.HTTP_REFERER %}class="active" {% endif %}>
+                        <a href="{% url 'collection_six:collection_six_list'%}" class="pl-4">स्थानीय स्तरको लेखापरीक्षण</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
@@ -198,8 +202,7 @@
                     </li>
                     {% endif %} {% if perms.users.perm_internal_affairs_form_approve %}
                     <li {% if 'internal-affairs/forms/review/approve, internal-affairs/forms/approve'|url_contains:request.path or 'internal-affairs/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
-                        <a href="{% url 'internal_affairs_forms:review_approve_list'%}" class="pl-4">Internal Affairs Approve
-              List</a>
+                        <a href="{% url 'internal_affairs_forms:review_approve_list'%}" class="pl-4">Internal Affairs Approve List</a>
                     </li>
                     {% endif %} {% if perms.users.perm_chief_minister_form_approve %}
                     <li {% if 'chief-minister-office/forms/review/approve, chief-minister-office/forms/approve'|url_contains:request.path or 'chief-minister-office/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
@@ -207,7 +210,11 @@
                     </li>
                     {% endif %} {% if perms.users.perm_local_level_form_approve %}
                     <li {% if 'local-level/forms/review/approve, local-level/forms/approve'|url_contains:request.path or 'local-level/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
-                        <a href="{% url 'local_level_forms:review_approve_list'%}" class="pl-4">Local Leve Approve List</a>
+                        <a href="{% url 'local_level_forms:review_approve_list'%}" class="pl-4">Local Level Approve List</a>
+                    </li>
+                    {% endif %} {% if perms.users.perm_collection_six_form_approve %}
+                    <li {% if 'collection-six/forms/review/approve, collection-six/forms/approve'|url_contains:request.path or 'collection-six/forms/review/submitted' in request.path and 'approve' in request.META.HTTP_REFERER %}class="active" {% endif %}>
+                        <a href="{% url 'collection_six:review_approve_list'%}" class="pl-4">स्थानीय स्तरको लेखापरीक्षण Approve List</a>
                     </li>
                     {% endif %}
                 </ul>

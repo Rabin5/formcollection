@@ -7360,5 +7360,134 @@
         "name":"अन्य"
 
     }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 1,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"शिक्षा"
+
+    }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 2,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"स्वास्थ्य"
+
+    }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 3,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"कृषि"
+
+    }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 4,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"पशु"
+
+    }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 5,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"महिला"
+
+    }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 5,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"वन"
+
+    }
+},
+{
+    "model": "master_data.granttype",
+    "pk": 5,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"अन्य"
+
+    }
+},
+{
+    "model": "master_data.conveniencetype",
+    "pk": 1,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"थप तलब भत्ता"
+
+    }
+},
+{
+    "model": "master_data.conveniencetype",
+    "pk":2 ,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"खाजा खर्च"
+
+    }
+},
+{
+    "model": "master_data.conveniencetype",
+    "pk": 3,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"यातायात खर्च"
+
+    }
+},
+{
+    "model": "master_data.conveniencetype",
+    "pk": 4,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"सन्चार खर्च"
+
+    }
+},
+{
+    "model": "master_data.conveniencetype",
+    "pk": 5,
+    "fields": {
+      
+        "created":"2021-02-15T04:24:31.425Z",
+        "name":"अन्य"
+
+    }
 }
 ]
+
+
+
+
+
+
+
+
+

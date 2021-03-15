@@ -27,8 +27,8 @@ class VehiclePurchaseForm(forms.ModelForm):
 
 VehiclePurchaseFormSet = inlineformset_factory(
     VehiclePurchase, VehiclePurchaseLine, form=VehiclePurchaseForm,
-    fields=['vehicle', 'purchased_amount', 'price',
-            'remarks'],
+    fields=['vehicle', 'purchased_amount', 'price', 'body',
+            'remarks', 'vehiclepurchase_line'],
     widgets={
 
     },
@@ -52,13 +52,10 @@ class VehiclePurchaseFormLine(forms.ModelForm):
         self.helper.layout = Layout(
             Hidden('next_state', 'next'),
             Row(
-                Column('body', css_class='col-md-6 mb-0'),
-                Column('fiscal_year', css_class='col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(
                 Fieldset('', Formset('lines')
                          ),
-                ButtonHolder(Submit('submit', 'save')),
             )
         )

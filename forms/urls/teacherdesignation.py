@@ -1,7 +1,7 @@
 
 from django.urls import path
 
-from forms.views.teacherdesignation import TeacherDesginationCreateView, TeacherDesginationUpdateView
+from forms.views.teacherdesignation_view import TeacherDesginationCreateView, TeacherDesginationUpdateView
 
 app_name = 'techer_desg'
 urlpatterns = [

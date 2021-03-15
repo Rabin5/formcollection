@@ -48,7 +48,7 @@ class JudicialCommitteeUpdateView(UpdateView):
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(MedPurchaseDescUpdateView,
+        data = super(JudicialCommitteeUpdateView,
                      self).get_context_data(**kwargs)
         # import pdb;pdb.set_trace()
         if self.request.POST:

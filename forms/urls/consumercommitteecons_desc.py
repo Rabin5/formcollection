@@ -1,6 +1,6 @@
 from django.urls import path
 
-from forms.views.consumercommitteecons_desc import ConsumercomConsDespCreateView, ConsumercomConsDespUpdateView
+from forms.views.consumercommitteecons_desc_view import ConsumercomConsDespCreateView, ConsumercomConsDespUpdateView
 
 app_name = 'consumer-com-des'
 urlpatterns = [

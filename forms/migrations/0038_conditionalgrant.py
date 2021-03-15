@@ -17,10 +17,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ConditionalGrant',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_date', models.DateField(auto_now_add=True, verbose_name='सिर्जना मिति')),
-                ('updated_date', models.DateField(auto_now=True, verbose_name='अद्यावधिक मिति')),
-                ('create_user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('created_date', models.DateField(
+                    auto_now_add=True, verbose_name='सिर्जना मिति')),
+                ('updated_date', models.DateField(
+                    auto_now=True, verbose_name='अद्यावधिक मिति')),
+                ('create_user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -29,15 +33,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ConditionalGrantLine',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_date', models.DateField(auto_now_add=True, verbose_name='सिर्जना मिति')),
-                ('updated_date', models.DateField(auto_now=True, verbose_name='अद्यावधिक मिति')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('created_date', models.DateField(
+                    auto_now_add=True, verbose_name='सिर्जना मिति')),
+                ('updated_date', models.DateField(
+                    auto_now=True, verbose_name='अद्यावधिक मिति')),
                 ('total_grant', models.IntegerField(verbose_name='जम्मा अनुदान')),
                 ('expense', models.FloatField(verbose_name='खर्च')),
-                ('freeze_amount', models.FloatField(verbose_name='बाँकि (फ्रिज हुनुपर्नें)')),
+                ('freeze_amount', models.FloatField(
+                    verbose_name='बाँकि (फ्रिज हुनुपर्नें)')),
                 ('remarks', models.CharField(max_length=300, verbose_name='कैफियत')),
-                ('condtionalgrant_line', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='line', to='forms.conditionalgrant')),
-                ('grant_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='master_data.granttype', verbose_name='अनुदानको किसिम')),
+                ('condtionalgrant_line', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, related_name='lines', to='forms.conditionalgrant')),
+                ('grant_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                 to='master_data.granttype', verbose_name='अनुदानको किसिम')),
             ],
             options={
                 'abstract': False,

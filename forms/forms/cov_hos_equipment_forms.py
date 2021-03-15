@@ -8,8 +8,10 @@ from forms.custom_layout_object import Formset
 from forms.fields import ModelChoiceFieldWithCreate
 from forms.models import CovidHospitalEquipment, CovidHospitalEquipmentLine, Product
 
+
 class CovidHospitalEquipmentLineForm(forms.ModelForm):
-    product = ModelChoiceFieldWithCreate(queryset=Product.objects.all(), label='स्वास्थ्य उपकरण', blank=False, save_to_field='name')
+    product = ModelChoiceFieldWithCreate(queryset=Product.objects.all(
+    ), label='स्वास्थ्य उपकरण', blank=False, save_to_field='name')
 
     class Meta:
         model = CovidHospitalEquipmentLine
@@ -23,8 +25,9 @@ class CovidHospitalEquipmentLineForm(forms.ModelForm):
 
 CovidHospitalEquipmentLineFormSet = inlineformset_factory(
     CovidHospitalEquipment, CovidHospitalEquipmentLine, form=CovidHospitalEquipmentLineForm,
-    fields=['cov_hos_equip', 'product', 'num_required', 'available', 'num_still_required'],
-    widgets = {
+    fields=['cov_hos_equip', 'product', 'num_required',
+            'available', 'num_still_required'],
+    widgets={
 
     },
     extra=1,
@@ -38,7 +41,7 @@ class CovidHospitalEquipmentForm(forms.ModelForm):
         model = CovidHospitalEquipment
         fields = '__all__'
         exclude = ('create_user', )
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -49,11 +52,11 @@ class CovidHospitalEquipmentForm(forms.ModelForm):
             Row(
                 Column('cov_hospital', css_class='col-md-6 mb-0'),
                 css_class='form-row'
-                ),
+            ),
             Div(
                 Fieldset('',
-                    Formset('lines')
-                ),
+                         Formset('lines')
+                         ),
             )
 
         )
