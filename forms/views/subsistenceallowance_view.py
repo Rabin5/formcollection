@@ -1,22 +1,27 @@
-from django.urls import reverse_lazy
 from django.db import transaction
+from django.forms import inlineformset_factory
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from forms.forms.case_investigation_tracing_forms import CaseInvestigationTracingForm,CaseInvestigationLineForm,CaseInvestigationTracingFormSet
-from forms.models.case_investigation_tracing import CaseInvestigationTracing
+
+from forms.models.subsistenceallowance import SubsistenceAllowance
+from forms.forms.subsistenceallowance_forms import SubsistenceAllowanceForm, SubsistenceAllowanceFormSet
 
 
-class CaseInvestigationTracingCreateView(CreateView):
-    model = CaseInvestigationTracing
-    template_name = 'forms/case_investigation_tracing/create.html'
-    form_class =CaseInvestigationTracingForm
+class SubsistenceAllowanceCreateView(CreateView):
+    model = SubsistenceAllowance
+    template_name = "forms/subsistence_allowance/create.html"
+    form_class = SubsistenceAllowanceForm
     success_url = None
 
-    def get_context_data(self, *args, **kwargs):
-        data = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        data = super(SubsistenceAllowanceCreateView,
+                     self).get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] =CaseInvestigationTracingFormSet(self.request.POST)
+            data['lines'] = SubsistenceAllowanceFormSet(
+                self.request.POST)
         else:
-            data['lines'] = CaseInvestigationTracingFormSet()
+            data['lines'] = SubsistenceAllowanceFormSet()
         return data
 
     def form_valid(self, form):
@@ -30,28 +35,32 @@ class CaseInvestigationTracingCreateView(CreateView):
                 lines.save()
         collection = context.get('collection')
         if collection:
-            collection.case_investigation_tracing = self.object
+            collection.isolation_construction_expenditure = self.object
             collection.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:case_investigation_tracing-create')
+        return reverse_lazy('subsistence_allowance:create')
 
 
-class CaseInvestigationTracingUpdateView(UpdateView):
-    model = CaseInvestigationTracing
-    template_name = 'forms/case_investigation_tracing/update.html'
-    form_class = CaseInvestigationTracingForm
+class SubsistenceAllowanceUpdateView(UpdateView):
+    model = SubsistenceAllowance
+    template_name = "forms/subsistence_allowance/update.html"
+    form_class = SubsistenceAllowanceForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(CaseInvestigationTracingUpdateView,
+        data = super(SubsistenceAllowanceUpdateView,
                      self).get_context_data(**kwargs)
+        # import pdb;pdb.set_trace()
         if self.request.POST:
-            data['lines'] = CaseInvestigationTracingFormSet(
+            data['lines'] = SubsistenceAllowanceFormSet(
                 self.request.POST, instance=self.object)
+            # data['lines'].full_clean()
         else:
-            data['lines'] = CaseInvestigationTracingFormSet(instance=self.object)
+            data['lines'] = SubsistenceAllowanceFormSet(
+                instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -72,4 +81,4 @@ class CaseInvestigationTracingUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:case_investigation_tracing-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('subsistence_allowance:update', kwargs={'pk': self.object.pk})

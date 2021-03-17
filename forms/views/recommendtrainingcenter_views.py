@@ -1,22 +1,24 @@
-from django.urls import reverse_lazy
 from django.db import transaction
+from django.forms import inlineformset_factory
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from forms.forms.case_investigation_tracing_forms import CaseInvestigationTracingForm,CaseInvestigationLineForm,CaseInvestigationTracingFormSet
-from forms.models.case_investigation_tracing import CaseInvestigationTracing
+from forms.models import RecommendTrainingCenter
+from forms.forms.recommendtraningcenter_forms import RecommendTrainingCenterForm, RecommendTrainingCenterFormSet
 
 
-class CaseInvestigationTracingCreateView(CreateView):
-    model = CaseInvestigationTracing
-    template_name = 'forms/case_investigation_tracing/create.html'
-    form_class =CaseInvestigationTracingForm
+class RecommendTrainingCenterCreateView(CreateView):
+    model = RecommendTrainingCenter
+    template_name = "forms/recommend_training_center/create.html"
+    form_class = RecommendTrainingCenterForm
     success_url = None
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] =CaseInvestigationTracingFormSet(self.request.POST)
+            data['lines'] = RecommendTrainingCenterFormSet(self.request.POST)
         else:
-            data['lines'] = CaseInvestigationTracingFormSet()
+            data['lines'] = RecommendTrainingCenterFormSet()
         return data
 
     def form_valid(self, form):
@@ -28,30 +30,32 @@ class CaseInvestigationTracingCreateView(CreateView):
             if lines.is_valid():
                 lines.instance = self.object
                 lines.save()
-        collection = context.get('collection')
-        if collection:
-            collection.case_investigation_tracing = self.object
-            collection.save()
+
+        # collection = context.get('collection')
+        # if collection:
+        #     collection.recover_amount = self.object
+        #     collection.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:case_investigation_tracing-create')
+        return reverse_lazy('recommend_traning_center:create')
 
 
-class CaseInvestigationTracingUpdateView(UpdateView):
-    model = CaseInvestigationTracing
-    template_name = 'forms/case_investigation_tracing/update.html'
-    form_class = CaseInvestigationTracingForm
+class RecommendTrainingCenterUpdateView(UpdateView):
+    model = RecommendTrainingCenter
+    template_name = "forms/recommend_training_center/update.html"
+    form_class = RecommendTrainingCenterForm
     success_url = None
 
     def get_context_data(self, **kwargs):
-        data = super(CaseInvestigationTracingUpdateView,
+        data = super(RecommendTrainingCenterUpdateView,
                      self).get_context_data(**kwargs)
         if self.request.POST:
-            data['lines'] = CaseInvestigationTracingFormSet(
+            data['lines'] = RecommendTrainingCenterFormSet(
                 self.request.POST, instance=self.object)
         else:
-            data['lines'] = CaseInvestigationTracingFormSet(instance=self.object)
+            data['lines'] = RecommendTrainingCenterFormSet(
+                instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -72,4 +76,4 @@ class CaseInvestigationTracingUpdateView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form, lines=lines))
 
     def get_success_url(self):
-        return reverse_lazy('case_investigation_forms:case_investigation_tracing-update', kwargs={'pk': self.object.pk})
+        return reverse_lazy('recommend_traning_center:update', kwargs={'pk': self.object.pk})

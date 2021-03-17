@@ -38,3 +38,4 @@ admin.site.register(models.ConstructionCompany)
 admin.site.register(models.Consultant)
 admin.site.register(models.School)
 
+admin.site.register(models.TrainingCenter)

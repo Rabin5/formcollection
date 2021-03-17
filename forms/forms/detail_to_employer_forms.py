@@ -2,7 +2,7 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden,ButtonHolder,Submit
+from crispy_forms.layout import Layout, Fieldset, Div, Row, Column, Hidden, ButtonHolder, Submit
 
 from forms.custom_layout_object import Formset
 from forms.fields import ModelChoiceFieldWithCreate, NepaliDateField
@@ -10,8 +10,10 @@ from forms.models.detail_to_employer import DetailToEmployer, DetailToEmployerLi
 
 
 class DetailToEmployerLineForm(forms.ModelForm):
-    employer_type = ModelChoiceFieldWithCreate(queryset=EmployerType.objects.all(), label='रोजगारदाताको किसिम (सार्वजनिक आयोजन, निजी क्षेत्र, गैसस)', blank=False, save_to_field='name')
-    employer_notified_date = NepaliDateField(label='रोजगारदातालाई जानकारी गराएको मिति')
+    employer_type = ModelChoiceFieldWithCreate(queryset=EmployerType.objects.all(
+    ), label='रोजगारदाताको किसिम (सार्वजनिक आयोजन, निजी क्षेत्र, गैसस)', blank=False, save_to_field='name')
+    employer_notified_date = NepaliDateField(
+        label='रोजगारदातालाई जानकारी गराएको मिति')
 
     class Meta:
         model = DetailToEmployerLine
@@ -58,7 +60,7 @@ class DetailToEmployerForm(forms.ModelForm):
                 Fieldset('',
                          Formset('lines')
                          ),
-            ButtonHolder(Submit('submit', 'save')),
-            
+                ButtonHolder(Submit('submit', 'save')),
+
             )
         )
