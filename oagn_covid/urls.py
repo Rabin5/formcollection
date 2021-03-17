@@ -33,7 +33,8 @@ urlpatterns = [
     path('master-data/address/country/', include('master_data.urls.country')),
     path('master-data/address/province/', include('master_data.urls.province')),
     path('master-data/address/district/', include('master_data.urls.district')),
-    path('master-data/address/locallevel/', include('master_data.urls.locallevel')),
+    path('master-data/address/locallevel/',
+         include('master_data.urls.locallevel')),
     path('master-data/address/', include('master_data.urls.address')),
 
     path('master-data/companies/', include('master_data.urls.company')),
@@ -204,7 +205,28 @@ urlpatterns = [
          include('forms.urls.local_partnership_program_urls')),
 
 
+    # Collection -7
+    path('forms/pm_employment_expense/',
+         include('forms.urls.pm_employment_expense_urls')),
+    path('forms/registered_unemployment/',
+         include('forms.urls.registered_unemployment_urls')),
+    # path('forms/employment_assessment/',
+    #    include('forms.urls.employment_assessment_urls')),
+    path('forms/notify_employee/', include('forms.urls.notify_employee_urls')),
+    path('forms/detail_to_employer/',
+         include('forms.urls.detail_to_employer_urls')),
+    path('forms/recommend_training_center/',
+         include('forms.urls.recommendtrainingcenter_urls')),
+    path('forms/industry_financial_incentive/',
+         include('forms.urls.industry_financial_incentive_urls')),
+    path('forms/financial_assistance_line/',
+         include('forms.urls.financialassistanceline_urls')),
+    path('forms/subsistence_allowance/',
+         include('forms.urls.subsistenceallowance_urls')),
+    path('forms/cashfor_work/',
+         include('forms.urls.cashforwork_urls')),
     path('users/', include('users.urls.user_urls')),
+
     path('', DashboardView.as_view(), name='index'),
 
 ]

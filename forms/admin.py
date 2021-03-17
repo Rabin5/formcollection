@@ -64,4 +64,9 @@ admin.site.register([
     models.ConditionalGrantLine,
     models.ServiceFlow,
     models.ServiceFlowLine,
+    models.RecommendTrainingCenter,
+    models.RecommendTrainingCenterLine,
+    models.IndustryFinancialIncentiveLine,
+    models.IndustryFinancialIncentive,
+
 ])
