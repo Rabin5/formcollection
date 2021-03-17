@@ -65,8 +65,7 @@ COPY --chown=app:app . $APP_HOME
 
 # copy entrypoint.prod.sh
 COPY ./entrypoint.prod.sh $APP_HOME/
-RUN chmod +x ./entrypoint.prod.sh
-
+RUN chmod +x ./entrypoint.prod.s
 # change user
 USER app
 
