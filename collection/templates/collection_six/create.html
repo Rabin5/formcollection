@@ -22,3 +22,53 @@
   <button type="submit" form="create_form" class="btn btn-info ml-2" id="next">Start</a>
 </div>
 {% endblock content %}
+{% block extrascripts %}
+{{ districts|json_script:"districts_data" }}
+{{ local_levels|json_script:"local_levels_data" }}
+<script>
+  // load data for use
+  const districts = JSON.parse(document.getElementById('districts_data').textContent);
+  const local_levels = JSON.parse(document.getElementById('local_levels_data').textContent);
+
+  $(document).ready(function () {
+
+    $( "select[name='province'], select[name='district'], select[name='local_level'], select[name='hospital']").select2();
+  });
+
+  // onchange province
+  $("select[name='province']").on('change', function (event) {
+    "Set district values according to province"
+    province_value = parseInt($("select[name='province']").val());
+
+    province_districts = districts.filter(function (item) {
+      return item.province_id == province_value;
+    });
+    province_districts.unshift({id:"", text:"---------"})
+
+    district_select = $("select[name='district']");
+    $("select[name='district'] option").remove();
+    
+    district_select.select2({
+      data: province_districts,
+    })
+  });
+
+  // onchange district
+  $("select[name='district']").on('change', function (event) {
+    "Set local level values according to district"
+    district_value = parseInt($("select[name='district']").val());
+
+    district_locallevels = local_levels.filter(function (item) {
+      return item.district_id == district_value;
+    });
+    district_locallevels.unshift({id:"", text:"---------"})
+
+    local_level_select = $("select[name='local_level']");
+    $("select[name='local_level'] option").remove();
+    
+    local_level_select.select2({
+      data: district_locallevels
+    })
+  });
+</script>
+{% endblock extrascripts %}
